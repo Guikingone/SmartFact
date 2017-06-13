@@ -8,9 +8,7 @@ services:
         volumes:
             - './:/var/www/smartfact'
         links:
-            - nginx
             - php
-        restart: always
 
     nginx:
         container_name: ${CONTAINER_PREFIX}_nginx
@@ -19,23 +17,25 @@ services:
             - '${NGINX_PORT}:80'
         volumes:
             - './:/var/www/smartfact'
-            - './docker/nginx/conf:/etc/nginx/conf.d:ro'
-        restart: always
-
-    php:
-        container_name: ${CONTAINER_PREFIX}_php
-        build: '.'
-        volumes:
-            - './:/var/www/smartfact'
-            - './docker/php/:/usr/local/etc/php'
-        restart: always
+            - './docker/nginx/conf/:/etc/nginx/conf.d:ro'
+        links:
+            - php
 
     nodejs:
         container_name: ${CONTAINER_PREFIX}_node
         image: node
         ports:
-            - '${NODE_PORT}'
+            - '${NODE_PORT}:32793'
         restart: always
+
+    php:
+        container_name: ${CONTAINER_PREFIX}_php
+        build: '.'
+        ports:
+            - '${PHP_PORT}:9000'
+        volumes:
+            - './:/var/www/smartfact'
+            - './docker/php/:/usr/local/etc/php'
 
     # DB configuration
     mongodb:

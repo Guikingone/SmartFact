@@ -8,3 +8,27 @@ RUN apt-get update -y \
     && php -r "unlink('composer-setup.php');" \
     && mv composer.phar /usr/local/bin/composer \
     && composer -v
+
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+WORKDIR /var/www/smartfact
+
+COPY composer.json ./
+COPY composer.lock ./
+
+RUN mkdir -p \
+		var/cache \
+		var/logs \
+		var/sessions \
+	&& composer install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress --no-suggest \
+	&& composer clear-cache \
+	&& chown -R www-data var
+
+COPY app app/
+COPY bin bin/
+COPY src src/
+COPY web web/
+
+RUN composer dump-autoload --optimize --classmap-authoritative --no-dev
+
+RUN rm -rf var/cache/*
