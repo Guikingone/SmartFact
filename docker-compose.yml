@@ -3,7 +3,7 @@ version: "3.1"
 services:
     # Core configuration
     debian:
-        container_name: debian_docker
+        container_name: ${CONTAINER_PREFIX}_debian
         image: debian
         volumes:
             - './:/var/www/smartfact'
@@ -13,75 +13,73 @@ services:
         restart: always
 
     nginx:
-        container_name: nginx_docker
+        container_name: ${CONTAINER_PREFIX}_nginx
         image: nginx
         ports:
-            - '8080:80'
+            - '${NGINX_PORT}:80'
         volumes:
             - './:/var/www/smartfact'
             - './docker/nginx/conf:/etc/nginx/conf.d:ro'
         restart: always
 
     php:
-        container_name: php_docker
+        container_name: ${CONTAINER_PREFIX}_php
         build: '.'
         volumes:
             - './:/var/www/smartfact'
             - './docker/php/:/usr/local/etc/php'
-        depends_on:
-            - nginx
         restart: always
 
     nodejs:
-        container_name: node_docker
+        container_name: ${CONTAINER_PREFIX}_node
         image: node
         ports:
-            - '9800'
-        restart: always
-
-    # Testing configuration
-    blackfire:
-        container_name: forteroche_blackfire_docker
-        image: blackfire/blackfire
-        links:
-            - php
+            - '${NODE_PORT}'
         restart: always
 
     # DB configuration
     mongodb:
-        container_name: mongodb_docker
+        container_name: ${CONTAINER_PREFIX}_mongodb
         image: mongo:latest
         ports:
-            - '27017:27017'
+            - '${MONGO_PORT}:27017'
         volumes:
             - 'mongo_docker:/data/db'
         restart: always
 
     postgres:
-        container_name: postgres_docker
+        container_name: ${CONTAINER_PREFIX}_postgres
         image: postgres:latest
         environment:
-            POSTGRES_USER: 'docker'
-            POSTGRES_PASSWORD: 'docker'
-            POSTGRES_DB: 'docker'
+            POSTGRES_USER: '${DB_USERNAME}'
+            POSTGRES_PASSWORD: '${DB_PASSWORD}'
+            POSTGRES_DB: '${DB_NAME}'
         ports:
-            - '5432:5432'
+            - '${POSTGRES_PORT}:5432'
         volumes:
             - 'postgres_docker:/var/lib/postgresql/data'
         restart: always
 
     mysql:
-        container_name: mysql_docker
+        container_name: ${CONTAINER_PREFIX}_mysql
         image: mysql:latest
         environment:
-            MYSQL_DATABASE: 'docker'
-            MYSQL_USER: 'docker'
-            MYSQL_PASSWORD: 'docker'
+            MYSQL_DATABASE: '${DB_NAME}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
         ports:
-            - '3306:3306'
+            - '${MYSQL_PORT}:3306'
         volumes:
             - 'mysql_docker:/var/lib/mysql'
+        restart: always
+
+    # Testing configuration
+    blackfire:
+        container_name: ${CONTAINER_PREFIX}_blackfire
+        image: blackfire/blackfire
+        links:
+            - php
         restart: always
 
 volumes:
