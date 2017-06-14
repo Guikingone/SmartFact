@@ -1,4 +1,6 @@
-FROM php:7.1.5-fpm
+FROM php:7.1.6-fpm
+
+ENV WORKDIR "/var/www/smartfact"
 
 RUN apt-get update -y \
     && apt-get install zip unzip -y \
@@ -11,24 +13,12 @@ RUN apt-get update -y \
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-WORKDIR /var/www/smartfact
+RUN mkdir -p ${WORKDIR}
 
-COPY composer.json ./
-COPY composer.lock ./
+RUN chown www-data:www-data -R ${WORKDIR}
 
-RUN mkdir -p \
-		var/cache \
-		var/logs \
-		var/sessions \
-	&& composer install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress --no-suggest \
-	&& composer clear-cache \
-	&& chown -R www-data var
+WORKDIR ${WORKDIR}
 
-COPY app app/
-COPY bin bin/
-COPY src src/
-COPY web web/
+EXPOSE 9000
 
-RUN composer dump-autoload --optimize --classmap-authoritative --no-dev
-
-RUN rm -rf var/cache/*
+CMD ["php-fpm"]
