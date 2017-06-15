@@ -1,2 +1,3 @@
 2017/06/14 17:14:41 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/smartfact.conf:15
 2017/06/14 17:15:14 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/smartfact.conf:15
+2017/06/15 06:07:30 [emerg] 1#1: no "events" section in configuration

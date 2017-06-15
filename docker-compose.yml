@@ -6,7 +6,7 @@ services:
         container_name: ${CONTAINER_PREFIX}_debian
         image: debian
         volumes:
-            - './core:/var/www/smartfact'
+            - './core:/var/www/smartfact:rw'
 
     nginx:
         container_name: ${CONTAINER_PREFIX}_nginx
@@ -16,7 +16,7 @@ services:
         links:
             - debian
         volumes:
-            - './core:/var/www/smartfact'
+            - './core:/var/www/smartfact:rw'
             - './nginx/conf/core/nginx.conf:/etc/nginx/conf/nginx.conf:ro'
             - './nginx/conf/app/:/etc/nginx/conf.d:ro'
             - './nginx/logs/:/var/log/nginx'
@@ -36,7 +36,7 @@ services:
         links:
             - debian
         volumes:
-            - './core:/var/www/smartfact'
+            - './core:/var/www/smartfact:rw'
             - './docker/php/:/usr/local/etc/php'
 
     # DB configuration
