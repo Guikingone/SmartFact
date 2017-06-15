@@ -2,6 +2,13 @@
 
 This repository contains the source code of the "open" project as asked in the EII path at OpenClassrooms.
 
+**_Please note that the code present here is only part of the backend->frontend logic, the mobile
+applications are available on other repositories._**
+
+### iOS application
+
+### Android application
+
 ## About
 
 _Contexte_
@@ -52,6 +59,8 @@ tested and easily maintainable, here's the tools who help the development proces
 
 ### Insight
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/7d68b2b6-6303-4e81-aebb-bc6a7aab1baf/big.png)](https://insight.sensiolabs.com/projects/7d68b2b6-6303-4e81-aebb-bc6a7aab1baf)
+
 ### Gitlab
 
 ### Blackfire
@@ -87,9 +96,12 @@ OR
 ```
 
 _Please notice that using the Symfony console is a little bit longer and probably not too friendly for
-bash users.
+bash users._
 
 ## Development process 
 
 
 ## Tests coverage
+
+This project is completely tested and followed by PHPUnit, this way, our code is easily maintanble
+and upgradable, 
