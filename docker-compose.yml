@@ -4,7 +4,7 @@ services:
     # Core configuration
     debian:
         container_name: ${CONTAINER_PREFIX}_debian
-        image: debian
+        build: './core'
         volumes:
             - './core:/var/www/smartfact:rw'
 
@@ -26,7 +26,10 @@ services:
         image: node
         ports:
             - '${NODE_PORT}:32793'
-        restart: always
+        links:
+            - debian
+        volumes:
+            - './core:/var/www/smartfact'
 
     php-fpm:
         container_name: ${CONTAINER_PREFIX}_php-fpm
