@@ -95,6 +95,12 @@ OR
 ./bin/console c:c 
 ```
 
+**In case that a bug appear, please use the classic approach in order to connect to a service :** 
+
+```bash
+docker-compose exec --user=userdesired theservice /bin/bash
+```
+
 _Please notice that using the Symfony console is a little bit longer and probably not too friendly for
 bash users._
 
