@@ -100,8 +100,27 @@ bash users._
 
 ## Development process 
 
+In order to keep the project upgradable and easy to maintain, we've fixed some
+rules to follow in order to develop better code and follow the best practices from both
+PHP (aka PSR) and Symfony, here's the details : 
+
+If you find a bug and want to correct it : 
+
+```
+git branch -d ISSUE_CONCERNED_PATCH
+```
+
+Once this is done, create an PR and submit your patch. 
+
+If you want to add a new functionality or submit an idea : 
+
+```
+git branch -d ISSUE_CONCERNED_ADDITION
+```
 
 ## Tests coverage
 
-This project is completely tested and followed by PHPUnit, this way, our code is easily maintanble
-and upgradable, 
+This project is completely tested and followed by PHPUnit, this way, our code is easily maintainable
+and upgradable, here's is the details of the coverage : 
+
+
