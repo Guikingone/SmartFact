@@ -130,3 +130,14 @@ This project is completely tested and followed by PHPUnit, this way, our code is
 and upgradable, here's is the details of the coverage : 
 
 
+In order to launch the tests, here's the process : 
+
+**Be sure to have build the containers/services**
+
+```
+docker exec -it smartfact_php-fpm sh 
+
+# phpunit -v
+```
+
+Once this is done, you should see the different results of tests.

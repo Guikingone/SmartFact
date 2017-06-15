@@ -12,13 +12,14 @@
 namespace tests\AppBundle\Entity;
 
 use AppBundle\Entity\User;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class UserTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class UserTest extends \PHPUnit_Framework_TestCase
+class UserTest extends TestCase
 {
     /**
      * Test the instantiation of the User entity.
@@ -30,11 +31,10 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $user->setLastName('Potter');
         $user->setAddress('23 Poudlard Avenue');
         $user->setPhoneNumber('0635459287');
-        $user->setBirthDate(new \DateTime());
+        $user->setBirthDate(new \DateTime('1995-03-21'));
         $user->setStatus('Freelance');
-        $user->setCreatedAt(new \DateTime());
+        $user->setCreatedAt(new \DateTime('2017-02-31'));
         $user->setValidated(true);
-        $user->setIsActive(true);
         $user->setUsername('HP');
         $user->setPassword('LB,L8ELTDL0');
         $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
@@ -44,11 +44,11 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Potter', $user->getLastName());
         $this->assertEquals('23 Poudlard Avenue', $user->getAddress());
         $this->assertEquals('0635459287', $user->getPhoneNumber());
-        $this->assertEquals(new \DateTime(), $user->getBirthDate());
+        $this->assertEquals(new \DateTime('1995-03-21'), $user->getBirthDate());
         $this->assertEquals('Freelance', $user->getStatus());
-        $this->assertEquals(new \DateTime(), $user->getCreatedAt());
+        $this->assertEquals(new \DateTime('2017-02-31'), $user->getCreatedAt());
         $this->assertTrue($user->getIsValidated());
-        $this->assertTrue($user->getIsActive());
+        $this->assertTrue($user->isEnabled());
         $this->assertEquals('HP', $user->getUsername());
         $this->assertEquals('LB,L8ELTDL0', $user->getPassword());
         $this->assertEquals('tok_0010901_001NNDOPPPANDHYEMMANDU', $user->getToken());

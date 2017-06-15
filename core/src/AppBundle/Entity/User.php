@@ -11,65 +11,102 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+
 /**
  * Class User
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
+ *
+ * @ORM\Table(name="_smartfact_user")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User
+class User implements AdvancedUserInterface, \Serializable
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
      * @var string
+     *
+     * @ORM\Column(name="firstname", type="string")
      */
     private $firstname;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="lastname", type="string")
      */
     private $lastname;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="address", type="string")
      */
     private $address;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="phone_number", type="string", length=14)
      */
     private $phoneNumber;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="birth_date", type="date", nullable=true)
      */
     private $birthDate;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=150)
      */
     private $status;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="date")
      */
     private $createdAt;
 
     /**
      * @var bool
+     *
+     * @ORM\Column(name="validated", type="boolean")
      */
     private $validated;
 
     /**
      * @var bool
+     *
+     * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=200, nullable=false)
      */
     private $username;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
 
@@ -80,13 +117,33 @@ class User
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="token", type="string", length=150)
      */
     private $token;
 
     /**
      * @var array
+     *
+     * @ORM\Column(name="roles", type="array")
      */
     private $roles;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->isActive = true;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @return string
@@ -203,7 +260,7 @@ class User
     /**
      * @return bool
      */
-    public function getIsValidated()
+    public function getValidated()
     {
         return $this->validated;
     }
@@ -214,22 +271,6 @@ class User
     public function setValidated($validated)
     {
         $this->validated = $validated;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * @param bool $isActive
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
     }
 
     /**
@@ -318,5 +359,67 @@ class User
     public function addRoles($roles)
     {
         $this->roles[] = $roles;
+    }
+
+    /** @codeCoverageIgnore */
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    /** @codeCoverageIgnore */
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    /** @codeCoverageIgnore */
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isActive;
+    }
+
+    /** @codeCoverageIgnore */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /** @codeCoverageIgnore */
+    public function eraseCredentials(){}
+
+    /**
+     * @see \Serializable::serialize()
+     *
+     * @codeCoverageIgnore
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->isActive
+        ]);
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     *
+     * @codeCoverageIgnore
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->isActive
+            ) = unserialize($serialized);
     }
 }
