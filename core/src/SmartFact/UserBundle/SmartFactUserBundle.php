@@ -9,14 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace core\tests\AppBundle\Managers\API;
+namespace SmartFact\UserBundle;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class ApiUserManagerTest
+ * Class SmartFactUserBundle
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class ApiUserManagerTest
+class SmartFactUserBundle extends Bundle
 {
-
+    
 }
