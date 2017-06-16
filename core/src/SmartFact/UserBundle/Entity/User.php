@@ -9,10 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Entity;
+namespace SmartFact\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+
+// Bundle
+use SmartFact\UserBundle\Interfaces\SmartFactUserInterface;
 
 /**
  * Class User
@@ -20,9 +24,9 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
  * @ORM\Table(name="_smartfact_user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="SmartFact\UserBundle\Repository\UserRepository")
  */
-class User implements AdvancedUserInterface, \Serializable
+class User implements SmartFactUserInterface, AdvancedUserInterface, \Serializable
 {
     /**
      * @var int
@@ -30,6 +34,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="id")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"users")
      */
     private $id;
 
@@ -37,6 +43,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="firstname", type="string")
+     *
+     * @Groups({"users"})
      */
     private $firstname;
 
@@ -44,6 +52,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="lastname", type="string")
+     *
+     * @Groups({"users"})
      */
     private $lastname;
 
@@ -51,6 +61,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="address", type="string")
+     *
+     * @Groups({"users"})
      */
     private $address;
 
@@ -58,6 +70,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="phone_number", type="string", length=14)
+     *
+     * @Groups({"users"})
      */
     private $phoneNumber;
 
@@ -65,6 +79,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @var \DateTime
      *
      * @ORM\Column(name="birth_date", type="date", nullable=true)
+     *
+     * @Groups({"users"})
      */
     private $birthDate;
 
@@ -72,6 +88,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=150)
+     *
+     * @Groups({"users"})
      */
     private $status;
 
@@ -79,6 +97,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="date")
+     *
+     * @Groups({"users"})
      */
     private $createdAt;
 
@@ -86,6 +106,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @var bool
      *
      * @ORM\Column(name="validated", type="boolean")
+     *
+     * @Groups({"users"})
      */
     private $validated;
 
@@ -93,6 +115,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @var bool
      *
      * @ORM\Column(name="is_active", type="boolean")
+     *
+     * @Groups({"users"})
      */
     private $isActive;
 
@@ -100,6 +124,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=200, nullable=false)
+     *
+     * @Groups({"users"})
      */
     private $username;
 
@@ -126,6 +152,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @var array
      *
      * @ORM\Column(name="roles", type="array")
+     *
+     * @Groups({"users"})
      */
     private $roles;
 

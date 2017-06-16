@@ -11,8 +11,11 @@
 
 namespace tests\AppBundle\Entity;
 
-use AppBundle\Entity\User;
+// Symfony core
 use PHPUnit\Framework\TestCase;
+
+// Bundle
+use SmartFact\UserBundle\Entity\User;
 
 /**
  * Class UserTest
@@ -47,7 +50,7 @@ class UserTest extends TestCase
         $this->assertEquals(new \DateTime('1995-03-21'), $user->getBirthDate());
         $this->assertEquals('Freelance', $user->getStatus());
         $this->assertEquals(new \DateTime('2017-02-31'), $user->getCreatedAt());
-        $this->assertTrue($user->getIsValidated());
+        $this->assertTrue($user->getValidated());
         $this->assertTrue($user->isEnabled());
         $this->assertEquals('HP', $user->getUsername());
         $this->assertEquals('LB,L8ELTDL0', $user->getPassword());
