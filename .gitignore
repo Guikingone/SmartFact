@@ -19,3 +19,4 @@
 # Docker
 .env
 /docker/nginx/logs/
+/docker/apache/logs/
