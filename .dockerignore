@@ -3,3 +3,4 @@
 /var/cache/
 
 /docker/nginx/logs/
+/docker/apache/logs/

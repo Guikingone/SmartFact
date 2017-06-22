@@ -15,7 +15,9 @@ RUN apt-get update -y \
     && mv phpunit-6.1.phar /usr/local/bin/phpunit \
     && phpunit --version
 
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install pdo.so pdo_mysql.so pdo_pgsql.so \
+    && docker-php-ext-enable --ini-name 20-apcu.ini apcu \
+    && docker-php-ext-enable --ini-name 05-opcache.ini opcache.so
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
