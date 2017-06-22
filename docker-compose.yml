@@ -3,48 +3,48 @@ version: "3.1"
 services:
     # Core configuration
     debian:
-        container_name: ${CONTAINER_PREFIX}_debian
-        build: './core'
+        container_name: ${CONTAINER_NAME}_debian
+        build: .
         volumes:
-            - './core:/var/www/smartfact:rw'
+            - './:/var/www/smartfact:rw'
 
     nginx:
-        container_name: ${CONTAINER_PREFIX}_nginx
-        image: nginx
+        container_name: ${CONTAINER_NAME}_nginx
+        build: './docker/nginx'
         ports:
             - '${NGINX_PORT}:80'
         links:
             - debian
         volumes:
-            - './core:/var/www/smartfact:rw'
-            - './nginx/conf/core/nginx.conf:/etc/nginx/conf/nginx.conf:ro'
-            - './nginx/conf/app/:/etc/nginx/conf.d:ro'
-            - './nginx/logs/:/var/log/nginx'
+            - './:/var/www/smartfact:rw'
+            - './docker/nginx/conf/core/nginx.conf:/etc/nginx/conf/nginx.conf:ro'
+            - './docker/nginx/conf/app/:/etc/nginx/conf.d:ro'
+            - './docker/nginx/logs/:/var/log/nginx'
 
     nodejs:
-        container_name: ${CONTAINER_PREFIX}_node
+        container_name: ${CONTAINER_NAME}_node
         image: node
         ports:
             - '${NODE_PORT}:32793'
         links:
             - debian
         volumes:
-            - './core:/var/www/smartfact'
+            - './:/var/www/smartfact'
 
     php-fpm:
-        container_name: ${CONTAINER_PREFIX}_php-fpm
-        build: './php'
+        container_name: ${CONTAINER_NAME}_php-fpm
+        build: './docker/php'
         ports:
             - '${PHP_PORT}:9000'
         links:
             - debian
         volumes:
-            - './core:/var/www/smartfact:rw'
-            - './docker/php/:/usr/local/etc/php'
+            - './:/var/www/smartfact:rw'
+            - './docker/php/conf/:/usr/local/etc/php'
 
     # DB configuration
     mongodb:
-        container_name: ${CONTAINER_PREFIX}_mongodb
+        container_name: ${CONTAINER_NAME}_mongodb
         image: mongo:latest
         ports:
             - '${MONGO_PORT}:27017'
@@ -53,7 +53,7 @@ services:
         restart: always
 
     postgres:
-        container_name: ${CONTAINER_PREFIX}_postgres
+        container_name: ${CONTAINER_NAME}_postgres
         image: postgres:latest
         environment:
             POSTGRES_USER: '${DB_USERNAME}'
@@ -66,7 +66,7 @@ services:
         restart: always
 
     mysql:
-        container_name: ${CONTAINER_PREFIX}_mysql
+        container_name: ${CONTAINER_NAME}_mysql
         image: mysql:latest
         environment:
             MYSQL_DATABASE: '${DB_NAME}'
@@ -81,12 +81,17 @@ services:
 
     # Testing configuration
     blackfire:
-        container_name: ${CONTAINER_PREFIX}_blackfire
+        container_name: ${CONTAINER_NAME}_blackfire
         image: blackfire/blackfire
+        environment:
+            - '${BLACKFIRE_CLIENT_ID}'
+            - '${BLACKFIRE_CLIENT_TOKEN}'
+            - '${BLACKFIRE_SERVER_ID}'
+            - '${BLACKFIRE_SERVER_TOKEN}'
         links:
             - debian
         volumes:
-            - './core:/var/www/smartfact'
+            - './:/var/www/smartfact:rw'
         restart: always
 
 volumes:
