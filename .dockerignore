@@ -1,1 +1,5 @@
-nginx/logs/
+.git/
+/vendor/
+/var/cache/
+
+/docker/nginx/logs/

@@ -15,6 +15,8 @@ RUN apt-get update -y \
     && mv phpunit-6.1.phar /usr/local/bin/phpunit \
     && phpunit --version
 
+RUN docker-php-ext-install pdo pdo_mysql
+
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 RUN mkdir -p ${WORKDIR}
