@@ -42,7 +42,7 @@ services:
             - debian
         volumes:
             - './:/var/www/smartfact:rw'
-            - './docker/php/conf/:/usr/local/etc/php'
+            - './docker/php/conf/:/usr/local/etc/php/'
 
     # DB configuration
     mongodb:
