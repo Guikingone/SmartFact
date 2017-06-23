@@ -3,8 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
 
@@ -41,19 +39,26 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver: pdo_mysql
-        host: '%database_host%'
-        port: '%database_port%'
-        dbname: '%database_name%'
-        user: '%database_user%'
-        password: '%database_password%'
-        charset: UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.project_dir%/var/data/data.sqlite"
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #path: '%database_path%'
+        default_connection: %default_connection%
+            connections:
+                production:
+                    driver:   pdo_pgsql
+                    host:     '%database_host_prod%'
+                    port:     '%database_prod_port%'
+                    dbname:   '%database_prod_name%'
+                    user:     '%database_prod_user%'
+                    password: '%database_prod_password%'
+                    charset:  UTF8
+                    server_version: '%database_prod_server_version%'
+                development:
+                     driver:   pdo_mysql
+                     host:     '%database_host_dev%'
+                     port:     '%database_dev_port%'
+                     dbname:   '%database_dev_name%'
+                     user:     '%database_dev_user%'
+                     password: '%database_dev_password%'
+                     charset:  UTF8
+                     server_version: '%database_dev_server_version%'
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
