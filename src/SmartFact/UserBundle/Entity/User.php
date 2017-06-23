@@ -35,7 +35,7 @@ class User implements SmartFactUserInterface, AdvancedUserInterface, \Serializab
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @Groups({"users")
+     * @Groups({"users"})
      */
     private $id;
 

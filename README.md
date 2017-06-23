@@ -67,42 +67,158 @@ tested and easily maintainable, here's the tools who help the development proces
 
 ## Usage
 
-In order to make this project easy to use and maintain, the choice was dedicated to use Docker, 
-this way, our code and further development can easily be tested and manage trough the lifecyle.
+This project is build using Docker along with PHP, Nginx, Postgres, MySQL, MongoDB and Blackfire.
 
-In order to use Docker, here is the process : 
+This way, the project can be used in differents ways : 
+
+### Docker:
+
+This project use Docker environment files in order to allow the configuration according to your needs,
+this way, you NEED to define a .env file in order to launch the build.
+
+**_In order to perform better, Docker can block your dependencies installation and return an error 
+or never change your php configuration, we recommand to delete all your images/containers 
+before building the project_**
+
+```bash
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -a -q) -f
+```
+
+**Note that this command can take several minutes before ending**
+
+Once this is done, let's build the project.
+
+```bash
+touch .env
+```
+
+Then add the following keys according to your identifiers:
+
+```text
+# Global
+CONTAINER_NAME=Smartfact
+
+# Servers Ports
+NGINX_PORT=port
+APACHE_PORT=port
+NODE_PORTport
+PHP_PORT=port
+
+# DB Ports
+MYSQL_PORT=port
+POSTGRES_PORT=port
+MONGO_PORT=port
+MAIL_DEV_PORT=port
+
+# Database
+DB_USERNAME=db
+DB_PASSWORD=db
+DB_NAME=db
+
+# Blackfire
+BLACKFIRE_CLIENT_ID='blc'
+BLACKFIRE_CLIENT_TOKEN='blc'
+BLACKFIRE_SERVER_ID='blc'
+BLACKFIRE_SERVER_TOKEN='blc'
+```
+
+Then build the project:
 
 ```bash
 docker-composer up -d --build
 ```
 
-This command prepare and build all the container phase, once this is done, time to open the magic door
-and use commands : 
+Once this is done, access the project via your browser : 
 
-```bash
-docker-compose exex -it smartfact_php sh
+- Dev : 
+
+```
+http://localhost:port/app_dev.php/
 ```
 
-Once into the container, let's clear the cache :
+- Prod : 
 
-```bash
-rm -rf var/cache/*
+```
+http://localhost:port/app.php/
 ```
 
-OR 
+If you need to perform some tasks:
 
 ```bash
-./bin/console c:c 
+docker exec -it php-fpm_louvre sh
 ```
 
-**In case that a bug appear, please use the classic approach in order to connect to a service :** 
+Once in the container:
 
 ```bash
-docker-compose exec --user=userdesired theservice /bin/bash
+# Example for clearing the cache
+./bin/console c:c --env=prod || rm -rf var/cache/*
 ```
 
-_Please notice that using the Symfony console is a little bit longer and probably not too friendly for
-bash users._
+**Please note that you MUST open a second terminal in order to keep git ou other commands line outside of Docker**
+
+### PHP CLI
+
+```bash
+cd core
+php bin/console s:r || ./bin/console s:r
+```
+
+Then access the project via your browser: 
+
+```
+http://localhost:8000
+```
+
+## Assets management
+
+This project is build via Symfony and with the help of React, in order to ease the process, Webpack-Encore is used.
+
+As says in the documentation, Encore help to build and maintain the frontend code, this way, 
+this project follow some guidelines, the react components are availables in the web/dev/react/components and
+loaded via *.jsx files.
+
+Here the list of commands available : 
+
+```bash
+# Build for dev env (only build once)
+./node_modules/.bin/encore dev
+```
+```bash
+# Build continuously (the files changes are handled automatically)
+./node_modules/.bin/encore dev --watch
+```
+```bash
+# Build for production use (with minification)
+./node_modules/.bin/encore production
+```
+
+**_Please note that this project has been built with Docker so if you use this last one, 
+you MUST use the docker exec command in order to access the ./node_modules folder._**
+
+This commands helps in the development process, in order to be effective, here the recommendations for this 
+project : 
+
+### Visual assets: 
+
+- Store the SASS files inside the scss folder.
+- Define the globals variables inside a globals.scss file.
+- Respect the separation of concerns logic, if the rules are concentrated on a single component, make
+  a file for AND ONLY FOR this component.
+
+### React components: 
+
+- Use the continuous build in the dev part.
+- Build for production ONLY if you're sure about your assets.
+
+## Code architecture
+
+This project isn't a full API + SPA project, in fact, he's build from the ground up with Symfony + Twig, 
+React has been used in order to had dynamism, nothing more, this way, the logic is placed from Symfony into React.
+
+In order to ensure code maintainability ...
 
 ## Development process 
 
@@ -134,10 +250,12 @@ In order to launch the tests, here's the process :
 
 **Be sure to have build the containers/services**
 
-```
+```bash
 docker exec -it smartfact_php-fpm sh 
+```
 
-# phpunit -v
+```bash
+phpunit -v
 ```
 
 Once this is done, you should see the different results of tests.
