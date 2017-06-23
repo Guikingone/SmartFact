@@ -22,10 +22,9 @@ RUN apt-get update -y \
     && mv phpunit-6.1.phar /usr/local/bin/phpunit \
     && phpunit --version
 
-RUN mkdir -p /usr/local/etc/php/conf.d/
+COPY conf/php.ini /usr/local/etc/php/
 
-RUN docker-php-ext-install pdo_mysql \
-    && docker-php-ext-enable pdo_mysql.so
+RUN docker-php-ext-install pdo_mysql
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
