@@ -7,6 +7,7 @@ services:
         build: .
         volumes:
             - './:/var/www/smartfact:rw'
+        restart: always
 
     nginx:
         container_name: ${CONTAINER_NAME}_nginx
@@ -22,16 +23,18 @@ services:
             # Uncomment this line for production.
             # - './docker/nginx/conf/app/prod:/etc/nginx/conf.d:ro'
             - './docker/nginx/logs/:/var/log/nginx'
+        restart: always
 
     nodejs:
         container_name: ${CONTAINER_NAME}_node
         image: node
         ports:
-            - '${NODE_PORT}:32793'
+            - '${NODE_PORT}:8888'
         links:
             - debian
         volumes:
             - './:/var/www/smartfact'
+        restart: always
 
     php-fpm:
         container_name: ${CONTAINER_NAME}_php-fpm
@@ -42,6 +45,7 @@ services:
             - debian
         volumes:
             - './:/var/www/smartfact:rw'
+        restart: always
 
     # DB configuration
     mongodb:
@@ -89,6 +93,8 @@ services:
             - '${BLACKFIRE_CLIENT_TOKEN}'
             - '${BLACKFIRE_SERVER_ID}'
             - '${BLACKFIRE_SERVER_TOKEN}'
+        ports:
+            - '${BLACKFIRE_PORT}:8707'
         links:
             - debian
         volumes:

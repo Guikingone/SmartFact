@@ -39,26 +39,22 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        default_connection: %default_connection%
-            connections:
-                production:
-                    driver:   pdo_pgsql
-                    host:     '%database_host_prod%'
-                    port:     '%database_prod_port%'
-                    dbname:   '%database_prod_name%'
-                    user:     '%database_prod_user%'
-                    password: '%database_prod_password%'
-                    charset:  UTF8
-                    server_version: '%database_prod_server_version%'
-                development:
-                     driver:   pdo_mysql
-                     host:     '%database_host_dev%'
-                     port:     '%database_dev_port%'
-                     dbname:   '%database_dev_name%'
-                     user:     '%database_dev_user%'
-                     password: '%database_dev_password%'
-                     charset:  UTF8
-                     server_version: '%database_dev_server_version%'
+        default_connection: '%default_connection%'
+        connections:
+            production:
+                driver:   pdo_pgsql
+                host:     '%database_prod_host%'
+                dbname:   '%database_prod_name%'
+                user:     '%database_prod_user%'
+                password: '%database_prod_password%'
+                server_version: '%database_prod_server_version%'
+            development:
+                driver:   pdo_mysql
+                host:     '%database_dev_host%'
+                dbname:   '%database_dev_name%'
+                user:     '%database_dev_user%'
+                password: '%database_dev_password%'
+                server_version: '%database_dev_server_version%'
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'

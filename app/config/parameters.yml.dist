@@ -1,9 +1,9 @@
 parameters:
-    default_connection: development
+    default_connection: null
 
     # Environment host
-    database_host_dev: 172.21.0.1
-    database_host_prod: 127.0.0.1
+    database_dev_host: 172.21.0.1
+    database_prod_host: 127.0.0.1
 
     # Database informations (prod && dev)
     database_prod_port: null
@@ -12,6 +12,7 @@ parameters:
     database_prod_password: null
     database_prod_server_version: null
     database_dev_port: null
+    database_dev_name: symfony
     database_dev_user: symfony
     database_dev_password: symfony
     database_dev_server_version: null
