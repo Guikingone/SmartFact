@@ -24,7 +24,9 @@ L'application devra fonctionner de pair avec un serveur : il y aura donc une com
 L'application fonctionnera donc sur le modèle suivant :
 
 - Communication entre applications mobiles et serveur
-- Communication entre applications mobiles et serveur
+
+![Communication entre applications mobiles et serveur](https://user.oc-static.com/upload/2016/12/29/14830188284661_smartphones_serveur.png)
+
 Ce schéma est très courant pour de nombreuses applications. A vous de veiller à concevoir une application qui respecte ce modèle.
 
 Vous porterez une attention particulière au modèle de données choisi, qui doit être efficace et cohérent. Vous devrez en particulier prouver qu'il tient la charge si votre application rencontre un succès rapide (souvenez-vous des débuts difficiles de Pokémon Go !). Sélectionnez donc avec soin votre méthode d'hébergement pour qu'elle puisse facilement passer à l'échelle.
@@ -118,6 +120,7 @@ DB_PASSWORD=db
 DB_NAME=db
 
 # Blackfire
+BLACKFIRE_PORT=port
 BLACKFIRE_CLIENT_ID='blc'
 BLACKFIRE_CLIENT_TOKEN='blc'
 BLACKFIRE_SERVER_ID='blc'
