@@ -15,7 +15,7 @@ namespace tests\AppBundle\Entity;
 use PHPUnit\Framework\TestCase;
 
 // Bundle
-use SmartFact\UserBundle\Entity\User;
+use AppBundle\Entity\User;
 
 /**
  * Class UserTest

@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace SmartFact\UserBundle\Entity;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
-// Bundle
-use SmartFact\UserBundle\Interfaces\SmartFactUserInterface;
+use AppBundle\Interfaces\SmartFactUserInterface;
 
 /**
  * Class User
@@ -24,9 +22,9 @@ use SmartFact\UserBundle\Interfaces\SmartFactUserInterface;
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
  * @ORM\Table(name="_smartfact_user")
- * @ORM\Entity(repositoryClass="SmartFact\UserBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User implements SmartFactUserInterface, AdvancedUserInterface, \Serializable
+class User implements SmartFactUserInterface
 {
     /**
      * @var int

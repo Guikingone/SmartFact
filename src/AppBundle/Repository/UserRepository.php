@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Smartfact project.
+ * This file is part of the SmartFact project.
  *
  * (c) Guillaume Loulier <contact@guillaumeloulier.fr>
  *
@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace SmartFact\UserBundle;
+namespace AppBundle\Repository;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Doctrine\ORM\EntityRepository;
 
 /**
- * Class SmartFactUserBundle
+ * Class UserRepository
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class SmartFactUserBundle extends Bundle
+class UserRepository extends EntityRepository
 {
-    
+
 }

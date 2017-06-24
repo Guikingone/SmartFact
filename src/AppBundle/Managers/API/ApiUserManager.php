@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace SmartFact\UserBundle\Managers\API;
+namespace AppBundle\Managers\API;
 
 // Symfony core
 use Doctrine\ORM\EntityManager;

@@ -9,16 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace SmartFact\UserBundle\Repository;
-
-use Doctrine\ORM\EntityRepository;
+namespace AppBundle\Managers\Web;
 
 /**
- * Class UserRepository
+ * Class WebUserManager
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class UserRepository extends EntityRepository
+class WebUserManager
 {
 
 }
