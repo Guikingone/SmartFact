@@ -9,14 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace SmartFact\UserBundle\Interfaces;
+namespace AppBundle\Interfaces;
+
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * Interface SmartFactUserInterface
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-interface SmartFactUserInterface
+interface SmartFactUserInterface extends AdvancedUserInterface, \Serializable
 {
     /**
      * @return int

@@ -1,3 +1,0 @@
-smart_fact_user_homepage:
-    path:     /user
-    defaults: { _controller: SmartFactUserBundle:Default:index }
