@@ -25,7 +25,10 @@ RUN apt-get update -y \
 
 COPY conf/php.ini /usr/local/etc/php/
 
-RUN docker-php-ext-install pdo_mysql opcache json
+RUN pecl install apcu \
+                 xdebug \
+    && docker-php-ext-install pdo_mysql opcache json sockets \
+    && docker-php-ext-enable apcu xdebug
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 

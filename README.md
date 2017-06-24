@@ -130,6 +130,16 @@ Then build the project:
 docker-composer up -d --build
 ```
 
+Once the project is build, let's play with the database : 
+
+```bash
+./bin/console d:d:c  --connection=production # In production
+
+./bin/console d:d:c --connection=development # In development
+```
+
+For more informations, please check the official documentation : [Symfony](https://symfony.com/doc/current/doctrine/multiple_entity_managers.html)
+
 Once this is done, access the project via your browser : 
 
 - Dev : 
@@ -259,3 +269,7 @@ phpunit -v
 ```
 
 Once this is done, you should see the different results of tests.
+
+## Production
+
+In order to 
