@@ -12,10 +12,12 @@
 namespace tests\AppBundle\Entity;
 
 // Symfony core
-use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
-// Bundle
+// Entity
 use AppBundle\Entity\User;
+use AppBundle\Entity\Clients;
+use AppBundle\Entity\Notifications;
 
 /**
  * Class UserTest
@@ -56,5 +58,80 @@ class UserTest extends TestCase
         $this->assertEquals('LB,L8ELTDL0', $user->getPassword());
         $this->assertEquals('tok_0010901_001NNDOPPPANDHYEMMANDU', $user->getToken());
         $this->assertContains('ROLE_USER', $user->getRoles());
+    }
+
+    /**
+     * Test if a user can be linked to a Notification.
+     */
+    public function testUserNotifications()
+    {
+        $user = new User();
+        $notification = $this->createMock(Notifications::class);
+
+        $user->setFirstName('Harry');
+        $user->setLastName('Potter');
+        $user->setAddress('23 Poudlard Avenue');
+        $user->setPhoneNumber('0635459287');
+        $user->setBirthDate(new \DateTime('1995-03-21'));
+        $user->setStatus('Freelance');
+        $user->setCreatedAt(new \DateTime('2017-02-31'));
+        $user->setValidated(true);
+        $user->setUsername('HP');
+        $user->setPassword('LB,L8ELTDL0');
+        $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
+        $user->addRoles('ROLE_USER');
+
+        $notification->method('getName')
+                     ->willReturn('A new bills has been generated !');
+
+        $notification->method('getId')
+                     ->willReturn(1);
+
+        $notification->method('setUser')
+                     ->willReturn($user);
+
+        $user->addNotification($notification);
+
+        if ($this->assertInstanceOf(Notifications::class, $user->getNotifications()->get(0))) {
+            $notif = $user->getNotifications()->get(0);
+            $this->assertEquals('A new bills has been generated !', $notif->getName());
+            $this->assertEquals(1, $notif->getId());
+        }
+    }
+
+    /**
+     * Test if a User can be linked to a Client.
+     */
+    public function testUserClients()
+    {
+        $user = new User();
+        $clients = $this->createMock(Clients::class);
+
+        $user->setFirstName('Harry');
+        $user->setLastName('Potter');
+        $user->setAddress('23 Poudlard Avenue');
+        $user->setPhoneNumber('0635459287');
+        $user->setBirthDate(new \DateTime('1995-03-21'));
+        $user->setStatus('Freelance');
+        $user->setCreatedAt(new \DateTime('2017-02-31'));
+        $user->setValidated(true);
+        $user->setUsername('HP');
+        $user->setPassword('LB,L8ELTDL0');
+        $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
+        $user->addRoles('ROLE_USER');
+
+        $clients->method('getName')
+                ->willReturn('Google');
+
+        $clients->method('getPrestationType')
+                ->willReturn('Services');
+
+        $user->addClient($clients);
+
+        if ($this->assertInstanceOf(Clients::class, $user->getClients()->get(0))) {
+            $client = $user->getNotifications()->get(0);
+            $this->assertEquals('Google', $client->getName());
+            $this->assertEquals('Services', $client->getTypePrestation());
+        }
     }
 }

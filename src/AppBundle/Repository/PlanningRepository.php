@@ -14,10 +14,10 @@ namespace AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class UserRepository
+ * Class PlanningRepository
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class UserRepository extends EntityRepository
+class PlanningRepository extends EntityRepository
 {
 }

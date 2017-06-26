@@ -11,9 +11,12 @@
 
 namespace AppBundle\Entity;
 
+// Core
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
+// Interface
 use AppBundle\Interfaces\SmartFactUserInterface;
 
 /**
@@ -156,10 +159,38 @@ class User implements SmartFactUserInterface
     private $roles;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notifications", mappedBy="user")
+     */
+    private $notifications;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Clients", mappedBy="user")
+     */
+    private $clients;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Accounting", inversedBy="user")
+     */
+    private $accounting;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bills", mappedBy="user")
+     */
+    private $bills;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Planning", mappedBy="user")
+     */
+    private $planning;
+
+    /**
      * User constructor.
      */
     public function __construct()
     {
+        $this->notifications = new ArrayCollection();
+        $this->clients = new ArrayCollection();
+        $this->bills = new ArrayCollection();
         $this->isActive = true;
     }
 
@@ -388,6 +419,11 @@ class User implements SmartFactUserInterface
     }
 
     /** @codeCoverageIgnore */
+    public function eraseCredentials()
+    {
+    }
+
+    /** @codeCoverageIgnore */
     public function isAccountNonExpired()
     {
         return true;
@@ -416,9 +452,6 @@ class User implements SmartFactUserInterface
         return null;
     }
 
-    /** @codeCoverageIgnore */
-    public function eraseCredentials(){}
-
     /**
      * @see \Serializable::serialize()
      *
@@ -441,11 +474,185 @@ class User implements SmartFactUserInterface
      */
     public function unserialize($serialized)
     {
-        list (
+        list(
             $this->id,
             $this->username,
             $this->password,
             $this->isActive
             ) = unserialize($serialized);
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Add notification
+     *
+     * @param \AppBundle\Entity\Notifications $notification
+     *
+     * @return User
+     */
+    public function addNotification(\AppBundle\Entity\Notifications $notification)
+    {
+        $this->notifications[] = $notification;
+
+        return $this;
+    }
+
+    /**
+     * Remove notification
+     *
+     * @param \AppBundle\Entity\Notifications $notification
+     */
+    public function removeNotification(\AppBundle\Entity\Notifications $notification)
+    {
+        $this->notifications->removeElement($notification);
+    }
+
+    /**
+     * Get notifications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+
+    /**
+     * Add client
+     *
+     * @param \AppBundle\Entity\Clients $client
+     *
+     * @return User
+     */
+    public function addClient(\AppBundle\Entity\Clients $client)
+    {
+        $this->clients[] = $client;
+
+        return $this;
+    }
+
+    /**
+     * Remove client
+     *
+     * @param \AppBundle\Entity\Clients $client
+     */
+    public function removeClient(\AppBundle\Entity\Clients $client)
+    {
+        $this->clients->removeElement($client);
+    }
+
+    /**
+     * Get clients
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getClients()
+    {
+        return $this->clients;
+    }
+
+    /**
+     * Set accounting
+     *
+     * @param \AppBundle\Entity\Accounting $accounting
+     *
+     * @return User
+     */
+    public function setAccounting(\AppBundle\Entity\Accounting $accounting = null)
+    {
+        $this->accounting = $accounting;
+
+        return $this;
+    }
+
+    /**
+     * Get accounting
+     *
+     * @return \AppBundle\Entity\Accounting
+     */
+    public function getAccounting()
+    {
+        return $this->accounting;
+    }
+
+    /**
+     * Add bill
+     *
+     * @param \AppBundle\Entity\Bills $bill
+     *
+     * @return User
+     */
+    public function addBill(\AppBundle\Entity\Bills $bill)
+    {
+        $this->bills[] = $bill;
+
+        return $this;
+    }
+
+    /**
+     * Remove bill
+     *
+     * @param \AppBundle\Entity\Bills $bill
+     */
+    public function removeBill(\AppBundle\Entity\Bills $bill)
+    {
+        $this->bills->removeElement($bill);
+    }
+
+    /**
+     * Get bills
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBills()
+    {
+        return $this->bills;
+    }
+
+    /**
+     * Set planning
+     *
+     * @param \AppBundle\Entity\Planning $planning
+     *
+     * @return User
+     */
+    public function setPlanning(\AppBundle\Entity\Planning $planning = null)
+    {
+        $this->planning = $planning;
+
+        return $this;
+    }
+
+    /**
+     * Get planning
+     *
+     * @return \AppBundle\Entity\Planning
+     */
+    public function getPlanning()
+    {
+        return $this->planning;
     }
 }

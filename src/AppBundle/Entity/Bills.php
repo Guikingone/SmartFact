@@ -9,15 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Repository;
+namespace AppBundle\Entity;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Interfaces\SmartFactBillsInterface;
 
 /**
- * Class UserRepository
+ * Class Bills
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
+ *
+ * @ORM\Table(name="_smartfact_user_bills")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BillsRepository")
  */
-class UserRepository extends EntityRepository
+class Bills implements SmartFactBillsInterface
 {
 }
