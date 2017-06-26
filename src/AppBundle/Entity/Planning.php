@@ -9,15 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Repository;
+namespace AppBundle\Entity;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Interfaces\SmartFactPlanningInterface;
 
 /**
- * Class UserRepository
+ * Class Planning
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
+ *
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanningRepository")
  */
-class UserRepository extends EntityRepository
+class Planning implements SmartFactPlanningInterface
 {
 }

@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 // Bundle
-use SmartFact\UserBundle\Entity\User;
+use AppBundle\Entity\User;
 
 /**
  * Class ApiUserManager
@@ -98,6 +98,5 @@ class ApiUserManager
 
     public function postUsers()
     {
-
     }
 }

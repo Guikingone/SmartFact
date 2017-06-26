@@ -253,6 +253,30 @@ If you want to add a new functionality or submit an idea :
 git branch -d ISSUE_CONCERNED_ADDITION
 ```
 
+When you develop a new feature or apply a patch, you MUST follow the PSR for code quality and
+simplicity, this way, we use [PHP-CS-FIXER](https://github.com/FriendsOfPHP/PHP-CS-Fixer) in order to ease the process, here's the way to launch
+the tool in order to manage the code : 
+
+```bash
+docker exec -it Smartfact_php-fpm sh
+
+ ./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix .
+```
+
+Once the corrections are applied, please, be sure to check the files who's been edited 
+and be sure that nothing into YOUR logic has changed. 
+
+On the other hand, we MUST keep the documentation up-to-date after each modifications, in order
+to ease the process, we use [SAMI](https://github.com/FriendsOfPHP/Sami), this way, a sami.phar 
+file is available into the _script folder, all the configuration has been done and you only 
+need to perform simple task : 
+
+```bash
+docker exec -it Smartfact_php-fpm sh
+
+php _script/sami.php
+```
+
 ## Tests coverage
 
 This project is completely tested and followed by PHPUnit, this way, our code is easily maintainable

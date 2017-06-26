@@ -16,7 +16,13 @@
 /vendor/
 /web/bundles/
 
+# Doctrine
+src/**Bundle/Entity/*.php
+
 # Docker
 .env
 /docker/nginx/logs/
 /docker/apache/logs/
+
+# Developement tools
+/.php_cs.phar

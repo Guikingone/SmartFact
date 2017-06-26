@@ -18,5 +18,4 @@ namespace AppBundle\Managers\Web;
  */
 class WebUserManager
 {
-
 }

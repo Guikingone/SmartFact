@@ -9,15 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Repository;
-
-use Doctrine\ORM\EntityRepository;
+namespace AppBundle\Interfaces;
 
 /**
- * Class UserRepository
+ * Interface SmartFactBillsInterface
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class UserRepository extends EntityRepository
+interface SmartFactBillsInterface
 {
 }
