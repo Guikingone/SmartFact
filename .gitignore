@@ -25,4 +25,4 @@ src/**Bundle/Entity/*.php~
 /docker/apache/logs/
 
 # Developement tools
-/.php_cs.phar
+/.php_cs.cache

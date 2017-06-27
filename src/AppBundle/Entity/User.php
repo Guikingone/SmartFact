@@ -160,6 +160,8 @@ class User implements SmartFactUserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notifications", mappedBy="user")
+     *
+     * @Groups({"users"})
      */
     private $notifications;
 
@@ -489,7 +491,7 @@ class User implements SmartFactUserInterface
      *
      * @return User
      */
-    public function setIsActive($isActive)
+    public function setActive($isActive)
     {
         $this->isActive = $isActive;
 
@@ -501,7 +503,7 @@ class User implements SmartFactUserInterface
      *
      * @return boolean
      */
-    public function getIsActive()
+    public function getActive()
     {
         return $this->isActive;
     }

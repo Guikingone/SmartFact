@@ -12,6 +12,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
+// Interface
 use AppBundle\Interfaces\SmartFactBillsInterface;
 
 /**
@@ -24,4 +26,41 @@ use AppBundle\Interfaces\SmartFactBillsInterface;
  */
 class Bills implements SmartFactBillsInterface
 {
+    /**
+     * @var int
+     *
+     * @ORM\Id
+     * @ORM\Column(name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     */
+    private $date;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
 }
