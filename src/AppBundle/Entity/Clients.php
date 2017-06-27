@@ -39,6 +39,16 @@ class Clients
     /**
      * @var string
      */
+    private $address;
+
+    /**
+     * @var string
+     */
+    private $phoneNumber;
+
+    /**
+     * @var string
+     */
     private $prestationType;
 
     /**
