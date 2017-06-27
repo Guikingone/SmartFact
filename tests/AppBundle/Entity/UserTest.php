@@ -93,7 +93,7 @@ class UserTest extends TestCase
 
         $user->addNotification($notification);
 
-        if ($this->assertInstanceOf(Notifications::class, $user->getNotifications()->get(0))) {
+        if ($this->assertInstanceOf(get_class($notification), $user->getNotifications()->get(0))) {
             $this->assertContains(0, $user->getNotifications());
             $notif = $user->getNotifications()->get(0);
             $this->assertEquals('A new bills has been generated !', $notif->getName());
@@ -130,7 +130,7 @@ class UserTest extends TestCase
 
         $user->setPlanning($planning);
 
-        if ($this->assertInstanceOf(Planning::class, $user->getPlanning())) {
+        if ($this->assertInstanceOf(get_class($planning), $user->getPlanning())) {
             $this->assertEquals('2017', $planning->getPeriod());
             $this->assertInstanceOf(User::class, $planning->getUser());
         }
@@ -165,7 +165,7 @@ class UserTest extends TestCase
 
         $user->addClient($clients);
 
-        if ($this->assertInstanceOf(Clients::class, $user->getClients()->get(0))) {
+        if ($this->assertInstanceOf(get_class($clients), $user->getClients()->get(0))) {
             $client = $user->getNotifications()->get(0);
             $this->assertEquals('Google', $client->getName());
             $this->assertEquals('Services', $client->getTypePrestation());

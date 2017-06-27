@@ -11,7 +11,11 @@
 
 namespace AppBundle\Entity;
 
+// Core
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+// Interface
 use AppBundle\Interfaces\SmartFactNotificationsInterface;
 
 /**
@@ -30,48 +34,78 @@ class Notifications implements SmartFactNotificationsInterface
      * @ORM\Column(name="id")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"users", "notifications"})
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string")
+     * @ORM\Column(name="name", type="string", length=50)
+     *
+     * @Groups({"users", "notifications"})
      */
     private $name;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="category", type="string", length=50)
+     *
+     * @Groups({"users", "notifications"})
      */
     private $category;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     *
+     * @Groups({"users", "notifications"})
      */
     private $createdAt;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="link", type="string")
+     *
+     * @Groups({"users", "notifications"})
      */
     private $link;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="content", type="string")
+     *
+     * @Groups({"users", "notifications"})
      */
     private $content;
 
     /**
      * @var bool
+     *
+     * @ORM\Column(name="repetition", type="boolean")
+     *
+     * @Groups({"users", "notifications"})
      */
     private $repetition;
 
     /**
      * @var bool
+     *
+     * @ORM\Column(name="checked", type="boolean")
+     *
+     * @Groups({"users", "notifications"})
      */
     private $checked;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="notifications")
+     *
+     * @Groups({"notifications"})
      */
     private $user;
 
@@ -198,11 +232,11 @@ class Notifications implements SmartFactNotificationsInterface
     /**
      * Set user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param User $user
      *
      * @return Notifications
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -212,7 +246,7 @@ class Notifications implements SmartFactNotificationsInterface
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getUser()
     {

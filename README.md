@@ -260,7 +260,7 @@ the tool in order to manage the code :
 ```bash
 docker exec -it Smartfact_php-fpm sh
 
- ./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix .
+./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix .
 ```
 
 Once the corrections are applied, please, be sure to check the files who's been edited 

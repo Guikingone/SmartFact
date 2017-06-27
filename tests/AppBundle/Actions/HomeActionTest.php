@@ -49,6 +49,5 @@ class HomeActionTest extends KernelTestCase
                                  ->get(HomeAction::class);
 
         $this->assertObjectHasAttribute('twig', $action);
-
     }
 }
