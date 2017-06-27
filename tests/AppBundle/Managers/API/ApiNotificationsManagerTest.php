@@ -11,11 +11,7 @@
 
 namespace tests\AppBundle\Managers\API;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-
-// Manager
-use AppBundle\Managers\API\ApiNotificationsManager;
 
 /**
  * Class ApiNotificationsManagerTest
