@@ -14,8 +14,6 @@ namespace AppBundle\Managers\API;
 // Symfony core
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -69,30 +67,22 @@ class ApiUserManager
     }
 
     /**
-     * Allow to retrieve all the users.
      *
-     * @return JsonResponse|Response
+     * @return array|null
      */
     public function getUsers()
     {
-        $data = $this->doctrine->getRepository(User::class)->findAll();
+        $data = $this->doctrine->getRepository(User::class)
+                               ->findAll();
 
         if (!$data) {
-            return new JsonResponse(
-                [
-                    'message' => 'Resource not found'
-                ],
-                Response::HTTP_NOT_FOUND
-            );
+            return null;
         }
 
-        $users = $this->serializer->serialize($data, 'json', ['groups' => ['users']]);
-
-        return new Response(
-            [
-                'data' => $users
-            ],
-            Response::HTTP_OK
+        return $this->serializer->serialize(
+            $data,
+            'json',
+            ['groups' => ['users']]
         );
     }
 

@@ -18,4 +18,21 @@ namespace AppBundle\Interfaces;
  */
 interface SmartFactNotificationsInterface
 {
+    public function getId();
+
+    public function getName();
+
+    public function getCategory();
+
+    public function getCreatedAt();
+
+    public function getLink();
+
+    public function getContent();
+
+    public function hasRepetition();
+
+    public function hasBeenChecked();
+
+    public function getUser();
 }

@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 // Entity
 use AppBundle\Entity\User;
 use AppBundle\Entity\Clients;
+use AppBundle\Entity\Planning;
 use AppBundle\Entity\Notifications;
 
 /**
@@ -93,9 +94,45 @@ class UserTest extends TestCase
         $user->addNotification($notification);
 
         if ($this->assertInstanceOf(Notifications::class, $user->getNotifications()->get(0))) {
+            $this->assertContains(0, $user->getNotifications());
             $notif = $user->getNotifications()->get(0);
             $this->assertEquals('A new bills has been generated !', $notif->getName());
             $this->assertEquals(1, $notif->getId());
+        }
+    }
+
+    /**
+     * Test if a User can be linked to a Planning.
+     */
+    public function testUserPlanning()
+    {
+        $user = new User();
+        $planning = $this->createMock(Planning::class);
+
+        $user->setFirstName('Harry');
+        $user->setLastName('Potter');
+        $user->setAddress('23 Poudlard Avenue');
+        $user->setPhoneNumber('0635459287');
+        $user->setBirthDate(new \DateTime('1995-03-21'));
+        $user->setStatus('Freelance');
+        $user->setCreatedAt(new \DateTime('2017-02-31'));
+        $user->setValidated(true);
+        $user->setUsername('HP');
+        $user->setPassword('LB,L8ELTDL0');
+        $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
+        $user->addRoles('ROLE_USER');
+
+        $planning->method('getPeriod')
+                 ->willReturn('2017');
+
+        $planning->method('setUser')
+                 ->willReturn($user);
+
+        $user->setPlanning($planning);
+
+        if ($this->assertInstanceOf(Planning::class, $user->getPlanning())) {
+            $this->assertEquals('2017', $planning->getPeriod());
+            $this->assertInstanceOf(User::class, $planning->getUser());
         }
     }
 

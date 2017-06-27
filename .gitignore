@@ -17,7 +17,7 @@
 /web/bundles/
 
 # Doctrine
-src/**Bundle/Entity/*.php
+src/**Bundle/Entity/*.php~
 
 # Docker
 .env
