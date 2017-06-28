@@ -297,6 +297,27 @@ phpunit -v
 
 Once this is done, you should see the different results of tests.
 
+## Performances tests
+
+In order to kepp the application in shape and available by every request, we use Blackfire
+in order to test our performances logic and correct the bottleneck, as you can saw,
+the Blackfire Agent/CLI and Probe are installed during the build process, this way,
+you can access the different commands directly from the PHP-FPM container : 
+
+```bash
+docker exec -it Smartfact_php-fpm sh # Name of the container is up to you.
+
+blackfire --help
+```
+Once the container is build, time to set the client_id and client_token : 
+
+```bash
+blackfire config 
+
+# Enter your identifiers.
+```
+Once this is done ...
+
 ## Production
 
 In order to 
