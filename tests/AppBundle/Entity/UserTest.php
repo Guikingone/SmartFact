@@ -12,6 +12,7 @@
 namespace tests\AppBundle\Entity;
 
 // Symfony core
+use AppBundle\Entity\Accounting;
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 // Entity
@@ -170,5 +171,26 @@ class UserTest extends TestCase
             $this->assertEquals('Google', $client->getName());
             $this->assertEquals('Services', $client->getTypePrestation());
         }
+    }
+
+    public function testUserAccounting()
+    {
+        $user = new User();
+        $accounting = $this->createMock(Accounting::class);
+
+        $user->setFirstName('Harry');
+        $user->setLastName('Potter');
+        $user->setAddress('23 Poudlard Avenue');
+        $user->setPhoneNumber('0635459287');
+        $user->setBirthDate(new \DateTime('1995-03-21'));
+        $user->setStatus('Freelance');
+        $user->setCreatedAt(new \DateTime('2017-02-31'));
+        $user->setValidated(true);
+        $user->setUsername('HP');
+        $user->setPassword('LB,L8ELTDL0');
+        $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
+        $user->addRoles('ROLE_USER');
+
+
     }
 }

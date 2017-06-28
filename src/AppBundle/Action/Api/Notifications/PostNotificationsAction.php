@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Action\Api;
+namespace AppBundle\Action\Api\Notifications;
 
 
 final class PostNotificationsAction

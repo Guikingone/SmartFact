@@ -12,9 +12,9 @@
 namespace AppBundle\Managers\API;
 
 // Symfony core
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\Serializer\Serializer;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -28,10 +28,10 @@ use AppBundle\Entity\User;
  */
 class ApiUserManager
 {
-    /** @var Serializer */
+    /** @var SerializerInterface */
     private $serializer;
 
-    /** @var EntityManager */
+    /** @var EntityManagerInterface */
     private $doctrine;
 
     /** @var EventDispatcherInterface */
@@ -43,18 +43,9 @@ class ApiUserManager
     /** @var RequestStack */
     private $requestStack;
 
-    /**
-     * ApiUserManager constructor.
-     *
-     * @param Serializer $serializer
-     * @param EntityManager $doctrine
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param ValidatorInterface $validator
-     * @param RequestStack $requestStack
-     */
     public function __construct(
-        Serializer $serializer,
-        EntityManager $doctrine,
+        SerializerInterface $serializer,
+        EntityManagerInterface $doctrine,
         EventDispatcherInterface $eventDispatcher,
         ValidatorInterface $validator,
         RequestStack $requestStack
@@ -67,8 +58,7 @@ class ApiUserManager
     }
 
     /**
-     *
-     * @return array|null
+     * @return null|string
      */
     public function getUsers()
     {
