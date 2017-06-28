@@ -11,8 +11,8 @@
 
 namespace AppBundle\Action\Web;
 
-use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Templating\EngineInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
@@ -24,18 +24,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  */
 final class HomeAction
 {
-    /**
-     * @var TwigEngine
-     */
+    /** @var EngineInterface */
     private $twig;
 
     /**
      * HomeAction constructor.
      *
-     * @param TwigEngine $responder
+     * @param EngineInterface $twig
      */
-    public function __construct(TwigEngine $twig)
-    {
+    public function __construct(
+        EngineInterface $twig
+    ) {
         $this->twig = $twig;
     }
 
@@ -44,6 +43,8 @@ final class HomeAction
      */
     public function __invoke()
     {
-        return new Response($this->twig->render('default/index.html.twig'));
+        return new Response(
+            $this->twig->render('default/index.html.twig')
+        );
     }
 }

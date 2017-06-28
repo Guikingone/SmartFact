@@ -9,23 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Action\Api;
+namespace AppBundle\Action\Api\Notifications;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 // Manager
 use AppBundle\Managers\API\ApiNotificationsManager;
 
 /**
- * Class GetNotificationsAction
+ * Class GetNotificationAction
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
- * @Route("/user/{id}/notifications", name="api_user_notifications")
+ * @Route("/user/{id}/notification/{notifId}", name="api_user_notification")
+ *
+ * @Method({"GET"})
  */
-final class GetNotificationsAction
+class GetNotificationAction
 {
     /** @var ApiNotificationsManager */
     private $manager;
@@ -34,7 +37,7 @@ final class GetNotificationsAction
     private $requestStack;
 
     /**
-     * GetNotificationsAction constructor.
+     * GetNotificationAction constructor.
      *
      * @param ApiNotificationsManager $manager
      * @param RequestStack $requestStack
@@ -43,8 +46,8 @@ final class GetNotificationsAction
         ApiNotificationsManager $manager,
         RequestStack $requestStack
     ) {
-       $this->manager = $manager;
-       $this->requestStack = $requestStack;
+        $this->manager = $manager;
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -52,12 +55,15 @@ final class GetNotificationsAction
      */
     public function __invoke()
     {
-        $id = $this->requestStack->getCurrentRequest()->get('id');
-
-        $notifications = $this->manager->getUserNotifications($id);
+        $data = $this->manager->getUserSingleNotification(
+            $this->requestStack->getCurrentRequest()->get('id'),
+            $this->requestStack->getCurrentRequest()->get('notifId')
+        );
 
         return new Response(
-            $notifications
+            $data,
+            Response::HTTP_OK,
+            ['Content-Type' => 'application/json']
         );
     }
 }

@@ -11,8 +11,8 @@
 
 namespace AppBundle\Managers\API;
 
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\Serializer\Serializer;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 // Entity
 use AppBundle\Entity\Notifications;
@@ -24,32 +24,32 @@ use AppBundle\Entity\Notifications;
  */
 class ApiNotificationsManager
 {
-    /** @var EntityManager */
+    /** @var EntityManagerInterface */
     private $doctrine;
 
-    /** @var Serializer */
+    /** @var SerializerInterface */
     private $serializer;
 
     /**
      * ApiNotificationsManager constructor.
      *
-     * @param EntityManager $doctrine
-     * @param Serializer $serializer
+     * @param EntityManagerInterface $doctrine
+     * @param SerializerInterface $serializer
      */
     public function __construct(
-        EntityManager $doctrine,
-        Serializer $serializer
+        EntityManagerInterface $doctrine,
+        SerializerInterface $serializer
     ) {
         $this->doctrine = $doctrine;
         $this->serializer = $serializer;
     }
 
     /**
-     * Return the User notifications.
+     * Return the User Notifications using the User id.
      *
-     * @param int $id   The id of the User.
+     * @param int $id       The User id.
      *
-     * @return array|null   The array of Notifications if available, null if not.
+     * @return string|array The array of Notifications.
      */
     public function getUserNotifications($id)
     {
@@ -57,10 +57,6 @@ class ApiNotificationsManager
                                ->findBy([
                                    'user' => $id
                                ]);
-
-        if (!$data) {
-            return null;
-        }
 
         return $this->serializer->serialize(
             $data,
@@ -76,7 +72,7 @@ class ApiNotificationsManager
      * @param int $id               The User id.
      * @param int $notificationId   The Notification id.
      *
-     * @return array|null   The array of Notification if available, null if not.
+     * @return string   The string of Notification if available, null if not.
      */
     public function getUserSingleNotification($id, $notificationId)
     {
@@ -86,10 +82,6 @@ class ApiNotificationsManager
                                    'id' => $notificationId
                                ]);
 
-        if (!$data) {
-            return null;
-        }
-
         return $this->serializer->serialize(
             $data,
             'json'
@@ -98,6 +90,25 @@ class ApiNotificationsManager
 
     public function postUserNotification($data)
     {
+        $object = $this->serializer->deserialize(
+            $data,
+            Notifications::class,
+            'json'
+        );
 
+        $this->doctrine->persist($object);
+        $this->doctrine->flush();
+    }
+
+    public function deleteUserNotifications($id)
+    {
+        $notifications = $this->doctrine->getRepository(Notifications::class)
+                                        ->findBy([
+                                            'user' => $id
+                                        ]);
+
+        if (!$notifications) {
+
+        }
     }
 }

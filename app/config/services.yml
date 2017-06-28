@@ -13,7 +13,7 @@ services:
         public: false
 
     AppBundle\Action\:
-        resource: '../../src/AppBundle/Action'
+        resource: '../../src/AppBundle/Action/*'
         public: true
 
     AppBundle\Managers\:

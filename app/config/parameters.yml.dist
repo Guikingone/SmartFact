@@ -1,5 +1,5 @@
 parameters:
-    default_connection: null
+    default_connection: development
 
     # Environment host
     database_dev_host: 172.21.0.1

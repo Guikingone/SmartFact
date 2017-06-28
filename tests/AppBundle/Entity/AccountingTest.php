@@ -9,23 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Entity;
+namespace tests\AppBundle\Entity;
+
+use AppBundle\Entity\Accounting;
+use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 /**
- * Class Accounting
+ * Class AccountingTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class Accounting
+class AccountingTest extends TestCase
 {
-    /**
-     * @var int
-     */
-    private $id;
-
-    /** @return int */
-    public function getId()
+    public function testInstantiation()
     {
-        return $this->id;
+        $accounting = new Accounting();
+
+        $this->assertNull($accounting->getId());
     }
 }
