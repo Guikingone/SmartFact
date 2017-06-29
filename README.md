@@ -299,16 +299,18 @@ Once this is done, you should see the different results of tests.
 
 ## Performances tests
 
-In order to kepp the application in shape and available by every request, we use Blackfire
-in order to test our performances logic and correct the bottleneck, as you can saw,
-the Blackfire Agent/CLI and Probe are installed during the build process, this way,
-you can access the different commands directly from the PHP-FPM container : 
+In order to kepp the application in shape and available by every request, 
+we use [Blackfire](https://blackfire.io/) in order to test our performances 
+logic and correct the bottleneck, as you can saw, 
+the Blackfire Agent/CLI and Probe are installed by the [official Docker image](https://blackfire.io/docs/integrations/docker), 
+this way, you can access the different commands directly from the PHP-FPM container : 
 
 ```bash
-docker exec -it Smartfact_php-fpm sh # Name of the container is up to you.
+docker exec -it Smartfact_blackfire sh # Name of the container is up to you.
 
 blackfire --help
 ```
+
 Once the container is build, time to set the client_id and client_token : 
 
 ```bash
@@ -316,7 +318,40 @@ blackfire config
 
 # Enter your identifiers.
 ```
-Once this is done ...
+
+Once this is done, we have access to the Blackfire Agent who can profile our pages
+and generate a graph, in order to profile, let's use the container :
+
+```bash
+docker exec -it Smartfact_blackfire sh
+
+blackfire curl http://172.20.0.1:PORT/app_dev.php/ # For development env
+```
+
+In order to keep the testing logic and profiling "vision" away from the "core" logic, 
+we use [Blackfire-Player](https://blackfire.io/docs/player/index),
+this tool is used in order to test EVERY pages and and ensure that we have the best 
+performances and testing experience.
+
+During the developement phase, you MUST use this tools in order to test every page
+you build, let's launch the process : 
+
+```bash
+docker exec -it Smartfact_php-fpm sh
+
+blackfire-player run blackfire_scenarios/core.bkf
+```
+
+The approach used is to define folder who contains the different parts of the application, 
+this way, if you work on the API side and specially on the "planning" part :
+
+- Create a api_planning.bkf file inside the blackfire_scenarios/api folder
+- Write your tests
+- Ensure that this file can be parsed (that no error is returned)
+- Launch the previous command.
+
+Blackfire can load all the files using the core.bkf file (with the load rules) and
+launch the tests, this way, only one single file is used.
 
 ## Production
 

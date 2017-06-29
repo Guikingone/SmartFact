@@ -11,7 +11,7 @@
 
 namespace tests\AppBundle\Entity;
 
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 // Entity
 use AppBundle\Entity\User;

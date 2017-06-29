@@ -21,7 +21,7 @@ use AppBundle\Interfaces\SmartFactPlanningInterface;
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
- * @ORM\Table(name="_smartfact_planning")
+ * @ORM\Table(name="_smartfact_user_planning")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanningRepository")
  */
 class Planning implements SmartFactPlanningInterface

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions;
+namespace tests\AppBundle\Actions\Web\Unit;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 

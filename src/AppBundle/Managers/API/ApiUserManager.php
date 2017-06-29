@@ -43,6 +43,15 @@ class ApiUserManager
     /** @var RequestStack */
     private $requestStack;
 
+    /**
+     * ApiUserManager constructor.
+     *
+     * @param SerializerInterface       $serializer
+     * @param EntityManagerInterface    $doctrine
+     * @param EventDispatcherInterface  $eventDispatcher
+     * @param ValidatorInterface        $validator
+     * @param RequestStack              $requestStack
+     */
     public function __construct(
         SerializerInterface $serializer,
         EntityManagerInterface $doctrine,
@@ -58,16 +67,14 @@ class ApiUserManager
     }
 
     /**
-     * @return null|string
+     * Return all the Users.
+     *
+     * @return string
      */
     public function getUsers()
     {
         $data = $this->doctrine->getRepository(User::class)
                                ->findAll();
-
-        if (!$data) {
-            return null;
-        }
 
         return $this->serializer->serialize(
             $data,
@@ -76,7 +83,29 @@ class ApiUserManager
         );
     }
 
-    public function postUsers()
+    /**
+     * Return a single User using his id.
+     *
+     * @param int $id       The id of the User.
+     *
+     * @return string       The User informations requested.
+     */
+    public function getUserById($id)
     {
+        $data = $this->doctrine->getRepository(User::class)
+                               ->findOneBy([
+                                   'id' => $id
+                               ]);
+
+        return $this->serializer->serialize(
+            $data,
+            'json',
+            ['groups' => ['users']]
+        );
+    }
+
+    public function postUsers($data)
+    {
+
     }
 }

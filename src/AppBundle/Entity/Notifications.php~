@@ -23,7 +23,7 @@ use AppBundle\Interfaces\SmartFactNotificationsInterface;
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
- * @ORM\Table(name="_smartfact_notifications")
+ * @ORM\Table(name="_smartfact_user_notifications")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\NotificationsRepository")
  */
 class Notifications implements SmartFactNotificationsInterface
@@ -251,5 +251,25 @@ class Notifications implements SmartFactNotificationsInterface
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Get repetition
+     *
+     * @return boolean
+     */
+    public function getRepetition()
+    {
+        return $this->repetition;
+    }
+
+    /**
+     * Get checked
+     *
+     * @return boolean
+     */
+    public function getChecked()
+    {
+        return $this->checked;
     }
 }

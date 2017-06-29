@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
- * @ORM\Table(name="_smartfact_user_clients")
+ * @ORM\Table(name="_smartfact_clients")
  */
 class Clients
 {

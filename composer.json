@@ -27,6 +27,7 @@
     "require-dev": {
         "blackfire/php-sdk": "^1.8",
         "friendsofphp/php-cs-fixer": "^2.2",
+        "phpunit/phpunit": "^4.8",
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0"
     },

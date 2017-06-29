@@ -1,0 +1,2 @@
+# Load every files inside the folder.
+load "**/*.bkf"
