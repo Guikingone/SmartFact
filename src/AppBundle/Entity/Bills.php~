@@ -21,7 +21,7 @@ use AppBundle\Interfaces\SmartFactBillsInterface;
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
- * @ORM\Table(name="_smartfact_bills")
+ * @ORM\Table(name="_smartfact_user_bills")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BillsRepository")
  */
 class Bills implements SmartFactBillsInterface

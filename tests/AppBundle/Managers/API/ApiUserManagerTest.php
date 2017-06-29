@@ -13,7 +13,7 @@ namespace SmartFact\UserBundle\Tests\Managers\API;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-use AppBundle\Entity\User;
+// Manager
 use AppBundle\Managers\API\ApiUserManager;
 
 /**
@@ -23,33 +23,35 @@ use AppBundle\Managers\API\ApiUserManager;
  */
 class ApiUserManagerTest extends KernelTestCase
 {
-    private $manager;
-
     /** {@inheritdoc} */
     public function setUp()
     {
         self::bootKernel();
-
-        $this->manager = static::$kernel->getContainer()->get(ApiUserManager::class);
     }
 
     /**
-     * Test if the manager is a instance of the right class.
+     * Test if the Container return the right manager.
      */
-    public function testManagerIsInstanceOf()
+    public function testContainerReturn()
     {
-        if (is_object($this->manager)) {
-            $this->assertInstanceOf(ApiUserManager::class, $this->manager);
-        }
+        $manager = static::$kernel->getContainer()
+                                  ->get(ApiUserManager::class);
+
+        $this->assertInstanceOf(ApiUserManager::class, $manager);
     }
 
     /**
-     * Test if the manager return the right instances.
+     * Test if the manager has the right attributes.
      */
-    public function testManagerGetUsers()
+    public function testManagerHasAttributes()
     {
-        if (is_object($this->manager) && $this->manager instanceof ApiUserManager) {
-            $this->assertContains(User::class, $this->manager->getUsers());
+        $manager = static::$kernel->getContainer()
+                                  ->get(ApiUserManager::class);
+
+        if ($this->assertInstanceOf(ApiUserManager::class, $manager)) {
+            $clone = $this->createMock(get_class($manager));
+            $this->assertObjectHasAttribute('serializer', $clone);
+            $this->assertObjectHasAttribute('doctrine', $clone);
         }
     }
 }

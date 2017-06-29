@@ -1,0 +1,6 @@
+scenario
+    name "User api"
+    endpoint "http://172.20.0.1:8000/app_dev.php/"
+
+    visit url('/api/users')
+        expect status_code() == 200

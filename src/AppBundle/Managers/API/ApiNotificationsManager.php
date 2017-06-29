@@ -24,11 +24,11 @@ use AppBundle\Entity\Notifications;
  */
 class ApiNotificationsManager
 {
-    /** @var EntityManagerInterface */
-    private $doctrine;
-
     /** @var SerializerInterface */
     private $serializer;
+
+    /** @var EntityManagerInterface */
+    private $doctrine;
 
     /**
      * ApiNotificationsManager constructor.
@@ -98,6 +98,8 @@ class ApiNotificationsManager
 
         $this->doctrine->persist($object);
         $this->doctrine->flush();
+
+        return $object;
     }
 
     public function deleteUserNotifications($id)

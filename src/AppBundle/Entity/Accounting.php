@@ -11,21 +11,194 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * Class Accounting
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
+ *
+ * @ORM\Table(name="_smartfact_accounting")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\AccountingRepository")
  */
 class Accounting
 {
     /**
      * @var int
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="id")
+     *
+     * @Groups({"users", "accounting"})
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=200)
+     *
+     * @Groups({"users", "accounting"})
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="interlocutor", type="string")
+     */
+    private $interlocutor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string")
+     */
+    private $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone_number", type="string", length=15)
+     */
+    private $phoneNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=50)
+     */
+    private $email;
+
+    /**
+     * @var User
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="accounting")
+     */
+    private $user;
+
+    /**
+     * Accounting constructor.
+     */
+    public function __construct()
+    {
+        $this->user = new ArrayCollection();
+    }
 
     /** @return int */
     public function getId()
     {
         return $this->id;
+    }
+
+    /** @return string */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInterlocutor()
+    {
+        return $this->interlocutor;
+    }
+
+    /**
+     * @param string $interlocutor
+     */
+    public function setInterlocutor($interlocutor)
+    {
+        $this->interlocutor = $interlocutor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * @param string $phoneNumber
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /** @return User */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add user
+     *
+     * @param User $user
+     *
+     * @return Accounting
+     */
+    public function addUser(User $user)
+    {
+        $this->user[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param User $user
+     */
+    public function removeUser(User $user)
+    {
+        $this->user->removeElement($user);
     }
 }
