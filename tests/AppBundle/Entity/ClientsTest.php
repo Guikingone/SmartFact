@@ -11,11 +11,60 @@
 
 namespace tests\AppBundle\Entity;
 
+use AppBundle\Entity\User;
+use AppBundle\Entity\Clients;
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class ClientsTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class ClientsTest
+class ClientsTest extends TestCase
 {
+    /**
+     * Test the instantiation of the class.
+     */
+    public function testClassInstantiation()
+    {
+        $clients = new Clients();
+
+        $clients->setName('Google');
+        $clients->setAddress('404 Road not found, Los Angeles');
+        $clients->setPhoneNumber('0987766554');
+        $clients->setPrestationType('Services');
+
+        $this->assertNull($clients->getId());
+        $this->assertEquals('Google', $clients->getName());
+        $this->assertEquals('404 Road not found, Los Angeles', $clients->getAddress());
+        $this->assertEquals('0987766554', $clients->getPhoneNumber());
+        $this->assertEquals('Services', $clients->getPrestationType());
+    }
+
+    /**
+     * Test the relation between Clients and User.
+     */
+    public function testClientsUser()
+    {
+        $clients = new Clients();
+        $user = $this->createMock(User::class);
+
+        $clients->setName('Google');
+        $clients->setAddress('404 Road not found, Los Angeles');
+        $clients->setPhoneNumber('0987766554');
+        $clients->setPrestationType('Services');
+
+        $user->method('getLastName')
+             ->willReturn('Potter');
+
+        $user->method('getFirstName')
+             ->willReturn('Harry');
+
+        $clients->setUser($user);
+
+        if ($this->assertInstanceOf(User::class, $clients->getUser())) {
+            $this->assertEquals('Potter', $user->getLastName());
+            $this->assertEquals('Harry', $user->getFistName());
+        }
+    }
 }

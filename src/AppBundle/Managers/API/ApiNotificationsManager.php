@@ -102,6 +102,11 @@ class ApiNotificationsManager
         return $object;
     }
 
+    /**
+     * Delete the User Notifications.
+     *
+     * @param int $id   The id of the User who's been linked to the Notifications.
+     */
     public function deleteUserNotifications($id)
     {
         $notifications = $this->doctrine->getRepository(Notifications::class)
@@ -109,8 +114,9 @@ class ApiNotificationsManager
                                             'user' => $id
                                         ]);
 
-        if (!$notifications) {
-
+        foreach ($notifications as $notification) {
+            $this->doctrine->remove($notification);
         }
+        $this->doctrine->flush();
     }
 }

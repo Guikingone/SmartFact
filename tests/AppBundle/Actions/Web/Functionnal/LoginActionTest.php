@@ -14,16 +14,18 @@ namespace tests\AppBundle\Actions\Web\Functionnal;
 // Blackfire
 use Blackfire\Client;
 
+// Core
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class HomeActionTest
+ * Class LoginActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class HomeActionTest extends WebTestCase
+class LoginActionTest extends WebTestCase
 {
+    /** @var null */
     private $client = null;
 
     /** @var Client */
@@ -32,23 +34,45 @@ class HomeActionTest extends WebTestCase
     /** {@inheritdoc} */
     public function setUp()
     {
-        $this->client = self::createClient();
+        $this->client = static::createClient();
     }
 
     /**
-     * Test if the homepage respond in-time and with the right headers.
+     * Test if the request return the right status code.
      */
-    public function testHomepageStatusCode()
+    public function testLoginPageStatusCode()
     {
         $this->blackfire = new Client();
         $probe = $this->blackfire->createProbe();
 
-        $this->client->request('GET', '/');
+        $this->client->request('GET', '/login');
 
         $this->assertEquals(
             Response::HTTP_OK,
             $this->client->getResponse()->getStatusCode()
         );
+
+        $this->blackfire->endProbe($probe);
+    }
+
+    /**
+     * Test if the submission work.
+     */
+    public function testLoginFormSubmission()
+    {
+        $this->blackfire = new Client();
+        $probe = $this->blackfire->createProbe();
+
+        $this->client->request('GET', '/login');
+
+        $this->assertEquals(
+            Response::HTTP_OK,
+            $this->client->getResponse()->getStatusCode()
+        );
+
+        if ($this->client->getResponse()->getStatusCode() === Response::HTTP_OK) {
+
+        }
 
         $this->blackfire->endProbe($probe);
     }

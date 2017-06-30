@@ -9,15 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle;
-
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+namespace AppBundle\Managers\Web;
 
 /**
- * Class AppBundle
+ * Class WebNotificationsManager
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class AppBundle extends Bundle
+class WebNotificationsManager
 {
 }

@@ -9,15 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle;
+namespace AppBundle\Repository;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Doctrine\ORM\EntityRepository;
 
 /**
- * Class AppBundle
+ * Class ClientsRepository
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class AppBundle extends Bundle
+class ClientsRepository extends EntityRepository
 {
+
 }

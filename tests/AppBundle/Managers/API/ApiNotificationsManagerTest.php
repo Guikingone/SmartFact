@@ -11,7 +11,10 @@
 
 namespace tests\AppBundle\Managers\API;
 
+// Manager
 use AppBundle\Managers\API\ApiNotificationsManager;
+
+// Core
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
