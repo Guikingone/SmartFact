@@ -47,6 +47,10 @@ RUN curl -OLsS http://get.blackfire.io/blackfire-player.phar \
     && chmod +x blackfire-player.phar \
     && mv blackfire-player.phar /usr/local/bin/blackfire-player
 
+# Sami (API)
+RUN curl -O http://get.sensiolabs.org/sami.phar \
+    && mv sami.phar /usr/local/bin/sami
+
 RUN mkdir -p ${WORKDIR}
 
 RUN chown www-data:www-data -R ${WORKDIR}
@@ -54,7 +58,7 @@ RUN chown www-data:www-data -R ${WORKDIR}
 WORKDIR ${WORKDIR}
 
 RUN cd ${WORKDIR} \
-    && composer dump-autolaod --optimize
+    && composer dump-autoload --optimize --no-dev --classmap-authoritative
 
 EXPOSE 9000
 

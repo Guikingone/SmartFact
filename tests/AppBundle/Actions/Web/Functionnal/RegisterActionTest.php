@@ -11,19 +11,18 @@
 
 namespace tests\AppBundle\Actions\Web\Functionnal;
 
-// Blackfire
 use Blackfire\Client;
-
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class HomeActionTest
+ * Class RegisterActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class HomeActionTest extends WebTestCase
+class RegisterActionTest extends WebTestCase
 {
+    /** @var null */
     private $client = null;
 
     /** @var Client */
@@ -32,23 +31,48 @@ class HomeActionTest extends WebTestCase
     /** {@inheritdoc} */
     public function setUp()
     {
-        $this->client = self::createClient();
+        $this->client = static::createClient();
     }
 
     /**
-     * Test if the homepage respond in-time and with the right headers.
+     * Test if the Response return the right status code.
      */
-    public function testHomepageStatusCode()
+    public function testResponseStatusCode()
     {
         $this->blackfire = new Client();
         $probe = $this->blackfire->createProbe();
 
-        $this->client->request('GET', '/');
+        $this->client->request('GET', '/register');
 
         $this->assertEquals(
             Response::HTTP_OK,
             $this->client->getResponse()->getStatusCode()
         );
+
+        $this->blackfire->endProbe($probe);
+    }
+
+    /**
+     * Test if the form can be hydrated and submitted.
+     */
+    public function testRegisterForm()
+    {
+        $this->blackfire = new Client();
+        $probe = $this->blackfire->createProbe();
+
+        $crawler = $this->client->request('GET', '/register');
+
+        $this->assertEquals(
+            Response::HTTP_OK,
+            $this->client->getResponse()->getStatusCode()
+        );
+
+        if ($this->client->getResponse()->getStatusCode() === Response::HTTP_OK) {
+
+            $form = $crawler->selectButton('submit')->form();
+
+            // To define
+        }
 
         $this->blackfire->endProbe($probe);
     }

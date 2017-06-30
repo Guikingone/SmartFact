@@ -12,6 +12,7 @@
 namespace AppBundle\Entity;
 
 // Core
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -519,11 +520,11 @@ class User implements SmartFactUserInterface
     /**
      * Add notification
      *
-     * @param \AppBundle\Entity\Notifications $notification
+     * @param Notifications $notification
      *
      * @return User
      */
-    public function addNotification(\AppBundle\Entity\Notifications $notification)
+    public function addNotification(Notifications $notification)
     {
         $this->notifications[] = $notification;
 
@@ -533,9 +534,9 @@ class User implements SmartFactUserInterface
     /**
      * Remove notification
      *
-     * @param \AppBundle\Entity\Notifications $notification
+     * @param Notifications $notification
      */
-    public function removeNotification(\AppBundle\Entity\Notifications $notification)
+    public function removeNotification(Notifications $notification)
     {
         $this->notifications->removeElement($notification);
     }
@@ -543,7 +544,7 @@ class User implements SmartFactUserInterface
     /**
      * Get notifications
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getNotifications()
     {
@@ -553,11 +554,11 @@ class User implements SmartFactUserInterface
     /**
      * Add client
      *
-     * @param \AppBundle\Entity\Clients $client
+     * @param Clients $client
      *
      * @return User
      */
-    public function addClient(\AppBundle\Entity\Clients $client)
+    public function addClient(Clients $client)
     {
         $this->clients[] = $client;
 
@@ -567,9 +568,9 @@ class User implements SmartFactUserInterface
     /**
      * Remove client
      *
-     * @param \AppBundle\Entity\Clients $client
+     * @param Clients $client
      */
-    public function removeClient(\AppBundle\Entity\Clients $client)
+    public function removeClient(Clients $client)
     {
         $this->clients->removeElement($client);
     }
@@ -577,7 +578,7 @@ class User implements SmartFactUserInterface
     /**
      * Get clients
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getClients()
     {
@@ -587,11 +588,11 @@ class User implements SmartFactUserInterface
     /**
      * Set accounting
      *
-     * @param \AppBundle\Entity\Accounting $accounting
+     * @param Accounting $accounting
      *
      * @return User
      */
-    public function setAccounting(\AppBundle\Entity\Accounting $accounting = null)
+    public function setAccounting(Accounting $accounting = null)
     {
         $this->accounting = $accounting;
 
@@ -611,11 +612,11 @@ class User implements SmartFactUserInterface
     /**
      * Add bill
      *
-     * @param \AppBundle\Entity\Bills $bill
+     * @param Bills $bill
      *
      * @return User
      */
-    public function addBill(\AppBundle\Entity\Bills $bill)
+    public function addBill(Bills $bill)
     {
         $this->bills[] = $bill;
 
@@ -625,9 +626,9 @@ class User implements SmartFactUserInterface
     /**
      * Remove bill
      *
-     * @param \AppBundle\Entity\Bills $bill
+     * @param Bills $bill
      */
-    public function removeBill(\AppBundle\Entity\Bills $bill)
+    public function removeBill(Bills $bill)
     {
         $this->bills->removeElement($bill);
     }
@@ -645,11 +646,11 @@ class User implements SmartFactUserInterface
     /**
      * Set planning
      *
-     * @param \AppBundle\Entity\Planning $planning
+     * @param Planning $planning
      *
      * @return User
      */
-    public function setPlanning(\AppBundle\Entity\Planning $planning = null)
+    public function setPlanning(Planning $planning = null)
     {
         $this->planning = $planning;
 
@@ -659,34 +660,10 @@ class User implements SmartFactUserInterface
     /**
      * Get planning
      *
-     * @return \AppBundle\Entity\Planning
+     * @return Planning
      */
     public function getPlanning()
     {
         return $this->planning;
-    }
-
-    /**
-     * Set isActive
-     *
-     * @param boolean $isActive
-     *
-     * @return User
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    /**
-     * Get isActive
-     *
-     * @return boolean
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
     }
 }

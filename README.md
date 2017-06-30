@@ -319,6 +319,12 @@ blackfire config
 # Enter your identifiers.
 ```
 
+**If you have problems about your server id, please, use the commands below**
+
+```bash
+blackfire agent --register 
+```
+
 Once this is done, we have access to the Blackfire Agent who can profile our pages
 and generate a graph, in order to profile, let's use the container :
 
@@ -339,7 +345,7 @@ you build, let's launch the process :
 ```bash
 docker exec -it Smartfact_php-fpm sh
 
-blackfire-player run blackfire_scenarios/core.bkf
+blackfire-player run scenarios/core.bkf
 ```
 
 The approach used is to define folder who contains the different parts of the application, 
