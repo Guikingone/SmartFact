@@ -173,6 +173,9 @@ class UserTest extends TestCase
         }
     }
 
+    /**
+     * Test the relation between User and Accounting.
+     */
     public function testUserAccounting()
     {
         $user = new User();
@@ -191,6 +194,14 @@ class UserTest extends TestCase
         $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
         $user->addRoles('ROLE_USER');
 
+        $accounting->method('getName')
+                   ->willReturn('DA Expertise');
+
+        $user->setAccounting($accounting);
+
+        if ($this->assertInstanceOf(Accounting::class, $user->getAccounting())) {
+            $this->assertEquals('DA Expertise', $accounting->getName());
+        }
 
     }
 }

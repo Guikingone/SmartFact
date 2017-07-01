@@ -69,6 +69,13 @@ class Clients implements SmartFactClientsInterface
     private $user;
 
     /**
+     * @var Bills
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bills", mappedBy="clients")
+     */
+    private $bills;
+
+    /**
      * @return int
      */
     public function getId()

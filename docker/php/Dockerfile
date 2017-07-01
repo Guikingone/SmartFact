@@ -32,8 +32,9 @@ COPY conf/php.ini /usr/local/etc/php/
 # Core extensions
 RUN pecl install apcu \
                  xdebug \
+                 pdflib \
     && docker-php-ext-install pdo_mysql opcache json sockets \
-    && docker-php-ext-enable apcu xdebug
+    && docker-php-ext-enable apcu xdebug pdflib
 
 # Blackfire (Docker approach)
 RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \

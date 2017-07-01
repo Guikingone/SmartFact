@@ -172,12 +172,6 @@ class Accounting
         $this->email = $email;
     }
 
-    /** @return User */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
     /**
      * Add user
      *
@@ -200,5 +194,13 @@ class Accounting
     public function removeUser(User $user)
     {
         $this->user->removeElement($user);
+    }
+
+    /**
+     * @return User|ArrayCollection
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

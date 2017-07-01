@@ -12,8 +12,8 @@
 namespace AppBundle\Entity;
 
 // Core
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -44,7 +44,7 @@ class User implements SmartFactUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string")
+     * @ORM\Column(name="firstname", type="string", nullable=true)
      *
      * @Groups({"users"})
      */
@@ -53,7 +53,7 @@ class User implements SmartFactUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="lastname", type="string")
+     * @ORM\Column(name="lastname", type="string", nullable=true)
      *
      * @Groups({"users"})
      */
@@ -62,7 +62,7 @@ class User implements SmartFactUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string")
+     * @ORM\Column(name="address", type="string", nullable=true)
      *
      * @Groups({"users"})
      */
@@ -71,7 +71,7 @@ class User implements SmartFactUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="phone_number", type="string", length=14)
+     * @ORM\Column(name="phone_number", type="string", length=14, nullable=true)
      *
      * @Groups({"users"})
      */
@@ -89,7 +89,7 @@ class User implements SmartFactUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", length=150)
+     * @ORM\Column(name="status", type="string", length=150, nullable=true)
      *
      * @Groups({"users"})
      */
@@ -98,7 +98,7 @@ class User implements SmartFactUserInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="date")
+     * @ORM\Column(name="created_at", type="date", nullable=true)
      *
      * @Groups({"users"})
      */
@@ -107,7 +107,7 @@ class User implements SmartFactUserInterface
     /**
      * @var bool
      *
-     * @ORM\Column(name="validated", type="boolean")
+     * @ORM\Column(name="validated", type="boolean", nullable=true)
      *
      * @Groups({"users"})
      */
@@ -125,7 +125,7 @@ class User implements SmartFactUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=200, nullable=false)
+     * @ORM\Column(name="username", type="string", length=75, nullable=false, nullable=false)
      *
      * @Groups({"users"})
      */
@@ -134,7 +134,7 @@ class User implements SmartFactUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     * @ORM\Column(name="password", type="string", length=255, nullable=false, nullable=false)
      */
     private $password;
 
@@ -146,14 +146,14 @@ class User implements SmartFactUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="token", type="string", length=150)
+     * @ORM\Column(name="token", type="string", length=150, nullable=true)
      */
     private $token;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="roles", type="array")
+     * @ORM\Column(name="roles", type="array", nullable=true)
      *
      * @Groups({"users"})
      */
