@@ -1,0 +1,27 @@
+scenario
+    name "Login page"
+    endpoint "http://172.20.0.1:8000/app_dev.php/"
+
+    visit url('/login')
+        expect status_code() == 200
+
+    submit button("Submit")
+        param login[_username] "Harry"
+        param login[_password] "Potter"
+
+scenario
+    name "Register page"
+    endpoint "http://172.20.0.1:8000/app_dev.php/"
+
+    visit url('/register')
+        expect status_code() == 200
+
+    submit button("Submit")
+        param register[firstname] "Harry"
+        param register[lastname] "Potter"
+        param register[username] "HP"
+        param register[plainPassword][first] "Ie1FDLP"
+        param register[plainPassword][second] "Ie1FDLP"
+
+    follow
+        expect status_code() == 200

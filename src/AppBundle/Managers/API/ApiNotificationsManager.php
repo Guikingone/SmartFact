@@ -13,6 +13,7 @@ namespace AppBundle\Managers\API;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 // Entity
 use AppBundle\Entity\Notifications;
@@ -30,18 +31,24 @@ class ApiNotificationsManager
     /** @var EntityManagerInterface */
     private $doctrine;
 
+    /** @var ValidatorInterface */
+    private $validator;
+
     /**
      * ApiNotificationsManager constructor.
      *
-     * @param EntityManagerInterface $doctrine
-     * @param SerializerInterface $serializer
+     * @param SerializerInterface       $serializer
+     * @param EntityManagerInterface    $doctrine
+     * @param ValidatorInterface        $validator
      */
     public function __construct(
+        SerializerInterface $serializer,
         EntityManagerInterface $doctrine,
-        SerializerInterface $serializer
+        ValidatorInterface $validator
     ) {
-        $this->doctrine = $doctrine;
         $this->serializer = $serializer;
+        $this->doctrine = $doctrine;
+        $this->validator = $validator;
     }
 
     /**
@@ -88,6 +95,13 @@ class ApiNotificationsManager
         );
     }
 
+    /**
+     * Allow to create a new Notifications.
+     *
+     * @param string|array $data    The data who's gonna create the notification.
+     *
+     * @return object|\Symfony\Component\Validator\ConstraintViolationListInterface
+     */
     public function postUserNotification($data)
     {
         $object = $this->serializer->deserialize(
@@ -96,11 +110,21 @@ class ApiNotificationsManager
             'json'
         );
 
+        if ($errors = $this->validator->validate($object)) {
+            return $errors;
+        }
+
         $this->doctrine->persist($object);
         $this->doctrine->flush();
 
         return $object;
     }
+
+    public function patchUserNotification($data)
+    {
+
+    }
+
 
     /**
      * Delete the User Notifications.

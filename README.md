@@ -345,19 +345,21 @@ you build, let's launch the process :
 ```bash
 docker exec -it Smartfact_php-fpm sh
 
-blackfire-player run scenarios/core.bkf
+blackfire-player run scenarios/dev.bkf # For development tests
+blackfire-player run scenarios/prod.bkf # For production tests
 ```
 
 The approach used is to define folder who contains the different parts of the application, 
-this way, if you work on the API side and specially on the "planning" part :
+this way, this way, the logic can be tested away from the api if you work on the web application.
 
-- Create a api_planning.bkf file inside the blackfire_scenarios/api folder
-- Write your tests
-- Ensure that this file can be parsed (that no error is returned)
-- Launch the previous command.
+In order to be effective and help to improve the application, you MUST write tests for both
+version (production and development) and both "part" (API and Web) if your features is 
+concerned by both parts.
 
-Blackfire can load all the files using the core.bkf file (with the load rules) and
-launch the tests, this way, only one single file is used.
+### Note 
+
+When you test the production part, be sure to use the "Production mode" specially build
+for this approach, this way, you don't break the production with testing approach
 
 ## Production
 

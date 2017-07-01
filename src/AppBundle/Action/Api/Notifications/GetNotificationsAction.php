@@ -11,9 +11,9 @@
 
 namespace AppBundle\Action\Api\Notifications;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 // Manager
 use AppBundle\Managers\API\ApiNotificationsManager;

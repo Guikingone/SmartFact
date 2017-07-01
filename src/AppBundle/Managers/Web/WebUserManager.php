@@ -13,8 +13,8 @@ namespace AppBundle\Managers\Web;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\RegisterType;
-use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 /**
  * Class WebUserManager
@@ -26,18 +26,18 @@ class WebUserManager
     /** @var EntityManagerInterface */
     private $doctrine;
 
-    /** @var FormFactory */
+    /** @var FormFactoryInterface */
     private $form;
 
     /**
      * WebUserManager constructor.
      *
      * @param EntityManagerInterface        $doctrine
-     * @param FormFactory                   $form
+     * @param FormFactoryInterface          $form
      */
     public function __construct(
         EntityManagerInterface $doctrine,
-        FormFactory $form
+        FormFactoryInterface $form
     ) {
         $this->doctrine = $doctrine;
         $this->form = $form;

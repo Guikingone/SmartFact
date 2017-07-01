@@ -11,7 +11,9 @@
 
 namespace AppBundle\Action\Web;
 
+use AppBundle\Form\Type\LoginType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Templating\EngineInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -31,6 +33,9 @@ class LoginAction
     /** @var EngineInterface */
     private $templating;
 
+    /** @var FormFactoryInterface */
+    private $form;
+
     /** @var AuthenticationUtils */
     private $authentication;
 
@@ -38,13 +43,16 @@ class LoginAction
      * LoginAction constructor.
      *
      * @param EngineInterface       $engine
+     * @param FormFactoryInterface  $formFactory
      * @param AuthenticationUtils   $utils
      */
     public function __construct(
         EngineInterface $engine,
+        FormFactoryInterface $formFactory,
         AuthenticationUtils $utils
     ) {
         $this->templating = $engine;
+        $this->form = $formFactory;
         $this->authentication = $utils;
     }
 
@@ -53,9 +61,13 @@ class LoginAction
      */
     public function __invoke()
     {
+        $form = $this->form->create(LoginType::class, [
+            '_username' => $this->authentication->getLastUsername()
+        ]);
+
         return new Response(
             $this->templating->render(':security:login.html.twig', [
-                'last_username' => $this->authentication->getLastUsername(),
+                'form' => $form->createView(),
                 'errors' => $this->authentication->getLastAuthenticationError()
             ])
         );
