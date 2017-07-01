@@ -25,9 +25,6 @@ class RegisterActionTest extends WebTestCase
     /** @var null */
     private $client = null;
 
-    /** @var Client */
-    private $blackfire;
-
     /** {@inheritdoc} */
     public function setUp()
     {
@@ -39,17 +36,12 @@ class RegisterActionTest extends WebTestCase
      */
     public function testResponseStatusCode()
     {
-        $this->blackfire = new Client();
-        $probe = $this->blackfire->createProbe();
-
         $this->client->request('GET', '/register');
 
         $this->assertEquals(
             Response::HTTP_OK,
             $this->client->getResponse()->getStatusCode()
         );
-
-        $this->blackfire->endProbe($probe);
     }
 
     /**
@@ -57,9 +49,6 @@ class RegisterActionTest extends WebTestCase
      */
     public function testRegisterForm()
     {
-        $this->blackfire = new Client();
-        $probe = $this->blackfire->createProbe();
-
         $crawler = $this->client->request('GET', '/register');
 
         $this->assertEquals(
@@ -69,11 +58,39 @@ class RegisterActionTest extends WebTestCase
 
         if ($this->client->getResponse()->getStatusCode() === Response::HTTP_OK) {
 
-            $form = $crawler->selectButton('submit')->form();
+            $form = $crawler->selectButton('Submit')->form();
+
+            $form['register[firstname]'] = 'Potter';
+            $form['register[lastname]'] = 'Harry';
+            $form['register[username]'] = 'HP';
+            $form['register[plainPassword][first]'] = 'Ie1FDLP';
+            $form['register[plainPassword][second]'] = 'Ie1FDLP';
+
+            $this->client->submit($form);
+
+        }
+    }
+
+    /**
+     * Test if the form can be submitted with bad informations.
+     */
+    public function testRegisterFormWithBadInformations()
+    {
+        $crawler = $this->client->request('GET', '/register');
+
+        $this->assertEquals(
+            Response::HTTP_OK,
+            $this->client->getResponse()->getStatusCode()
+        );
+
+        if ($this->client->getResponse()->getStatusCode() === Response::HTTP_OK) {
+
+            $form = $crawler->selectButton('Submit')->form();
 
             // To define
-        }
 
-        $this->blackfire->endProbe($probe);
+            $this->client->submit($form);
+
+        }
     }
 }
