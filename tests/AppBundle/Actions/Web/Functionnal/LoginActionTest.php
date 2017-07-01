@@ -11,10 +11,6 @@
 
 namespace tests\AppBundle\Actions\Web\Functionnal;
 
-// Blackfire
-use Blackfire\Client;
-
-// Core
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -28,9 +24,6 @@ class LoginActionTest extends WebTestCase
     /** @var null */
     private $client = null;
 
-    /** @var Client */
-    private $blackfire;
-
     /** {@inheritdoc} */
     public function setUp()
     {
@@ -42,17 +35,12 @@ class LoginActionTest extends WebTestCase
      */
     public function testLoginPageStatusCode()
     {
-        $this->blackfire = new Client();
-        $probe = $this->blackfire->createProbe();
-
         $this->client->request('GET', '/login');
 
         $this->assertEquals(
             Response::HTTP_OK,
             $this->client->getResponse()->getStatusCode()
         );
-
-        $this->blackfire->endProbe($probe);
     }
 
     /**
@@ -60,10 +48,7 @@ class LoginActionTest extends WebTestCase
      */
     public function testLoginFormSubmission()
     {
-        $this->blackfire = new Client();
-        $probe = $this->blackfire->createProbe();
-
-        $this->client->request('GET', '/login');
+        $crawler = $this->client->request('GET', '/login');
 
         $this->assertEquals(
             Response::HTTP_OK,
@@ -72,8 +57,17 @@ class LoginActionTest extends WebTestCase
 
         if ($this->client->getResponse()->getStatusCode() === Response::HTTP_OK) {
 
-        }
+            $form = $crawler->selectButton('Submit')->form();
 
-        $this->blackfire->endProbe($probe);
+            $form['login[_username]'] = "Harry";
+            $form['login[_password]'] = "Potter";
+
+            $this->client->submit($form);
+
+            $this->assertEquals(
+                Response::HTTP_OK,
+                $this->client->getResponse()->getStatusCode()
+            );
+        }
     }
 }

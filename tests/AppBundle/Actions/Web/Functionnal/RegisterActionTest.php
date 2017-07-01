@@ -11,7 +11,6 @@
 
 namespace tests\AppBundle\Actions\Web\Functionnal;
 
-use Blackfire\Client;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -47,7 +46,7 @@ class RegisterActionTest extends WebTestCase
     /**
      * Test if the form can be hydrated and submitted.
      */
-    public function testRegisterForm()
+    public function testRegisterFormSubmission()
     {
         $crawler = $this->client->request('GET', '/register');
 
@@ -65,29 +64,6 @@ class RegisterActionTest extends WebTestCase
             $form['register[username]'] = 'HP';
             $form['register[plainPassword][first]'] = 'Ie1FDLP';
             $form['register[plainPassword][second]'] = 'Ie1FDLP';
-
-            $this->client->submit($form);
-
-        }
-    }
-
-    /**
-     * Test if the form can be submitted with bad informations.
-     */
-    public function testRegisterFormWithBadInformations()
-    {
-        $crawler = $this->client->request('GET', '/register');
-
-        $this->assertEquals(
-            Response::HTTP_OK,
-            $this->client->getResponse()->getStatusCode()
-        );
-
-        if ($this->client->getResponse()->getStatusCode() === Response::HTTP_OK) {
-
-            $form = $crawler->selectButton('Submit')->form();
-
-            // To define
 
             $this->client->submit($form);
 
