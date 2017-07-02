@@ -57,9 +57,6 @@ RUN chown www-data:www-data -R ${WORKDIR}
 
 WORKDIR ${WORKDIR}
 
-RUN cd ${WORKDIR} \
-    && composer dump-autoload --optimize --no-dev --classmap-authoritative
-
 EXPOSE 9000
 
 CMD ["php-fpm"]

@@ -4,7 +4,8 @@ ENV WORKDIR "/var/www/smartact"
 
 ADD . ${WORKDIR}
 
-RUN ls -l ${WORKDIR}
+RUN rm -rf ${WORKDIR}/vendor \
+    && ls -l ${WORKDIR}
 
 RUN mkdir -p \
 		${WORKDIR}/var/cache \
