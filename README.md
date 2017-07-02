@@ -133,6 +133,14 @@ Then build the project:
 docker-composer up -d --build
 ```
 
+Then you must use Composer in order to launch the application : 
+
+```bash
+composer install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress --no-suggest
+composer clear-cache
+composer dump-autoload --optimize --classmap-authoritative --no-dev
+```
+
 Once the project is build, let's play with the database : 
 
 ```bash
