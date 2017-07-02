@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}SmartFact - Login{% endblock %}
+
 {% block body %}
     {% if errors %}
-        <div>{{ errors.messageKey|trans(error.messageData, 'security') }}</div>
+        <div>
+            {{ errors.messageKey|trans(error.messageData, 'security') }}
+        </div>
     {% endif %}
 
     {{ form_start(form) }}

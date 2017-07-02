@@ -28,7 +28,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
  *
  * @Method({"GET"})
  */
-final class UsersAction
+final class GetUsersAction
 {
     /** @var ApiUserManager */
     private $manager;

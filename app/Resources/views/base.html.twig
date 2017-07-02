@@ -2,7 +2,11 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}SmartFact - Create fast and simple bills process !{% endblock %}</title>
+        <title>
+            {% block title %}
+                SmartFact - {% trans %}Create fast and simple bills process !{% endtrans %}
+            {% endblock %}
+        </title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
