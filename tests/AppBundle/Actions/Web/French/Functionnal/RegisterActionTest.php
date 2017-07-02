@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Web\Functionnal;
+namespace tests\AppBundle\Actions\Web\French\Functionnal;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class LoginActionTest
+ * Class RegisterActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class LoginActionTest extends WebTestCase
+class RegisterActionTest extends WebTestCase
 {
     /** @var null */
     private $client = null;
@@ -31,11 +31,11 @@ class LoginActionTest extends WebTestCase
     }
 
     /**
-     * Test if the request return the right status code.
+     * Test if the Response return the right status code.
      */
-    public function testLoginPageStatusCode()
+    public function testResponseStatusCode()
     {
-        $this->client->request('GET', '/login');
+        $this->client->request('GET', '/fr/register');
 
         $this->assertEquals(
             Response::HTTP_OK,
@@ -44,11 +44,11 @@ class LoginActionTest extends WebTestCase
     }
 
     /**
-     * Test if the submission work.
+     * Test if the form can be hydrated and submitted.
      */
-    public function testLoginFormSubmission()
+    public function testRegisterFormSubmission()
     {
-        $crawler = $this->client->request('GET', '/login');
+        $crawler = $this->client->request('GET', '/fr/register');
 
         $this->assertEquals(
             Response::HTTP_OK,
@@ -59,15 +59,14 @@ class LoginActionTest extends WebTestCase
 
             $form = $crawler->selectButton('Submit')->form();
 
-            $form['login[_username]'] = "Harry";
-            $form['login[_password]'] = "Potter";
+            $form['register[firstname]'] = 'Potter';
+            $form['register[lastname]'] = 'Harry';
+            $form['register[username]'] = 'HP';
+            $form['register[plainPassword][first]'] = 'Ie1FDLP';
+            $form['register[plainPassword][second]'] = 'Ie1FDLP';
 
             $this->client->submit($form);
 
-            $this->assertEquals(
-                Response::HTTP_OK,
-                $this->client->getResponse()->getStatusCode()
-            );
         }
     }
 }

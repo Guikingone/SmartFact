@@ -1,5 +1,6 @@
 tests:
-    "Homepage should be fast":
-        path: "/"
+    "Pages should load fast and consume low memory":
+        path: "/.*"
         assertions:
-            - "main.wall_time < 500ms"
+            - "main.wall_time < 200ms"
+            - "main.peak_memory < 3 mb"

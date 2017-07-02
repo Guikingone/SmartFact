@@ -9,42 +9,35 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Api\Functionnal;
+namespace tests\AppBundle\Actions\Web\French\Functionnal;
 
-use Blackfire\Client;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class DeleteNotificationsActionTest
+ * Class HomeActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class DeleteNotificationsActionTest extends WebTestCase
+class HomeActionTest extends WebTestCase
 {
     private $client = null;
-
-    /** @var Client */
-    private $blackfire;
 
     /** {@inheritdoc} */
     public function setUp()
     {
-        $this->client = static::createClient();
+        $this->client = self::createClient();
     }
 
     /**
-     * Test if the request return the right status code.
+     * Test if the homepage respond in-time and with the right headers.
      */
-    public function testStatusCode()
+    public function testHomepageStatusCode()
     {
-        $this->blackfire = new Client();
-        $probe = $this->blackfire->createProbe();
-
-        $this->client->request('DELETE', '/api/users/1/notifications/delete');
+        $this->client->request('GET', '/fr/');
 
         $this->assertEquals(
-            Response::HTTP_ACCEPTED,
+            Response::HTTP_OK,
             $this->client->getResponse()->getStatusCode()
         );
     }

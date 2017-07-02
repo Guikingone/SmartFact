@@ -9,47 +9,37 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Web\Functionnal;
-
-// Blackfire
-use Blackfire\Client;
+namespace tests\AppBundle\Actions\Api\Functionnal\Users;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class HomeActionTest
+ * Class GetUserActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class HomeActionTest extends WebTestCase
+class GetUserActionTest extends WebTestCase
 {
+    /** @var null */
     private $client = null;
-
-    /** @var Client */
-    private $blackfire;
 
     /** {@inheritdoc} */
     public function setUp()
     {
-        $this->client = self::createClient();
+        $this->client = static::createClient();
     }
 
     /**
-     * Test if the homepage respond in-time and with the right headers.
+     * Test if the response contain the right status code.
      */
-    public function testHomepageStatusCode()
+    public function testResponseStatusCode()
     {
-        $this->blackfire = new Client();
-        $probe = $this->blackfire->createProbe();
-
-        $this->client->request('GET', '/');
+        $this->client->request('GET', '/api/user/1');
 
         $this->assertEquals(
             Response::HTTP_OK,
             $this->client->getResponse()->getStatusCode()
         );
-
-        $this->blackfire->endProbe($probe);
     }
 }

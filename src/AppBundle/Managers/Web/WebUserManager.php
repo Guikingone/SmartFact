@@ -32,8 +32,8 @@ class WebUserManager
     /**
      * WebUserManager constructor.
      *
-     * @param EntityManagerInterface        $doctrine
-     * @param FormFactoryInterface          $form
+     * @param EntityManagerInterface    $doctrine
+     * @param FormFactoryInterface      $form
      */
     public function __construct(
         EntityManagerInterface $doctrine,
@@ -80,5 +80,21 @@ class WebUserManager
         }
 
         return $form->createView();
+    }
+
+    /**
+     * Delete a User using his id.
+     *
+     * @param int $id       The id of the User.
+     */
+    public function deleteUser($id)
+    {
+        $user = $this->doctrine->getRepository(User::class)
+                               ->findOneBy([
+                                   'id' => $id
+                               ]);
+
+        $this->doctrine->remove($user);
+        $this->doctrine->flush();
     }
 }
