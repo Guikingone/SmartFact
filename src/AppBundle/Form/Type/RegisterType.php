@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
@@ -34,28 +35,6 @@ class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', TextType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                    new Length([
-                        'min' => 2,
-                        'minMessage' => 'This value is too short !',
-                        'max' => 150,
-                        'maxMessage' => 'This value is too long !'
-                    ])
-                ]
-            ])
-            ->add('lastname', TextType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                    new Length([
-                        'min' => 2,
-                        'minMessage' => 'This value is too short !',
-                        'max' => 150,
-                        'maxMessage' => 'This value is too long !'
-                    ])
-                ]
-            ])
             ->add('username', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
@@ -63,6 +42,17 @@ class RegisterType extends AbstractType
                         'min' => 2,
                         'minMessage' => 'This value is too short !',
                         'max' => 75,
+                        'maxMessage' => 'This value is too long !'
+                    ])
+                ]
+            ])
+            ->add('email', EmailType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'This value is too short !',
+                        'max' => 200,
                         'maxMessage' => 'This value is too long !'
                     ])
                 ]
