@@ -1,11 +1,6 @@
 app:
     resource: '@AppBundle/Action/Web/'
     type: annotation
-    prefix: /{_locale}
-    requirements:
-        _locale: en|fr
-    defaults:
-        _locale: fr
 
 api:
     resource: '@AppBundle/Action/Api/'

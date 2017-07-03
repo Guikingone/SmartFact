@@ -78,6 +78,15 @@ class User implements SmartFactUserInterface
     private $phoneNumber;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=200)
+     *
+     * @Groups({"users"})
+     */
+    private $email;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="birth_date", type="date", nullable=true)
@@ -275,6 +284,22 @@ class User implements SmartFactUserInterface
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
 
     /**

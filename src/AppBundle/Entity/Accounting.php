@@ -11,9 +11,13 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+
+// Interface
+use AppBundle\Interfaces\SmartFactAccountingInterface;
 
 /**
  * Class Accounting
@@ -23,7 +27,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Table(name="_smartfact_accounting")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AccountingRepository")
  */
-class Accounting
+class Accounting implements SmartFactAccountingInterface
 {
     /**
      * @var int
@@ -49,6 +53,8 @@ class Accounting
      * @var string
      *
      * @ORM\Column(name="interlocutor", type="string")
+     *
+     * @Groups({"users", "accounting"})
      */
     private $interlocutor;
 
@@ -56,6 +62,8 @@ class Accounting
      * @var string
      *
      * @ORM\Column(name="address", type="string")
+     *
+     * @Groups({"users", "accounting"})
      */
     private $address;
 
@@ -63,6 +71,8 @@ class Accounting
      * @var string
      *
      * @ORM\Column(name="phone_number", type="string", length=15)
+     *
+     * @Groups({"users", "accounting"})
      */
     private $phoneNumber;
 
@@ -70,6 +80,8 @@ class Accounting
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=50)
+     *
+     * @Groups({"users", "accounting"})
      */
     private $email;
 
@@ -197,7 +209,7 @@ class Accounting
     }
 
     /**
-     * @return User|ArrayCollection
+     * @return Collection
      */
     public function getUser()
     {

@@ -9,32 +9,33 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Web\French\Functionnal;
+namespace tests\AppBundle\Actions\Api\Functionnal\Accounting;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class HomeActionTest
+ * Class GetAccountingsActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class HomeActionTest extends WebTestCase
+class GetAccountingsActionTest extends WebTestCase
 {
+    /** @var null */
     private $client = null;
 
     /** {@inheritdoc} */
     public function setUp()
     {
-        $this->client = self::createClient();
+        $this->client = static::createClient();
     }
 
     /**
-     * Test if the homepage respond in-time and with the right headers.
+     * Test if the Response contain the right status code.
      */
-    public function testHomepageStatusCode()
+    public function testResponseStatusCode()
     {
-        $this->client->request('GET', '/fr/');
+        $this->client->request('GET', '/api/accountings');
 
         $this->assertEquals(
             Response::HTTP_OK,
