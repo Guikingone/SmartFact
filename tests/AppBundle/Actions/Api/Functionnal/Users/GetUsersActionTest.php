@@ -19,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class GetUsersAction extends WebTestCase
+class GetUsersActionTest extends WebTestCase
 {
     /** @var null */
     private $client = null;

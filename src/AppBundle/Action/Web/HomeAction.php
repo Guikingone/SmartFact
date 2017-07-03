@@ -14,6 +14,7 @@ namespace AppBundle\Action\Web;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\EngineInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * Class HomeAction
@@ -21,6 +22,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
  * @Route("/", name="homepage")
+ * @Method({"GET"})
  */
 final class HomeAction
 {

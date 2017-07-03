@@ -12,6 +12,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use AppBundle\Interfaces\SmartFactClientsInterface;
 
 /**
@@ -74,6 +75,14 @@ class Clients implements SmartFactClientsInterface
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bills", mappedBy="clients")
      */
     private $bills;
+
+    /**
+     * Clients constructor.
+     */
+    public function __construct()
+    {
+        $this->bills = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -221,5 +230,29 @@ class Clients implements SmartFactClientsInterface
         }
 
         $this->user = $user;
+    }
+
+    /**
+     * @param Bills $bills
+     */
+    public function addBills(Bills $bills)
+    {
+        $this->bills[] = $bills;
+    }
+
+    /**
+     * @param Bills $bills
+     */
+    public function removeBill(Bills $bills)
+    {
+        $this->bills->removeElement($bills);
+    }
+
+    /**
+     * @return Bills|ArrayCollection
+     */
+    public function getBills()
+    {
+        return $this->bills;
     }
 }
