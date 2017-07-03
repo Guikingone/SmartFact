@@ -14,6 +14,7 @@ namespace AppBundle\Action\Api\Notifications;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 // Manager
 use AppBundle\Managers\API\ApiNotificationsManager;
@@ -25,7 +26,7 @@ use AppBundle\Managers\API\ApiNotificationsManager;
  *
  * @Route("/user/{id}/notifications", name="api_user_notifications")
  *
- * @Route({"GET"})
+ * @Method({"GET"})
  */
 final class GetNotificationsAction
 {

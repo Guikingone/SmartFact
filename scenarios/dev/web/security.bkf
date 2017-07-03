@@ -1,6 +1,6 @@
 scenario
     name "Login page"
-    endpoint "http://172.20.0.1:8000/app_dev.php/"
+    endpoint "http://172.20.0.1:8000/app_dev.php/fr/"
 
     visit url('/login')
         expect status_code() == 200
@@ -11,7 +11,7 @@ scenario
 
 scenario
     name "Register page"
-    endpoint "http://172.20.0.1:8000/app_dev.php/"
+    endpoint "http://172.20.0.1:8000/app_dev.php/fr/"
 
     visit url('/register')
         expect status_code() == 200

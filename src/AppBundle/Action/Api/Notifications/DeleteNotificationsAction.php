@@ -14,10 +14,11 @@ namespace AppBundle\Action\Api\Notifications;
 use AppBundle\Managers\API\ApiNotificationsManager;
 
 // Core
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * Class DeleteNotificationsAction
@@ -25,6 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
  * @Route("/users/{id}/notifications/delete", name="api_user_notifications_delete")
+ * @Method({"DELETE"})
  */
 class DeleteNotificationsAction
 {

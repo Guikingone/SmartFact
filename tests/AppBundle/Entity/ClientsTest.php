@@ -12,6 +12,7 @@
 namespace tests\AppBundle\Entity;
 
 use AppBundle\Entity\User;
+use AppBundle\Entity\Bills;
 use AppBundle\Entity\Clients;
 use PHPUnit\Framework\TestCase;
 
@@ -65,6 +66,33 @@ class ClientsTest extends TestCase
         if ($this->assertInstanceOf(User::class, $clients->getUser())) {
             $this->assertEquals('Potter', $user->getLastName());
             $this->assertEquals('Harry', $user->getFistName());
+        }
+    }
+
+    /**
+     * Test the relation between Clients and Bills.
+     */
+    public function testClientsBill()
+    {
+        $clients = new Clients();
+        $bills = $this->createMock(Bills::class);
+
+        $clients->setName('Google');
+        $clients->setAddress('404 Road not found, Los Angeles');
+        $clients->setPhoneNumber('0987766554');
+        $clients->setPrestationType('Services');
+
+        $bills->method('hasTVA')
+              ->willReturn(true);
+
+        $bills->method('getDate')
+              ->willReturn(new \DateTime('2017-04-26'));
+
+        $clients->addBills($bills);
+
+        if ($this->assertInstanceOf(get_class($bills), $clients->getBills()->get(0))) {
+            $this->assertTrue($bills->hasTva());
+            $this->assertEquals(new \DateTime('2017-04-26'), $bills->getDate());
         }
     }
 }
