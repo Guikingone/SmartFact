@@ -77,11 +77,18 @@ class Clients implements SmartFactClientsInterface
     private $bills;
 
     /**
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Meetup", mappedBy="clients")
+     */
+    private $meetup;
+
+    /**
      * Clients constructor.
      */
     public function __construct()
     {
         $this->bills = new ArrayCollection();
+        $this->meetup = new ArrayCollection();
     }
 
     /**
@@ -102,21 +109,9 @@ class Clients implements SmartFactClientsInterface
 
     /**
      * @param string $name
-     *
-     * @throws \InvalidArgumentException
      */
     public function setName($name)
     {
-        if ((!is_string($name)) || (strlen($name) > 200)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value isn\'t valid or too long ! 
-                            Given %s, expected string',
-                    gettype($name)
-                )
-            );
-        }
-
         $this->name = $name;
     }
 
@@ -130,21 +125,9 @@ class Clients implements SmartFactClientsInterface
 
     /**
      * @param string $address
-     *
-     * @throws \InvalidArgumentException
      */
     public function setAddress($address)
     {
-        if ((!is_string($address)) || (strlen($address) > 150)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value isn\'t valid or too long ! 
-                            Given %s, expected string',
-                    gettype($address)
-                )
-            );
-        }
-
         $this->address = $address;
     }
 
@@ -158,21 +141,9 @@ class Clients implements SmartFactClientsInterface
 
     /**
      * @param string $phoneNumber
-     *
-     * @throws \InvalidArgumentException
      */
     public function setPhoneNumber($phoneNumber)
     {
-        if ((!is_string($phoneNumber)) || (strlen($phoneNumber) > 15)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value isn\'t valid or too long !
-                            Given %s, expected string.',
-                    gettype($phoneNumber)
-                )
-            );
-        }
-
         $this->phoneNumber = $phoneNumber;
     }
 
@@ -186,21 +157,9 @@ class Clients implements SmartFactClientsInterface
 
     /**
      * @param string $prestationType
-     *
-     * @throws \InvalidArgumentException
      */
     public function setPrestationType($prestationType)
     {
-        if ((!is_string($prestationType)) || (strlen($prestationType) > 100)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value isn\'t valid or too long !
-                            Given %s',
-                    gettype($prestationType)
-                )
-            );
-        }
-
         $this->prestationType = $prestationType;
     }
 
@@ -214,21 +173,9 @@ class Clients implements SmartFactClientsInterface
 
     /**
      * @param User $user
-     *
-     * @throws \InvalidArgumentException
      */
     public function setUser(User $user)
     {
-        if (!$user instanceof User) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value isn\'t valid !
-                            Given %s',
-                    gettype($user)
-                )
-            );
-        }
-
         $this->user = $user;
     }
 
@@ -254,5 +201,29 @@ class Clients implements SmartFactClientsInterface
     public function getBills()
     {
         return $this->bills;
+    }
+
+    /**
+     * @param Meetup $meetup
+     */
+    public function addMeetup(Meetup $meetup)
+    {
+        $this->meetup[] = $meetup;
+    }
+
+    /**
+     * @param Meetup $meetup
+     */
+    public function removeMeetup(Meetup $meetup)
+    {
+        $this->meetup->removeElement($meetup);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getMeetups()
+    {
+        return $this->meetup;
     }
 }

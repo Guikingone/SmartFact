@@ -32,8 +32,6 @@ interface SmartFactClientsInterface
 
     /**
      * @param string $name
-     *
-     * @throws \InvalidArgumentException    If the value isn't correct or too long.
      */
     public function setName($name);
 
@@ -44,8 +42,6 @@ interface SmartFactClientsInterface
 
     /**
      * @param string $address
-     *
-     * @throws \InvalidArgumentException
      */
     public function setAddress($address);
 
@@ -56,8 +52,6 @@ interface SmartFactClientsInterface
 
     /**
      * @param string $phoneNumber
-     *
-     * @throws \InvalidArgumentException
      */
     public function setPhoneNumber($phoneNumber);
 
@@ -68,8 +62,6 @@ interface SmartFactClientsInterface
 
     /**
      * @param string $prestationType
-     *
-     * @throws \InvalidArgumentException
      */
     public function setPrestationType($prestationType);
 

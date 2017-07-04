@@ -52,11 +52,18 @@ class PlanningTest extends TestCase
         $meetup->method('getDuration')
                ->willReturn('45 Minutes');
 
+        $meetup->method('getId')
+               ->willReturn(0);
+
         $planning->addMeetup($meetup);
 
-        if ($this->assertInstanceOf(get_class($meetup), $planning->getMeetups()->get(0))) {
+        if ($this->assertInstanceOf(Meetup::class, $planning->getMeetups()->get(0))) {
             $this->assertEquals('45 MINUTES', $meetup->getDuration());
         }
+
+        $planning->removeMeetup($meetup);
+
+        $this->assertArrayNotHasKey($meetup->getId(), $planning->getMeetups());
     }
 
     /**
