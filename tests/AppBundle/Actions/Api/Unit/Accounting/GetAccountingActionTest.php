@@ -12,14 +12,14 @@
 namespace tests\AppBundle\Actions\Api\Unit\Accounting;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use AppBundle\Action\Api\Accounting\GetAccountingsAction;
+use AppBundle\Action\Api\Accounting\GetAccountingAction;
 
 /**
- * Class GetAccountingsActionTest
+ * Class GetAccountingActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class GetAccountingsActionTest extends KernelTestCase
+class GetAccountingActionTest extends KernelTestCase
 {
     /** {@inheritdoc} */
     public function setUp()
@@ -33,19 +33,20 @@ class GetAccountingsActionTest extends KernelTestCase
     public function testContainerReturn()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(GetAccountingsAction::class);
+                                 ->get(GetAccountingAction::class);
 
-        $this->assertInstanceOf(GetAccountingsAction::class, $action);
+        $this->assertInstanceOf(GetAccountingAction::class, $action);
     }
 
     /**
-     * Test if the object has the right Attributes.
+     * Test if the object has the right attributes.
      */
     public function testObjectHasAttributes()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(GetAccountingsAction::class);
+                                 ->get(GetAccountingAction::class);
 
         $this->assertObjectHasAttribute('manager', $action);
+        $this->assertObjectHasAttribute('requestStack', $action);
     }
 }

@@ -1,5 +1,5 @@
 scenario
-    name "Notifications all"
+    name "Notifications - API"
     endpoint "http://172.20.0.1:8000/app_dev.php/"
 
     visit url('/api/user/1/notifications')

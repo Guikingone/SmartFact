@@ -26,3 +26,6 @@ src/*Bundle/Entity/*.php~
 
 # Developement tools
 /.php_cs.cache
+
+# PHPUnit
+/coverage/
