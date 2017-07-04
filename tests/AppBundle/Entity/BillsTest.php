@@ -16,7 +16,10 @@ use AppBundle\Entity\User;
 use AppBundle\Entity\Bills;
 use AppBundle\Entity\Clients;
 
+// Doctrine
 use Doctrine\Common\Collections\ArrayCollection;
+
+// PHPUnit
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 

@@ -33,6 +33,8 @@ interface SmartFactBillsInterface
 
     /**
      * @param \DateTime $date
+     *
+     * @throws \InvalidArgumentException
      */
     public function setDate($date);
 
@@ -43,11 +45,15 @@ interface SmartFactBillsInterface
 
     /**
      * @param float $total
+     *
+     * @throws \InvalidArgumentException
      */
     public function setTotal($total);
 
     /**
      * @param bool $send
+     *
+     * @throws \InvalidArgumentException
      */
     public function setSend($send);
 
@@ -62,6 +68,8 @@ interface SmartFactBillsInterface
 
     /**
      * @param \DateTime $sendAt
+     *
+     * @throws \InvalidArgumentException
      */
     public function setSendAt($sendAt);
 
@@ -72,6 +80,8 @@ interface SmartFactBillsInterface
 
     /**
      * @param string $file
+     *
+     * @throws \InvalidArgumentException
      */
     public function setFile($file);
 
@@ -82,6 +92,8 @@ interface SmartFactBillsInterface
 
     /**
      * @param User $user
+     *
+     * @throws \InvalidArgumentException
      */
     public function setUser(User $user);
 
@@ -92,11 +104,15 @@ interface SmartFactBillsInterface
 
     /**
      * @param Clients $clients
+     *
+     * @throws \InvalidArgumentException
      */
     public function addClients(Clients $clients);
 
     /**
      * @param Clients $clients
+     *
+     * @throws \InvalidArgumentException
      */
     public function removeClients(Clients $clients);
 

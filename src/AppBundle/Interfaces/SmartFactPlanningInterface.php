@@ -11,6 +11,8 @@
 
 namespace AppBundle\Interfaces;
 
+use AppBundle\Entity\Clients;
+
 /**
  * Interface SmartFactPlanningInterface
  *
@@ -18,4 +20,8 @@ namespace AppBundle\Interfaces;
  */
 interface SmartFactPlanningInterface
 {
+    /**
+     * @return int
+     */
+    public function getId();
 }
