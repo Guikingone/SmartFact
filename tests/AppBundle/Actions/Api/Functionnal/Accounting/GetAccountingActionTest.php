@@ -11,15 +11,15 @@
 
 namespace tests\AppBundle\Actions\Api\Functionnal\Accounting;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class GetAccountingsActionTest
+ * Class GetAccountingActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class GetAccountingsActionTest extends WebTestCase
+class GetAccountingActionTest extends WebTestCase
 {
     /** @var null */
     private $client = null;
@@ -31,12 +31,12 @@ class GetAccountingsActionTest extends WebTestCase
     }
 
     /**
-     * Test if the Response contain the right
+     * Test if the Response return the right
      * status code and headers.
      */
-    public function testResponseStatusCode()
+    public function testResponseStatusCodeAndHeaders()
     {
-        $this->client->request('GET', '/api/accountings');
+        $this->client->request('GET', '/api/accounting/1');
 
         $this->assertEquals(
             Response::HTTP_OK,

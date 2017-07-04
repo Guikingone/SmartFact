@@ -34,6 +34,7 @@ class UserTest extends TestCase
     public function testUserInstance()
     {
         $user = new User();
+
         $user->setFirstName('Harry');
         $user->setLastName('Potter');
         $user->setAddress('23 Poudlard Avenue');
@@ -46,7 +47,9 @@ class UserTest extends TestCase
         $user->setPassword('LB,L8ELTDL0');
         $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
         $user->addRoles('ROLE_USER');
+        $user->setRoles(['ROLE_USER']);
 
+        $this->assertNull($user->getId());
         $this->assertEquals('Harry', $user->getFirstName());
         $this->assertEquals('Potter', $user->getLastName());
         $this->assertEquals('23 Poudlard Avenue', $user->getAddress());

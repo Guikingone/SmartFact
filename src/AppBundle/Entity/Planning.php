@@ -12,6 +12,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 // Interface
 use AppBundle\Interfaces\SmartFactPlanningInterface;
@@ -43,11 +44,22 @@ class Planning implements SmartFactPlanningInterface
     private $period;
 
     /**
-     * @var User
-     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Meetup", mappedBy="planning")
+     */
+    private $meetup;
+
+    /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", inversedBy="planning")
      */
     private $user;
+
+    /**
+     * Planning constructor.
+     */
+    public function __construct()
+    {
+        $this->meetup = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -71,6 +83,30 @@ class Planning implements SmartFactPlanningInterface
     public function setPeriod($period)
     {
         $this->period = $period;
+    }
+
+    /**
+     * @param Meetup $meetup
+     */
+    public function addMeetup(Meetup $meetup)
+    {
+        $this->meetup[] = $meetup;
+    }
+
+    /**
+     * @param Meetup $meetup
+     */
+    public function removeMeetup(Meetup $meetup)
+    {
+        $this->meetup->removeElement($meetup);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getMeetups()
+    {
+        return $this->meetup;
     }
 
     /**
