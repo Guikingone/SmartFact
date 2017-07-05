@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Web\Functionnal;
+namespace tests\AppBundle\Actions\Web\Functionnal\Security;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

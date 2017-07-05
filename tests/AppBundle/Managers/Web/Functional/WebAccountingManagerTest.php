@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Web\Functionnal;
+namespace tests\AppBundle\Managers\Web\Functional;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class RegisterActionTest
+ * Class WebAccoutingTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class RegisterActionTest extends WebTestCase
+class WebAccountingManagerTest extends WebTestCase
 {
     /** @var null */
     private $client = null;
@@ -31,11 +31,25 @@ class RegisterActionTest extends WebTestCase
     }
 
     /**
-     * Test if the Response return the right status code.
+     * Test if the Response contain the right status code.
      */
-    public function testResponseStatusCode()
+    public function testAccountingsListStatusCode()
     {
-        $this->client->request('GET', '/register');
+        $this->client->request('GET', '/accountings');
+
+        $this->assertEquals(
+            Response::HTTP_OK,
+            $this->client->getResponse()->getStatusCode()
+        );
+
+    }
+
+    /**
+     * Test if the Response contain the right status code.
+     */
+    public function testAccountingDetailsStatusCode()
+    {
+        $this->client->request('GET', '/accounting/1/details');
 
         $this->assertEquals(
             Response::HTTP_OK,
@@ -43,29 +57,13 @@ class RegisterActionTest extends WebTestCase
         );
     }
 
-    /**
-     * Test if the form can be hydrated and submitted.
-     */
-    public function testRegisterFormSubmission()
+    public function testAccountingNewStatusCode()
     {
-        $crawler = $this->client->request('GET', '/register');
+        $this->client->request('GET', '/accounting/new');
 
         $this->assertEquals(
             Response::HTTP_OK,
             $this->client->getResponse()->getStatusCode()
         );
-
-        if ($this->client->getResponse()->getStatusCode() === Response::HTTP_OK) {
-
-            $form = $crawler->selectButton('Submit')->form();
-
-            $form['register[username]'] = 'HP';
-            $form['register[email]'] = 'hp@gmail.com';
-            $form['register[plainPassword][first]'] = 'Ie1FDLP';
-            $form['register[plainPassword][second]'] = 'Ie1FDLP';
-
-            $this->client->submit($form);
-
-        }
     }
 }

@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Web\Unit;
+namespace tests\AppBundle\Managers\Web\Unit;
 
-// Manager
-use AppBundle\Action\Web\Security\LoginAction;
+use AppBundle\Managers\Web\WebAccountingManager;
 
 // Core
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
- * Class LoginActionTest
+ * Class WebAccountingManager
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class LoginActionTest extends KernelTestCase
+class WebAccountingManagerTest extends KernelTestCase
 {
     /** {@inheritdoc} */
     public function setUp()
@@ -31,25 +30,26 @@ class LoginActionTest extends KernelTestCase
     }
 
     /**
-     * Test if the container return the right instance.
+     * Test if the Container return the right instance.
      */
     public function testContainerReturn()
     {
         $manager = static::$kernel->getContainer()
-                                  ->get(LoginAction::class);
+                                  ->get(WebAccountingManager::class);
 
-        $this->assertInstanceOf(LoginAction::class, $manager);
+        $this->assertInstanceOf(WebAccountingManager::class, $manager);
     }
 
     /**
-     * Test if the object has the right attributes.
+     * Test if the Manager has the right attributes.
      */
     public function testObjectHasAttributes()
     {
         $manager = static::$kernel->getContainer()
-            ->get(LoginAction::class);
+                                  ->get(WebAccountingManager::class);
 
-        $this->assertObjectHasAttribute('templating', $manager);
-        $this->assertObjectHasAttribute('authentication', $manager);
+        $this->assertObjectHasAttribute('doctrine', $manager);
+        $this->assertObjectHasAttribute('form', $manager);
+        $this->assertObjectHasAttribute('eventDispatcher', $manager);
     }
 }

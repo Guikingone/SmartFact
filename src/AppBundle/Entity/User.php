@@ -15,7 +15,6 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 // Interface
 use AppBundle\Interfaces\SmartFactUserInterface;
@@ -36,8 +35,6 @@ class User implements SmartFactUserInterface
      * @ORM\Column(name="id")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     *
-     * @Groups({"users"})
      */
     private $id;
 
@@ -45,8 +42,6 @@ class User implements SmartFactUserInterface
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", nullable=true)
-     *
-     * @Groups({"users"})
      */
     private $firstname;
 
@@ -54,8 +49,6 @@ class User implements SmartFactUserInterface
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", nullable=true)
-     *
-     * @Groups({"users"})
      */
     private $lastname;
 
@@ -63,8 +56,6 @@ class User implements SmartFactUserInterface
      * @var string
      *
      * @ORM\Column(name="address", type="string", nullable=true)
-     *
-     * @Groups({"users"})
      */
     private $address;
 
@@ -72,8 +63,6 @@ class User implements SmartFactUserInterface
      * @var string
      *
      * @ORM\Column(name="phone_number", type="string", length=14, nullable=true)
-     *
-     * @Groups({"users"})
      */
     private $phoneNumber;
 
@@ -81,8 +70,6 @@ class User implements SmartFactUserInterface
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=200)
-     *
-     * @Groups({"users"})
      */
     private $email;
 
@@ -90,8 +77,6 @@ class User implements SmartFactUserInterface
      * @var \DateTime
      *
      * @ORM\Column(name="birth_date", type="date", nullable=true)
-     *
-     * @Groups({"users"})
      */
     private $birthDate;
 
@@ -99,8 +84,6 @@ class User implements SmartFactUserInterface
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=150, nullable=true)
-     *
-     * @Groups({"users"})
      */
     private $status;
 
@@ -108,8 +91,6 @@ class User implements SmartFactUserInterface
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="date", nullable=true)
-     *
-     * @Groups({"users"})
      */
     private $createdAt;
 
@@ -117,8 +98,6 @@ class User implements SmartFactUserInterface
      * @var bool
      *
      * @ORM\Column(name="validated", type="boolean", nullable=true)
-     *
-     * @Groups({"users"})
      */
     private $validated;
 
@@ -126,8 +105,6 @@ class User implements SmartFactUserInterface
      * @var bool
      *
      * @ORM\Column(name="is_active", type="boolean")
-     *
-     * @Groups({"users"})
      */
     private $isActive;
 
@@ -135,8 +112,6 @@ class User implements SmartFactUserInterface
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=75, nullable=false, nullable=false)
-     *
-     * @Groups({"users"})
      */
     private $username;
 
@@ -163,43 +138,31 @@ class User implements SmartFactUserInterface
      * @var array
      *
      * @ORM\Column(name="roles", type="array", nullable=true)
-     *
-     * @Groups({"users"})
      */
     private $roles;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notifications", mappedBy="user")
-     *
-     * @Groups({"users"})
      */
     private $notifications;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Clients", mappedBy="user")
-     *
-     * @Groups({"users"})
      */
     private $clients;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Accounting", inversedBy="user")
-     *
-     * @Groups({"users"})
      */
     private $accounting;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bills", mappedBy="user")
-     *
-     * @Groups({"users"})
      */
     private $bills;
 
     /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Planning", mappedBy="user")
-     *
-     * @Groups({"users"})
      */
     private $planning;
 

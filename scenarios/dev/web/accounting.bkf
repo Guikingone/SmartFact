@@ -1,0 +1,9 @@
+scenario
+    name "Accountings - Web"
+    endpoint "http://172.20.0.1:8000/app_dev.php/"
+
+    visit url('/accountings')
+        expect status_code() == 200
+
+    visit url('/accounting/1/details')
+        expect status_code() == 200

@@ -11,10 +11,9 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 // Interface
 use AppBundle\Interfaces\SmartFactAccountingInterface;
@@ -35,8 +34,6 @@ class Accounting implements SmartFactAccountingInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(name="id")
-     *
-     * @Groups({"users", "accounting"})
      */
     private $id;
 
@@ -44,8 +41,6 @@ class Accounting implements SmartFactAccountingInterface
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=200)
-     *
-     * @Groups({"users", "accounting"})
      */
     private $name;
 
@@ -53,8 +48,6 @@ class Accounting implements SmartFactAccountingInterface
      * @var string
      *
      * @ORM\Column(name="interlocutor", type="string")
-     *
-     * @Groups({"users", "accounting"})
      */
     private $interlocutor;
 
@@ -62,8 +55,6 @@ class Accounting implements SmartFactAccountingInterface
      * @var string
      *
      * @ORM\Column(name="address", type="string")
-     *
-     * @Groups({"users", "accounting"})
      */
     private $address;
 
@@ -71,8 +62,6 @@ class Accounting implements SmartFactAccountingInterface
      * @var string
      *
      * @ORM\Column(name="phone_number", type="string", length=15)
-     *
-     * @Groups({"users", "accounting"})
      */
     private $phoneNumber;
 
@@ -80,8 +69,6 @@ class Accounting implements SmartFactAccountingInterface
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=50)
-     *
-     * @Groups({"users", "accounting"})
      */
     private $email;
 

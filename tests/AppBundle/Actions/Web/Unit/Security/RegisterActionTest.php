@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Web\Unit;
+namespace tests\AppBundle\Actions\Web\Unit\Security;
 
 use AppBundle\Action\Web\Security\RegisterAction;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
