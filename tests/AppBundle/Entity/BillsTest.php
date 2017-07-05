@@ -16,9 +16,6 @@ use AppBundle\Entity\User;
 use AppBundle\Entity\Bills;
 use AppBundle\Entity\Clients;
 
-// Doctrine
-use Doctrine\Common\Collections\ArrayCollection;
-
 // PHPUnit
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
@@ -41,6 +38,7 @@ class BillsTest extends TestCase
         $bills->setTotal(3000.45);
         $bills->setSend(false);
         $bills->setSendAt(new \DateTime('2017-03-02'));
+        $bills->setTva(true);
         $bills->setFile('facture.pdf');
 
         $this->assertNull($bills->getId());
@@ -49,6 +47,7 @@ class BillsTest extends TestCase
         $this->assertEquals(3000.45, $bills->getTotal());
         $this->assertFalse($bills->hasBeenSend());
         $this->assertEquals(new \DateTime('2017-03-02'), $bills->getSendAt());
+        $this->assertTrue($bills->hasTva());
         $this->assertEquals('facture.pdf', $bills->getFile());
     }
 
@@ -96,6 +95,9 @@ class BillsTest extends TestCase
         $bills->setSendAt(new \DateTime('2017-03-02'));
         $bills->setFile('facture.pdf');
 
+        $clients->method('getId')
+                ->willReturn(0);
+
         $clients->method('getName')
                 ->willReturn('Google');
 
@@ -108,37 +110,9 @@ class BillsTest extends TestCase
             $this->assertEquals('Google', $clients->getName());
             $this->assertEquals('404 Road Not Found', $clients->getAddress());
         }
-    }
-
-    /**
-     * Test if a Bills can remove a linked Clients.
-     */
-    public function testBillsRemoveClients()
-    {
-        $bills = new Bills();
-        $clients = $this->createMock(Clients::class);
-
-        $bills->setDate(new \DateTime('2017-04-31'));
-        $bills->setTotal(3000.45);
-        $bills->setDate(new \DateTime('2017-02-15'));
-        $bills->setSend(false);
-        $bills->setSendAt(new \DateTime('2017-03-02'));
-        $bills->setFile('facture.pdf');
-
-        $clients->method('getName')
-            ->willReturn('Google');
-
-        $clients->method('getAddress')
-            ->wilLReturn('404 Road Not Found');
-
-        $clients->method('getId')
-                ->willReturn(0);
-
-        $bills->addClients($clients);
 
         $bills->removeClients($clients);
 
-        $this->assertInstanceOf(ArrayCollection::class, $bills->getClients());
         $this->assertArrayNotHasKey($clients->getId(), $bills->getClients());
     }
 }

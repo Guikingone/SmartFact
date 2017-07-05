@@ -13,7 +13,10 @@ namespace tests\AppBundle\Entity;
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\Bills;
+use AppBundle\Entity\Meetup;
 use AppBundle\Entity\Clients;
+
+// PHPUnit
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -82,6 +85,9 @@ class ClientsTest extends TestCase
         $clients->setPhoneNumber('0987766554');
         $clients->setPrestationType('Services');
 
+        $bills->method('getId')
+              ->willReturn(0);
+
         $bills->method('hasTVA')
               ->willReturn(true);
 
@@ -94,5 +100,36 @@ class ClientsTest extends TestCase
             $this->assertTrue($bills->hasTva());
             $this->assertEquals(new \DateTime('2017-04-26'), $bills->getDate());
         }
+
+        $clients->removeBill($bills);
+
+        $this->assertArrayNotHasKey($bills->getId(), $clients->getBills());
+    }
+
+    /**
+     * Test the relation between Clients and Meetup.
+     */
+    public function testClientsMeetup()
+    {
+        $clients = new Clients();
+        $meetup = $this->createMock(Meetup::class);
+
+        $clients->setName('Google');
+        $clients->setAddress('404 Road not found, Los Angeles');
+        $clients->setPhoneNumber('0987766554');
+        $clients->setPrestationType('Services');
+
+        $meetup->method('getId')
+               ->willReturn(0);
+
+        $clients->addMeetup($meetup);
+
+        if ($this->assertInstanceOf(Meetup::class, $clients->getMeetups()->get(0))) {
+            $this->assertEquals(0, $meetup->getId());
+        }
+
+        $clients->removeMeetup($meetup);
+
+        $this->assertArrayNotHasKey($meetup->getId(), $clients->getMeetups());
     }
 }

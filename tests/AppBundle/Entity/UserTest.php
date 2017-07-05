@@ -12,13 +12,14 @@
 namespace tests\AppBundle\Entity;
 
 // Symfony core
-use AppBundle\Entity\Accounting;
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 // Entity
 use AppBundle\Entity\User;
+use AppBundle\Entity\Bills;
 use AppBundle\Entity\Clients;
 use AppBundle\Entity\Planning;
+use AppBundle\Entity\Accounting;
 use AppBundle\Entity\Notifications;
 
 /**
@@ -39,11 +40,13 @@ class UserTest extends TestCase
         $user->setLastName('Potter');
         $user->setAddress('23 Poudlard Avenue');
         $user->setPhoneNumber('0635459287');
+        $user->setEmail('hp@gmail.com');
         $user->setBirthDate(new \DateTime('1995-03-21'));
         $user->setStatus('Freelance');
         $user->setCreatedAt(new \DateTime('2017-02-31'));
         $user->setValidated(true);
         $user->setUsername('HP');
+        $user->setPlainPassword('LB,L8ELTDL0');
         $user->setPassword('LB,L8ELTDL0');
         $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
         $user->addRoles('ROLE_USER');
@@ -54,19 +57,21 @@ class UserTest extends TestCase
         $this->assertEquals('Potter', $user->getLastName());
         $this->assertEquals('23 Poudlard Avenue', $user->getAddress());
         $this->assertEquals('0635459287', $user->getPhoneNumber());
+        $this->assertEquals('hp@gmail.com', $user->getEmail());
         $this->assertEquals(new \DateTime('1995-03-21'), $user->getBirthDate());
         $this->assertEquals('Freelance', $user->getStatus());
         $this->assertEquals(new \DateTime('2017-02-31'), $user->getCreatedAt());
         $this->assertTrue($user->getValidated());
         $this->assertTrue($user->isEnabled());
         $this->assertEquals('HP', $user->getUsername());
+        $this->assertEquals('LB,L8ELTDL0', $user->getPlainPassword());
         $this->assertEquals('LB,L8ELTDL0', $user->getPassword());
         $this->assertEquals('tok_0010901_001NNDOPPPANDHYEMMANDU', $user->getToken());
         $this->assertContains('ROLE_USER', $user->getRoles());
     }
 
     /**
-     * Test if a user can be linked to a Notification.
+     * Test the relation between User and Notifications.
      */
     public function testUserNotifications()
     {
@@ -77,6 +82,7 @@ class UserTest extends TestCase
         $user->setLastName('Potter');
         $user->setAddress('23 Poudlard Avenue');
         $user->setPhoneNumber('0635459287');
+        $user->setEmail('hp@gmail.com');
         $user->setBirthDate(new \DateTime('1995-03-21'));
         $user->setStatus('Freelance');
         $user->setCreatedAt(new \DateTime('2017-02-31'));
@@ -103,6 +109,47 @@ class UserTest extends TestCase
             $this->assertEquals('A new bills has been generated !', $notif->getName());
             $this->assertEquals(1, $notif->getId());
         }
+
+        $user->removeNotification($notification);
+
+        $this->assertArrayNotHasKey($notification->getId(), $user->getNotifications());
+    }
+
+    /**
+     * Test the relation between User and Bills.
+     */
+    public function testUserBills()
+    {
+        $user = new User();
+        $bills = $this->createMock(Bills::class);
+
+        $user->setFirstName('Harry');
+        $user->setLastName('Potter');
+        $user->setAddress('23 Poudlard Avenue');
+        $user->setPhoneNumber('0635459287');
+        $user->setEmail('hp@gmail.com');
+        $user->setBirthDate(new \DateTime('1995-03-21'));
+        $user->setStatus('Freelance');
+        $user->setCreatedAt(new \DateTime('2017-02-31'));
+        $user->setValidated(true);
+        $user->setUsername('HP');
+        $user->setPassword('LB,L8ELTDL0');
+        $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
+        $user->addRoles('ROLE_USER');
+
+        $bills->method('getId')
+              ->willReturn(0);
+
+        $user->addBill($bills);
+
+        if ($this->assertInstanceOf(Bills::class, $user->getBills()->get(0))) {
+            $this->assertNull($bills->getId());
+        }
+
+        $user->removeBill($bills);
+
+        $this->assertArrayNotHasKey($bills->getId(), $user->getBills());
+
     }
 
     /**
@@ -117,6 +164,7 @@ class UserTest extends TestCase
         $user->setLastName('Potter');
         $user->setAddress('23 Poudlard Avenue');
         $user->setPhoneNumber('0635459287');
+        $user->setEmail('hp@gmail.com');
         $user->setBirthDate(new \DateTime('1995-03-21'));
         $user->setStatus('Freelance');
         $user->setCreatedAt(new \DateTime('2017-02-31'));
@@ -161,6 +209,9 @@ class UserTest extends TestCase
         $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
         $user->addRoles('ROLE_USER');
 
+        $clients->method('getId')
+                ->willReturn(0);
+
         $clients->method('getName')
                 ->willReturn('Google');
 
@@ -174,6 +225,10 @@ class UserTest extends TestCase
             $this->assertEquals('Google', $client->getName());
             $this->assertEquals('Services', $client->getTypePrestation());
         }
+
+        $user->removeClient($clients);
+
+        $this->assertArrayNotHasKey($clients->getId(), $user->getClients());
     }
 
     /**
@@ -205,6 +260,5 @@ class UserTest extends TestCase
         if ($this->assertInstanceOf(Accounting::class, $user->getAccounting())) {
             $this->assertEquals('DA Expertise', $accounting->getName());
         }
-
     }
 }

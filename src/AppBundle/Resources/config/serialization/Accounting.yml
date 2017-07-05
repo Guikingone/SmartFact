@@ -1,0 +1,16 @@
+AppBundle\Entity\Accounting:
+    attributes:
+        id:
+            groups: ['users', 'accounting']
+        name:
+            groups: ['users', 'accouting']
+        interlocutor:
+            groups: ['users', 'accouting']
+        address:
+            groups: ['users', 'accouting']
+        phoneNumber:
+            groups: ['users', 'accouting']
+        email:
+            groups: ['users', 'accouting']
+        users:
+            groups: ['accouting']
