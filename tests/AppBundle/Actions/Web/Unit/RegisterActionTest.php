@@ -11,7 +11,7 @@
 
 namespace tests\AppBundle\Actions\Web\Unit;
 
-use AppBundle\Action\Web\RegisterAction;
+use AppBundle\Action\Web\Security\RegisterAction;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**

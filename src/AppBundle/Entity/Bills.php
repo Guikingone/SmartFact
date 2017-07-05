@@ -126,21 +126,9 @@ class Bills implements SmartFactBillsInterface
 
     /**
      * @param \DateTime $date
-     *
-     * @throws \InvalidArgumentException
      */
     public function setDate($date)
     {
-        if (!$date instanceof \DateTime) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value isn\'t valid !
-                        Givent %s,',
-                    gettype($date)
-                )
-            );
-        }
-
         $this->date = $date;
     }
 
@@ -154,21 +142,9 @@ class Bills implements SmartFactBillsInterface
 
     /**
      * @param float $total
-     *
-     * @throws \InvalidArgumentException
      */
     public function setTotal($total)
     {
-        if (!is_float($total)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value isn\'t the right type !
-                            Given %s',
-                    gettype($total)
-                )
-            );
-        }
-
         $this->total = $total;
     }
 
@@ -182,21 +158,9 @@ class Bills implements SmartFactBillsInterface
 
     /**
      * @param bool $send
-     *
-     * @throws \InvalidArgumentException
      */
     public function setSend($send)
     {
-        if (!is_bool($send)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value isn\'t the type expected !
-                            Given %s',
-                    gettype($send)
-                )
-            );
-        }
-
         $this->send = $send;
     }
 
@@ -218,21 +182,9 @@ class Bills implements SmartFactBillsInterface
 
     /**
      * @param \DateTime $sendAt
-     *
-     * @throws \InvalidArgumentException
      */
     public function setSendAt($sendAt)
     {
-        if (!$sendAt instanceof \DateTime) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value isn\'t the type expected !
-                            Given %s',
-                    gettype($sendAt) || get_class($sendAt)
-                )
-            );
-        }
-
         $this->sendAt = $sendAt;
     }
 
@@ -246,41 +198,17 @@ class Bills implements SmartFactBillsInterface
 
     /**
      * @param string $file
-     *
-     * @throws \InvalidArgumentException
      */
     public function setFile($file)
     {
-        if (!is_string($file)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value isn\'t the right type of value expected !
-                            Given %s',
-                    gettype($file)
-                )
-            );
-        }
-
         $this->file = $file;
     }
 
     /**
      * @param bool $tva
-     *
-     * @throws \InvalidArgumentException
      */
     public function setTva($tva)
     {
-        if (!is_bool($tva)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value ins\'t the type expected !
-                            Given %s',
-                    gettype($tva)
-                )
-            );
-        }
-
         $this->tva = $tva;
     }
 
@@ -294,20 +222,9 @@ class Bills implements SmartFactBillsInterface
 
     /**
      * @param User $user
-     *
-     * @throws \InvalidArgumentException
      */
     public function setUser(User $user)
     {
-        if (!$user instanceof User) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value isn\'t the right instance or type !
-                            Given %s',
-                    gettype($user) || get_class($user)
-                )
-            );
-        }
         $this->user = $user;
     }
 
@@ -321,41 +238,17 @@ class Bills implements SmartFactBillsInterface
 
     /**
      * @param Clients $clients
-     *
-     * @throws \InvalidArgumentException
      */
     public function addClients(Clients $clients)
     {
-        if (!$clients instanceof Clients) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value isn\'t the right instance or type !
-                            Given %s',
-                        gettype($clients) || get_class($clients)
-                )
-            );
-        }
-
         $this->clients[] = $clients;
     }
 
     /**
      * @param Clients $clients
-     *
-     * @throws \InvalidArgumentException
      */
     public function removeClients(Clients $clients)
     {
-        if (!$clients instanceof Clients) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'This value isn\'t the right instance or type !
-                            Given %s',
-                    gettype($clients) || get_class($clients)
-                )
-            );
-        }
-
         $this->clients->removeElement($clients);
     }
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Action\Web;
+namespace AppBundle\Action\Web\Security;
 
 use AppBundle\Managers\Web\WebUserManager;
 use Symfony\Component\HttpFoundation\Response;

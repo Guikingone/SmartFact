@@ -34,8 +34,6 @@ class Notifications implements SmartFactNotificationsInterface
      * @ORM\Column(name="id")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     *
-     * @Groups({"users", "notifications"})
      */
     private $id;
 
@@ -43,8 +41,6 @@ class Notifications implements SmartFactNotificationsInterface
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=50)
-     *
-     * @Groups({"users", "notifications"})
      */
     private $name;
 
@@ -52,8 +48,6 @@ class Notifications implements SmartFactNotificationsInterface
      * @var string
      *
      * @ORM\Column(name="category", type="string", length=50)
-     *
-     * @Groups({"users", "notifications"})
      */
     private $category;
 
@@ -61,8 +55,6 @@ class Notifications implements SmartFactNotificationsInterface
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
-     *
-     * @Groups({"users", "notifications"})
      */
     private $createdAt;
 
@@ -70,8 +62,6 @@ class Notifications implements SmartFactNotificationsInterface
      * @var string
      *
      * @ORM\Column(name="link", type="string")
-     *
-     * @Groups({"users", "notifications"})
      */
     private $link;
 
@@ -79,8 +69,6 @@ class Notifications implements SmartFactNotificationsInterface
      * @var string
      *
      * @ORM\Column(name="content", type="string")
-     *
-     * @Groups({"users", "notifications"})
      */
     private $content;
 
@@ -88,8 +76,6 @@ class Notifications implements SmartFactNotificationsInterface
      * @var bool
      *
      * @ORM\Column(name="repetition", type="boolean")
-     *
-     * @Groups({"users", "notifications"})
      */
     private $repetition;
 
@@ -97,15 +83,11 @@ class Notifications implements SmartFactNotificationsInterface
      * @var bool
      *
      * @ORM\Column(name="checked", type="boolean")
-     *
-     * @Groups({"users", "notifications"})
      */
     private $checked;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="notifications")
-     *
-     * @Groups({"notifications"})
      */
     private $user;
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Action\Web;
+namespace AppBundle\Action\Web\Security;
 
 use AppBundle\Form\Type\LoginType;
 use Symfony\Component\HttpFoundation\Response;

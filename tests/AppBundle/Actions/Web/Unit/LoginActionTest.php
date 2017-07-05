@@ -12,7 +12,7 @@
 namespace tests\AppBundle\Actions\Web\Unit;
 
 // Manager
-use AppBundle\Action\Web\LoginAction;
+use AppBundle\Action\Web\Security\LoginAction;
 
 // Core
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

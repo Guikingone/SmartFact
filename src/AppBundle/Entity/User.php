@@ -519,30 +519,6 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * Set isActive
-     *
-     * @param boolean $isActive
-     *
-     * @return User
-     */
-    public function setActive($isActive)
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    /**
-     * Get isActive
-     *
-     * @return boolean
-     */
-    public function getActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
      * Add notification
      *
      * @param Notifications $notification
