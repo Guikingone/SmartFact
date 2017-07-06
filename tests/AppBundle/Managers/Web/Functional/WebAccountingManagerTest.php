@@ -33,11 +33,11 @@ class WebAccountingManagerTest extends WebTestCase
     /**
      * Test if the Response contain the right status code.
      */
-    public function testAccountingsListStatusCode()
+    public function testAccountingsList()
     {
         $this->client->request('GET', '/accountings');
 
-        $this->assertEquals(
+        static::assertEquals(
             Response::HTTP_OK,
             $this->client->getResponse()->getStatusCode()
         );
@@ -47,28 +47,49 @@ class WebAccountingManagerTest extends WebTestCase
     /**
      * Test if the Response contain the right status code.
      */
-    public function testAccountingDetailsStatusCode()
+    public function testAccountingDetails()
     {
         $this->client->request('GET', '/accounting/1/details');
 
-        $this->assertEquals(
+        static::assertEquals(
             Response::HTTP_OK,
             $this->client->getResponse()->getStatusCode()
         );
     }
 
-    public function testAccountingNewStatusCode()
+    /**
+     * Test if a new Accounting can be created.
+     */
+    public function testAccountingCreation()
     {
         $this->client->request('GET', '/accounting/new');
 
-        $this->assertEquals(
+        static::assertEquals(
             Response::HTTP_OK,
             $this->client->getResponse()->getStatusCode()
         );
+
+        if ($this->client->getResponse()->getStatusCode() === Response::HTTP_OK) {
+
+            // To crawl.
+        }
     }
 
-    public function testAccountingUpdatedStatusCode()
+    /**
+     * Test if an Accounting can be udapted.
+     */
+    public function testAccountingUpdate()
     {
+        $this->client->request('GET', '/accounting/1/update');
 
+        static::assertEquals(
+            Response::HTTP_OK,
+            $this->client->getResponse()->getStatusCode()
+        );
+
+        if ($this->client->getResponse()->getStatusCode() === Response::HTTP_OK) {
+
+            // To crawl.
+        }
     }
 }

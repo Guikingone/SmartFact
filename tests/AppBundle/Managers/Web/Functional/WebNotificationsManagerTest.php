@@ -34,7 +34,7 @@ class WebNotificationsManagerTest extends WebTestCase
     {
         $this->client->request('GET', '/user/1/notifications');
 
-        $this->assertEquals(
+        static::assertEquals(
             Response::HTTP_OK,
             $this->client->getResponse()->getStatusCode()
         );

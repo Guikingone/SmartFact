@@ -87,13 +87,17 @@ class Accounting implements SmartFactAccountingInterface
         $this->user = new ArrayCollection();
     }
 
-    /** @return int */
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
-    /** @return string */
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;

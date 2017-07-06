@@ -46,27 +46,6 @@ class NotificationsListeners
     }
 
     /**
-     * Allow to alert the User that a new Notification has been created.
-     *
-     * @param PostedNotificationEvent $event    The event linked to the new Notification.
-     *
-     * @throws \LogicException                  If the Notification isn't linked to an User.
-     */
-    public function onPostedNotification(PostedNotificationEvent $event)
-    {
-        $user = $event->getNotification()->getUser();
-
-        if (!$user) {
-            throw new \LogicException(
-                sprintf(
-                    ''
-                )
-            );
-        }
-
-    }
-
-    /**
      * @param DeletedNotificationEvent $event
      */
     public function onDeletedNotification(DeletedNotificationEvent $event)
