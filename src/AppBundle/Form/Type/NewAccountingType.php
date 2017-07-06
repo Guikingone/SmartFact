@@ -11,7 +11,10 @@
 
 namespace AppBundle\Form\Type;
 
+// Entity
 use AppBundle\Entity\Accounting;
+
+// Core
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

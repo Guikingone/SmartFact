@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Events;
+namespace AppBundle\Events\Accounting;
 
 use AppBundle\Entity\Accounting;
 use Symfony\Component\EventDispatcher\Event;

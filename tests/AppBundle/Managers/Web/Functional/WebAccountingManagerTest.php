@@ -66,4 +66,9 @@ class WebAccountingManagerTest extends WebTestCase
             $this->client->getResponse()->getStatusCode()
         );
     }
+
+    public function testAccountingUpdatedStatusCode()
+    {
+
+    }
 }

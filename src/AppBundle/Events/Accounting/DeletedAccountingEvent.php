@@ -9,32 +9,30 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Events;
+namespace AppBundle\Events\Accounting;
 
 use AppBundle\Entity\Accounting;
 
-// Core
-use Symfony\Component\EventDispatcher\Event;
-
 /**
- * Class NewAccountingEvent
+ * Class DeletedAccountingEvent
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class NewAccountingEvent extends Event
+class DeletedAccountingEvent
 {
-    const NAME = 'accounting.created';
+    const NAME = 'accounting.deleted';
 
     /** @var Accounting */
     public $accounting;
 
     /**
-     * NewAccountingEvent constructor.
+     * DeletedAccountingEvent constructor.
      *
-     * @param Accounting $accounting
+     * @param Accounting    $accounting
      */
-    public function __construct($accounting)
-    {
+    public function __construct(
+        Accounting $accounting
+    ) {
         $this->accounting = $accounting;
     }
 
