@@ -1,0 +1,7 @@
+parameters:
+    locale: 'en'
+
+services:
+    App\Managers\:
+        resource: '../src/Managers'
+        public: false

@@ -1,0 +1,20 @@
+App\Entity\Notifications:
+    attributes:
+        id:
+            groups: ['users', 'notifications']
+        name:
+            groups: ['users', 'notifications']
+        category:
+            groups: ['users', 'notifications']
+        createdAt:
+            groups: ['users', 'notifications']
+        link:
+            groups: ['users', 'notifications']
+        content:
+            groups: ['users', 'notifications']
+        repetition:
+            groups: ['users', 'notifications']
+        checked:
+            groups: ['users', 'notifications']
+        users:
+            groups: ['notifications']

@@ -1,0 +1,16 @@
+# Core
+home:
+    path:    '/'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Web\HomeAction }
+
+# Security
+register:
+    path:    '/register'
+    methods: ['GET', 'POST']
+    defaults: { _controller: App\Action\Web\Security\RegisterAction }
+
+login:
+    path:    '/login'
+    methods: ['GET', 'POST']
+    defaults: { _controller: App\Action\Web\Security\LoginAction }

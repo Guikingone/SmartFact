@@ -9,7 +9,7 @@
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <server name="KERNEL_CLASS" value="AppKernel" />
+        <server name="KERNEL_CLASS" value="src/Kernel" />
     </php>
 
     <testsuites>
@@ -20,7 +20,7 @@
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory>./src/AppBundle/*</directory>
+            <directory>./src/*</directory>
             <exclude>
                 <directory>src/*Bundle/DataFixtures</directory>
                 <directory>src/*/Bundle/*Bundle/Interfaces</directory>

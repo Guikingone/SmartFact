@@ -1,0 +1,10 @@
+# Users
+api_users_single:
+    path:    '/users/{id}'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Users\GetUserAction }
+
+api_users:
+    path:    '/users'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Users\GetUsersAction }

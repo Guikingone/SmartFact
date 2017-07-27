@@ -1,0 +1,22 @@
+App\Entity\Bills:
+    attributes:
+        id:
+            groups: ['users', 'bills', 'clients']
+        date:
+            groups: ['users', 'bills', 'clients']
+        total:
+            groups: ['users', 'bills', 'clients']
+        send:
+            groups: ['users', 'bills', 'clients']
+        createdAt:
+            groups: ['users', 'bills', 'clients']
+        sendAt:
+            groups: ['users', 'bills', 'clients']
+        file:
+            groups: ['users', 'bills', 'clients']
+        tva:
+            groups: ['users', 'bills', 'clients']
+        user:
+            groups: ['bills', 'clients']
+        clients:
+            groups: ['users', 'bills']

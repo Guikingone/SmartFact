@@ -1,23 +1,12 @@
-/.web-server-pid
-/app/config/parameters.yml
-/build/
-/phpunit.xml
-/var/*
-!/var/cache
-/var/cache/*
-!var/cache/.gitkeep
-!/var/logs
-/var/logs/*
-!var/logs/.gitkeep
-!/var/sessions
-/var/sessions/*
-!var/sessions/.gitkeep
-!var/SymfonyRequirements.php
+###> symfony/framework-bundle ###
+.env
+/public/bundles/
+/var/
 /vendor/
-/web/bundles/
+###< symfony/framework-bundle ###
 
 # Doctrine
-src/*Bundle/Entity/*.php~
+src/Entity/*.php~
 
 # Docker
 .env
@@ -29,3 +18,6 @@ src/*Bundle/Entity/*.php~
 
 # PHPUnit
 /coverage/
+###> behat/symfony2-extension ###
+behat.yml
+###< behat/symfony2-extension ###

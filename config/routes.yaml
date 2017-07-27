@@ -1,0 +1,6 @@
+app:
+    resource: "routing_web.yaml"
+
+api:
+   prefix: /api
+   resource: "routing_api.yaml"
