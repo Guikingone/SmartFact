@@ -42,29 +42,30 @@ class FeatureContext implements Context
     }
 
     /**
-     * @param string $path
-     * @param string $method
+     * @Given i send a request to :path using :method method.
      *
-     * @When I send a request to :path using :method method
+     * @param string $path          The path to go.
+     * @param string $method        The HTTP method to use.
      */
-    public function iSendARequestToUsingMethod(string $path, string $method)
+    public function iSendARequestTo(string $path, string $method)
     {
         $this->response = $this->kernel->handle(Request::create($path, $method));
     }
 
     /**
-     * @param int $statusCode
+     * @Then the status code should be :statusCode
      *
-     * @throws \LogicException
+     * @param int $statusCode       The status code expected.
      *
-     * @Then the response status code should be :statusCode
+     * @throws \LogicException      If the status code isn't right.
      */
-    public function theResponseStatusCodeShouldBe(int $statusCode)
+    public function theStatusCodeShouldBe(int $statusCode)
     {
-        if ($this->response->getStatusCode() !== $statusCode) {
+        if ($statusCode !== $this->response->getStatusCode()) {
             throw new \LogicException(
                 sprintf(
-                    'Bad status code received !'
+                    'Bad status code ! Found %d',
+                    $this->response->getStatusCode()
                 )
             );
         }

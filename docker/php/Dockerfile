@@ -1,4 +1,4 @@
-FROM php:7.1.6-fpm
+FROM php:fpm
 
 ENV WORKDIR "/var/www/smartfact"
 

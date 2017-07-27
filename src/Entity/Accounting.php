@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 // Interface
-use AppBundle\Interfaces\SmartFactAccountingInterface;
+use App\Interfaces\SmartFactAccountingInterface;
 
 /**
  * Class Accounting
@@ -24,7 +24,7 @@ use AppBundle\Interfaces\SmartFactAccountingInterface;
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
  * @ORM\Table(name="_smartfact_accounting")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\AccountingRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\AccountingRepository")
  */
 class Accounting implements SmartFactAccountingInterface
 {

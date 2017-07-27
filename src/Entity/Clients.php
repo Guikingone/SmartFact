@@ -13,7 +13,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use AppBundle\Interfaces\SmartFactClientsInterface;
+use App\Interfaces\SmartFactClientsInterface;
 
 /**
  * Class Clients
@@ -21,7 +21,7 @@ use AppBundle\Interfaces\SmartFactClientsInterface;
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
  * @ORM\Table(name="_smartfact_clients")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ClientsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ClientsRepository")
  */
 class Clients implements SmartFactClientsInterface
 {

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Form\Type;
+namespace App\Form\Type;
 
 // Entity
-use AppBundle\Entity\Accounting;
+use App\Entity\Accounting;
 
 // Core
 use Symfony\Component\Form\AbstractType;

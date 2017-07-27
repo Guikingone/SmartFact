@@ -13,8 +13,6 @@ namespace App\Action\Api\Accounting;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 // Manager
 use App\Managers\API\ApiAccountingManager;
@@ -23,9 +21,6 @@ use App\Managers\API\ApiAccountingManager;
  * Class GetAccountingAction
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
- *
- * @Route("/accounting/{id}", name="api_accounting")
- * @Method({"GET"})
  */
 final class GetAccountingAction
 {

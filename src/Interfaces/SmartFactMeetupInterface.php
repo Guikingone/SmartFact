@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Interfaces;
+namespace App\Interfaces;
 
-use AppBundle\Entity\User;
-use AppBundle\Entity\Clients;
-use AppBundle\Entity\Planning;
+use App\Entity\User;
+use App\Entity\Clients;
+use App\Entity\Planning;
 
 /**
  * Interface SmartFactMeetupInterface

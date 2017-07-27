@@ -9,9 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Interfaces;
-
-use AppBundle\Entity\Clients;
+namespace App\Interfaces;
 
 /**
  * Interface SmartFactPlanningInterface

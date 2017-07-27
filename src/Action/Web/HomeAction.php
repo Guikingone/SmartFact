@@ -18,9 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
  * Class HomeAction
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
- *
- * @Route("/", name="homepage")
- * @Method({"GET"})
  */
 final class HomeAction
 {

@@ -13,10 +13,9 @@ namespace App\Entity;
 
 // Core
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 // Interface
-use AppBundle\Interfaces\SmartFactNotificationsInterface;
+use App\Interfaces\SmartFactNotificationsInterface;
 
 /**
  * Class Notifications
@@ -24,7 +23,7 @@ use AppBundle\Interfaces\SmartFactNotificationsInterface;
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
  * @ORM\Table(name="_smartfact_notifications")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\NotificationsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\NotificationsRepository")
  */
 class Notifications implements SmartFactNotificationsInterface
 {

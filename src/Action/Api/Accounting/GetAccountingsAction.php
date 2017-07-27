@@ -18,9 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
  * Class GetAccountingsAction
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
- *
- * @Route("/accountings", name="api_accountings")
- * @Method({"GET"})
  */
 final class GetAccountingsAction
 {

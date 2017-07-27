@@ -14,7 +14,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 // Interface
-use AppBundle\Interfaces\SmartFactMeetupInterface;
+use App\Interfaces\SmartFactMeetupInterface;
 
 /**
  * Class Meetup
@@ -22,7 +22,7 @@ use AppBundle\Interfaces\SmartFactMeetupInterface;
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
  * @ORM\Table(name="_smartfact_meetup")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\MeetupRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\MeetupRepository")
  */
 class Meetup implements SmartFactMeetupInterface
 {

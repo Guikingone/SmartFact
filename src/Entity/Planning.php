@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 // Interface
-use AppBundle\Interfaces\SmartFactPlanningInterface;
+use App\Interfaces\SmartFactPlanningInterface;
 
 /**
  * Class Planning
@@ -23,7 +23,7 @@ use AppBundle\Interfaces\SmartFactPlanningInterface;
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
  * @ORM\Table(name="_smartfact_planning")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanningRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PlanningRepository")
  */
 class Planning implements SmartFactPlanningInterface
 {

@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 // Interface
-use AppBundle\Interfaces\SmartFactBillsInterface;
+use App\Interfaces\SmartFactBillsInterface;
 
 /**
  * Class Bills
@@ -23,7 +23,7 @@ use AppBundle\Interfaces\SmartFactBillsInterface;
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
  * @ORM\Table(name="_smartfact_bills")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\BillsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\BillsRepository")
  */
 class Bills implements SmartFactBillsInterface
 {

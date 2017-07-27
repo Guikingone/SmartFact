@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 // Interface
-use AppBundle\Interfaces\SmartFactUserInterface;
+use App\Interfaces\SmartFactUserInterface;
 
 /**
  * Class User
@@ -25,7 +25,7 @@ use AppBundle\Interfaces\SmartFactUserInterface;
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  *
  * @ORM\Table(name="_smartfact_user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements SmartFactUserInterface
 {

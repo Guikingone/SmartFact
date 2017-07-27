@@ -1,8 +1,8 @@
 {
-    "type": "project",
+    "name": "guikingone/smartfact",
     "license": "proprietary",
-    "name": "guikingone/Smartfact",
-    "description": "",
+    "type": "project",
+    "description": "The source code of the smartfact project.",
     "require": {
         "php": "^7.1.3",
         "phpunit/phpunit": "^6.2",
@@ -11,6 +11,7 @@
         "symfony/form": "^3.3",
         "symfony/framework-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
+        "symfony/profiler-pack": "^1.0",
         "symfony/security-bundle": "^3.3",
         "symfony/serializer": "^3.3",
         "symfony/translation": "^3.3",

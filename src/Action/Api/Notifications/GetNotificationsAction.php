@@ -21,10 +21,6 @@ use App\Managers\API\ApiNotificationsManager;
  * Class GetNotificationsAction
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
- *
- * @Route("/user/{id}/notifications", name="api_user_notifications")
- *
- * @Method({"GET"})
  */
 final class GetNotificationsAction
 {

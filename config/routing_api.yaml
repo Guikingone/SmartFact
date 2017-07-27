@@ -8,3 +8,9 @@ api_users:
     path:    '/users'
     methods: ['GET']
     defaults: { _controller: App\Action\Api\Users\GetUsersAction }
+
+# Accounting
+api_accountings_single:
+    path:    '/accounting/{id}'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Accounting\GetAccountingAction }
