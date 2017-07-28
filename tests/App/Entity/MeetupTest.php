@@ -13,10 +13,10 @@ namespace tests\App\Entity;
 
 use PHPUnit\Framework\TestCase;
 
-use App\Entity\User;
-use App\Entity\Meetup;
-use App\Entity\Clients;
-use App\Entity\Planning;
+use App\Resolvers\User;
+use App\Resolvers\Meetup;
+use App\Resolvers\Clients;
+use App\Resolvers\Planning;
 
 /**
  * Class MeetupTest

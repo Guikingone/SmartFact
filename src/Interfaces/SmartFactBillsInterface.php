@@ -11,8 +11,8 @@
 
 namespace App\Interfaces;
 
-use AppBundle\Entity\User;
-use AppBundle\Entity\Clients;
+use App\Model\User;
+use App\Model\Clients;
 
 /**
  * Interface SmartFactBillsInterface
@@ -22,7 +22,7 @@ use AppBundle\Entity\Clients;
 interface SmartFactBillsInterface
 {
     /**
-     * @return int
+     * @return null|int
      */
     public function getId();
 

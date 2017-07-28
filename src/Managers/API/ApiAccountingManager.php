@@ -11,7 +11,7 @@
 
 namespace App\Managers\API;
 
-use App\Entity\Accounting;
+use App\Model\Accounting;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -47,7 +47,7 @@ class ApiAccountingManager
      *
      * @return string
      */
-    public function getAccountings()
+    public function getAccountings() : string
     {
         $data = $this->doctrine->getRepository(Accounting::class)
                                ->findAll();
@@ -66,7 +66,7 @@ class ApiAccountingManager
      *
      * @return string
      */
-    public function getAccounting($id)
+    public function getAccounting(int $id) : string
     {
         $data = $this->doctrine->getRepository(Accounting::class)
                                ->findOneBy([
@@ -80,7 +80,10 @@ class ApiAccountingManager
         );
     }
 
-    public function deleteAccounting($id)
+    /**
+     * @param int $id
+     */
+    public function deleteAccounting(int $id)
     {
         $accounting = $this->doctrine->getRepository(Accounting::class)
                                      ->findOneBy([

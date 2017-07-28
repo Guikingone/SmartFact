@@ -1,0 +1,34 @@
+App\Model\Meetup:
+    type: entity
+    repositoryClass: App\Repository\MeetupRepository
+    table: _smartfact_meetup
+    id:
+         id:
+             generated: { strategy: AUTO }
+    fields:
+        date:
+            type: datetime
+            nullable: false
+        places:
+            type: string
+            length: 100
+            nullable: false
+        duration:
+            type: string
+            length: 125
+            nullable: false
+        type:
+            type: string
+            length: 100
+            nullable: false
+
+    manyToOne:
+        planning:
+            targetEntity: App\Model\Planning
+            inversedBy: meetup
+        user:
+            targetEntity: App\Model\User
+            inversedBy: meetup
+        clients:
+            targetEntity: App\Model\Clients
+            inversedBy: meetup

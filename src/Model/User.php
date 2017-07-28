@@ -9,10 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Model;
 
-// Core
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -23,102 +21,71 @@ use App\Interfaces\SmartFactUserInterface;
  * Class User
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
- *
- * @ORM\Table(name="_smartfact_user")
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements SmartFactUserInterface
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="firstname", type="string", nullable=true)
      */
     private $firstname;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="lastname", type="string", nullable=true)
      */
     private $lastname;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="address", type="string", nullable=true)
      */
     private $address;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="phone_number", type="string", length=14, nullable=true)
      */
     private $phoneNumber;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=200)
      */
     private $email;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="birth_date", type="date", nullable=true)
      */
     private $birthDate;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="status", type="string", length=150, nullable=true)
      */
     private $status;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="date", nullable=true)
      */
     private $createdAt;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="validated", type="boolean", nullable=true)
      */
     private $validated;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=75, nullable=false, nullable=false)
      */
     private $username;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false, nullable=false)
      */
     private $password;
 
@@ -129,42 +96,25 @@ class User implements SmartFactUserInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="token", type="string", length=150, nullable=true)
      */
     private $token;
 
     /**
      * @var array
-     *
-     * @ORM\Column(name="roles", type="array", nullable=true)
      */
     private $roles;
 
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notifications", mappedBy="user")
-     */
     private $notifications;
 
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Clients", mappedBy="user")
-     */
     private $clients;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Accounting", inversedBy="user")
-     */
     private $accounting;
 
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bills", mappedBy="user")
-     */
     private $bills;
 
-    /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Planning", mappedBy="user")
-     */
     private $planning;
+
+    private $meetup;
 
     /**
      * User constructor.
@@ -174,6 +124,7 @@ class User implements SmartFactUserInterface
         $this->notifications = new ArrayCollection();
         $this->clients = new ArrayCollection();
         $this->bills = new ArrayCollection();
+        $this->meetup = new ArrayCollection();
         $this->isActive = true;
     }
 
@@ -458,7 +409,7 @@ class User implements SmartFactUserInterface
      */
     public function serialize()
     {
-        return serialize([
+        return \serialize([
             $this->id,
             $this->username,
             $this->password,
@@ -478,7 +429,7 @@ class User implements SmartFactUserInterface
             $this->username,
             $this->password,
             $this->isActive
-            ) = unserialize($serialized);
+            ) = \unserialize($serialized);
     }
 
     /**
@@ -629,5 +580,39 @@ class User implements SmartFactUserInterface
     public function getPlanning()
     {
         return $this->planning;
+    }
+
+    /**
+     * Add Meetup
+     *
+     * @param Meetup $meetup
+     *
+     * @return User
+     */
+    public function addMeetup(Meetup $meetup)
+    {
+        $this->meetup[] = $meetup;
+
+        return $this;
+    }
+
+    /**
+     * Remove meetup
+     *
+     * @param Meetup $meetup
+     */
+    public function removeMeetup(Meetup $meetup)
+    {
+        $this->meetup->removeElement($meetup);
+    }
+
+    /**
+     * Get meetups
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMeetups()
+    {
+        return $this->meetup;
     }
 }

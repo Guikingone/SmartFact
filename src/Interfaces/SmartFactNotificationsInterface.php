@@ -11,8 +11,7 @@
 
 namespace App\Interfaces;
 
-// Entity
-use App\Entity\User;
+use App\Model\User;
 
 /**
  * Interface SmartFactNotificationsInterface
@@ -21,54 +20,96 @@ use App\Entity\User;
  */
 interface SmartFactNotificationsInterface
 {
-    /** @return int */
+    /**
+     * @return null|int
+     */
     public function getId();
 
-    /** @return string */
-    public function getName();
+    /**
+     * @return string
+     */
+    public function getName() : string;
 
-    /** @param string $name */
-    public function setName($name);
+    /**
+     * @param string $name
+     * @return mixed
+     */
+    public function setName(string $name);
 
-    /** @return string */
-    public function getCategory();
+    /**
+     * @return string
+     */
+    public function getCategory() : string;
 
-    /** @param string $category */
-    public function setCategory($category);
+    /**
+     * @param string $category
+     * @return mixed
+     */
+    public function setCategory(string $category);
 
-    /** @return \DateTime */
-    public function getCreatedAt();
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt() : \DateTime;
 
-    /** @param \Datetime $createdAt */
-    public function setCreatedAt($createdAt);
+    /**
+     * @param $createdAt
+     * @return mixed
+     */
+    public function setCreatedAt(\DateTime $createdAt);
 
-    /** @return string */
-    public function getLink();
+    /**
+     * @return string
+     */
+    public function getLink() : string;
 
-    /** @param string $link */
-    public function setLink($link);
+    /**
+     * @param string $link
+     * @return mixed
+     */
+    public function setLink(string $link);
 
-    /** @return string */
-    public function getContent();
+    /**
+     * @return string
+     */
+    public function getContent() : string;
 
-    /** @param string $content */
-    public function setContent($content);
+    /**
+     * @param string $content
+     * @return mixed
+     */
+    public function setContent(string $content);
 
-    /** @return bool */
-    public function hasRepetition();
+    /**
+     * @return bool
+     */
+    public function hasRepetition() : bool;
 
-    /** @param bool $repetition */
-    public function setRepetition($repetition);
+    /**
+     * @param bool $repetition
+     * @return mixed
+     */
+    public function setRepetition(bool $repetition);
 
-    /** @return bool */
-    public function hasBeenChecked();
+    /**
+     * @return bool
+     */
+    public function hasBeenChecked() : bool;
 
-    /** @param bool $checked */
-    public function setChecked($checked);
+    /**
+     * @param bool $checked
+     * @return mixed
+     */
+    public function setChecked(bool $checked);
 
-    /** @return User */
-    public function getUser();
+    /**
+     * @return User
+     */
+    public function getUser() : User;
 
-    /** @param User $user */
+    /**
+     * @param User $user
+     * @return mixed
+     */
     public function setUser(User $user);
 }

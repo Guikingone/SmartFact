@@ -13,9 +13,9 @@ namespace tests\App\Entity;
 
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
-use App\Entity\User;
-use App\Entity\Bills;
-use App\Entity\Clients;
+use App\Resolvers\User;
+use App\Resolvers\Bills;
+use App\Resolvers\Clients;
 
 /**
  * Class BillsTest

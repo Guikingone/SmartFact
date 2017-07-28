@@ -11,6 +11,6 @@ api_users:
 
 # Accounting
 api_accountings_single:
-    path:    '/accounting/{id}'
+    path:    '/accountings/{id}'
     methods: ['GET']
     defaults: { _controller: App\Action\Api\Accounting\GetAccountingAction }

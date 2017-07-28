@@ -1,4 +1,4 @@
-App\Entity\Accounting:
+App\Model\Accounting:
     attributes:
         id:
             groups: ['users', 'accounting']

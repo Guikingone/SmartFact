@@ -12,10 +12,10 @@
 namespace App\Managers\Web;
 
 // Entity
-use App\Entity\Notifications;
+use App\Resolvers\Notifications;
 
 // Event
-use App\Entity\User;
+use App\Resolvers\User;
 use App\Events\Notifications\DeletedNotificationEvent;
 
 use Doctrine\ORM\EntityManagerInterface;

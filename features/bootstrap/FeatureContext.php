@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 /**
  * Class FeatureContext
  *
- * @author Guillaume Loulier <contact@guillaumeloulier.fr>
+ * @author Guillaume Loulier <contact@guillaumeloulier.fr
  */
 class FeatureContext implements Context
 {
@@ -42,10 +42,10 @@ class FeatureContext implements Context
     }
 
     /**
-     * @Given i send a request to :path using :method method.
+     * @When i send a request to :path using :method method.
      *
-     * @param string $path          The path to go.
-     * @param string $method        The HTTP method to use.
+     * @param string $path      The path to go.
+     * @param string $method    The HTTP method to use.
      */
     public function iSendARequestTo(string $path, string $method)
     {
@@ -55,17 +55,16 @@ class FeatureContext implements Context
     /**
      * @Then the status code should be :statusCode
      *
-     * @param int $statusCode       The status code expected.
+     * @param int $statusCode    The status code expected.
      *
-     * @throws \LogicException      If the status code isn't right.
+     * @throws \LogicException   If the status code doesn't match.
      */
     public function theStatusCodeShouldBe(int $statusCode)
     {
-        if ($statusCode !== $this->response->getStatusCode()) {
+        if ($this->response->getStatusCode() !== $statusCode) {
             throw new \LogicException(
                 sprintf(
-                    'Bad status code ! Found %d',
-                    $this->response->getStatusCode()
+                    'Bad status code ! Found %d', $statusCode
                 )
             );
         }

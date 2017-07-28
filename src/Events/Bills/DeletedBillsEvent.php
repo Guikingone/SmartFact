@@ -9,11 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Events\Bills;
-// Entity
-use AppBundle\Entity\Bills;
+namespace App\Events\Bills;
 
-// Core
+use App\Model\Bills;
 use Symfony\Component\EventDispatcher\Event;
 
 /**

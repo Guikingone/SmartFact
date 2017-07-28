@@ -1,0 +1,23 @@
+App\Model\Planning:
+    type: entity
+    repositoryClass: App\Repository\PlanningRepository
+    table: _smartfact_planning
+    id:
+        id:
+            type: integer
+            generated: { strategy: AUTO }
+    fields:
+        period:
+            type: string
+            length: 10
+            nullable: false
+
+    oneToMany:
+        meetups:
+            targetEntity: App\Model\Meetup
+            mappedBy: planning
+
+    oneToOne:
+        user:
+            targetEntity: App\Model\User
+            inversedBy: planning

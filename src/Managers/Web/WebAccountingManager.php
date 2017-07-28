@@ -12,8 +12,8 @@
 namespace App\Managers\Web;
 
 // Entity
-use App\Entity\User;
-use App\Entity\Accounting;
+use App\Resolvers\User;
+use App\Resolvers\Accounting;
 
 // Form
 use App\Form\Type\NewAccountingType;

@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 // Bundle
-use App\Entity\User;
+use App\Resolvers\User;
 
 /**
  * Class ApiUserManager

@@ -9,47 +9,35 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-
-// Interface
 use App\Interfaces\SmartFactPlanningInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Planning
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
- *
- * @ORM\Table(name="_smartfact_planning")
- * @ORM\Entity(repositoryClass="App\Repository\PlanningRepository")
  */
 class Planning implements SmartFactPlanningInterface
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="id")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="period", type="string", length=10)
      */
     private $period;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Meetup", mappedBy="planning")
+     * @var ArrayCollection
      */
     private $meetup;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", inversedBy="planning")
+     * @var User
      */
     private $user;
 
@@ -62,7 +50,7 @@ class Planning implements SmartFactPlanningInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -70,17 +58,17 @@ class Planning implements SmartFactPlanningInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getPeriod()
+    public function getPeriod() : string
     {
         return $this->period;
     }
 
     /**
-     * @param string $period
+     * {@inheritdoc}
      */
-    public function setPeriod($period)
+    public function setPeriod(string $period)
     {
         $this->period = $period;
     }

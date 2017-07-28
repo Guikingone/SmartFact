@@ -13,12 +13,12 @@ namespace tests\App\Entity;
 
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
-use App\Entity\User;
-use App\Entity\Bills;
-use App\Entity\Clients;
-use App\Entity\Planning;
-use App\Entity\Accounting;
-use App\Entity\Notifications;
+use App\Resolvers\User;
+use App\Resolvers\Bills;
+use App\Resolvers\Clients;
+use App\Resolvers\Planning;
+use App\Resolvers\Accounting;
+use App\Resolvers\Notifications;
 
 /**
  * Class UserTest

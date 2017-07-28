@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Events\Accounting;
+namespace App\Events\Accounting;
 
-use AppBundle\Entity\Accounting;
+use App\Model\Accounting;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class DeletedAccountingEvent
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class DeletedAccountingEvent
+class DeletedAccountingEvent extends Event
 {
     const NAME = 'accounting.deleted';
 

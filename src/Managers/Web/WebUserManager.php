@@ -11,7 +11,7 @@
 
 namespace App\Managers\Web;
 
-use App\Entity\User;
+use App\Resolvers\User;
 use App\Form\Type\RegisterType;
 
 // Core

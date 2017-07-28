@@ -1,0 +1,37 @@
+App\Model\Clients:
+    type: entity
+    repositoryClass: App\Repository\ClientsRepository
+    table: _smartfact_clients
+    id:
+         id:
+             type: integer
+             generated: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 200
+            nullable: false
+        address:
+            type: string
+            length: 150
+            nullable: true
+        phoneNumber:
+            type: string
+            length: 15
+            nullable: true
+        prestationType:
+            type: string
+            length: 150
+            nullable: false
+
+    manyToOne:
+        user:
+            targetEntity: App\Model\User
+            inversedBy: clients
+    oneToMany:
+        bills:
+            targetEntity: App\Model\Bills
+            mappedBy: clients
+        meetup:
+            targetEntity: App\Model\Meetup
+            mappedBy: clients

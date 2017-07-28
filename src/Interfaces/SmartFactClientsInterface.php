@@ -11,7 +11,10 @@
 
 namespace App\Interfaces;
 
-use App\Entity\User;
+use App\Model\User;
+use App\Model\Bills;
+use App\Model\Meetup;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Interface SmartFactClientsInterface
@@ -21,14 +24,14 @@ use App\Entity\User;
 interface SmartFactClientsInterface
 {
     /**
-     * @return int
+     * @return null|int
      */
     public function getId();
 
     /**
      * @return string
      */
-    public function getName();
+    public function getName() : string;
 
     /**
      * @param string $name
@@ -38,7 +41,7 @@ interface SmartFactClientsInterface
     /**
      * @return string
      */
-    public function getAddress();
+    public function getAddress() : string;
 
     /**
      * @param string $address
@@ -48,7 +51,7 @@ interface SmartFactClientsInterface
     /**
      * @return string
      */
-    public function getPhoneNumber();
+    public function getPhoneNumber() : string;
 
     /**
      * @param string $phoneNumber
@@ -58,7 +61,7 @@ interface SmartFactClientsInterface
     /**
      * @return string
      */
-    public function getPrestationType();
+    public function getPrestationType() : string;
 
     /**
      * @param string $prestationType
@@ -68,7 +71,7 @@ interface SmartFactClientsInterface
     /**
      * @return User
      */
-    public function getUser();
+    public function getUser() : User;
 
     /**
      * @param User $user
@@ -76,4 +79,38 @@ interface SmartFactClientsInterface
      * @throws \InvalidArgumentException
      */
     public function setUser(User $user);
+
+    /**
+     * @param Bills $bills
+     * @return mixed
+     */
+    public function addBills(Bills $bills);
+
+    /**
+     * @param Bills $bills
+     * @return mixed
+     */
+    public function removeBills(Bills $bills);
+
+    /**
+     * @return Bills
+     */
+    public function getBills() : ArrayCollection;
+
+    /**
+     * @param Meetup $meetup
+     * @return mixed
+     */
+    public function addMeetup(Meetup $meetup);
+
+    /**
+     * @param Meetup $meetup
+     * @return mixed
+     */
+    public function removeMeetup(Meetup $meetup);
+
+    /**
+     * @return Meetup
+     */
+    public function getMeetups() : ArrayCollection;
 }

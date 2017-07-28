@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,68 +20,38 @@ use App\Interfaces\SmartFactMeetupInterface;
  * Class Meetup
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
- *
- * @ORM\Table(name="_smartfact_meetup")
- * @ORM\Entity(repositoryClass="App\Repository\MeetupRepository")
  */
 class Meetup implements SmartFactMeetupInterface
 {
     /**
      * @var int
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="places", type="string", length=100)
      */
     private $places;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="duration", type="string", length=125)
      */
     private $duration;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=100)
      */
     private $type;
 
-    /**
-     * @var Planning
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Planning", inversedBy="meetup")
-     */
     private $planning;
 
-    /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="meetup")
-     */
     private $user;
 
-    /**
-     * @var Clients
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Clients", inversedBy="meetup")
-     */
     private $clients;
 
     /**

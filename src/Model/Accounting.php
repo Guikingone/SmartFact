@@ -9,73 +9,50 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
-
-// Interface
 use App\Interfaces\SmartFactAccountingInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Accounting
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
- *
- * @ORM\Table(name="_smartfact_accounting")
- * @ORM\Entity(repositoryClass="App\Repository\AccountingRepository")
  */
 class Accounting implements SmartFactAccountingInterface
 {
     /**
      * @var int
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="id")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=200)
      */
     private $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="interlocutor", type="string")
      */
     private $interlocutor;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="address", type="string")
      */
     private $address;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="phone_number", type="string", length=15)
      */
     private $phoneNumber;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=50)
      */
     private $email;
 
     /**
      * @var User
-     *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="accounting")
      */
     private $user;
 
@@ -88,7 +65,7 @@ class Accounting implements SmartFactAccountingInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -96,7 +73,7 @@ class Accounting implements SmartFactAccountingInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -104,15 +81,15 @@ class Accounting implements SmartFactAccountingInterface
     }
 
     /**
-     * @param string $name
+     * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getInterlocutor()
     {
@@ -120,15 +97,15 @@ class Accounting implements SmartFactAccountingInterface
     }
 
     /**
-     * @param string $interlocutor
+     * {@inheritdoc}
      */
-    public function setInterlocutor($interlocutor)
+    public function setInterlocutor(string $interlocutor)
     {
         $this->interlocutor = $interlocutor;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getAddress()
     {
@@ -136,15 +113,15 @@ class Accounting implements SmartFactAccountingInterface
     }
 
     /**
-     * @param string $address
+     * {@inheritdoc}
      */
-    public function setAddress($address)
+    public function setAddress(string $address)
     {
         $this->address = $address;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getPhoneNumber()
     {
@@ -152,15 +129,15 @@ class Accounting implements SmartFactAccountingInterface
     }
 
     /**
-     * @param string $phoneNumber
+     * {@inheritdoc}
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(string $phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getEmail()
     {
@@ -168,19 +145,15 @@ class Accounting implements SmartFactAccountingInterface
     }
 
     /**
-     * @param string $email
+     * {@inheritdoc}
      */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
 
     /**
-     * Add user
-     *
-     * @param User $user
-     *
-     * @return Accounting
+     * {@inheritdoc}
      */
     public function addUser(User $user)
     {
@@ -190,9 +163,7 @@ class Accounting implements SmartFactAccountingInterface
     }
 
     /**
-     * Remove user
-     *
-     * @param User $user
+     * {@inheritdoc}
      */
     public function removeUser(User $user)
     {
@@ -200,7 +171,7 @@ class Accounting implements SmartFactAccountingInterface
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getUser()
     {

@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 // Entity
-use App\Entity\Notifications;
+use App\Resolvers\Notifications;
 
 /**
  * Class ApiNotificationsManager

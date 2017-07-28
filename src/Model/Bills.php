@@ -9,94 +9,60 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-
-// Interface
 use App\Interfaces\SmartFactBillsInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Bills
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
- *
- * @ORM\Table(name="_smartfact_bills")
- * @ORM\Entity(repositoryClass="App\Repository\BillsRepository")
  */
 class Bills implements SmartFactBillsInterface
 {
     /**
      * @var int
-     *
-     * @ORM\Id
-     * @ORM\Column(name="id")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="total", type="float")
      */
     private $total;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="send", type="boolean")
      */
     private $send;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="send_at", type="datetime")
      */
     private $sendAt;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="file", type="string", length=150)
      */
     private $file;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="tva", type="boolean")
      */
     private $tva;
 
-    /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="bills")
-     */
     private $user;
 
-    /**
-     * @var Clients
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Clients", inversedBy="bills")
-     */
     private $clients;
 
     /**
@@ -109,7 +75,7 @@ class Bills implements SmartFactBillsInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -117,7 +83,7 @@ class Bills implements SmartFactBillsInterface
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getDate()
     {
@@ -125,7 +91,7 @@ class Bills implements SmartFactBillsInterface
     }
 
     /**
-     * @param \DateTime $date
+     * {@inheritdoc}
      */
     public function setDate($date)
     {
@@ -133,7 +99,7 @@ class Bills implements SmartFactBillsInterface
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getTotal()
     {

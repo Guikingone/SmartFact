@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Events\Notifications;
+namespace App\Events\Notifications;
 
-use AppBundle\Entity\Notifications;
+use App\Model\Notifications;
 use Symfony\Component\EventDispatcher\Event;
 
 /**

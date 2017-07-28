@@ -1,0 +1,34 @@
+App\Model\Accounting:
+    type: entity
+    repositoryClass: App\Repository\AccountingRepository
+    table: _smartfact_accounting
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 200
+            nullable: false
+        interlocutor:
+            type: string
+            length: 200
+            nullable: false
+        address:
+            type: string
+            length: 255
+            nullable: true
+        phoneNumber:
+            type: string
+            length: 15
+            nullable: true
+        email:
+            type: string
+            length: 255
+            nullable: false
+
+    oneToMany:
+        user:
+            targetEntity: App\Model\User
+            mappedBy: accounting

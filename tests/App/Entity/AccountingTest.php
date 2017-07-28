@@ -13,8 +13,8 @@ namespace tests\App\Entity;
 
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
-use App\Entity\User;
-use App\Entity\Accounting;
+use App\Resolvers\User;
+use App\Resolvers\Accounting;
 
 /**
  * Class AccountingTest

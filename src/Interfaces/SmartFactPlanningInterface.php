@@ -19,7 +19,18 @@ namespace App\Interfaces;
 interface SmartFactPlanningInterface
 {
     /**
-     * @return int
+     * @return null|int
      */
     public function getId();
+
+    /**
+     * @return string
+     */
+    public function getPeriod() : string;
+
+    /**
+     * @param string $period
+     * @return mixed
+     */
+    public function setPeriod(string $period);
 }

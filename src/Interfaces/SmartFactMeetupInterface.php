@@ -11,9 +11,9 @@
 
 namespace App\Interfaces;
 
-use App\Entity\User;
-use App\Entity\Clients;
-use App\Entity\Planning;
+use App\Model\User;
+use App\Model\Clients;
+use App\Model\Planning;
 
 /**
  * Interface SmartFactMeetupInterface

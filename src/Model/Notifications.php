@@ -9,89 +9,64 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Model;
 
-// Core
-use Doctrine\ORM\Mapping as ORM;
-
-// Interface
 use App\Interfaces\SmartFactNotificationsInterface;
 
 /**
  * Class Notifications
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
- *
- * @ORM\Table(name="_smartfact_notifications")
- * @ORM\Entity(repositoryClass="App\Repository\NotificationsRepository")
  */
 class Notifications implements SmartFactNotificationsInterface
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=50)
      */
     private $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="category", type="string", length=50)
      */
     private $category;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="link", type="string")
      */
     private $link;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="content", type="string")
      */
     private $content;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="repetition", type="boolean")
      */
     private $repetition;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="checked", type="boolean")
      */
     private $checked;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="notifications")
+     * @var User
      */
     private $user;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -99,125 +74,121 @@ class Notifications implements SmartFactNotificationsInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getCategory()
+    public function getCategory() : string
     {
         return $this->category;
     }
 
     /**
-     * @param string $category
+     * {@inheritdoc}
      */
-    public function setCategory($category)
+    public function setCategory(string $category)
     {
         $this->category = $category;
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
-    public function getCreatedAt()
+    public function getCreatedAt() : \DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * {@inheritdoc}
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getLink()
+    public function getLink() : string
     {
         return $this->link;
     }
 
     /**
-     * @param string $link
+     * {@inheritdoc}
      */
-    public function setLink($link)
+    public function setLink(string $link)
     {
         $this->link = $link;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getContent()
+    public function getContent() : string
     {
         return $this->content;
     }
 
     /**
-     * @param string $content
+     * {@inheritdoc}
      */
-    public function setContent($content)
+    public function setContent(string $content)
     {
         $this->content = $content;
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
-    public function hasRepetition()
+    public function hasRepetition() : bool
     {
         return $this->repetition;
     }
 
     /**
-     * @param bool $repetition
+     * {@inheritdoc}
      */
-    public function setRepetition($repetition)
+    public function setRepetition(bool $repetition)
     {
         $this->repetition = $repetition;
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
-    public function hasBeenChecked()
+    public function hasBeenChecked() : bool
     {
         return $this->checked;
     }
 
     /**
-     * @param bool $checked
+     * {@inheritdoc}
      */
-    public function setChecked($checked)
+    public function setChecked(bool $checked)
     {
         $this->checked = $checked;
     }
 
     /**
-     * Set user
-     *
-     * @param User $user
-     *
-     * @return Notifications
+     * {@inheritdoc}
      */
-    public function setUser(User $user = null)
+    public function setUser(User $user)
     {
         $this->user = $user;
 
@@ -225,11 +196,9 @@ class Notifications implements SmartFactNotificationsInterface
     }
 
     /**
-     * Get user
-     *
-     * @return User
+     * {@inheritdoc}
      */
-    public function getUser()
+    public function getUser() : User
     {
         return $this->user;
     }

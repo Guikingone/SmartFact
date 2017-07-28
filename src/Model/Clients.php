@@ -9,77 +9,47 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use App\Interfaces\SmartFactClientsInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Clients
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
- *
- * @ORM\Table(name="_smartfact_clients")
- * @ORM\Entity(repositoryClass="App\Repository\ClientsRepository")
  */
 class Clients implements SmartFactClientsInterface
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=200)
      */
     private $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="address", type="string", length=150)
      */
     private $address;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="phone_number", type="string", length=15)
      */
     private $phoneNumber;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="prestation_type", type="string", length=100)
      */
     private $prestationType;
 
-    /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="clients")
-     */
     private $user;
 
-    /**
-     * @var Bills
-     *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bills", mappedBy="clients")
-     */
     private $bills;
 
-    /**
-     *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Meetup", mappedBy="clients")
-     */
     private $meetup;
 
     /**
@@ -92,7 +62,7 @@ class Clients implements SmartFactClientsInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -100,15 +70,15 @@ class Clients implements SmartFactClientsInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -116,15 +86,15 @@ class Clients implements SmartFactClientsInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getAddress()
+    public function getAddress() : string
     {
         return $this->address;
     }
 
     /**
-     * @param string $address
+     * {@inheritdoc}
      */
     public function setAddress($address)
     {
@@ -132,15 +102,15 @@ class Clients implements SmartFactClientsInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getPhoneNumber()
+    public function getPhoneNumber() : string
     {
         return $this->phoneNumber;
     }
 
     /**
-     * @param string $phoneNumber
+     * {@inheritdoc}
      */
     public function setPhoneNumber($phoneNumber)
     {
@@ -148,15 +118,15 @@ class Clients implements SmartFactClientsInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getPrestationType()
+    public function getPrestationType() : string
     {
         return $this->prestationType;
     }
 
     /**
-     * @param string $prestationType
+     * {@inheritdoc}
      */
     public function setPrestationType($prestationType)
     {
@@ -164,15 +134,15 @@ class Clients implements SmartFactClientsInterface
     }
 
     /**
-     * @return User
+     * {@inheritdoc}
      */
-    public function getUser()
+    public function getUser() : User
     {
         return $this->user;
     }
 
     /**
-     * @param User $user
+     * {@inheritdoc}
      */
     public function setUser(User $user)
     {
@@ -180,7 +150,7 @@ class Clients implements SmartFactClientsInterface
     }
 
     /**
-     * @param Bills $bills
+     * {@inheritdoc}
      */
     public function addBills(Bills $bills)
     {
@@ -188,23 +158,23 @@ class Clients implements SmartFactClientsInterface
     }
 
     /**
-     * @param Bills $bills
+     * {@inheritdoc}
      */
-    public function removeBill(Bills $bills)
+    public function removeBills(Bills $bills)
     {
         $this->bills->removeElement($bills);
     }
 
     /**
-     * @return Bills|ArrayCollection
+     * {@inheritdoc}
      */
-    public function getBills()
+    public function getBills() : ArrayCollection
     {
         return $this->bills;
     }
 
     /**
-     * @param Meetup $meetup
+     * {@inheritdoc}
      */
     public function addMeetup(Meetup $meetup)
     {
@@ -212,7 +182,7 @@ class Clients implements SmartFactClientsInterface
     }
 
     /**
-     * @param Meetup $meetup
+     * {@inheritdoc}
      */
     public function removeMeetup(Meetup $meetup)
     {
@@ -220,9 +190,9 @@ class Clients implements SmartFactClientsInterface
     }
 
     /**
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
-    public function getMeetups()
+    public function getMeetups() : ArrayCollection
     {
         return $this->meetup;
     }

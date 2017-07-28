@@ -12,7 +12,7 @@
 namespace App\Form\Type;
 
 // Entity
-use App\Entity\Accounting;
+use App\Resolvers\Accounting;
 
 // Core
 use Symfony\Component\Form\AbstractType;

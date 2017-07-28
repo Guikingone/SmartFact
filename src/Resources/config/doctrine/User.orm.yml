@@ -1,0 +1,84 @@
+App\Model\User:
+    type: entity
+    repositoryClass: App\Repository\UserRepository
+    table: _smartfact_user
+    id:
+        id:
+            type: integer
+            generated: { strategy: AUTO }
+    fields:
+        firstname:
+            type: string
+            length: 255
+            nullable: true
+        lastname:
+            type: string
+            length: 200
+            nullable: true
+        address:
+            type: string
+            length: 255
+            nullable: true
+        phoneNumber:
+            type: string
+            length: 15
+            nullable: true
+        email:
+            type: string
+            length: 150
+            nullable: false
+        birthdate:
+            type: date
+            nullable: true
+        status:
+            type: string
+            length: 150
+            nullable: false
+        createdAt:
+            type: datetime
+            nullable: false
+        validated:
+            type: boolean
+            nullable: false
+        isActive:
+            type: boolean
+            nullable: false
+        username:
+            type: string
+            length: 100
+            nullable: false
+        password:
+            type: string
+            length: 150
+            nullable: false
+        token:
+            type: string
+            length: 150
+            nullable: false
+        roles:
+            type: array
+            nullable: false
+
+    oneToOne:
+        planning:
+            targetEntity: App\Model\Planning
+            mappedBy: user
+
+    oneToMany:
+        notifications:
+            targetEntity: App\Model\Notifications
+            mappedBy: user
+        clients:
+            targetEntity: App\Model\Clients
+            mappedBy: user
+        bills:
+            targetEntity: App\Model\Bills
+            mappedBy: user
+        meetups:
+            targetEntity: App\Model\Meetup
+            mappedBy: user
+
+    manyToOne:
+        accounting:
+            targetEntity: App\Model\Accounting
+            inversedBy: user

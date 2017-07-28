@@ -11,6 +11,8 @@
 
 namespace App\Interfaces;
 
+use App\Model\User;
+
 /**
  * Interface SmartFactAccountingInterface
  *
@@ -18,5 +20,82 @@ namespace App\Interfaces;
  */
 interface SmartFactAccountingInterface
 {
+    /**
+     * @return null|int
+     */
+    public function getId();
 
+    /**
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * @param string $name
+     *
+     * @return mixed
+     */
+    public function setName(string $name);
+
+    /**
+     * @return string
+     */
+    public function getInterlocutor();
+
+    /**
+     * @param string $interlocutor
+     *
+     * @return mixed
+     */
+    public function setInterlocutor(string $interlocutor);
+
+    /**
+     * @return string
+     */
+    public function getAddress();
+
+    /**
+     * @param string $address
+     * @return mixed
+     */
+    public function setAddress(string $address);
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber();
+
+    /**
+     * @param string $phoneNumber
+     * @return mixed
+     */
+    public function setPhoneNumber(string $phoneNumber);
+
+    /**
+     * @return string
+     */
+    public function getEmail();
+
+    /**
+     * @param string $email
+     * @return mixed
+     */
+    public function setEmail(string $email);
+
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function addUser(User $user);
+
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function removeUser(User $user);
+
+    /**
+     * @return User
+     */
+    public function getUser();
 }
