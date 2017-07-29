@@ -21,54 +21,54 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 interface SmartFactUserInterface extends AdvancedUserInterface, \Serializable
 {
     /**
-     * @return int
+     * @return null|int
      */
     public function getId();
 
     /**
      * @return string
      */
-    public function getFirstname();
+    public function getFirstname() : string;
 
     /**
      * @param string $firstname
      */
-    public function setFirstname($firstName);
+    public function setFirstname(string $firstName);
 
     /**
      * @return string
      */
-    public function getLastname();
+    public function getLastname() : string;
 
     /**
      * @param string $lastname
      */
-    public function setLastname($lastName);
+    public function setLastname(string $lastName);
 
     /**
      * @return string
      */
-    public function getAddress();
+    public function getAddress() : string;
 
     /**
      * @param string $address
      */
-    public function setAddress($address);
+    public function setAddress(string $address);
 
     /**
      * @return string
      */
-    public function getPhoneNumber();
+    public function getPhoneNumber() : string;
 
     /**
      * @param string $phoneNumber
      */
-    public function setPhoneNumber($phoneNumber);
+    public function setPhoneNumber(string $phoneNumber);
 
     /**
      * @return \DateTime
      */
-    public function getBirthDate();
+    public function getBirthDate() : \DateTime;
 
     /**
      * @param \DateTime $birthDate
@@ -114,6 +114,17 @@ interface SmartFactUserInterface extends AdvancedUserInterface, \Serializable
      * @param string $username
      */
     public function setUsername($username);
+
+    /**
+     * @param string $email
+     * @return mixed
+     */
+    public function setEmail(string $email);
+
+    /**
+     * @return string
+     */
+    public function getEmail();
 
     /**
      * @return string

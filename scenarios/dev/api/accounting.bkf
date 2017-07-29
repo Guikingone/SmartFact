@@ -1,9 +1,9 @@
 scenario
     name "Accountings - API"
-    endpoint "http://172.20.0.1:8000/app_dev.php/"
+    endpoint "http://172.20.0.1:8000/"
 
     visit url('/api/accountings')
         expect status_code() == 200
 
-    visit url('/api/accounting/1')
+    visit url('/api/accountings/1')
         expect status_code() == 200

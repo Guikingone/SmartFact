@@ -12,8 +12,7 @@
 namespace App\Listeners;
 
 // Events
-use AppBundle\Events\Notifications\PostedNotificationEvent;
-use AppBundle\Events\Notifications\DeletedNotificationEvent;
+use App\Events\Notifications\DeletedNotificationEvent;
 
 // Core
 use Symfony\Component\HttpFoundation\Session\SessionInterface;

@@ -6,3 +6,13 @@ services:
         resource: '../src/Managers'
         public: false
         autowire: true
+
+    App\Listeners\:
+        resource: '../src/Listeners'
+        public: false
+        autowire: true
+        tags:
+            - { name: kernel.event_listener, event: bills.created }
+            - { name: kernel.event_listener, event: bills.updated }
+            - { name: kernel.event_listener, event: bills.deleted }
+            - { name: kernel.event_listener, event: notification.deleted }

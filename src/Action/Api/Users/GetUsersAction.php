@@ -11,10 +11,7 @@
 
 namespace App\Action\Api\Users;
 
-// Manager
 use App\Managers\API\ApiUserManager;
-
-// Core
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -24,7 +21,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class GetUsersAction
 {
-    /** @var ApiUserManager */
+    /**
+     * @var ApiUserManager
+     */
     private $manager;
 
     /**
@@ -40,6 +39,8 @@ final class GetUsersAction
 
     /**
      * @return Response
+     *
+     * @throws \InvalidArgumentException
      */
     public function __invoke()
     {

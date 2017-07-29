@@ -13,8 +13,8 @@ namespace tests\App\Entity;
 
 use PHPUnit\Framework\TestCase;
 
-use App\Resolvers\User;
-use App\Resolvers\Notifications;
+use App\Model\User;
+use App\Model\Notifications;
 
 /**
  * Class NotificationsTest

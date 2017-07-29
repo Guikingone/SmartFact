@@ -6,5 +6,5 @@ return [
     'Doctrine\Bundle\DoctrineBundle\DoctrineBundle' => ['all' => true],
     'Symfony\Bundle\TwigBundle\TwigBundle' => ['all' => true],
     'Symfony\Bundle\SecurityBundle\SecurityBundle' => ['all' => true],
-    'Symfony\Bundle\WebProfilerBundle\WebProfilerBundle' => ['dev' => true, 'test' => true],
+    'Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle' => ['all' => true],
 ];

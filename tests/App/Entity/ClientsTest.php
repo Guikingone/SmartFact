@@ -13,10 +13,10 @@ namespace tests\App\Entity;
 
 use PHPUnit\Framework\TestCase;
 
-use App\Resolvers\User;
-use App\Resolvers\Bills;
-use App\Resolvers\Meetup;
-use App\Resolvers\Clients;
+use App\Model\User;
+use App\Model\Bills;
+use App\Model\Meetup;
+use App\Model\Clients;
 
 /**
  * Class ClientsTest
@@ -100,7 +100,7 @@ class ClientsTest extends TestCase
             $this->assertEquals(new \DateTime('2017-04-26'), $bills->getDate());
         }
 
-        $clients->removeBill($bills);
+        $clients->removeBills($bills);
 
         $this->assertArrayNotHasKey($bills->getId(), $clients->getBills());
     }

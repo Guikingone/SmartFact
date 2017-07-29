@@ -11,11 +11,9 @@
 
 namespace App\Model;
 
+use App\Interfaces\SmartFactUserInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-
-// Interface
-use App\Interfaces\SmartFactUserInterface;
 
 /**
  * Class User
@@ -57,7 +55,7 @@ class User implements SmartFactUserInterface
     /**
      * @var \DateTime
      */
-    private $birthDate;
+    private $birthdate;
 
     /**
      * @var string
@@ -114,7 +112,7 @@ class User implements SmartFactUserInterface
 
     private $planning;
 
-    private $meetup;
+    private $meetups;
 
     /**
      * User constructor.
@@ -129,7 +127,7 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -137,95 +135,95 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getFirstname()
+    public function getFirstname() : string
     {
         return $this->firstname;
     }
 
     /**
-     * @param string $firstname
+     * {@inheritdoc}
      */
-    public function setFirstname($firstName)
+    public function setFirstname(string $firstName)
     {
         $this->firstname = $firstName;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getLastname()
+    public function getLastname() : string
     {
         return $this->lastname;
     }
 
     /**
-     * @param string $lastname
+     * {@inheritdoc}
      */
-    public function setLastname($lastName)
+    public function setLastname(string $lastName)
     {
         $this->lastname = $lastName;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getAddress()
+    public function getAddress() : string
     {
         return $this->address;
     }
 
     /**
-     * @param string $address
+     * {@inheritdoc}
      */
-    public function setAddress($address)
+    public function setAddress(string $address)
     {
         $this->address = $address;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getPhoneNumber()
+    public function getPhoneNumber() : string
     {
         return $this->phoneNumber;
     }
 
     /**
-     * @param string $phoneNumber
+     * {@inheritdoc}
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(string $phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getEmail()
+    public function getEmail() : string
     {
         return $this->email;
     }
 
     /**
-     * @param string $email
+     * {@inheritdoc}
      */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
-    public function getBirthDate()
+    public function getBirthDate() : \DateTime
     {
-        return $this->birthDate;
+        return $this->birthdate;
     }
 
     /**
-     * @param \DateTime $birthDate
+     * {@inheritdoc}
      */
     public function setBirthDate($birthDate)
     {
@@ -233,7 +231,7 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getStatus()
     {
@@ -241,7 +239,7 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @param string $status
+     * {@inheritdoc}
      */
     public function setStatus($status)
     {
@@ -249,7 +247,7 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {
@@ -257,7 +255,7 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @param \DateTime $createdAt
+     * {@inheritdoc}
      */
     public function setCreatedAt($createdAt)
     {
@@ -265,7 +263,7 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function getValidated()
     {
@@ -273,7 +271,7 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @param bool $validated
+     * {@inheritdoc}
      */
     public function setValidated($validated)
     {
@@ -281,7 +279,7 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getUsername()
     {
@@ -289,7 +287,7 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @param string $username
+     * {@inheritdoc}
      */
     public function setUsername($username)
     {
@@ -297,7 +295,7 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getPassword()
     {
@@ -305,7 +303,7 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @param string $password
+     * {@inheritdoc}
      */
     public function setPassword($password)
     {
@@ -313,7 +311,7 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getPlainPassword()
     {
@@ -321,7 +319,7 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @param string $plainPassword
+     * {@inheritdoc}
      */
     public function setPlainPassword($plainPassword)
     {
@@ -517,7 +515,7 @@ class User implements SmartFactUserInterface
     /**
      * Get accounting
      *
-     * @return \AppBundle\Entity\Accounting
+     * @return \AppBundle\Model\Accounting
      */
     public function getAccounting()
     {
@@ -591,7 +589,7 @@ class User implements SmartFactUserInterface
      */
     public function addMeetup(Meetup $meetup)
     {
-        $this->meetup[] = $meetup;
+        $this->meetups[] = $meetup;
 
         return $this;
     }
@@ -603,7 +601,7 @@ class User implements SmartFactUserInterface
      */
     public function removeMeetup(Meetup $meetup)
     {
-        $this->meetup->removeElement($meetup);
+        $this->meetups->removeElement($meetup);
     }
 
     /**
@@ -613,6 +611,6 @@ class User implements SmartFactUserInterface
      */
     public function getMeetups()
     {
-        return $this->meetup;
+        return $this->meetups;
     }
 }

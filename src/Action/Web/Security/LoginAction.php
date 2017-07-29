@@ -11,7 +11,7 @@
 
 namespace App\Action\Web\Security;
 
-use AppBundle\Form\Type\LoginType;
+use App\Form\Type\Security\LoginType;
 
 use Twig\Environment;
 use Symfony\Component\HttpFoundation\Response;

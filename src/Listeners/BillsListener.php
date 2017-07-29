@@ -12,9 +12,9 @@
 namespace App\Listeners;
 
 // Events
-use AppBundle\Events\Bills\NewBillsEvent;
-use AppBundle\Events\Bills\UpdatedBillsEvent;
-use AppBundle\Events\Bills\DeletedBillsEvent;
+use App\Events\Bills\NewBillsEvent;
+use App\Events\Bills\UpdatedBillsEvent;
+use App\Events\Bills\DeletedBillsEvent;
 
 /**
  * Class BillsListener

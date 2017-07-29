@@ -1,16 +1,67 @@
-# Users
-api_users_single:
-    path:    '/users/{id}'
-    methods: ['GET']
-    defaults: { _controller: App\Action\Api\Users\GetUserAction }
+# Security
+api_token_entrypoint:
+    path:    '/token'
+    methods: ['POST']
+    defaults: { _controller: App\Action\Api\Security\ApiTokenAction }
 
+# Accounting
+api_accountings:
+    path:    '/accountings'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Accounting\GetAccountingsAction }
+
+api_accountings_single:
+    path:    '/accountings/{id}'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Accounting\GetAccountingAction }
+
+api_accountings_single_post:
+    path:    '/accountings/{id}'
+    methods: ['POST']
+    defaults: { _controller: App\Action\Api\Accounting\PostAccountingAction }
+
+api_accountings_single_put:
+    path:    '/accountings/{id}'
+    methods: ['PUT']
+    defaults: { _controller: App\Action\Api\Accounting\GetAccountingAction }
+
+api_accountings_single_patch:
+    path:    '/accountings/{id}'
+    methods: ['PATCH']
+    defaults: { _controller: App\Action\Api\Accounting\GetAccountingAction }
+
+api_accountings_single_delete:
+    path:    '/accountings/{id}'
+    methods: ['DELETE']
+    defaults: { _controller: App\Action\Api\Accounting\GetAccountingAction }
+
+# Users
 api_users:
     path:    '/users'
     methods: ['GET']
     defaults: { _controller: App\Action\Api\Users\GetUsersAction }
 
-# Accounting
-api_accountings_single:
-    path:    '/accountings/{id}'
+api_users_single:
+    path:    '/users/{id}'
     methods: ['GET']
-    defaults: { _controller: App\Action\Api\Accounting\GetAccountingAction }
+    defaults: { _controller: App\Action\Api\Users\GetUserAction }
+
+api_users_single_post:
+    path:    '/users/{id}'
+    methods: ['POST']
+    defaults: { _controller: App\Action\Api\Users\PostUserAction }
+
+api_users_single_put:
+    path:    '/users/{id}'
+    methods: ['PUT']
+    defaults: { _controller: App\Action\Api\Users\GetUserAction }
+
+api_users_single_patch:
+    path:    '/users/{id}'
+    methods: ['PATCH']
+    defaults: { _controller: App\Action\Api\Users\GetUserAction }
+
+api_users_single_delete:
+    path:    '/users/{id}'
+    methods: ['DELETE']
+    defaults: { _controller: App\Action\Api\Users\GetUserAction }

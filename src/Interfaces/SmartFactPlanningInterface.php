@@ -11,6 +11,10 @@
 
 namespace App\Interfaces;
 
+use App\Model\User;
+use App\Model\Meetup;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Interface SmartFactPlanningInterface
  *
@@ -33,4 +37,32 @@ interface SmartFactPlanningInterface
      * @return mixed
      */
     public function setPeriod(string $period);
+
+    /**
+     * @param Meetup $meetup
+     * @return mixed
+     */
+    public function addMeetup(Meetup $meetup);
+
+    /**
+     * @param Meetup $meetup
+     * @return mixed
+     */
+    public function removeMeetup(Meetup $meetup);
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getMeetups();
+
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function setUser(User $user);
+
+    /**
+     * @return User
+     */
+    public function getUser() : User;
 }

@@ -13,9 +13,9 @@ namespace tests\App\Entity;
 
 use PHPUnit\Framework\TestCase;
 
-use App\Resolvers\User;
-use App\Resolvers\Meetup;
-use App\Resolvers\Planning;
+use App\Model\User;
+use App\Model\Meetup;
+use App\Model\Planning;
 
 /**
  * Class PlanningTest

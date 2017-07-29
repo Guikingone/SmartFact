@@ -1,6 +1,6 @@
 scenario
     name "Notifications - API"
-    endpoint "http://172.20.0.1:8000/app_dev.php/"
+    endpoint "http://172.20.0.1:8000/"
 
-    visit url('/api/user/1/notifications')
+    visit url('/api/users/1/notifications')
         expect status_code() == 200

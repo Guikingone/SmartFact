@@ -11,15 +11,12 @@
 
 namespace App\Managers\API;
 
-// Symfony core
+use App\Model\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-
-// Bundle
-use App\Resolvers\User;
 
 /**
  * Class ApiUserManager
@@ -69,7 +66,7 @@ class ApiUserManager
     /**
      * Return all the Users.
      *
-     * @return string
+     * @return string       All the users saved.
      */
     public function getUsers()
     {

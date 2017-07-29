@@ -34,7 +34,7 @@ class Planning implements SmartFactPlanningInterface
     /**
      * @var ArrayCollection
      */
-    private $meetup;
+    private $meetups;
 
     /**
      * @var User
@@ -74,39 +74,39 @@ class Planning implements SmartFactPlanningInterface
     }
 
     /**
-     * @param Meetup $meetup
+     * {@inheritdoc}
      */
     public function addMeetup(Meetup $meetup)
     {
-        $this->meetup[] = $meetup;
+        $this->meetups[] = $meetup;
     }
 
     /**
-     * @param Meetup $meetup
+     * {@inheritdoc}
      */
     public function removeMeetup(Meetup $meetup)
     {
-        $this->meetup->removeElement($meetup);
+        $this->meetups->removeElement($meetup);
     }
 
     /**
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
     public function getMeetups()
     {
-        return $this->meetup;
+        return $this->meetups;
     }
 
     /**
-     * @return User
+     * {@inheritdoc}
      */
-    public function getUser()
+    public function getUser() : User
     {
         return $this->user;
     }
 
     /**
-     * @param User $user
+     * {@inheritdoc}
      */
     public function setUser(User $user)
     {

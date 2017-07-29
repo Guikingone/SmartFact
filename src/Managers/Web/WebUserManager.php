@@ -11,10 +11,8 @@
 
 namespace App\Managers\Web;
 
-use App\Resolvers\User;
-use App\Form\Type\RegisterType;
-
-// Core
+use App\Model\User;
+use App\Form\Type\Security\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
