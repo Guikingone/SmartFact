@@ -25,10 +25,10 @@ App\Model\Meetup:
     manyToOne:
         planning:
             targetEntity: App\Model\Planning
-            inversedBy: meetup
+            inversedBy: meetups
         user:
             targetEntity: App\Model\User
-            inversedBy: meetup
+            inversedBy: meetups
         clients:
             targetEntity: App\Model\Clients
-            inversedBy: meetup
+            inversedBy: meetups

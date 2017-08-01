@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\App\Entity;
+namespace tests\App\Model;
 
 use PHPUnit\Framework\TestCase;
 

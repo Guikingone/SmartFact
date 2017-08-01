@@ -11,10 +11,8 @@
 
 namespace SmartFact\UserBundle\Tests\Managers\API;
 
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-
-// Manager
 use App\Managers\API\ApiUserManager;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * Class ApiUserManagerTest

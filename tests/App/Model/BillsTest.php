@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\App\Entity;
+namespace tests\App\Model;
 
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
@@ -25,7 +25,7 @@ use App\Model\Clients;
 class BillsTest extends TestCase
 {
     /**
-     * Test the instantiation of the Entity.
+     * Test the instantiation of the Model.
      */
     public function testEntityInstance()
     {

@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\App\Entity;
+namespace tests\App\Model;
 
+use App\Model\Meetup;
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 use App\Model\User;
@@ -184,6 +185,45 @@ class UserTest extends TestCase
             $this->assertEquals('2017', $planning->getPeriod());
             $this->assertInstanceOf(User::class, $planning->getUser());
         }
+    }
+
+    /**
+     * Test the relation between User and Meetup.
+     */
+    public function testUserMeetups()
+    {
+        $user = new User();
+        $meetup = $this->createMock(Meetup::class);
+
+        $user->setFirstName('Harry');
+        $user->setLastName('Potter');
+        $user->setAddress('23 Poudlard Avenue');
+        $user->setPhoneNumber('0635459287');
+        $user->setEmail('hp@gmail.com');
+        $user->setBirthDate(new \DateTime('1995-03-21'));
+        $user->setStatus('Freelance');
+        $user->setCreatedAt(new \DateTime('2017-02-31'));
+        $user->setValidated(true);
+        $user->setUsername('HP');
+        $user->setPassword('LB,L8ELTDL0');
+        $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
+        $user->addRoles('ROLE_USER');
+
+        $meetup->method('getId')
+               ->willReturn(0);
+
+        $meetup->method('getDate')
+               ->willReturn(new \DateTime('2017-02-31'));
+
+        $user->addMeetup($meetup);
+
+        if ($this->assertInstanceOf(get_class($meetup), $user->getMeetups()->get(0))) {
+            $this->assertEquals(new \DateTime('2017-02-31'), $meetup->getDate());
+        }
+
+        $user->removeMeetup($meetup);
+
+        $this->assertArrayNotHasKey($meetup->getId(), $user->getMeetups());
     }
 
     /**

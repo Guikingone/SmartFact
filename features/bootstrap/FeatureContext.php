@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr
  */
-class FeatureContext implements Context
+final class FeatureContext implements Context
 {
     /**
      * @var KernelInterface
@@ -64,7 +64,8 @@ class FeatureContext implements Context
         if ($this->response->getStatusCode() !== $statusCode) {
             throw new \LogicException(
                 sprintf(
-                    'Bad status code ! Found %d', $statusCode
+                    'Bad status code ! Found %d',
+                    $this->response->getStatusCode()
                 )
             );
         }

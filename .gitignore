@@ -5,6 +5,13 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
+###> behat/symfony2-extension ###
+behat.yml
+###< behat/symfony2-extension ###
+###> symfony/phpunit-bridge ###
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
 # Doctrine
 src/Entity/*.php~
 
@@ -18,6 +25,6 @@ src/Entity/*.php~
 
 # PHPUnit
 /coverage/
-###> behat/symfony2-extension ###
-behat.yml
-###< behat/symfony2-extension ###
+
+# JWT
+config/jwt/*

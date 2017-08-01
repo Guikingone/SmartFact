@@ -73,7 +73,7 @@ interface SmartFactUserInterface extends AdvancedUserInterface, \Serializable
     /**
      * @param \DateTime $birthDate
      */
-    public function setBirthDate($birthDate);
+    public function setBirthDate(\DateTime $birthDate);
 
     /**
      * @return string

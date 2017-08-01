@@ -53,7 +53,7 @@ interface SmartFactPlanningInterface
     /**
      * @return ArrayCollection
      */
-    public function getMeetups();
+    public function getMeetups() : ArrayCollection;
 
     /**
      * @param User $user

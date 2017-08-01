@@ -46,7 +46,7 @@ class Planning implements SmartFactPlanningInterface
      */
     public function __construct()
     {
-        $this->meetup = new ArrayCollection();
+        $this->meetups = new ArrayCollection();
     }
 
     /**
@@ -92,7 +92,7 @@ class Planning implements SmartFactPlanningInterface
     /**
      * {@inheritdoc}
      */
-    public function getMeetups()
+    public function getMeetups() : ArrayCollection
     {
         return $this->meetups;
     }

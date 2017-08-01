@@ -122,7 +122,7 @@ class User implements SmartFactUserInterface
         $this->notifications = new ArrayCollection();
         $this->clients = new ArrayCollection();
         $this->bills = new ArrayCollection();
-        $this->meetup = new ArrayCollection();
+        $this->meetups = new ArrayCollection();
         $this->isActive = true;
     }
 
@@ -225,9 +225,9 @@ class User implements SmartFactUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setBirthDate($birthDate)
+    public function setBirthDate(\DateTime $birthDate)
     {
-        $this->birthDate = $birthDate;
+        $this->birthdate = $birthDate;
     }
 
     /**

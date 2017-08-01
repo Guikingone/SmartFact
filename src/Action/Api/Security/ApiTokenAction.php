@@ -11,6 +11,8 @@
 
 namespace App\Action\Api\Security;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 /**
  * Class ApiTokenAction
  *
@@ -18,5 +20,15 @@ namespace App\Action\Api\Security;
  */
 final class ApiTokenAction
 {
+    public function __construct()
+    {
 
+    }
+
+    public function __invoke()
+    {
+        return new JsonResponse(
+            'Hello World !'
+        );
+    }
 }

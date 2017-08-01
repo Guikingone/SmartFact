@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\App\Entity;
+namespace tests\App\Model;
 
 use PHPUnit\Framework\TestCase;
 
@@ -55,6 +55,7 @@ class PlanningTest extends TestCase
                ->willReturn(0);
 
         $planning->addMeetup($meetup);
+        var_dump($planning);
 
         if ($this->assertInstanceOf(Meetup::class, $planning->getMeetups()->get(0))) {
             $this->assertEquals('45 MINUTES', $meetup->getDuration());

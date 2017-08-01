@@ -50,7 +50,7 @@ class Clients implements SmartFactClientsInterface
 
     private $bills;
 
-    private $meetup;
+    private $meetups;
 
     /**
      * Clients constructor.
@@ -58,7 +58,7 @@ class Clients implements SmartFactClientsInterface
     public function __construct()
     {
         $this->bills = new ArrayCollection();
-        $this->meetup = new ArrayCollection();
+        $this->meetups = new ArrayCollection();
     }
 
     /**
@@ -178,7 +178,7 @@ class Clients implements SmartFactClientsInterface
      */
     public function addMeetup(Meetup $meetup)
     {
-        $this->meetup[] = $meetup;
+        $this->meetups[] = $meetup;
     }
 
     /**
@@ -186,7 +186,7 @@ class Clients implements SmartFactClientsInterface
      */
     public function removeMeetup(Meetup $meetup)
     {
-        $this->meetup->removeElement($meetup);
+        $this->meetups->removeElement($meetup);
     }
 
     /**
@@ -194,6 +194,6 @@ class Clients implements SmartFactClientsInterface
      */
     public function getMeetups() : ArrayCollection
     {
-        return $this->meetup;
+        return $this->meetups;
     }
 }

@@ -9,26 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\App\Entity;
-
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
+namespace tests\App\Resolvers;
 
 use App\Model\User;
-use App\Model\Accounting;
+use App\Resolvers\AccountingResolver;
+use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 /**
- * Class AccountingTest
+ * Class AccountingResolverTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class AccountingTest extends TestCase
+class AccountingResolverTest extends TestCase
 {
     /**
-     * Test the instantiation of the Entity;
+     * Test the instantiation of the Model;
      */
-    public function testInstantiation()
+    public function testEntityInstantiation()
     {
-        $accounting = new Accounting();
+        $accounting = new AccountingResolver();
 
         $accounting->setName('Cabinet Intox');
         $accounting->setAddress('404 Road Not Found');
@@ -49,7 +48,7 @@ class AccountingTest extends TestCase
      */
     public function testAccountingUser()
     {
-        $accounting = new Accounting();
+        $accounting = new AccountingResolver();
         $user = $this->createMock(User::class);
 
         $accounting->setName('Cabinet Intox');
@@ -57,6 +56,9 @@ class AccountingTest extends TestCase
         $accounting->setPhoneNumber('0987654321');
         $accounting->setInterlocutor('Mr Not Found');
         $accounting->setEmail('notfound@intox.com');
+
+        $user->method('getId')
+             ->willReturn(0);
 
         $user->method('getLastName')
              ->willReturn('Potter');
@@ -66,31 +68,6 @@ class AccountingTest extends TestCase
         if ($this->assertInstanceOf(get_class($user), $accounting->getUser()->get(0))) {
             $this->assertEquals('Potter', $user->getLastName());
         }
-    }
-
-    /**
-     * Test if Accounting can remove a linked User.
-     */
-    public function testAccountingUserRemove()
-    {
-        $accounting = new Accounting();
-        $user = $this->createMock(User::class);
-
-        $accounting->setName('Cabinet Intox');
-        $accounting->setAddress('404 Road Not Found');
-        $accounting->setPhoneNumber('0987654321');
-        $accounting->setInterlocutor('Mr Not Found');
-        $accounting->setEmail('notfound@intox.com');
-
-        $user->method('getLastName')
-             ->willReturn('Potter');
-
-        $user->method('getId')
-             ->wilLReturn(0);
-
-        $accounting->addUser($user);
-
-        $this->assertInstanceOf(get_class($user), $accounting->getUser()->get(0));
 
         $accounting->removeUser($user);
 

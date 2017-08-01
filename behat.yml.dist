@@ -4,6 +4,8 @@ default:
             contexts:
                 - FeatureContext:
                     kernel: '@kernel'
+                - ApiContext:
+                    kernel: '@kernel'
 
     extensions:
         Behat\Symfony2Extension:

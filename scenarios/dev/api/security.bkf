@@ -1,0 +1,6 @@
+scenario
+    name "User - API"
+    endpoint "http://172.20.0.1:8000/"
+
+    visit url('/api/token')
+        expect status_code() == 200
