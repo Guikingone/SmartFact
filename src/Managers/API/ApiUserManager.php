@@ -12,11 +12,14 @@
 namespace App\Managers\API;
 
 use App\Model\User;
+use App\Exceptions\ApiJsonException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\SerializerInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 
 /**
  * Class ApiUserManager
@@ -25,43 +28,70 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class ApiUserManager
 {
-    /** @var SerializerInterface */
-    private $serializer;
-
-    /** @var EntityManagerInterface */
+    /**
+     * @var EntityManagerInterface
+     */
     private $doctrine;
 
-    /** @var EventDispatcherInterface */
+    /**
+     * @var SerializerInterface
+     */
+    private $serializer;
+
+    /**
+     * @var EventDispatcherInterface
+     */
     private $eventDispatcher;
 
-    /** @var ValidatorInterface */
+    /**
+     * @var ValidatorInterface
+     */
     private $validator;
 
-    /** @var RequestStack */
+    /**
+     * @var UserPasswordEncoder
+     */
+    private $passwordEncoder;
+
+    /**
+     * @var JWTManager
+     */
+    private $tokenManager;
+
+    /**
+     * @var RequestStack
+     */
     private $requestStack;
 
     /**
      * ApiUserManager constructor.
      *
-     * @param SerializerInterface       $serializer
-     * @param EntityManagerInterface    $doctrine
-     * @param EventDispatcherInterface  $eventDispatcher
-     * @param ValidatorInterface        $validator
-     * @param RequestStack              $requestStack
+     * @param EntityManagerInterface        $doctrine
+     * @param SerializerInterface           $serializer
+     * @param EventDispatcherInterface      $eventDispatcher
+     * @param ValidatorInterface            $validator
+     * @param UserPasswordEncoder           $passwordEncoder
+     * @param JWTManager                    $tokenManager
+     * @param RequestStack                  $requestStack
      */
     public function __construct(
-        SerializerInterface $serializer,
         EntityManagerInterface $doctrine,
+        SerializerInterface $serializer,
         EventDispatcherInterface $eventDispatcher,
         ValidatorInterface $validator,
+        UserPasswordEncoder $passwordEncoder,
+        JWTManager $tokenManager,
         RequestStack $requestStack
     ) {
-        $this->serializer = $serializer;
         $this->doctrine = $doctrine;
+        $this->serializer = $serializer;
         $this->eventDispatcher = $eventDispatcher;
         $this->validator = $validator;
+        $this->passwordEncoder = $passwordEncoder;
+        $this->tokenManager = $tokenManager;
         $this->requestStack = $requestStack;
     }
+
 
     /**
      * Return all the Users.
@@ -101,7 +131,48 @@ class ApiUserManager
         );
     }
 
-    public function postUsers($data)
+    /**
+     * @param array $data           The date used for authenticate the user.
+     *
+     * @throws ApiJsonException     If bad arguments are passed or empty.
+     * @throws ApiJsonException     If no user can be found.
+     *
+     * @return bool|string          The token if authenticated or false if not.
+     */
+    public function authenticateUser(array $data)
+    {
+        if ((!$data['username']) || (!$data['password'])) {
+            throw new ApiJsonException(
+                \sprintf(
+                    'The request must contains the right arguments, waiting for username and password !'
+                )
+            );
+        }
+
+        $user = $this->doctrine->getRepository(User::class)
+                               ->findOneBy([
+                                   'username' => $data['username']
+                               ]);
+
+        if (!$user) {
+            throw new ApiJsonException(
+                \sprintf(
+                    'A user must be found using this identifiers !'
+                )
+            );
+        }
+
+        if ($this->passwordEncoder->isPasswordValid($user, $data['password'])) {
+            return $this->tokenManager->create($user);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param array $data
+     */
+    public function postUsers(array $data)
     {
 
     }

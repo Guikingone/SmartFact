@@ -22,11 +22,15 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class ApiAccountingManager
 {
-    /** @var SerializerInterface */
-    private $serializer;
-
-    /** @var EntityManagerInterface */
+    /**
+     * @var EntityManagerInterface
+     */
     private $doctrine;
+
+    /**
+     * @var SerializerInterface
+     */
+    private $serializer;
 
     /**
      * ApiAccountingManager constructor.

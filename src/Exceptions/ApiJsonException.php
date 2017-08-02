@@ -9,14 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Managers\API;
+namespace App\Exceptions;
+
+use Throwable;
 
 /**
- * Class ApiAuthenticationManager
+ * Class ApiJsonException
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-final class ApiAuthenticationManager
+class ApiJsonException extends \Exception
 {
-
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 }

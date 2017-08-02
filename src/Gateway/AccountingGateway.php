@@ -11,7 +11,7 @@
 
 namespace App\Gateway;
 
-use App\Model\Accounting;
+use App\Resolvers\AccountingResolver;
 
 /**
  * Class AccountingGateway
@@ -21,44 +21,44 @@ use App\Model\Accounting;
 abstract class AccountingGateway
 {
     /**
-     * @return Accounting[]
+     * @return AccountingResolver[]
      */
     public abstract function findAll();
 
     /**
      * @param int $accounting
      *
-     * @return Accounting
+     * @return AccountingResolver
      */
     public abstract function find(int $accounting);
 
     /**
      * @param array $parameters
      *
-     * @return Accounting
+     * @return AccountingResolver
      */
     public abstract function findOneBy(array $parameters);
 
     /**
      * @param array $data
      *
-     * @return Accounting
+     * @return AccountingResolver
      */
     public abstract function insert(array $data);
 
     /**
      * @param array $data
      *
-     * @return Accounting
+     * @return AccountingResolver
      */
-    public abstract function update(array $data);
+    public abstract function update(array $data) : AccountingResolver;
 
     /**
      * @param array $data
      *
-     * @return Accounting
+     * @return AccountingResolver
      */
-    public abstract function patch(array $data);
+    public abstract function patch(array $data) : AccountingResolver;
 
     /**
      * @param int $accounting
@@ -70,7 +70,7 @@ abstract class AccountingGateway
     /**
      * @param array $result
      *
-     * @return Accounting
+     * @return AccountingResolver
      */
-    public abstract function buildObject(array $result);
+    public abstract function buildObject(array $result) : AccountingResolver;
 }

@@ -7,6 +7,13 @@ services:
         public: false
         autowire: true
 
+    App\Exceptions\Listeners\:
+        resource: '../src/Exceptions/Listeners'
+        public: false
+        autowire: true
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+
     App\Listeners\:
         resource: '../src/Listeners'
         public: false
