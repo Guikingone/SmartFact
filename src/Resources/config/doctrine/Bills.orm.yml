@@ -5,7 +5,7 @@ App\Model\Bills:
     id:
         id:
              type: integer
-             generated: { strategy: AUTO }
+             generator: { strategy: AUTO }
     fields:
         date:
             type: datetime

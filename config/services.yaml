@@ -2,24 +2,21 @@ parameters:
     locale: 'en'
 
 services:
-    App\Managers\:
-        resource: '../src/Managers'
-        public: false
+    _defaults:
         autowire: true
+        autoconfigure: true
+        public: false
 
     App\Exceptions\Listeners\:
         resource: '../src/Exceptions/Listeners'
-        public: false
-        autowire: true
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
 
     App\Listeners\:
         resource: '../src/Listeners'
-        public: false
-        autowire: true
         tags:
             - { name: kernel.event_listener, event: bills.created }
             - { name: kernel.event_listener, event: bills.updated }
             - { name: kernel.event_listener, event: bills.deleted }
             - { name: kernel.event_listener, event: notification.deleted }
+            - { name: kernel.event_listener, event: users.created }

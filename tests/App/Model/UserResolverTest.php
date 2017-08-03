@@ -9,34 +9,33 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\App\Model;
+namespace tests\App\Resolvers;
 
-use App\Model\Meetup;
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
-
-use App\Model\User;
 use App\Model\Bills;
+use App\Model\Meetup;
 use App\Model\Clients;
 use App\Model\Planning;
 use App\Model\Accounting;
 use App\Model\Notifications;
+use App\Resolvers\UserResolver;
+use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 /**
- * Class UserTest
+ * Class UserResolverTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class UserTest extends TestCase
+class UserResolverTest extends TestCase
 {
     /**
      * Test the instantiation of the User entity.
      */
     public function testUserInstance()
     {
-        $user = new User();
+        $user = new UserResolver();
 
-        $user->setFirstName('Harry');
-        $user->setLastName('Potter');
+        $user->setFirstname('Harry');
+        $user->setLastname('Potter');
         $user->setAddress('23 Poudlard Avenue');
         $user->setPhoneNumber('0635459287');
         $user->setEmail('hp@gmail.com');
@@ -51,22 +50,22 @@ class UserTest extends TestCase
         $user->addRoles('ROLE_USER');
         $user->setRoles(['ROLE_USER']);
 
-        $this->assertNull($user->getId());
-        $this->assertEquals('Harry', $user->getFirstName());
-        $this->assertEquals('Potter', $user->getLastName());
-        $this->assertEquals('23 Poudlard Avenue', $user->getAddress());
-        $this->assertEquals('0635459287', $user->getPhoneNumber());
-        $this->assertEquals('hp@gmail.com', $user->getEmail());
-        $this->assertEquals(new \DateTime('1995-03-21'), $user->getBirthDate());
-        $this->assertEquals('Freelance', $user->getStatus());
-        $this->assertEquals(new \DateTime('2017-02-31'), $user->getCreatedAt());
-        $this->assertTrue($user->getValidated());
-        $this->assertTrue($user->isEnabled());
-        $this->assertEquals('HP', $user->getUsername());
-        $this->assertEquals('LB,L8ELTDL0', $user->getPlainPassword());
-        $this->assertEquals('LB,L8ELTDL0', $user->getPassword());
-        $this->assertEquals('tok_0010901_001NNDOPPPANDHYEMMANDU', $user->getToken());
-        $this->assertContains('ROLE_USER', $user->getRoles());
+        static::assertNull($user->getId());
+        static::assertEquals('Harry', $user->getFirstname());
+        static::assertEquals('Potter', $user->getLastname());
+        static::assertEquals('23 Poudlard Avenue', $user->getAddress());
+        static::assertEquals('0635459287', $user->getPhoneNumber());
+        static::assertEquals('hp@gmail.com', $user->getEmail());
+        static::assertEquals(new \DateTime('1995-03-21'), $user->getBirthDate());
+        static::assertEquals('Freelance', $user->getStatus());
+        static::assertEquals(new \DateTime('2017-02-31'), $user->getCreatedAt());
+        static::assertTrue($user->getValidated());
+        static::assertTrue($user->isEnabled());
+        static::assertEquals('HP', $user->getUsername());
+        static::assertEquals('LB,L8ELTDL0', $user->getPlainPassword());
+        static::assertEquals('LB,L8ELTDL0', $user->getPassword());
+        static::assertEquals('tok_0010901_001NNDOPPPANDHYEMMANDU', $user->getToken());
+        static::assertContains('ROLE_USER', $user->getRoles());
     }
 
     /**
@@ -74,11 +73,11 @@ class UserTest extends TestCase
      */
     public function testUserNotifications()
     {
-        $user = new User();
+        $user = new UserResolver();
         $notification = $this->createMock(Notifications::class);
 
-        $user->setFirstName('Harry');
-        $user->setLastName('Potter');
+        $user->setFirstname('Harry');
+        $user->setLastname('Potter');
         $user->setAddress('23 Poudlard Avenue');
         $user->setPhoneNumber('0635459287');
         $user->setEmail('hp@gmail.com');
@@ -102,16 +101,16 @@ class UserTest extends TestCase
 
         $user->addNotification($notification);
 
-        if ($this->assertInstanceOf(get_class($notification), $user->getNotifications()->get(0))) {
-            $this->assertContains(0, $user->getNotifications());
+        if (static::assertInstanceOf(get_class($notification), $user->getNotifications()->get(0))) {
+            static::assertContains(0, $user->getNotifications());
             $notif = $user->getNotifications()->get(0);
-            $this->assertEquals('A new bills has been generated !', $notif->getName());
-            $this->assertEquals(1, $notif->getId());
+            static::assertEquals('A new bills has been generated !', $notif->getName());
+            static::assertEquals(1, $notif->getId());
         }
 
         $user->removeNotification($notification);
 
-        $this->assertArrayNotHasKey($notification->getId(), $user->getNotifications());
+        static::assertArrayNotHasKey($notification->getId(), $user->getNotifications());
     }
 
     /**
@@ -119,11 +118,11 @@ class UserTest extends TestCase
      */
     public function testUserBills()
     {
-        $user = new User();
+        $user = new UserResolver();
         $bills = $this->createMock(Bills::class);
 
-        $user->setFirstName('Harry');
-        $user->setLastName('Potter');
+        $user->setFirstname('Harry');
+        $user->setLastname('Potter');
         $user->setAddress('23 Poudlard Avenue');
         $user->setPhoneNumber('0635459287');
         $user->setEmail('hp@gmail.com');
@@ -141,13 +140,13 @@ class UserTest extends TestCase
 
         $user->addBill($bills);
 
-        if ($this->assertInstanceOf(Bills::class, $user->getBills()->get(0))) {
-            $this->assertNull($bills->getId());
+        if (static::assertInstanceOf(Bills::class, $user->getBills()->get(0))) {
+            static::assertNull($bills->getId());
         }
 
         $user->removeBill($bills);
 
-        $this->assertArrayNotHasKey($bills->getId(), $user->getBills());
+        static::assertArrayNotHasKey($bills->getId(), $user->getBills());
 
     }
 
@@ -156,11 +155,11 @@ class UserTest extends TestCase
      */
     public function testUserPlanning()
     {
-        $user = new User();
+        $user = new UserResolver();
         $planning = $this->createMock(Planning::class);
 
-        $user->setFirstName('Harry');
-        $user->setLastName('Potter');
+        $user->setFirstname('Harry');
+        $user->setLastname('Potter');
         $user->setAddress('23 Poudlard Avenue');
         $user->setPhoneNumber('0635459287');
         $user->setEmail('hp@gmail.com');
@@ -181,9 +180,9 @@ class UserTest extends TestCase
 
         $user->setPlanning($planning);
 
-        if ($this->assertInstanceOf(get_class($planning), $user->getPlanning())) {
-            $this->assertEquals('2017', $planning->getPeriod());
-            $this->assertInstanceOf(User::class, $planning->getUser());
+        if (static::assertInstanceOf(get_class($planning), $user->getPlanning())) {
+            static::assertEquals('2017', $planning->getPeriod());
+            static::assertInstanceOf(UserResolver::class, $planning->getUser());
         }
     }
 
@@ -192,11 +191,11 @@ class UserTest extends TestCase
      */
     public function testUserMeetups()
     {
-        $user = new User();
+        $user = new UserResolver();
         $meetup = $this->createMock(Meetup::class);
 
-        $user->setFirstName('Harry');
-        $user->setLastName('Potter');
+        $user->setFirstname('Harry');
+        $user->setLastname('Potter');
         $user->setAddress('23 Poudlard Avenue');
         $user->setPhoneNumber('0635459287');
         $user->setEmail('hp@gmail.com');
@@ -217,13 +216,13 @@ class UserTest extends TestCase
 
         $user->addMeetup($meetup);
 
-        if ($this->assertInstanceOf(get_class($meetup), $user->getMeetups()->get(0))) {
-            $this->assertEquals(new \DateTime('2017-02-31'), $meetup->getDate());
+        if (static::assertInstanceOf(get_class($meetup), $user->getMeetups()->get(0))) {
+            static::assertEquals(new \DateTime('2017-02-31'), $meetup->getDate());
         }
 
         $user->removeMeetup($meetup);
 
-        $this->assertArrayNotHasKey($meetup->getId(), $user->getMeetups());
+        static::assertArrayNotHasKey($meetup->getId(), $user->getMeetups());
     }
 
     /**
@@ -231,11 +230,11 @@ class UserTest extends TestCase
      */
     public function testUserClients()
     {
-        $user = new User();
+        $user = new UserResolver();
         $clients = $this->createMock(Clients::class);
 
-        $user->setFirstName('Harry');
-        $user->setLastName('Potter');
+        $user->setFirstname('Harry');
+        $user->setLastname('Potter');
         $user->setAddress('23 Poudlard Avenue');
         $user->setPhoneNumber('0635459287');
         $user->setBirthDate(new \DateTime('1995-03-21'));
@@ -258,15 +257,15 @@ class UserTest extends TestCase
 
         $user->addClient($clients);
 
-        if ($this->assertInstanceOf(get_class($clients), $user->getClients()->get(0))) {
+        if (static::assertInstanceOf(get_class($clients), $user->getClients()->get(0))) {
             $client = $user->getNotifications()->get(0);
-            $this->assertEquals('Google', $client->getName());
-            $this->assertEquals('Services', $client->getTypePrestation());
+            static::assertEquals('Google', $client->getName());
+            static::assertEquals('Services', $client->getTypePrestation());
         }
 
         $user->removeClient($clients);
 
-        $this->assertArrayNotHasKey($clients->getId(), $user->getClients());
+        static::assertArrayNotHasKey($clients->getId(), $user->getClients());
     }
 
     /**
@@ -274,11 +273,11 @@ class UserTest extends TestCase
      */
     public function testUserAccounting()
     {
-        $user = new User();
+        $user = new UserResolver();
         $accounting = $this->createMock(Accounting::class);
 
-        $user->setFirstName('Harry');
-        $user->setLastName('Potter');
+        $user->setFirstname('Harry');
+        $user->setLastname('Potter');
         $user->setAddress('23 Poudlard Avenue');
         $user->setPhoneNumber('0635459287');
         $user->setBirthDate(new \DateTime('1995-03-21'));
@@ -295,8 +294,8 @@ class UserTest extends TestCase
 
         $user->setAccounting($accounting);
 
-        if ($this->assertInstanceOf(Accounting::class, $user->getAccounting())) {
-            $this->assertEquals('DA Expertise', $accounting->getName());
+        if (static::assertInstanceOf(Accounting::class, $user->getAccounting())) {
+            static::assertEquals('DA Expertise', $accounting->getName());
         }
     }
 }

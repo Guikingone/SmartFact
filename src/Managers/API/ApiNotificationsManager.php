@@ -62,7 +62,7 @@ class ApiNotificationsManager
     {
         $data = $this->doctrine->getRepository(Notifications::class)
                                ->findBy([
-                                   'user' => $id
+                                   'users' => $id
                                ]);
 
         return $this->serializer->serialize(
@@ -85,7 +85,7 @@ class ApiNotificationsManager
     {
         $data = $this->doctrine->getRepository(Notifications::class)
                                ->findBy([
-                                   'user' => $id,
+                                   'users' => $id,
                                    'id' => $notificationId
                                ]);
 
@@ -135,7 +135,7 @@ class ApiNotificationsManager
     {
         $notifications = $this->doctrine->getRepository(Notifications::class)
                                         ->findBy([
-                                            'user' => $id
+                                            'users' => $id
                                         ]);
 
         foreach ($notifications as $notification) {

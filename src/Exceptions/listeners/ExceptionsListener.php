@@ -35,8 +35,7 @@ class ExceptionsListener
                     'message' => $exception->getMessage()
                 ]
             );
+            $event->setResponse($response);
         }
-
-        $event->setResponse($response);
     }
 }

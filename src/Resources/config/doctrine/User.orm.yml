@@ -5,7 +5,7 @@ App\Model\User:
     id:
         id:
             type: integer
-            generated: { strategy: AUTO }
+            generator: { strategy: AUTO }
     fields:
         firstname:
             type: string
@@ -62,23 +62,23 @@ App\Model\User:
     oneToOne:
         planning:
             targetEntity: App\Model\Planning
-            mappedBy: user
+            mappedBy: users
 
     oneToMany:
         notifications:
             targetEntity: App\Model\Notifications
-            mappedBy: user
+            mappedBy: users
         clients:
             targetEntity: App\Model\Clients
-            mappedBy: user
+            mappedBy: users
         bills:
             targetEntity: App\Model\Bills
-            mappedBy: user
+            mappedBy: users
         meetups:
             targetEntity: App\Model\Meetup
-            mappedBy: user
+            mappedBy: users
 
     manyToOne:
         accounting:
             targetEntity: App\Model\Accounting
-            inversedBy: user
+            inversedBy: users

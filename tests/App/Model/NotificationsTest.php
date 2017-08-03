@@ -36,7 +36,7 @@ class NotificationsTest extends TestCase
         $notification->setCreatedAt(new \DateTime('2017-03-21'));
         $notification->setRepetition(true);
         $notification->setChecked(false);
-        $notification->setLink('/user/root/notifications/march/2017');
+        $notification->setLink('/users/root/notifications/march/2017');
 
         $this->assertNull($notification->getId());
         $this->assertEquals('New bills !', $notification->getName());
@@ -45,7 +45,7 @@ class NotificationsTest extends TestCase
         $this->assertEquals(new \DateTime('2017-03-21'), $notification->getCreatedAt());
         $this->assertTrue($notification->hasRepetition());
         $this->assertFalse($notification->hasBeenChecked());
-        $this->assertEquals('/user/root/notifications/march/2017', $notification->getLink());
+        $this->assertEquals('/users/root/notifications/march/2017', $notification->getLink());
     }
 
     /**
@@ -62,7 +62,7 @@ class NotificationsTest extends TestCase
         $notification->setCreatedAt(new \DateTime('2017-03-21'));
         $notification->setRepetition(true);
         $notification->setChecked(false);
-        $notification->setLink('/user/root/notifications/march/2017');
+        $notification->setLink('/users/root/notifications/march/2017');
 
         $user->method('getLastName')
              ->willReturn('Potter');

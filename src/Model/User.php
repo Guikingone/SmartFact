@@ -22,6 +22,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class User implements SmartFactUserInterface
 {
+    const CREATED = 'created';
+
     /**
      * @var int
      */
@@ -201,7 +203,7 @@ class User implements SmartFactUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getEmail() : string
+    public function getEmail()
     {
         return $this->email;
     }
@@ -427,7 +429,7 @@ class User implements SmartFactUserInterface
             $this->username,
             $this->password,
             $this->isActive
-            ) = \unserialize($serialized);
+            ) = \unserialize($serialized, $this);
     }
 
     /**

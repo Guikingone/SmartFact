@@ -13,6 +13,7 @@ namespace App\Action\Api\Accounting;
 
 use App\Managers\API\ApiAccountingManager;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Class GetAccountingsAction
@@ -21,7 +22,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class GetAccountingsAction
 {
-    /** @var ApiAccountingManager */
+    /**
+     * @var ApiAccountingManager
+     */
     private $manager;
 
     /**
@@ -40,8 +43,14 @@ final class GetAccountingsAction
      */
     public function __invoke()
     {
+        $data = $this->manager->getAccountings();
+
+        if ($data === null) {
+            return new JsonResponse();
+        }
+
         return new Response(
-            $this->manager->getAccountings(),
+            $data,
             Response::HTTP_OK,
             ['Content-Type' => 'application/json']
         );

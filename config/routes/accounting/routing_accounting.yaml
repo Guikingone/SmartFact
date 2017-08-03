@@ -1,0 +1,30 @@
+# Accounting
+api_accountings:
+    path:    '/accountings'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Accounting\GetAccountingsAction }
+
+api_accountings_single:
+    path:    '/accountings/{id}'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Accounting\GetAccountingAction }
+
+api_accountings_single_post:
+    path:    '/accountings/post'
+    methods: ['POST']
+    defaults: { _controller: App\Action\Api\Accounting\PostAccountingAction }
+
+api_accountings_single_put:
+    path:    '/accountings/{id}/put'
+    methods: ['PUT']
+    defaults: { _controller: App\Action\Api\Accounting\PutAccountingAction }
+
+api_accountings_single_patch:
+    path:    '/accountings/{id}/patch'
+    methods: ['PATCH']
+    defaults: { _controller: App\Action\Api\Accounting\PatchAccountingAction }
+
+api_accountings_single_delete:
+    path:    '/accountings/{id}/delete'
+    methods: ['DELETE']
+    defaults: { _controller: App\Action\Api\Accounting\DeleteAccountingAction }

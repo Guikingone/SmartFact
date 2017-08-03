@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-abstract class Accounting implements SmartFactAccountingInterface
+class Accounting implements SmartFactAccountingInterface
 {
     /**
      * @var int

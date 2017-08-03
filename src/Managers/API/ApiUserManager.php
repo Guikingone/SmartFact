@@ -132,10 +132,10 @@ class ApiUserManager
     }
 
     /**
-     * @param array $data           The date used for authenticate the user.
+     * @param array $data           The date used for authenticate the users.
      *
      * @throws ApiJsonException     If bad arguments are passed or empty.
-     * @throws ApiJsonException     If no user can be found.
+     * @throws ApiJsonException     If no users can be found.
      *
      * @return bool|string          The token if authenticated or false if not.
      */
@@ -157,7 +157,7 @@ class ApiUserManager
         if (!$user) {
             throw new ApiJsonException(
                 \sprintf(
-                    'A user must be found using this identifiers !'
+                    'A users must be found using this identifiers !'
                 )
             );
         }

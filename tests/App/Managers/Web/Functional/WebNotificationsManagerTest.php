@@ -32,7 +32,7 @@ class WebNotificationsManagerTest extends WebTestCase
 
     public function testUserNotifications()
     {
-        $this->client->request('GET', '/user/1/notifications');
+        $this->client->request('GET', '/users/1/notifications');
 
         static::assertEquals(
             Response::HTTP_OK,

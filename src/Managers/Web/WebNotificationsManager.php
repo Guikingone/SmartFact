@@ -66,7 +66,7 @@ class WebNotificationsManager
     {
         return $this->entityManager->getRepository(Notifications::class)
                                    ->findBy([
-                                       'user' => $user
+                                       'users' => $user
                                    ]);
     }
 
@@ -84,7 +84,7 @@ class WebNotificationsManager
     {
         $notification =  $this->entityManager->getRepository(Notifications::class)
                                              ->findOneBy([
-                                                 'user' => $user,
+                                                 'users' => $user,
                                                  'id' => $id
                                              ]);
 
@@ -152,7 +152,7 @@ class WebNotificationsManager
 
         $notification = $this->entityManager->getRepository(Notifications::class)
                                             ->findOneBy([
-                                                'user' => $user,
+                                                'users' => $user,
                                                 'id' => $id
                                             ]);
 
@@ -175,7 +175,7 @@ class WebNotificationsManager
      *
      * @param int $user                     The id of the User.
      *
-     * @throws \InvalidArgumentException    If the user param isn't a integer.
+     * @throws \InvalidArgumentException    If the users param isn't a integer.
      * @throws \InvalidArgumentException    If no notifications has been found.
      */
     public function deleteNotificationsByUser($user)
@@ -191,7 +191,7 @@ class WebNotificationsManager
 
         $notifications = $this->entityManager->getRepository(Notifications::class)
                                              ->findBy([
-                                                 'user' => $user
+                                                 'users' => $user
                                              ]);
 
         if (!$notifications) {

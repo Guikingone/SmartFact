@@ -5,7 +5,7 @@ App\Model\Planning:
     id:
         id:
             type: integer
-            generated: { strategy: AUTO }
+            generator: { strategy: AUTO }
     fields:
         period:
             type: string

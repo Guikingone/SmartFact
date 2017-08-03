@@ -210,7 +210,7 @@ class WebAccountingManager
 
         $accounting = $this->doctrine->getRepository(Accounting::class)
                                      ->findOneBy([
-                                         'user' => $usr,
+                                         'users' => $usr,
                                          'id' => $id
                                      ]);
 

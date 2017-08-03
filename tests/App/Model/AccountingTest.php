@@ -9,25 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\App\Resolvers;
+namespace tests\App\Model;
 
 use App\Model\User;
-use App\Resolvers\AccountingResolver;
+use App\Model\Accounting;
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 /**
- * Class AccountingResolverTest
+ * Class AccountingTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class AccountingResolverTest extends TestCase
+class AccountingTest extends TestCase
 {
     /**
      * Test the instantiation of the Model;
      */
     public function testEntityInstantiation()
     {
-        $accounting = new AccountingResolver();
+        $accounting = new Accounting();
 
         $accounting->setName('Cabinet Intox');
         $accounting->setAddress('404 Road Not Found');
@@ -35,12 +35,12 @@ class AccountingResolverTest extends TestCase
         $accounting->setInterlocutor('Mr Not Found');
         $accounting->setEmail('notfound@intox.com');
 
-        $this->assertNull($accounting->getId());
-        $this->assertEquals('Cabinet Intox', $accounting->getName());
-        $this->assertEquals('404 Road Not Found', $accounting->getAddress());
-        $this->assertEquals('0987654321', $accounting->getPhoneNumber());
-        $this->assertEquals('Mr Not Found', $accounting->getInterlocutor());
-        $this->assertEquals('notfound@intox.com', $accounting->getEmail());
+        static::assertNull($accounting->getId());
+        static::assertEquals('Cabinet Intox', $accounting->getName());
+        static::assertEquals('404 Road Not Found', $accounting->getAddress());
+        static::assertEquals('0987654321', $accounting->getPhoneNumber());
+        static::assertEquals('Mr Not Found', $accounting->getInterlocutor());
+        static::assertEquals('notfound@intox.com', $accounting->getEmail());
     }
 
     /**
@@ -48,7 +48,7 @@ class AccountingResolverTest extends TestCase
      */
     public function testAccountingUser()
     {
-        $accounting = new AccountingResolver();
+        $accounting = new Accounting();
         $user = $this->createMock(User::class);
 
         $accounting->setName('Cabinet Intox');
@@ -65,12 +65,12 @@ class AccountingResolverTest extends TestCase
 
         $accounting->addUser($user);
 
-        if ($this->assertInstanceOf(get_class($user), $accounting->getUser()->get(0))) {
-            $this->assertEquals('Potter', $user->getLastName());
+        if (static::assertInstanceOf(get_class($user), $accounting->getUser()->get(0))) {
+            static::assertEquals('Potter', $user->getLastName());
         }
 
         $accounting->removeUser($user);
 
-        $this->assertArrayNotHasKey($user->getId(), $accounting->getUser());
+        static::assertArrayNotHasKey($user->getId(), $accounting->getUser());
     }
 }

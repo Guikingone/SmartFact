@@ -35,7 +35,7 @@ class GetUserActionTest extends WebTestCase
      */
     public function testResponseStatusCode()
     {
-        $this->client->request('GET', '/api/user/1');
+        $this->client->request('GET', '/api/users/1');
 
         $this->assertEquals(
             Response::HTTP_OK,

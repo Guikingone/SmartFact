@@ -11,11 +11,9 @@
 
 namespace App\Action\Api\Accounting;
 
+use App\Managers\API\ApiAccountingManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
-
-// Manager
-use App\Managers\API\ApiAccountingManager;
 
 /**
  * Class GetAccountingAction
@@ -24,10 +22,14 @@ use App\Managers\API\ApiAccountingManager;
  */
 final class GetAccountingAction
 {
-    /** @var ApiAccountingManager */
+    /**
+     * @var ApiAccountingManager
+     */
     private $manager;
 
-    /** @var RequestStack */
+    /**
+     * @var RequestStack
+     */
     private $requestStack;
 
     /**
@@ -51,8 +53,10 @@ final class GetAccountingAction
     {
         $id = $this->requestStack->getCurrentRequest()->get('id');
 
+        $data = $this->manager->getAccounting($id);
+
         return new Response(
-            $this->manager->getAccounting($id),
+            $data,
             Response::HTTP_OK,
             ['Content-Type' => 'application/json']
         );

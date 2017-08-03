@@ -12,8 +12,10 @@
 namespace App\Managers\API;
 
 use App\Model\Accounting;
+use App\Exceptions\ApiJsonException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class ApiAccountingManager
@@ -28,6 +30,11 @@ class ApiAccountingManager
     private $doctrine;
 
     /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
      * @var SerializerInterface
      */
     private $serializer;
@@ -35,16 +42,20 @@ class ApiAccountingManager
     /**
      * ApiAccountingManager constructor.
      *
-     * @param SerializerInterface       $serializer
-     * @param EntityManagerInterface    $doctrine
+     * @param EntityManagerInterface        $doctrine
+     * @param ValidatorInterface            $validator
+     * @param SerializerInterface           $serializer
      */
     public function __construct(
-        SerializerInterface $serializer,
-        EntityManagerInterface $doctrine
+        EntityManagerInterface $doctrine,
+        ValidatorInterface $validator,
+        SerializerInterface $serializer
     ) {
-        $this->serializer = $serializer;
         $this->doctrine = $doctrine;
+        $this->validator = $validator;
+        $this->serializer = $serializer;
     }
+
 
     /**
      * Return all the Accounting.
@@ -64,7 +75,7 @@ class ApiAccountingManager
     }
 
     /**
-     * Return a single Accounting.
+     * Return a single Accounting using his id.
      *
      * @param int $id
      *
@@ -82,6 +93,43 @@ class ApiAccountingManager
             'json',
             ['groups' => ['accounting']]
         );
+    }
+
+    /**
+     * @param array $data
+     *
+     * @throws ApiJsonException
+     *
+     * @return array|object
+     */
+    public function postAccounting(array $data)
+    {
+        if (!$data) {
+            throw new ApiJsonException(
+                \sprintf(
+                    ''
+                )
+            );
+        }
+
+        $errors = $this->validator->validate($data);
+
+        if ($errors) {
+            return [
+                'errors' => $errors
+            ];
+        }
+
+        $entity = $this->serializer->deserialize(
+            $data,
+            Accounting::class,
+            'json'
+        );
+
+        $this->doctrine->persist($entity);
+        $this->doctrine->flush();
+
+        return $entity;
     }
 
     /**

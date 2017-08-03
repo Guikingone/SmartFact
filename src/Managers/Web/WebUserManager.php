@@ -11,10 +11,14 @@
 
 namespace App\Managers\Web;
 
+use App\Events\Users\UserUpdatedEvent;
 use App\Model\User;
+use App\Events\Users\UserCreatedEvent;
 use App\Form\Type\Security\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class WebUserManager
@@ -23,25 +27,39 @@ use Symfony\Component\Form\FormFactoryInterface;
  */
 class WebUserManager
 {
-    /** @var EntityManagerInterface */
+
+    /**
+     * @var EntityManagerInterface
+     */
     private $doctrine;
 
-    /** @var FormFactoryInterface */
+    /**
+     * @var FormFactoryInterface
+     */
     private $form;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
 
     /**
      * WebUserManager constructor.
      *
      * @param EntityManagerInterface    $doctrine
      * @param FormFactoryInterface      $form
+     * @param EventDispatcherInterface  $eventDispatcher
      */
     public function __construct(
         EntityManagerInterface $doctrine,
-        FormFactoryInterface $form
+        FormFactoryInterface $form,
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->doctrine = $doctrine;
         $this->form = $form;
+        $this->eventDispatcher = $eventDispatcher;
     }
+
 
     /**
      * Return all the Users.
@@ -57,7 +75,7 @@ class WebUserManager
     /**
      * @param int $id
      *
-     * @return User|null
+     * @return User|null|object
      */
     public function getUserById($id)
     {
@@ -67,7 +85,12 @@ class WebUserManager
                               ]);
     }
 
-    public function postUser($request)
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\Form\FormView
+     */
+    public function postUser(Request $request)
     {
         $user = new User();
 
@@ -75,7 +98,45 @@ class WebUserManager
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $event = new UserCreatedEvent($user);
+            $this->eventDispatcher->dispatch($event, UserCreatedEvent::NAME);
             $this->doctrine->persist($user);
+            $this->doctrine->flush();
+        }
+
+        return $form->createView();
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Symfony\Component\Form\FormView
+     */
+    public function updateUser(Request $request, int $id)
+    {
+        $user = $this->doctrine->getRepository(User::class)
+                               ->findOneBy([
+                                   'id' => $id
+                               ]);
+
+        if (!$user) {
+            throw new \InvalidArgumentException(
+                \sprintf(
+                    'An users must be found using the id passed !
+                            Given %s', $id
+                )
+            );
+        }
+
+        $form = $this->form->create(UpdatUserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $event = new UserUpdatedEvent($user);
+            $this->eventDispatcher->dispatch($event, UserUpdatedEvent::NAME);
             $this->doctrine->flush();
         }
 
