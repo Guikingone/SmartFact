@@ -2,5 +2,8 @@ scenario
     name "Notifications - API"
     endpoint "http://172.20.0.1:8000/"
 
-    visit url('/api/users/1/notifications')
+    visit url('/api/notifications/users/1')
+        expect status_code() == 200
+
+    visit url('/api/notifications/1/users/1')
         expect status_code() == 200

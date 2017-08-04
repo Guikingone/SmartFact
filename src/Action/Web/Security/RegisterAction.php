@@ -23,13 +23,19 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class RegisterAction
 {
-    /** @var WebUserManager */
+    /**
+     * @var WebUserManager
+     */
     private $manager;
 
-    /** @var RequestStack */
+    /**
+     * @var RequestStack
+     */
     private $requestStack;
 
-    /** @var Environment */
+    /**
+     * @var Environment
+     */
     private $templating;
 
     /**

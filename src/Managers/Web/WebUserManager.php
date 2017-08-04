@@ -11,9 +11,9 @@
 
 namespace App\Managers\Web;
 
-use App\Events\Users\UserUpdatedEvent;
 use App\Model\User;
 use App\Events\Users\UserCreatedEvent;
+use App\Events\Users\UserUpdatedEvent;
 use App\Form\Type\Security\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,7 +74,7 @@ class WebUserManager
     /**
      * @param int $id
      *
-     * @return User|null|object
+     * @return User|null
      */
     public function getUserById($id)
     {
@@ -107,6 +107,31 @@ class WebUserManager
         }
 
         return $form->createView();
+    }
+
+    /**
+     * @param string $token
+     * @param int $id
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function validateUser(string $token, int $id)
+    {
+        $user = $this->doctrine->getRepository(User::class)
+                               ->findOneBy([
+                                   'id' => $id,
+                                   'token' => $token
+                               ]);
+
+        if (!$user) {
+            throw new \InvalidArgumentException(
+                \sprintf(
+                    ''
+                )
+            );
+        }
+
+
     }
 
     /**

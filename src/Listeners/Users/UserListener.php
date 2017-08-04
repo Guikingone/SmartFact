@@ -13,6 +13,7 @@ namespace App\Listeners\Users;
 
 use App\Events\Users\UserCreatedEvent;
 use App\Events\Users\UserUpdatedEvent;
+use App\Events\Users\UserValidatedEvent;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -58,11 +59,23 @@ final class UserListener
             return;
         }
 
-        $user->setCreatedAt(new \DateTime());
-        $user->setStatus($user::CREATED);
         $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
         $user->setPassword($password);
-        $user->setValidated(false);
+
+        $token = \uniqid('_token', true);
+        $user->setToken($token);
+    }
+
+    /**
+     * @param UserValidatedEvent $event
+     */
+    public function onUserValidated(UserValidatedEvent $event)
+    {
+        $user = $event->getUser();
+
+        if ($user) {
+            return;
+        }
     }
 
     /**
@@ -75,6 +88,5 @@ final class UserListener
         if (!$user) {
             return;
         }
-
     }
 }

@@ -24,6 +24,14 @@ class User implements SmartFactUserInterface
 {
     const CREATED = 'created';
 
+    const VALIDATED = 'validated';
+
+    const ACTIVATED = 'activated';
+
+    const UPDATED = 'updated';
+
+    const LOCKED = 'locked';
+
     /**
      * @var int
      */
@@ -125,6 +133,10 @@ class User implements SmartFactUserInterface
         $this->clients = new ArrayCollection();
         $this->bills = new ArrayCollection();
         $this->meetups = new ArrayCollection();
+
+        $this->createdAt = new \DateTime();
+        $this->status = static::CREATED;
+        $this->validated = false;
         $this->isActive = true;
     }
 
