@@ -12,11 +12,20 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
 
-    App\Listeners\:
-        resource: '../src/Listeners'
+    App\Listeners\Users\:
+        resource: '../src/Listeners/Users'
+        tags:
+            - { name: kernel.event_listener, event: users.created }
+            - { name: kernel.event_listener, event: users.updated }
+
+    App\Listeners\Bills\:
+        resource: '../src/Listeners/Bills'
         tags:
             - { name: kernel.event_listener, event: bills.created }
             - { name: kernel.event_listener, event: bills.updated }
             - { name: kernel.event_listener, event: bills.deleted }
-            - { name: kernel.event_listener, event: notification.deleted }
-            - { name: kernel.event_listener, event: users.created }
+
+    App\Listeners\Notifications\:
+        resource: '../src/Listeners/Notifications'
+        tags:
+            - { name: kernel.event_listener, event: notifications.deleted }

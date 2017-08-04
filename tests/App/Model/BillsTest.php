@@ -38,14 +38,14 @@ class BillsTest extends TestCase
         $bills->setTva(true);
         $bills->setFile('facture.pdf');
 
-        $this->assertNull($bills->getId());
-        $this->assertInstanceOf(\DateTime::class, $bills->getCreatedAt());
-        $this->assertEquals(new \DateTime('2017-04-31'), $bills->getDate());
-        $this->assertEquals(3000.45, $bills->getTotal());
-        $this->assertFalse($bills->hasBeenSend());
-        $this->assertEquals(new \DateTime('2017-03-02'), $bills->getSendAt());
-        $this->assertTrue($bills->hasTva());
-        $this->assertEquals('facture.pdf', $bills->getFile());
+        static::assertNull($bills->getId());
+        static::assertInstanceOf(\DateTime::class, $bills->getCreatedAt());
+        static::assertEquals(new \DateTime('2017-04-31'), $bills->getDate());
+        static::assertEquals(3000.45, $bills->getTotal());
+        static::assertFalse($bills->hasBeenSend());
+        static::assertEquals(new \DateTime('2017-03-02'), $bills->getSendAt());
+        static::assertTrue($bills->hasTva());
+        static::assertEquals('facture.pdf', $bills->getFile());
     }
 
     /**
@@ -71,9 +71,9 @@ class BillsTest extends TestCase
 
         $bills->setUser($user);
 
-        if ($this->assertInstanceOf(get_class($user), $bills->getUser())) {
-            $this->assertEquals('Potter', $user->getLastName());
-            $this->assertEquals('Harry', $user->getFirstName());
+        if (static::assertInstanceOf(get_class($user), $bills->getUser())) {
+            static::assertEquals('Potter', $user->getLastName());
+            static::assertEquals('Harry', $user->getFirstName());
         }
     }
 
@@ -103,13 +103,13 @@ class BillsTest extends TestCase
 
         $bills->addClients($clients);
 
-        if ($this->assertInstanceOf(get_class($clients), $bills->getClients()->get(0))) {
-            $this->assertEquals('Google', $clients->getName());
-            $this->assertEquals('404 Road Not Found', $clients->getAddress());
+        if (static::assertInstanceOf(get_class($clients), $bills->getClients()->get(0))) {
+            static::assertEquals('Google', $clients->getName());
+            static::assertEquals('404 Road Not Found', $clients->getAddress());
         }
 
         $bills->removeClients($clients);
 
-        $this->assertArrayNotHasKey($clients->getId(), $bills->getClients());
+        static::assertArrayNotHasKey($clients->getId(), $bills->getClients());
     }
 }

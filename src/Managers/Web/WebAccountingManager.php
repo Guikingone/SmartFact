@@ -11,19 +11,12 @@
 
 namespace App\Managers\Web;
 
-// Entity
-use App\Resolvers\User;
-use App\Resolvers\Accounting;
-
-// Form
-use App\Form\Type\NewAccountingType;
-
-// Event
+use App\Model\User;
+use App\Model\Accounting;
+use App\Form\Type\Accounting\NewAccountingType;
 use App\Events\Accounting\NewAccountingEvent;
 use App\Events\Accounting\UpdatedAccountingEvent;
 use App\Events\Accounting\DeletedAccountingEvent;
-
-// Core
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -78,7 +71,7 @@ class WebAccountingManager
      *
      * @param int $id                               The id of the Accounting.
      *
-     * @throws \InvalidArgumentException            Thrown if the identifier doesn't exist.
+     * @throws \InvalidArgumentException            If the identifier doesn't exist.
      *
      * @return Accounting[]|array
      */
@@ -91,7 +84,7 @@ class WebAccountingManager
 
         if (!$accounting) {
             throw new \InvalidArgumentException(
-                sprintf(
+                \sprintf(
                     'This identifier doesn\'t exist !
                             Given %s', $id
                 )

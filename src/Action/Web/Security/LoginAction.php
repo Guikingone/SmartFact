@@ -11,9 +11,9 @@
 
 namespace App\Action\Web\Security;
 
-use App\Form\Type\Security\LoginType;
 
 use Twig\Environment;
+use App\Form\Type\Security\LoginType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -25,13 +25,19 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  */
 class LoginAction
 {
-    /** @var Environment */
+    /**
+     * @var Environment
+     */
     private $templating;
 
-    /** @var FormFactoryInterface */
+    /**
+     * @var FormFactoryInterface
+     */
     private $form;
 
-    /** @var AuthenticationUtils */
+    /**
+     * @var AuthenticationUtils
+     */
     private $authentication;
 
     /**
@@ -44,7 +50,7 @@ class LoginAction
     public function __construct(
         Environment $engine,
         FormFactoryInterface $formFactory,
-        Environment $utils
+        AuthenticationUtils $utils
     ) {
         $this->templating = $engine;
         $this->form = $formFactory;
@@ -61,7 +67,7 @@ class LoginAction
         ]);
 
         return new Response(
-            $this->templating->render(':security:login.html.twig', [
+            $this->templating->render('security/login.html.twig', [
                 'form' => $form->createView(),
                 'errors' => $this->authentication->getLastAuthenticationError()
             ])

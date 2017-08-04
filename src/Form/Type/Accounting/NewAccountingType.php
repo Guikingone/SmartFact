@@ -9,12 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Form\Type;
+namespace App\Form\Type\Accounting;
 
-// Entity
-use App\Resolvers\Accounting;
-
-// Core
+use App\Model\Accounting;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,7 +25,9 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
  */
 class NewAccountingType extends AbstractType
 {
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -40,7 +39,9 @@ class NewAccountingType extends AbstractType
         ;
     }
 
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

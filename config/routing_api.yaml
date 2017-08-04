@@ -5,8 +5,23 @@ api_token_entrypoint:
     defaults: { _controller: App\Action\Api\Security\ApiTokenAction }
 
 accounting:
-   resource: "routes/accounting/routing_accounting.yaml"
+   resource: "routes/api/routing_accounting.yaml"
+
+bills:
+   resource: "routes/api/routing_bills.yaml"
+
+clients:
+   resource: "routes/api/routing_clients.yaml"
+
+meetups:
+   resource: "routes/api/routing_meetup.yaml"
+
+notifications:
+   resource: "routes/api/routing_notifications.yaml"
+
+planning:
+   resource: "routes/api/routing_planning.yaml"
 
 users:
-   resource: "routes/users/routing_users.yaml"
+   resource: "routes/api/routing_users.yaml"
 

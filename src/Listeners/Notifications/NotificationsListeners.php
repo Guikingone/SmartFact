@@ -9,12 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Listeners;
+namespace App\Listeners\Notifications;
 
-// Events
 use App\Events\Notifications\DeletedNotificationEvent;
-
-// Core
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
@@ -47,7 +44,7 @@ class NotificationsListeners
     /**
      * @param DeletedNotificationEvent $event
      */
-    public function onDeletedNotification(DeletedNotificationEvent $event)
+    public function onNotificationsDeleted(DeletedNotificationEvent $event)
     {
         $notification = $event->getNotification();
 

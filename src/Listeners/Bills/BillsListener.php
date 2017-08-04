@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Listeners;
+namespace App\Listeners\Bills;
 
 // Events
 use App\Events\Bills\NewBillsEvent;

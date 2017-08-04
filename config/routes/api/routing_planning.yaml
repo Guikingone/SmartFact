@@ -1,0 +1,30 @@
+# Planning
+api_planning:
+    path:    '/planning'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Planning\GetPlanningsAction }
+
+api_planning_single:
+    path:    '/planning/{id}'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Planning\GetPlanningAction }
+
+api_planning_single_post:
+    path:    '/planning/post'
+    methods: ['POST']
+    defaults: { _controller: App\Action\Api\Planning\PostPlanningAction }
+
+api_planning_single_put:
+    path:    '/planning/{id}/put'
+    methods: ['PUT']
+    defaults: { _controller: App\Action\Api\Planning\PutPlanningAction }
+
+api_planning_single_patch:
+    path:    '/planning/{id}/patch'
+    methods: ['PATCH']
+    defaults: { _controller: App\Action\Api\Planning\PatchPlanningAction }
+
+api_planning_single_delete:
+    path:    '/planning/{id}/delete'
+    methods: ['DELETE']
+    defaults: { _controller: App\Action\Api\Planning\DeletePlanningAction }

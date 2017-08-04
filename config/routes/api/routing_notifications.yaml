@@ -1,0 +1,30 @@
+# Notifications
+api_notifications:
+    path:    '/notifications'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Notifications\GetNotificationsAction }
+
+api_notifications_single:
+    path:    '/notifications/{id}/user/{userId}'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Notifications\getNotificationAction }
+
+api_notifications_single_post:
+    path:    '/notifications/users/{id}/post'
+    methods: ['POST']
+    defaults: { _controller: App\Action\Api\Notifications\PostNotificationsAction }
+
+api_notifications_single_put:
+    path:    '/notifications/{id}/users/{userId}/put'
+    methods: ['PUT']
+    defaults: { _controller: App\Action\Api\Notifications\PutNotificationsAction }
+
+api_notifications_single_patch:
+    path:    '/notifications/{id}/users/{userId}/patch'
+    methods: ['PATCH']
+    defaults: { _controller: App\Action\Api\Notifications\PatchNotificationsAction }
+
+api_notifications_single_delete:
+    path:    '/notifications/{id}/users/{userId}/delete'
+    methods: ['DELETE']
+    defaults: { _controller: App\Action\Api\Notifications\DeleteNotificationsAction }

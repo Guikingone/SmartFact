@@ -27,7 +27,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class WebUserManager
 {
-
     /**
      * @var EntityManagerInterface
      */
@@ -99,7 +98,10 @@ class WebUserManager
 
         if ($form->isSubmitted() && $form->isValid()) {
             $event = new UserCreatedEvent($user);
-            $this->eventDispatcher->dispatch($event, UserCreatedEvent::NAME);
+            $this->eventDispatcher->dispatch(
+                UserCreatedEvent::NAME,
+                $event
+            );
             $this->doctrine->persist($user);
             $this->doctrine->flush();
         }
@@ -136,7 +138,10 @@ class WebUserManager
 
         if ($form->isSubmitted() && $form->isValid()) {
             $event = new UserUpdatedEvent($user);
-            $this->eventDispatcher->dispatch($event, UserUpdatedEvent::NAME);
+            $this->eventDispatcher->dispatch(
+                UserUpdatedEvent::NAME,
+                $event
+            );
             $this->doctrine->flush();
         }
 

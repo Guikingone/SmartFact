@@ -17,9 +17,8 @@ scenario
         expect status_code() == 200
 
     submit button("Submit")
-        param register[firstname] "Harry"
-        param register[lastname] "Potter"
         param register[username] "HP"
+        param register[email] "hp@poudlard.com"
         param register[plainPassword][first] "Ie1FDLP"
         param register[plainPassword][second] "Ie1FDLP"
 

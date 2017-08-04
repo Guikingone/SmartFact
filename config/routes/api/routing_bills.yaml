@@ -1,0 +1,30 @@
+# Accounting
+api_bills:
+    path:    '/bills'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Bills\GetBillsAction }
+
+api_bills_single:
+    path:    '/bills/{id}'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Bills\GetBillAction }
+
+api_bills_single_post:
+    path:    '/bills/post'
+    methods: ['POST']
+    defaults: { _controller: App\Action\Api\Bills\PostBillsAction }
+
+api_bills_single_put:
+    path:    '/bills/{id}/put'
+    methods: ['PUT']
+    defaults: { _controller: App\Action\Api\Bills\PutBillsAction }
+
+api_bills_single_patch:
+    path:    '/bills/{id}/patch'
+    methods: ['PATCH']
+    defaults: { _controller: App\Action\Api\Bills\PatchBillsAction }
+
+api_bills_single_delete:
+    path:    '/bills/{id}/delete'
+    methods: ['DELETE']
+    defaults: { _controller: App\Action\Api\Bills\DeleteBillsAction }

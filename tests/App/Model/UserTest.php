@@ -11,28 +11,28 @@
 
 namespace tests\App\Resolvers;
 
+use App\Model\User;
 use App\Model\Bills;
 use App\Model\Meetup;
 use App\Model\Clients;
 use App\Model\Planning;
 use App\Model\Accounting;
 use App\Model\Notifications;
-use App\Resolvers\UserResolver;
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 /**
- * Class UserResolverTest
+ * Class UserTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class UserResolverTest extends TestCase
+class UserTest extends TestCase
 {
     /**
      * Test the instantiation of the User entity.
      */
     public function testUserInstance()
     {
-        $user = new UserResolver();
+        $user = new User();
 
         $user->setFirstname('Harry');
         $user->setLastname('Potter');
@@ -73,7 +73,7 @@ class UserResolverTest extends TestCase
      */
     public function testUserNotifications()
     {
-        $user = new UserResolver();
+        $user = new User();
         $notification = $this->createMock(Notifications::class);
 
         $user->setFirstname('Harry');
@@ -118,7 +118,7 @@ class UserResolverTest extends TestCase
      */
     public function testUserBills()
     {
-        $user = new UserResolver();
+        $user = new User();
         $bills = $this->createMock(Bills::class);
 
         $user->setFirstname('Harry');
@@ -155,7 +155,7 @@ class UserResolverTest extends TestCase
      */
     public function testUserPlanning()
     {
-        $user = new UserResolver();
+        $user = new User();
         $planning = $this->createMock(Planning::class);
 
         $user->setFirstname('Harry');
@@ -191,7 +191,7 @@ class UserResolverTest extends TestCase
      */
     public function testUserMeetups()
     {
-        $user = new UserResolver();
+        $user = new User();
         $meetup = $this->createMock(Meetup::class);
 
         $user->setFirstname('Harry');
@@ -230,7 +230,7 @@ class UserResolverTest extends TestCase
      */
     public function testUserClients()
     {
-        $user = new UserResolver();
+        $user = new User();
         $clients = $this->createMock(Clients::class);
 
         $user->setFirstname('Harry');
@@ -273,7 +273,7 @@ class UserResolverTest extends TestCase
      */
     public function testUserAccounting()
     {
-        $user = new UserResolver();
+        $user = new User();
         $accounting = $this->createMock(Accounting::class);
 
         $user->setFirstname('Harry');
