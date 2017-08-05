@@ -28,7 +28,7 @@ App\Model\Accounting:
             nullable: false
 
     referenceMany:
-        user:
-            targetdocument: App\Model\User
+        users:
+            targetDocument: App\Model\User
             mappedBy: accounting
 

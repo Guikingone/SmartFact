@@ -54,14 +54,14 @@ class Accounting implements SmartFactAccountingInterface
     /**
      * @var User
      */
-    private $user;
+    private $users;
 
     /**
      * Accounting constructor.
      */
     public function __construct()
     {
-        $this->user = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     /**
@@ -157,7 +157,7 @@ class Accounting implements SmartFactAccountingInterface
      */
     public function addUser(User $user)
     {
-        $this->user[] = $user;
+        $this->users[] = $user;
 
         return $this;
     }
@@ -167,7 +167,7 @@ class Accounting implements SmartFactAccountingInterface
      */
     public function removeUser(User $user)
     {
-        $this->user->removeElement($user);
+        $this->users->removeElement($user);
     }
 
     /**
@@ -175,6 +175,6 @@ class Accounting implements SmartFactAccountingInterface
      */
     public function getUser()
     {
-        return $this->user;
+        return $this->users;
     }
 }

@@ -13,5 +13,5 @@ doctrine_mongodb:
                     is_bundle: false
                     type: 'yml'
                     dir: '%kernel.project_dir%/src/Resources/config/doctrine/mongo'
-                    prefix: App\Model\
+                    prefix: App\Model
                     alias: App
