@@ -38,6 +38,15 @@ services:
             - './:${WORKPATH}:rw'
         restart: always
 
+    redis:
+        container_name: ${CONTAINER_NAME}_redis
+        image: redis
+        ports:
+          - '${REDIS_PORT}:6379'
+        links:
+          - debian
+        restart: always
+
     # DB configuration
     mysql:
         container_name: ${CONTAINER_NAME}_mysql
@@ -52,6 +61,17 @@ services:
             - '${MYSQL_PORT}:3306'
         volumes:
             - 'mysql_louvre_smartfact:/var/lib/mysql'
+        restart: always
+
+    mongodb:
+        container_name: ${CONTAINER_NAME}_mongodb
+        image: mongo
+        ports:
+          - '${MONGO_PORT}:27017'
+        links:
+          - debian
+        volumes:
+          - 'mongodb_smartfact:/data/db'
         restart: always
 
     # Testing configuration
@@ -69,3 +89,4 @@ services:
 
 volumes:
     mysql_louvre_smartfact:
+    mongodb_smartfact:

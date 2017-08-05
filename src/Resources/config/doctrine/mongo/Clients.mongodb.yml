@@ -1,0 +1,36 @@
+App\Model\Clients:
+    type: document
+    collection: _smartfact_clients
+    fields:
+        id:
+            type: id
+            id: true
+            strategy: AUTO
+        name:
+            type: string
+            length: 200
+            nullable: false
+        address:
+            type: string
+            length: 150
+            nullable: true
+        phoneNumber:
+            type: string
+            length: 15
+            nullable: true
+        prestationType:
+            type: string
+            length: 150
+            nullable: false
+
+    referenceOne:
+        user:
+            targetDocument: App\Model\User
+            inversedBy: clients
+    referenceMany:
+        bills:
+            targetDocument: App\Model\Bills
+            mappedBy: clients
+        meetups:
+            targetDocument: App\Model\Meetup
+            mappedBy: clients

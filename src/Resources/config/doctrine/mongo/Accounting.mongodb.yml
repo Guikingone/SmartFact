@@ -1,0 +1,34 @@
+App\Model\Accounting:
+    type: document
+    collection: _smartfact_accounting
+    fields:
+        id:
+            type: id
+            id: true
+            strategy: AUTO
+        name:
+            type: string
+            length: 200
+            nullable: false
+        interlocutor:
+            type: string
+            length: 200
+            nullable: false
+        address:
+            type: string
+            length: 255
+            nullable: true
+        phoneNumber:
+            type: string
+            length: 15
+            nullable: true
+        email:
+            type: string
+            length: 255
+            nullable: false
+
+    referenceMany:
+        user:
+            targetdocument: App\Model\User
+            mappedBy: accounting
+

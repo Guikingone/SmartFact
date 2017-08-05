@@ -1,0 +1,81 @@
+App\Model\User:
+    type: document
+    collection: _smartfact_notifications
+    fields:
+        id:
+            type: id
+            id: true
+            strategy: AUTO
+        firstname:
+            type: string
+            length: 255
+            nullable: true
+        lastname:
+            type: string
+            length: 200
+            nullable: true
+        address:
+            type: string
+            length: 255
+            nullable: true
+        phoneNumber:
+            type: string
+            length: 15
+            nullable: true
+        email:
+            type: string
+            length: 150
+            nullable: false
+        birthdate:
+            type: date
+            nullable: true
+        status:
+            type: string
+            length: 150
+            nullable: false
+        createdAt:
+            type: datetime
+            nullable: false
+        validated:
+            type: boolean
+            nullable: false
+        isActive:
+            type: boolean
+            nullable: false
+        username:
+            type: string
+            length: 100
+            nullable: false
+        password:
+            type: string
+            length: 150
+            nullable: false
+        token:
+            type: string
+            length: 150
+            nullable: false
+        roles:
+            type: array
+            nullable: false
+
+    referenceOne:
+        planning:
+            targetDocument: App\Model\Planning
+            mappedBy: users
+        accounting:
+            targetDocument: App\Model\Accounting
+            inversedBy: users
+
+    referenceMany:
+        notifications:
+            targetDocument: App\Model\Notifications
+            mappedBy: users
+        clients:
+            targetDocument: App\Model\Clients
+            mappedBy: users
+        bills:
+            targetDocument: App\Model\Bills
+            mappedBy: users
+        meetups:
+            targetDocument: App\Model\Meetup
+            mappedBy: users

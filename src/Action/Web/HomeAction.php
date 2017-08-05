@@ -21,7 +21,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class HomeAction
 {
-    /** @var Environment */
+    /**
+     * @var Environment
+     */
     private $twig;
 
     /**

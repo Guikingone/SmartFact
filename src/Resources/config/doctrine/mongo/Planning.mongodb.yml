@@ -1,0 +1,22 @@
+App\Model\Planning:
+    type: document
+    collection: _smartfact_notifications
+    fields:
+        id:
+            type: id
+            id: true
+            strategy: AUTO
+        period:
+            type: string
+            length: 10
+            nullable: false
+
+    referenceMany:
+        meetups:
+            targetDocument: App\Model\Meetup
+            mappedBy: planning
+
+    referenceOne:
+        user:
+            targetDocument: App\Model\User
+            inversedBy: planning

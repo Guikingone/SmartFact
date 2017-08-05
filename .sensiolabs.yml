@@ -1,1 +1,20 @@
 php_version: 7.1
+
+pre_composer_script: |
+    yes '' | pecl install mongodb
+    #!/bin/bash
+    sudo apt-get update
+    sudo apt-get install -y libfreetype6-dev \
+                            libjpeg62-turbo-dev \
+                            libmcrypt-dev \
+                            libpng12-dev \
+                            zip \
+                            unzip \
+                            wget \
+                            curl \
+                            libcurl4-openssl-dev \
+                            pkg-config \
+                            libssl-dev
+
+php_ini: |
+    extension=mongo.so

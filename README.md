@@ -7,9 +7,13 @@ applications are available on other repositories._**
 
 ### iOS application
 
+[Smartfact-iOS](https://github.com/Guikingone/SmartFact-IOS)
+
 ### Android application
 
 ### Ionic application
+
+[SmartFact-Ionic](https://github.com/Guikingone/SmartFact-Ionic)
 
 ## About
 
@@ -71,7 +75,7 @@ tested and easily maintainable, here's the tools who help the development proces
 
 ## Usage
 
-This project is build using Docker along with PHP, Nginx, Postgres, MySQL, MongoDB and Blackfire.
+This project is build using Docker along with PHP, Nginx, Postgres, MySQL, MongoDB, Redis and Blackfire.
 
 This way, the project can be used in differents ways : 
 

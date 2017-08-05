@@ -11,7 +11,10 @@ RUN apt-get update -y \
                zip \
                unzip \
                wget \
-               curl
+               curl \
+               libcurl4-openssl-dev \
+               pkg-config \
+               libssl-dev
 
 # Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
@@ -32,8 +35,9 @@ COPY conf/php.ini /usr/local/etc/php/
 # Core extensions
 RUN pecl install apcu \
                  xdebug \
+                 mongodb \
     && docker-php-ext-install pdo_mysql opcache json sockets \
-    && docker-php-ext-enable apcu xdebug
+    && docker-php-ext-enable apcu xdebug mongodb.so
 
 # Blackfire (Docker approach)
 RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \

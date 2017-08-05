@@ -1,0 +1,38 @@
+App\Model\Notifications:
+    type: document
+    collection: _smartfact_notifications
+    fields:
+        id:
+            type: id
+            id: true
+            strategy: AUTO
+        name:
+            type: string
+            length: 50
+            nullable: false
+        category:
+            type: string
+            length: 50
+            nullable: false
+        createdAt:
+            type: datetime
+            nullable: false
+        link:
+            type: string
+            length: 200
+            nullable: false
+        content:
+            type: string
+            length: 255
+            nullable: false
+        repetition:
+            type: boolean
+            nullable: false
+        checked:
+            type: boolean
+            nullable: false
+
+    referenceOne:
+        user:
+             targetDocument: App\Model\User
+             inversedBy: notifications

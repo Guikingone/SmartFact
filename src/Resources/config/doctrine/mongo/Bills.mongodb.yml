@@ -1,0 +1,38 @@
+App\Model\Bills:
+    type: document
+    collection: _smartfact_bills
+    fields:
+        id:
+            type: id
+            id: true
+            strategy: AUTO
+        date:
+            type: datetime
+            nullable: false
+        total:
+            type: float
+            nullable: false
+        send:
+            type: boolean
+            nullable: false
+        createdAt:
+            type: datetime
+            nullable: false
+        sendAt:
+            type: datetime
+            nullable: false
+        file:
+            type: string
+            length: 150
+            nullable: false
+        tva:
+            type: boolean
+            nullable: false
+
+    referenceMany:
+        user:
+            targetDocument: App\Model\User
+            inversedBy: bills
+        clients:
+            targetDocument: App\Model\Clients
+            inversedBy: bills
