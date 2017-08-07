@@ -14,7 +14,7 @@ namespace App\Managers\Web;
 use App\Model\User;
 use App\Model\Accounting;
 use App\Form\Type\Accounting\NewAccountingType;
-use App\Events\Accounting\NewAccountingEvent;
+use App\Events\Accounting\PostedAccountingEvent;
 use App\Events\Accounting\UpdatedAccountingEvent;
 use App\Events\Accounting\DeletedAccountingEvent;
 use Doctrine\ORM\EntityManagerInterface;
@@ -110,9 +110,9 @@ class WebAccountingManager
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $event = new NewAccountingEvent($accounting);
+            $event = new PostedAccountingEvent($accounting);
             $this->eventDispatcher->dispatch(
-                NewAccountingEvent::NAME,
+                PostedAccountingEvent::NAME,
                 $event
             );
 

@@ -18,11 +18,11 @@ use App\Model\Accounting;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class NewAccountingEvent
+ * Class PostedAccountingEvent
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class NewAccountingEvent extends Event
+class PostedAccountingEvent extends Event
 {
     const NAME = 'accounting.created';
 
@@ -30,7 +30,7 @@ class NewAccountingEvent extends Event
     public $accounting;
 
     /**
-     * NewAccountingEvent constructor.
+     * PostedAccountingEvent constructor.
      *
      * @param Accounting $accounting
      */

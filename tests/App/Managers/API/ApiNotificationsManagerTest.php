@@ -11,10 +11,7 @@
 
 namespace tests\AppBundle\Managers\API;
 
-// Manager
 use App\Managers\API\ApiNotificationsManager;
-
-// Core
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
@@ -24,7 +21,9 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 class ApiNotificationsManagerTest extends KernelTestCase
 {
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     public function setUp()
     {
         static::bootKernel();
@@ -38,7 +37,7 @@ class ApiNotificationsManagerTest extends KernelTestCase
         $manager = static::$kernel->getContainer()
                                   ->get(ApiNotificationsManager::class);
 
-        $this->assertInstanceOf(ApiNotificationsManager::class, $manager);
+        static::assertInstanceOf(ApiNotificationsManager::class, $manager);
     }
 
     /**
@@ -49,10 +48,10 @@ class ApiNotificationsManagerTest extends KernelTestCase
         $manager = static::$kernel->getContainer()
             ->get(ApiNotificationsManager::class);
 
-        if ($this->assertInstanceOf(ApiNotificationsManager::class, $manager)) {
+        if (static::assertInstanceOf(ApiNotificationsManager::class, $manager)) {
             $clone = $this->createMock(get_class($manager));
-            $this->assertObjectHasAttribute('serializer', $clone);
-            $this->assertObjectHasAttribute('doctrine', $clone);
+            static::assertObjectHasAttribute('serializer', $clone);
+            static::assertObjectHasAttribute('doctrine', $clone);
         }
     }
 }

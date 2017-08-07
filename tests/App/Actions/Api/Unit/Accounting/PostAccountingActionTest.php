@@ -9,19 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Api\Unit\Accounting;
+namespace App\Tests\App\Actions\Api\Unit\Accounting;
 
-use App\Action\Api\Accounting\GetAccountingAction;
+use App\Action\Api\Accounting\PostAccountingAction;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
- * Class GetAccountingActionTest
+ * Class PostAccountingActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class GetAccountingActionTest extends KernelTestCase
+class PostAccountingActionTest extends KernelTestCase
 {
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     public function setUp()
     {
         static::bootKernel();
@@ -33,9 +35,9 @@ class GetAccountingActionTest extends KernelTestCase
     public function testContainerReturn()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(GetAccountingAction::class);
+                                 ->get(PostAccountingAction::class);
 
-        static::assertInstanceOf(GetAccountingAction::class, $action);
+        static::assertInstanceOf(PostAccountingAction::class, $action);
     }
 
     /**
@@ -44,7 +46,7 @@ class GetAccountingActionTest extends KernelTestCase
     public function testObjectHasAttributes()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(GetAccountingAction::class);
+                                 ->get(PostAccountingAction::class);
 
         static::assertObjectHasAttribute('manager', $action);
         static::assertObjectHasAttribute('requestStack', $action);

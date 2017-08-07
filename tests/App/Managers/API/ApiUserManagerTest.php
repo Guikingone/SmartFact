@@ -21,7 +21,9 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 class ApiUserManagerTest extends KernelTestCase
 {
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     public function setUp()
     {
         self::bootKernel();
@@ -35,7 +37,7 @@ class ApiUserManagerTest extends KernelTestCase
         $manager = static::$kernel->getContainer()
                                   ->get(ApiUserManager::class);
 
-        $this->assertInstanceOf(ApiUserManager::class, $manager);
+        static::assertInstanceOf(ApiUserManager::class, $manager);
     }
 
     /**
@@ -46,10 +48,10 @@ class ApiUserManagerTest extends KernelTestCase
         $manager = static::$kernel->getContainer()
                                   ->get(ApiUserManager::class);
 
-        if ($this->assertInstanceOf(ApiUserManager::class, $manager)) {
+        if (static::assertInstanceOf(ApiUserManager::class, $manager)) {
             $clone = $this->createMock(get_class($manager));
-            $this->assertObjectHasAttribute('serializer', $clone);
-            $this->assertObjectHasAttribute('doctrine', $clone);
+            static::assertObjectHasAttribute('serializer', $clone);
+            static::assertObjectHasAttribute('doctrine', $clone);
         }
     }
 }

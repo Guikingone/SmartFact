@@ -14,6 +14,8 @@ namespace App\Managers\API;
 use App\Model\Accounting;
 use App\Exceptions\ApiJsonException;
 use Doctrine\ODM\MongoDB\DocumentManager;
+use App\Events\Accounting\PostedAccountingEvent;
+use App\Events\Accounting\UpdatedAccountingEvent;
 use App\Events\Accounting\DeletedAccountingEvent;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -69,7 +71,7 @@ class ApiAccountingManager
     /**
      * Return all the Accounting.
      *
-     * @return string
+     * @return string           All the accounting stored.
      */
     public function getAccountings() : string
     {
@@ -105,11 +107,11 @@ class ApiAccountingManager
     }
 
     /**
-     * @param array $data
+     * @param array $data         The data passed for instantiating.
      *
-     * @throws ApiJsonException
+     * @throws ApiJsonException   Ff no data are passed.
      *
-     * @return array|object
+     * @return array|object       The representation of the resource created.
      */
     public function postAccounting(array $data)
     {
@@ -135,10 +137,93 @@ class ApiAccountingManager
             'json'
         );
 
+        $clone = $this->documentManager->getRepository(Accounting::class)
+                                       ->findOneBy([
+                                           'name' => $entity->getName()
+                                       ]);
+
+        if ($clone) {
+            return [
+                'message' => 'Resource already exist !',
+                'resource' => $clone
+            ];
+        }
+
+        $event = new PostedAccountingEvent($entity);
+        $this->dispatcher->dispatch($event::NAME, $event);
+
         $this->documentManager->persist($entity);
         $this->documentManager->flush();
 
         return $entity;
+    }
+
+    /**
+     * @param array $data           The date passed to update the entity.
+     * @param int $id               The id of the resource to update.
+     *
+     * @throws ApiJsonException     If no resource is found.
+     */
+    public function putAccounting(array $data, int $id)
+    {
+        $entity = $this->documentManager->getRepository(Accounting::class)
+                                        ->findOneBy([
+                                            'id' => $id
+                                        ]);
+
+        if (!$entity) {
+            $accounting = $this->serializer->deserialize(
+                $data,
+                Accounting::class,
+                'json'
+            );
+
+            $clone = $this->documentManager->getRepository(Accounting::class)
+                                           ->findOneBy([
+                                               'name' => $accounting->getName()
+                                           ]);
+
+            if ($clone) {
+                return [
+                    'message' => 'Resource already exist !',
+                    'resource' => $clone
+                ];
+            }
+
+            $event = new PostedAccountingEvent($accounting);
+            $this->dispatcher->dispatch($event::NAME, $event);
+
+            $this->documentManager->persist($accounting);
+            $this->documentManager->flush();
+        }
+
+        $this->serializer->deserialize(
+            $data,
+            $entity,
+            'json'
+        );
+
+        $event = new UpdatedAccountingEvent($entity);
+        $this->dispatcher->dispatch($event::NAME, $event);
+
+        $this->documentManager->flush();
+    }
+
+    /**
+     * @param array $data
+     * @param int $id
+     */
+    public function patchAccounting(array $data, int $id)
+    {
+        $entity = $this->documentManager->getRepository(Accounting::class)
+                                        ->findOneBy([
+                                            'id' => $id
+                                        ]);
+
+        if (!$entity) {
+
+        }
+
     }
 
     /**

@@ -82,8 +82,6 @@ services:
           - debian
         volumes:
             - './:${WORKPATH}:rw'
-        ports:
-            - ${NODE_PORT}
         restart: always
 
     # Testing configuration

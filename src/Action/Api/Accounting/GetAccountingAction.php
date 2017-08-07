@@ -47,6 +47,8 @@ final class GetAccountingAction
     }
 
     /**
+     * @throws \InvalidArgumentException
+     *
      * @return Response
      */
     public function __invoke()

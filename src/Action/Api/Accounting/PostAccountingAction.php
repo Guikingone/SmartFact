@@ -12,6 +12,7 @@
 namespace App\Action\Api\Accounting;
 
 use App\Managers\API\ApiUserManager;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
 

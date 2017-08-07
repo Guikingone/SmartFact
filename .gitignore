@@ -28,3 +28,6 @@ src/Entity/*.php~
 
 # JWT
 config/jwt/*
+
+# Node
+/node_modules/

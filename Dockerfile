@@ -1,6 +1,6 @@
 FROM debian
 
-ENV WORKDIR "/var/www/smartact"
+ENV WORKDIR "/var/www/smartfact"
 
 ADD . ${WORKDIR}
 

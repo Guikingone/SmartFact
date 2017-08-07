@@ -38,12 +38,12 @@ class GetAccountingsActionTest extends WebTestCase
     {
         $this->client->request('GET', '/api/accountings');
 
-        $this->assertEquals(
+        static::assertEquals(
             Response::HTTP_OK,
             $this->client->getResponse()->getStatusCode()
         );
 
-        $this->assertTrue(
+        static::assertTrue(
             $this->client->getResponse()->headers->contains(
                 'Content-Type',
                 'application/json'

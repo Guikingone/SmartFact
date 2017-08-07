@@ -9,19 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Api\Functionnal\Accounting;
+namespace App\Tests\App\Actions\Api\Functionnal\Accounting;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class GetAccountingActionTest
+ * Class PostAccountingsActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class GetAccountingActionTest extends WebTestCase
+class PostAccountingsActionTest extends WebTestCase
 {
-    /** @var null */
+    /**
+     * @var null
+     */
     private $client = null;
 
     /**
@@ -33,15 +35,20 @@ class GetAccountingActionTest extends WebTestCase
     }
 
     /**
-     * Test if the Response return the right
-     * status code and headers.
+     * Test if the API respond with the right headers.
      */
-    public function testResponseStatusCodeAndHeaders()
+    public function testResponse()
     {
-        $this->client->request('GET', '/api/accountings/1');
+        $this->client->request('POST', '/api/accountings/post', [], [], [], [
+            'name' => 'TestAccounting',
+            'interlocutor' => 'Mr Test',
+            'address' => '404 Not Found',
+            'phoneNumber' => '0875645336',
+            'email' => 'mrtest@testaccounting.com'
+        ]);
 
         static::assertEquals(
-            Response::HTTP_OK,
+            Response::HTTP_CREATED,
             $this->client->getResponse()->getStatusCode()
         );
 
