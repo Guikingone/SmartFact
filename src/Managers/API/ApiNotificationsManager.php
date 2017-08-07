@@ -11,12 +11,10 @@
 
 namespace App\Managers\API;
 
-use Doctrine\ORM\EntityManagerInterface;
+use App\Model\Notifications;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-
-// Entity
-use App\Resolvers\Notifications;
 
 /**
  * Class ApiNotificationsManager
@@ -25,29 +23,35 @@ use App\Resolvers\Notifications;
  */
 class ApiNotificationsManager
 {
-    /** @var SerializerInterface */
+    /**
+     * @var DocumentManager
+     */
+    private $documentManager;
+
+    /**
+     * @var SerializerInterface
+     */
     private $serializer;
 
-    /** @var EntityManagerInterface */
-    private $doctrine;
-
-    /** @var ValidatorInterface */
+    /**
+     * @var ValidatorInterface
+     */
     private $validator;
 
     /**
      * ApiNotificationsManager constructor.
      *
+     * @param DocumentManager           $documentManager
      * @param SerializerInterface       $serializer
-     * @param EntityManagerInterface    $doctrine
      * @param ValidatorInterface        $validator
      */
     public function __construct(
+        DocumentManager $documentManager,
         SerializerInterface $serializer,
-        EntityManagerInterface $doctrine,
         ValidatorInterface $validator
     ) {
+        $this->documentManager = $documentManager;
         $this->serializer = $serializer;
-        $this->doctrine = $doctrine;
         $this->validator = $validator;
     }
 
@@ -60,10 +64,10 @@ class ApiNotificationsManager
      */
     public function getUserNotifications($id)
     {
-        $data = $this->doctrine->getRepository(Notifications::class)
-                               ->findBy([
-                                   'users' => $id
-                               ]);
+        $data = $this->documentManager->getRepository(Notifications::class)
+                                      ->findBy([
+                                          'users' => $id
+                                      ]);
 
         return $this->serializer->serialize(
             $data,
@@ -83,11 +87,11 @@ class ApiNotificationsManager
      */
     public function getUserSingleNotification($id, $notificationId)
     {
-        $data = $this->doctrine->getRepository(Notifications::class)
-                               ->findBy([
-                                   'users' => $id,
-                                   'id' => $notificationId
-                               ]);
+        $data = $this->documentManager->getRepository(Notifications::class)
+                                      ->findBy([
+                                          'users' => $id,
+                                          'id' => $notificationId
+                                      ]);
 
         return $this->serializer->serialize(
             $data,
@@ -114,8 +118,8 @@ class ApiNotificationsManager
             return $errors;
         }
 
-        $this->doctrine->persist($object);
-        $this->doctrine->flush();
+        $this->documentManager->persist($object);
+        $this->documentManager->flush();
 
         return $object;
     }
@@ -133,14 +137,14 @@ class ApiNotificationsManager
      */
     public function deleteUserNotifications($id)
     {
-        $notifications = $this->doctrine->getRepository(Notifications::class)
-                                        ->findBy([
-                                            'users' => $id
-                                        ]);
+        $notifications = $this->documentManager->getRepository(Notifications::class)
+                                               ->findBy([
+                                                   'users' => $id
+                                               ]);
 
         foreach ($notifications as $notification) {
-            $this->doctrine->remove($notification);
+            $this->documentManager->remove($notification);
         }
-        $this->doctrine->flush();
+        $this->documentManager->flush();
     }
 }

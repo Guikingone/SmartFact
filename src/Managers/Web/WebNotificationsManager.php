@@ -12,13 +12,14 @@
 namespace App\Managers\Web;
 
 // Entity
-use App\Resolvers\Notifications;
+use App\Model\User;
+use App\Model\Notifications;
 
 // Event
-use App\Resolvers\User;
 use App\Events\Notifications\DeletedNotificationEvent;
 
-use Doctrine\ORM\EntityManagerInterface;
+// Core
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -29,28 +30,34 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class WebNotificationsManager
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    /**
+     * @var DocumentManager
+     */
+    private $documentManager;
 
-    /** @var FormFactoryInterface */
+    /**
+     * @var FormFactoryInterface
+     */
     private $form;
 
-    /** @var EventDispatcherInterface */
+    /**
+     * @var EventDispatcherInterface
+     */
     private $eventDispatcher;
 
     /**
      * WebNotificationsManager constructor.
      *
-     * @param EntityManagerInterface        $entityManager
+     * @param DocumentManager               $documentManager
      * @param FormFactoryInterface          $form
      * @param EventDispatcherInterface      $eventDispatcher
      */
     public function __construct(
-        EntityManagerInterface $entityManager,
+        DocumentManager $documentManager,
         FormFactoryInterface $form,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->entityManager = $entityManager;
+        $this->documentManager = $documentManager;
         $this->form = $form;
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -58,35 +65,35 @@ class WebNotificationsManager
     /**
      * Allow to return all the Notifications linked to an User.
      *
-     * @param int $user                   The id of the User.
+     * @param int $userId                   The id of the User.
      *
      * @return Notifications[]|array
      */
-    public function getNotificationsByUser($user)
+    public function getNotificationsByUser(int $userId)
     {
-        return $this->entityManager->getRepository(Notifications::class)
-                                   ->findBy([
-                                       'users' => $user
-                                   ]);
+        return $this->documentManager->getRepository(Notifications::class)
+                                     ->findBy([
+                                         'users' => $userId
+                                     ]);
     }
 
     /**
      * Allow to return a single Notifications using hid id and the User id.
      *
-     * @param int $user
+     * @param int $userId
      * @param int $id
      *
      * @throws \InvalidArgumentException
      *
      * @return Notifications|null|object
      */
-    public function getSingleNotificationsByUser($user, $id)
+    public function getSingleNotificationsByUser(int $userId, int $id)
     {
-        $notification =  $this->entityManager->getRepository(Notifications::class)
-                                             ->findOneBy([
-                                                 'users' => $user,
-                                                 'id' => $id
-                                             ]);
+        $notification =  $this->documentManager->getRepository(Notifications::class)
+                                               ->findOneBy([
+                                                   'users' => $userId,
+                                                   'id' => $id
+                                               ]);
 
         if (!$notification) {
             throw new \InvalidArgumentException(
@@ -100,22 +107,22 @@ class WebNotificationsManager
         return $notification;
     }
 
-    public function postNewNotification($user)
+    public function postNewNotification(int $userId)
     {
-        if (!is_int($user)) {
+        if (!is_int($userId)) {
             throw new \InvalidArgumentException(
-                sprintf(
+                \sprintf(
                     'This value isn\'t valid !
                             Given %s, expected integer.',
-                    gettype($user)
+                    \gettype($userId)
                 )
             );
         }
 
-        $user = $this->entityManager->getRepository(User::class)
-                                    ->findOneBy([
-                                        'id' => $user
-                                    ]);
+        $user = $this->documentManager->getRepository(User::class)
+                                      ->findOneBy([
+                                          'id' => $userId
+                                      ]);
 
         if (!$user) {
             throw new \LogicException(
@@ -150,11 +157,11 @@ class WebNotificationsManager
             );
         }
 
-        $notification = $this->entityManager->getRepository(Notifications::class)
-                                            ->findOneBy([
-                                                'users' => $user,
-                                                'id' => $id
-                                            ]);
+        $notification = $this->documentManager->getRepository(Notifications::class)
+                                              ->findOneBy([
+                                                  'users' => $user,
+                                                  'id' => $id
+                                              ]);
 
         if (!$notification) {
             throw new \LogicException(
@@ -166,8 +173,8 @@ class WebNotificationsManager
             );
         }
 
-        $this->entityManager->remove($notification);
-        $this->entityManager->flush();
+        $this->documentManager->remove($notification);
+        $this->documentManager->flush();
     }
 
     /**
@@ -189,10 +196,10 @@ class WebNotificationsManager
             );
         }
 
-        $notifications = $this->entityManager->getRepository(Notifications::class)
-                                             ->findBy([
-                                                 'users' => $user
-                                             ]);
+        $notifications = $this->documentManager->getRepository(Notifications::class)
+                                               ->findBy([
+                                                   'users' => $user
+                                               ]);
 
         if (!$notifications) {
             throw new \InvalidArgumentException(
@@ -210,9 +217,9 @@ class WebNotificationsManager
                 $event
             );
 
-            $this->entityManager->remove($notification);
+            $this->documentManager->remove($notification);
         }
 
-        $this->entityManager->flush();
+        $this->documentManager->flush();
     }
 }

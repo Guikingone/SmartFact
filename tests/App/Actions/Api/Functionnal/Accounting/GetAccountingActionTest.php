@@ -38,7 +38,7 @@ class GetAccountingActionTest extends WebTestCase
      */
     public function testResponseStatusCodeAndHeaders()
     {
-        $this->client->request('GET', '/api/accountings/1');
+        $this->client->request('GET', '/api/accounting/1');
 
         static::assertEquals(
             Response::HTTP_OK,

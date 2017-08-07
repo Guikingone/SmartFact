@@ -12,10 +12,17 @@
 namespace App\Managers\Web;
 
 use App\Model\User;
+
+// Events
 use App\Events\Users\UserCreatedEvent;
 use App\Events\Users\UserUpdatedEvent;
+
+// Form
+use App\Form\Type\Users\UpdateUserType;
 use App\Form\Type\Security\RegisterType;
-use Doctrine\ORM\EntityManagerInterface;
+
+// Core
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -28,9 +35,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class WebUserManager
 {
     /**
-     * @var EntityManagerInterface
+     * @var DocumentManager
      */
-    private $doctrine;
+    private $documentManager;
 
     /**
      * @var FormFactoryInterface
@@ -45,16 +52,16 @@ class WebUserManager
     /**
      * WebUserManager constructor.
      *
-     * @param EntityManagerInterface    $doctrine
+     * @param DocumentManager           $documentManager
      * @param FormFactoryInterface      $form
      * @param EventDispatcherInterface  $eventDispatcher
      */
     public function __construct(
-        EntityManagerInterface $doctrine,
+        DocumentManager $documentManager,
         FormFactoryInterface $form,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->doctrine = $doctrine;
+        $this->documentManager = $documentManager;
         $this->form = $form;
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -67,8 +74,8 @@ class WebUserManager
      */
     public function getUsers()
     {
-        return $this->doctrine->getRepository(User::class)
-                              ->findAll();
+        return $this->documentManager->getRepository(User::class)
+                                     ->findAll();
     }
 
     /**
@@ -78,10 +85,10 @@ class WebUserManager
      */
     public function getUserById($id)
     {
-        return $this->doctrine->getRepository(User::class)
-                              ->findOneBy([
-                                  'id' => $id
-                              ]);
+        return $this->documentManager->getRepository(User::class)
+                                     ->findOneBy([
+                                         'id' => $id
+                                     ]);
     }
 
     /**
@@ -102,8 +109,8 @@ class WebUserManager
                 UserCreatedEvent::NAME,
                 $event
             );
-            $this->doctrine->persist($user);
-            $this->doctrine->flush();
+            $this->documentManager->persist($user);
+            $this->documentManager->flush();
         }
 
         return $form->createView();
@@ -117,11 +124,11 @@ class WebUserManager
      */
     public function validateUser(string $token, int $id)
     {
-        $user = $this->doctrine->getRepository(User::class)
-                               ->findOneBy([
-                                   'id' => $id,
-                                   'token' => $token
-                               ]);
+        $user = $this->documentManager->getRepository(User::class)
+                                      ->findOneBy([
+                                          'id' => $id,
+                                          'token' => $token
+                                      ]);
 
         if (!$user) {
             throw new \InvalidArgumentException(
@@ -144,10 +151,10 @@ class WebUserManager
      */
     public function updateUser(Request $request, int $id)
     {
-        $user = $this->doctrine->getRepository(User::class)
-                               ->findOneBy([
-                                   'id' => $id
-                               ]);
+        $user = $this->documentManager->getRepository(User::class)
+                                      ->findOneBy([
+                                          'id' => $id
+                                      ]);
 
         if (!$user) {
             throw new \InvalidArgumentException(
@@ -158,7 +165,7 @@ class WebUserManager
             );
         }
 
-        $form = $this->form->create(UpdatUserType::class, $user);
+        $form = $this->form->create(UpdateUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -167,7 +174,7 @@ class WebUserManager
                 UserUpdatedEvent::NAME,
                 $event
             );
-            $this->doctrine->flush();
+            $this->documentManager->flush();
         }
 
         return $form->createView();
@@ -180,12 +187,12 @@ class WebUserManager
      */
     public function deleteUser($id)
     {
-        $user = $this->doctrine->getRepository(User::class)
-                               ->findOneBy([
-                                   'id' => $id
-                               ]);
+        $user = $this->documentManager->getRepository(User::class)
+                                      ->findOneBy([
+                                          'id' => $id
+                                      ]);
 
-        $this->doctrine->remove($user);
-        $this->doctrine->flush();
+        $this->documentManager->remove($user);
+        $this->documentManager->flush();
     }
 }

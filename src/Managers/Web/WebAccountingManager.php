@@ -17,7 +17,7 @@ use App\Form\Type\Accounting\NewAccountingType;
 use App\Events\Accounting\PostedAccountingEvent;
 use App\Events\Accounting\UpdatedAccountingEvent;
 use App\Events\Accounting\DeletedAccountingEvent;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -29,28 +29,34 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class WebAccountingManager
 {
-    /** @var EntityManagerInterface */
-    private $doctrine;
+    /**
+     * @var DocumentManager
+     */
+    private $documentManager;
 
-    /** @var FormFactoryInterface */
+    /**
+     * @var FormFactoryInterface
+     */
     private $form;
 
-    /** @var EventDispatcherInterface */
+    /**
+     * @var EventDispatcherInterface
+     */
     private $eventDispatcher;
 
     /**
      * WebAccountingManager constructor.
      *
-     * @param EntityManagerInterface $doctrine
-     * @param FormFactoryInterface $form
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param DocumentManager           $documentManager
+     * @param FormFactoryInterface      $form
+     * @param EventDispatcherInterface  $eventDispatcher
      */
     public function __construct(
-        EntityManagerInterface $doctrine,
+        DocumentManager $documentManager,
         FormFactoryInterface $form,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->doctrine = $doctrine;
+        $this->documentManager = $documentManager;
         $this->form = $form;
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -62,8 +68,8 @@ class WebAccountingManager
      */
     public function getAccountings()
     {
-        return $this->doctrine->getRepository(Accounting::class)
-                              ->findAll();
+        return $this->documentManager->getRepository(Accounting::class)
+                                     ->findAll();
     }
 
     /**
@@ -77,10 +83,10 @@ class WebAccountingManager
      */
     public function getAccountingDetails($id)
     {
-        $accounting =  $this->doctrine->getRepository(Accounting::class)
-                                      ->findBy([
-                                          'id' => $id
-                                      ]);
+        $accounting =  $this->documentManager->getRepository(Accounting::class)
+                                             ->findBy([
+                                                 'id' => $id
+                                             ]);
 
         if (!$accounting) {
             throw new \InvalidArgumentException(
@@ -116,8 +122,8 @@ class WebAccountingManager
                 $event
             );
 
-            $this->doctrine->persist($accounting);
-            $this->doctrine->flush();
+            $this->documentManager->persist($accounting);
+            $this->documentManager->flush();
         }
 
         return $form->createView();
@@ -135,10 +141,10 @@ class WebAccountingManager
      */
     public function updateAccounting($id, $request)
     {
-        $accounting = $this->doctrine->getRepository(Accounting::class)
-                                     ->findOneBy([
-                                         'id' => $id
-                                     ]);
+        $accounting = $this->documentManager->getRepository(Accounting::class)
+                                            ->findOneBy([
+                                                'id' => $id
+                                            ]);
 
         if (!$accounting) {
             throw new \LogicException(
@@ -160,7 +166,7 @@ class WebAccountingManager
                 $event
             );
 
-            $this->doctrine->flush();
+            $this->documentManager->flush();
         }
 
         return $form->createView();
@@ -188,10 +194,10 @@ class WebAccountingManager
             );
         }
 
-        $usr = $this->doctrine->getRepository(User::class)
-                               ->findOneBy([
-                                   'id' => $user
-                               ]);
+        $usr = $this->documentManager->getRepository(User::class)
+                                     ->findOneBy([
+                                         'id' => $user
+                                     ]);
 
         if (!$usr) {
             throw new \LogicException(
@@ -201,11 +207,11 @@ class WebAccountingManager
             );
         }
 
-        $accounting = $this->doctrine->getRepository(Accounting::class)
-                                     ->findOneBy([
-                                         'users' => $usr,
-                                         'id' => $id
-                                     ]);
+        $accounting = $this->documentManager->getRepository(Accounting::class)
+                                            ->findOneBy([
+                                                'users' => $usr,
+                                                'id' => $id
+                                            ]);
 
         if (!$accounting) {
             throw new \LogicException(
@@ -224,7 +230,7 @@ class WebAccountingManager
 
         $accounting->removeUser($usr);
 
-        $this->doctrine->flush();
+        $this->documentManager->flush();
     }
 
     /**
@@ -247,10 +253,10 @@ class WebAccountingManager
             );
         }
 
-        $accounting = $this->doctrine->getRepository(Accounting::class)
-                                     ->findOneBy([
-                                         'id' => $id
-                                     ]);
+        $accounting = $this->documentManager->getRepository(Accounting::class)
+                                            ->findOneBy([
+                                                'id' => $id
+                                            ]);
 
         if (!$accounting) {
             throw new \LogicException(
@@ -261,7 +267,7 @@ class WebAccountingManager
             );
         }
 
-        $this->doctrine->remove($accounting);
-        $this->doctrine->flush();
+        $this->documentManager->remove($accounting);
+        $this->documentManager->flush();
     }
 }

@@ -13,7 +13,7 @@ namespace App\Managers\API;
 
 use App\Model\User;
 use App\Exceptions\ApiJsonException;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\SerializerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
@@ -29,9 +29,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 class ApiUserManager
 {
     /**
-     * @var EntityManagerInterface
+     * @var DocumentManager
      */
-    private $doctrine;
+    private $documentManager;
 
     /**
      * @var SerializerInterface
@@ -66,7 +66,7 @@ class ApiUserManager
     /**
      * ApiUserManager constructor.
      *
-     * @param EntityManagerInterface        $doctrine
+     * @param DocumentManager               $doctrine
      * @param SerializerInterface           $serializer
      * @param EventDispatcherInterface      $eventDispatcher
      * @param ValidatorInterface            $validator
@@ -75,7 +75,7 @@ class ApiUserManager
      * @param RequestStack                  $requestStack
      */
     public function __construct(
-        EntityManagerInterface $doctrine,
+        DocumentManager $documentManager,
         SerializerInterface $serializer,
         EventDispatcherInterface $eventDispatcher,
         ValidatorInterface $validator,
@@ -83,7 +83,7 @@ class ApiUserManager
         JWTManager $tokenManager,
         RequestStack $requestStack
     ) {
-        $this->doctrine = $doctrine;
+        $this->documentManager = $documentManager;
         $this->serializer = $serializer;
         $this->eventDispatcher = $eventDispatcher;
         $this->validator = $validator;
@@ -100,8 +100,8 @@ class ApiUserManager
      */
     public function getUsers()
     {
-        $data = $this->doctrine->getRepository(User::class)
-                               ->findAll();
+        $data = $this->documentManager->getRepository(User::class)
+                                      ->findAll();
 
         return $this->serializer->serialize(
             $data,
@@ -119,10 +119,10 @@ class ApiUserManager
      */
     public function getUserById($id)
     {
-        $data = $this->doctrine->getRepository(User::class)
-                               ->findOneBy([
-                                   'id' => $id
-                               ]);
+        $data = $this->documentManager->getRepository(User::class)
+                                      ->findOneBy([
+                                          'id' => $id
+                                      ]);
 
         return $this->serializer->serialize(
             $data,
@@ -149,10 +149,10 @@ class ApiUserManager
             );
         }
 
-        $user = $this->doctrine->getRepository(User::class)
-                               ->findOneBy([
-                                   'username' => $data['username']
-                               ]);
+        $user = $this->documentManager->getRepository(User::class)
+                                      ->findOneBy([
+                                          'username' => $data['username']
+                                      ]);
 
         if (!$user) {
             throw new ApiJsonException(
