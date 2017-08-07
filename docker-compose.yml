@@ -74,6 +74,18 @@ services:
           - 'mongodb_smartfact:/data/db'
         restart: always
 
+    # Frontend
+    node:
+        container_name: ${CONTAINER_NAME}_node
+        image: node
+        links:
+          - debian
+        volumes:
+            - './:${WORKPATH}:rw'
+        ports:
+            - ${NODE_PORT}
+        restart: always
+
     # Testing configuration
     blackfire:
         container_name: ${CONTAINER_NAME}_blackfire

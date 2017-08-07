@@ -23,8 +23,10 @@ class DeletedAccountingEvent extends Event
 {
     const NAME = 'accounting.deleted';
 
-    /** @var Accounting */
-    public $accounting;
+    /**
+     * @var Accounting
+     */
+    private $accounting;
 
     /**
      * DeletedAccountingEvent constructor.

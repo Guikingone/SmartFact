@@ -9,4 +9,5 @@ return [
     'Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle' => ['all' => true],
     'Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle' => ['all' => true],
     'Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle' => ['all' => true],
+    'Snc\RedisBundle\SncRedisBundle' => ['all' => true],
 ];

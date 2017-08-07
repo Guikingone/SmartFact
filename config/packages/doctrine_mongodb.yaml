@@ -3,7 +3,7 @@ doctrine_mongodb:
     auto_generate_hydrator_classes: '%kernel.debug%'
     connections:
         default:
-            server: '%env(MONGODB_URL)%'
+            server: '%env(MONGODB_URL_DEV)%'
             options: {}
     document_managers:
         default:

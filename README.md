@@ -117,6 +117,16 @@ docker exec -it project_php-fpm sh
 composer install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress --no-suggest
 composer clear-cache
 composer dump-autoload --optimize --classmap-authoritative --no-dev
+
+# Configure BDD
+./bin/console d:m:s:c # for MongoDB users
+./bin/console d:s:c # for classic users
+```
+
+As this project use NodeJS for frontend assets, we need to build the assets : 
+
+```bash
+// TODO
 ```
 
 Once this is done, access the project via your browser : 
@@ -246,6 +256,10 @@ this way, this way, the logic can be tested away from the api if you work on the
 In order to be effective and help to improve the application, you MUST write tests for both
 version (production and development) and both "part" (API and Web) if your features is 
 concerned by both parts.
+
+## Frontend assets
+
+To define
 
 ## Production
 

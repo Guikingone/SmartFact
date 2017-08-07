@@ -13,9 +13,11 @@ namespace App\Managers\API;
 
 use App\Model\Accounting;
 use App\Exceptions\ApiJsonException;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use App\Events\Accounting\DeletedAccountingEvent;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class ApiAccountingManager
@@ -25,9 +27,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class ApiAccountingManager
 {
     /**
-     * @var EntityManagerInterface
+     * @var DocumentManager
      */
-    private $doctrine;
+    private $documentManager;
 
     /**
      * @var ValidatorInterface
@@ -40,22 +42,29 @@ class ApiAccountingManager
     private $serializer;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    private $dispatcher;
+
+    /**
      * ApiAccountingManager constructor.
      *
-     * @param EntityManagerInterface        $doctrine
-     * @param ValidatorInterface            $validator
-     * @param SerializerInterface           $serializer
+     * @param DocumentManager           $documentManager
+     * @param ValidatorInterface        $validator
+     * @param SerializerInterface       $serializer
+     * @param EventDispatcherInterface  $dispatcher
      */
     public function __construct(
-        EntityManagerInterface $doctrine,
+        DocumentManager $documentManager,
         ValidatorInterface $validator,
-        SerializerInterface $serializer
+        SerializerInterface $serializer,
+        EventDispatcherInterface $dispatcher
     ) {
-        $this->doctrine = $doctrine;
+        $this->documentManager = $documentManager;
         $this->validator = $validator;
         $this->serializer = $serializer;
+        $this->dispatcher = $dispatcher;
     }
-
 
     /**
      * Return all the Accounting.
@@ -64,8 +73,8 @@ class ApiAccountingManager
      */
     public function getAccountings() : string
     {
-        $data = $this->doctrine->getRepository(Accounting::class)
-                               ->findAll();
+        $data = $this->documentManager->getRepository(Accounting::class)
+                                      ->findAll();
 
         return $this->serializer->serialize(
             $data,
@@ -77,16 +86,16 @@ class ApiAccountingManager
     /**
      * Return a single Accounting using his id.
      *
-     * @param int $id
+     * @param int $id           The id of the Accounting requested.
      *
-     * @return string
+     * @return string           The informations relatives to the Accounting (serialized).
      */
     public function getAccounting(int $id) : string
     {
-        $data = $this->doctrine->getRepository(Accounting::class)
-                               ->findOneBy([
-                                   'id' => $id
-                               ]);
+        $data = $this->documentManager->getRepository(Accounting::class)
+                                      ->findOneBy([
+                                          'id' => $id
+                                      ]);
 
         return $this->serializer->serialize(
             $data,
@@ -126,23 +135,43 @@ class ApiAccountingManager
             'json'
         );
 
-        $this->doctrine->persist($entity);
-        $this->doctrine->flush();
+        $this->documentManager->persist($entity);
+        $this->documentManager->flush();
 
         return $entity;
     }
 
     /**
-     * @param int $id
+     * @param int $id               The id of the Accounting to delete.
+     *
+     * @throws ApiJsonException     If the accounting doesn't exist.
+     *
+     * @return array                The success message send to the client.
      */
     public function deleteAccounting(int $id)
     {
-        $accounting = $this->doctrine->getRepository(Accounting::class)
-                                     ->findOneBy([
-                                         'id' => $id
-                                     ]);
+        $accounting = $this->documentManager->getRepository(Accounting::class)
+                                            ->findOneBy([
+                                                'id' => $id
+                                            ]);
 
-        $this->doctrine->remove($accounting);
-        $this->doctrine->flush();
+        if (!$accounting) {
+            throw new ApiJsonException(
+                \sprintf(
+                    'The identifier doesn\'t return any entry ! Given %d', $id
+                )
+            );
+        }
+
+        $this->documentManager->remove($accounting);
+
+        $event = new DeletedAccountingEvent($accounting);
+        $this->dispatcher->dispatch($event::NAME, $event);
+
+        $this->documentManager->flush();
+
+        return [
+            'message' => 'Resource deleted !'
+        ];
     }
 }
