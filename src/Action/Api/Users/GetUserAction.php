@@ -24,10 +24,14 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class GetUserAction
 {
-    /** @var ApiUserManager */
+    /**
+     * @var ApiUserManager
+     */
     private $manager;
 
-    /** @var RequestStack */
+    /**
+     * @var RequestStack
+     */
     private $request;
 
     /**
@@ -45,6 +49,8 @@ final class GetUserAction
     }
 
     /**
+     * @throws \InvalidArgumentException
+     *
      * @return Response
      */
     public function __invoke()

@@ -10,7 +10,6 @@
  */
 
 use Behat\Behat\Context\Context;
-use Behat\Gherkin\Node\PyStringNode;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -46,17 +45,17 @@ final class ApiContext implements Context
      *
      * @param string        $path
      * @param string        $method
-     * @param PyStringNode  $body
+     * @param string        $body
      *
      * @throws \Exception
      */
     public function iSendARequestToUsingMethodAndWithBody(
         string $path,
         string $method,
-        PyStringNode $body
+        string $body
     ) {
         $this->response = $this->kernel->handle(
-            Request::create($path, $method, json_decode($body->getRaw(), true))
+            Request::create($path, $method, [], [], [], [], json_decode($body, true))
         );
     }
 
@@ -104,13 +103,13 @@ final class ApiContext implements Context
     }
 
     /**
-     * @Then the body must contain :
+     * @Then the body must contain :string
      *
-     * @param PyStringNode $body
+     * @param string $body
      *
      * @throws \LogicException
      */
-    public function theBodyMustContain(PyStringNode $body)
+    public function theBodyMustContain(string $body)
     {
         if ($this->response->getContent() !== $body) {
             throw new \LogicException(

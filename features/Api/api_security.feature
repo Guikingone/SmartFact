@@ -21,12 +21,3 @@ Feature:
     }
     """
     Then the response should have status code 200 and be typed 'application/json'
-
-  Scenario: I send a request to the api user lists
-    When i send a request to "/api/users" using "GET" method
-    Then the response should have status code 200 and be typed 'application/json'
-    Then the body must contain :
-    """
-    []
-    """
-

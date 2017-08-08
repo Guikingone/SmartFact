@@ -48,11 +48,13 @@ final class PostAccountingAction
     }
 
     /**
+     * @throws \InvalidArgumentException
+     *
      * @return Response
      */
     public function __invoke()
     {
-        $data = json_decode(
+        $data = \json_decode(
             $this->requestStack->getCurrentRequest()->getContent(),
             true
         );
