@@ -13,6 +13,7 @@ namespace App\Managers\API;
 
 use App\Model\User;
 use App\Exceptions\ApiJsonException;
+use App\Events\Users\UserCreatedEvent;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -170,10 +171,89 @@ class ApiUserManager
     }
 
     /**
-     * @param array $data
+     * @param string $data
+     *
+     * @throws ApiJsonException        If no data are passed.
+     *
+     * @return string
      */
-    public function postUsers(array $data)
+    public function postUsers(string $data)
+    {
+        if (!$data) {
+            throw new ApiJsonException(
+                \sprintf(
+                    'Expecting data !'
+                )
+            );
+        }
+
+        $object = $this->serializer->deserialize(
+            $data,
+            User::class,
+            'json'
+        );
+
+        $clone = $this->documentManager->getRepository(User::class)
+                                       ->findOneBy([
+                                           'firstname' => $object->getFirstname()
+                                       ]);
+
+        if ($clone) {
+            return \json_encode([
+                'message' => 'Resource already exist !',
+                'data' => $clone
+            ]);
+        }
+
+        $this->validator->validate($object);
+        $event = new UserCreatedEvent($object);
+        $this->eventDispatcher->dispatch($event::NAME, $event);
+
+        $this->documentManager->persist($object);
+        $this->documentManager->flush();
+
+        return $object;
+    }
+
+    /**
+     * @param int $id
+     * @param string $data
+     */
+    public function putUsers(int $id, string $data)
     {
 
+    }
+
+    /**
+     * @param int $id
+     * @param string $data
+     */
+    public function patchUsers(int $id, string $data)
+    {
+
+    }
+
+    /**
+     * @param int $id               The id of the resource.
+     *
+     * @throws ApiJsonException     If no resource are found.
+     */
+    public function deleteUser(int $id)
+    {
+        $entity = $this->documentManager->getRepository(User::class)
+                                        ->findOneBy([
+                                            'id' => $id
+                                        ]);
+
+        if (!$entity) {
+            throw new ApiJsonException(
+                \sprintf(
+                    'No resource can be found using this identifier, given %d', $id
+                )
+            );
+        }
+
+        $this->documentManager->remove($entity);
+        $this->documentManager->flush();
     }
 }

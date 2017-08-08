@@ -55,7 +55,6 @@ class PlanningTest extends TestCase
                ->willReturn(0);
 
         $planning->addMeetup($meetup);
-        var_dump($planning);
 
         if ($this->assertInstanceOf(Meetup::class, $planning->getMeetups()->get(0))) {
             $this->assertEquals('45 MINUTES', $meetup->getDuration());

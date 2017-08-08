@@ -11,8 +11,8 @@
 
 namespace App\Managers\API;
 
-use App\Exceptions\ApiJsonException;
 use App\Model\Bills;
+use App\Exceptions\ApiJsonException;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -97,6 +97,14 @@ final class ApiBillsManager
             $entity,
             'json'
         );
+    }
+
+    /**
+     * @param array $data
+     */
+    public function postBills(array $data)
+    {
+
     }
 
     /**

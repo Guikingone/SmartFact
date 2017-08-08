@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Web\Unit\Security;
+namespace tests\AppBundle\Actions\Web\Security;
 
 // Manager
 use AppBundle\Action\Web\Security\LoginAction;

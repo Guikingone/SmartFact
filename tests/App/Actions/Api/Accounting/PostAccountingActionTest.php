@@ -9,19 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Web\Unit\Security;
+namespace App\Tests\App\Actions\Api\Accounting;
 
-use AppBundle\Action\Web\Security\RegisterAction;
+use App\Action\Api\Accounting\PostAccountingAction;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
- * Class RegisterActionTest
+ * Class PostAccountingActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class RegisterActionTest extends KernelTestCase
+class PostAccountingActionTest extends KernelTestCase
 {
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     public function setUp()
     {
         static::bootKernel();
@@ -33,9 +35,9 @@ class RegisterActionTest extends KernelTestCase
     public function testContainerReturn()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(RegisterAction::class);
+                                 ->get(PostAccountingAction::class);
 
-        $this->assertInstanceOf(RegisterAction::class, $action);
+        static::assertInstanceOf(PostAccountingAction::class, $action);
     }
 
     /**
@@ -44,10 +46,9 @@ class RegisterActionTest extends KernelTestCase
     public function testObjectHasAttributes()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(RegisterAction::class);
+                                 ->get(PostAccountingAction::class);
 
-        $this->assertObjectHasAttribute('manager', $action);
-        $this->assertObjectHasAttribute('templating', $action);
-        $this->assertObjectHasAttribute('requestStack', $action);
+        static::assertObjectHasAttribute('manager', $action);
+        static::assertObjectHasAttribute('requestStack', $action);
     }
 }

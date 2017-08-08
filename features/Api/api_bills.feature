@@ -13,17 +13,17 @@ Feature:
     Then the response should have status code 200 and be typed "application/json"
 
   Scenario: I send a request to the accounting list
-    When i send a request to "/api/bills/1" using "POST" method
+    When i send a request to "/api/bills/post" using "POST" method
     Then the body must contain "[]"
     Then the response should have status code 200 and be typed "application/json"
 
   Scenario: I send a request to the accounting list
-    When i send a request to "/api/bills/1" using "PUT" method
+    When i send a request to "/api/bills/1/put" using "PUT" method
     Then the body must contain "[]"
     Then the response should have status code 200 and be typed "application/json"
 
   Scenario: I send a request to the accounting list
-    When i send a request to "/api/bills/1" using "PATCH" method
+    When i send a request to "/api/bills/1/patch" using "PATCH" method
     Then the body must contain "[]"
     Then the response should have status code 200 and be typed "application/json"
 

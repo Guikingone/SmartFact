@@ -9,19 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\App\Actions\Web\Unit;
+namespace tests\AppBundle\Actions\Api\Accounting;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-
-// Action
-use App\Action\Web\HomeAction;
+use AppBundle\Action\Api\Accounting\GetAccountingsAction;
 
 /**
- * Class HomeActionTest
+ * Class GetAccountingsActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class HomeActionTest extends KernelTestCase
+class GetAccountingsActionTest extends KernelTestCase
 {
     /** {@inheritdoc} */
     public function setUp()
@@ -35,19 +33,19 @@ class HomeActionTest extends KernelTestCase
     public function testContainerReturn()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(HomeAction::class);
+                                 ->get(GetAccountingsAction::class);
 
-        $this->assertInstanceOf(HomeAction::class, $action);
+        $this->assertInstanceOf(GetAccountingsAction::class, $action);
     }
 
     /**
-     * Test if the Action has the TwigEngine attribute.
+     * Test if the object has the right Attributes.
      */
-    public function testActionHasTwig()
+    public function testObjectHasAttributes()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(HomeAction::class);
+                                 ->get(GetAccountingsAction::class);
 
-        $this->assertObjectHasAttribute('twig', $action);
+        $this->assertObjectHasAttribute('manager', $action);
     }
 }

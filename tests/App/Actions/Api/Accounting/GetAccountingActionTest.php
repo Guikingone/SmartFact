@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Api\Unit;
+namespace tests\AppBundle\Actions\Api\Accounting;
 
+use App\Action\Api\Accounting\GetAccountingAction;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-use App\Action\Api\Notifications\DeleteNotificationsAction;
-
 /**
- * Class DeleteNotificationsActionTest
+ * Class GetAccountingActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class DeleteNotificationsActionTest extends KernelTestCase
+class GetAccountingActionTest extends KernelTestCase
 {
     /** {@inheritdoc} */
     public function setUp()
@@ -34,9 +33,9 @@ class DeleteNotificationsActionTest extends KernelTestCase
     public function testContainerReturn()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(DeleteNotificationsAction::class);
+                                 ->get(GetAccountingAction::class);
 
-        $this->assertInstanceOf(DeleteNotificationsAction::class, $action);
+        static::assertInstanceOf(GetAccountingAction::class, $action);
     }
 
     /**
@@ -45,9 +44,9 @@ class DeleteNotificationsActionTest extends KernelTestCase
     public function testObjectHasAttributes()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(DeleteNotificationsAction::class);
+                                 ->get(GetAccountingAction::class);
 
-        $this->assertObjectHasAttribute('manager', $action);
-        $this->assertObjectHasAttribute('requestStack', $action);
+        static::assertObjectHasAttribute('manager', $action);
+        static::assertObjectHasAttribute('requestStack', $action);
     }
 }

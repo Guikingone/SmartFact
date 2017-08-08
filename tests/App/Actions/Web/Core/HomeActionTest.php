@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\App\Actions\Api\Unit\Accounting;
+namespace tests\App\Actions\Web\Core;
 
-use App\Action\Api\Accounting\PostAccountingAction;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+// Action
+use App\Action\Web\HomeAction;
+
 /**
- * Class PostAccountingActionTest
+ * Class HomeActionTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class PostAccountingActionTest extends KernelTestCase
+class HomeActionTest extends KernelTestCase
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function setUp()
     {
         static::bootKernel();
@@ -35,20 +35,19 @@ class PostAccountingActionTest extends KernelTestCase
     public function testContainerReturn()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(PostAccountingAction::class);
+                                 ->get(HomeAction::class);
 
-        static::assertInstanceOf(PostAccountingAction::class, $action);
+        $this->assertInstanceOf(HomeAction::class, $action);
     }
 
     /**
-     * Test if the object has the right attributes.
+     * Test if the Action has the TwigEngine attribute.
      */
-    public function testObjectHasAttributes()
+    public function testActionHasTwig()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(PostAccountingAction::class);
+                                 ->get(HomeAction::class);
 
-        static::assertObjectHasAttribute('manager', $action);
-        static::assertObjectHasAttribute('requestStack', $action);
+        $this->assertObjectHasAttribute('twig', $action);
     }
 }

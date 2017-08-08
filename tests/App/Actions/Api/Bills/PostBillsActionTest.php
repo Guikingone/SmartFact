@@ -9,43 +9,46 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Actions\Api\Unit\Accounting;
+namespace App\Tests\App\Actions\Api\Bills;
 
+use App\Action\Api\Bills\PostBillsAction;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use AppBundle\Action\Api\Accounting\GetAccountingsAction;
 
 /**
- * Class GetAccountingsActionTest
- *
+ * Class PostBillsActionTest
+ * 
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class GetAccountingsActionTest extends KernelTestCase
+class PostBillsActionTest extends KernelTestCase
 {
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     public function setUp()
     {
         static::bootKernel();
     }
 
     /**
-     * Test if the Container return the right instance.
+     * Test if the container can return the right class.
      */
     public function testContainerReturn()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(GetAccountingsAction::class);
+                                 ->get(PostBillsAction::class);
 
-        $this->assertInstanceOf(GetAccountingsAction::class, $action);
+        static::assertInstanceOf(PostBillsAction::class, $action);
     }
 
     /**
-     * Test if the object has the right Attributes.
+     * Test if the object has the right attributes.
      */
     public function testObjectHasAttributes()
     {
         $action = static::$kernel->getContainer()
-                                 ->get(GetAccountingsAction::class);
+                                 ->get(PostBillsAction::class);
 
-        $this->assertObjectHasAttribute('manager', $action);
+        static::assertObjectHasAttribute('manager', $action);
+        static::assertObjectHasAttribute('requestStack', $action);
     }
 }
