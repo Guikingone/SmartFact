@@ -159,12 +159,14 @@ class ApiAccountingManager
     }
 
     /**
-     * @param array $data           The date passed to update the entity.
+     * @param string $data          he date passed to update the entity.
      * @param int $id               The id of the resource to update.
      *
      * @throws ApiJsonException     If no resource is found.
+     *
+     * @return array|string|Accounting
      */
-    public function putAccounting(array $data, int $id)
+    public function putAccounting(string $data, int $id)
     {
         $entity = $this->documentManager->getRepository(Accounting::class)
                                         ->findOneBy([
@@ -186,7 +188,10 @@ class ApiAccountingManager
             if ($clone) {
                 return [
                     'message' => 'Resource already exist !',
-                    'resource' => $clone
+                    'resource' => $this->serializer->serialize(
+                        $clone,
+                        'json'
+                    )
                 ];
             }
 
@@ -195,6 +200,11 @@ class ApiAccountingManager
 
             $this->documentManager->persist($accounting);
             $this->documentManager->flush();
+
+            return $this->serializer->serialize(
+                $accounting,
+                'json'
+            );
         }
 
         $this->serializer->deserialize(
@@ -207,6 +217,8 @@ class ApiAccountingManager
         $this->dispatcher->dispatch($event::NAME, $event);
 
         $this->documentManager->flush();
+
+        return $entity;
     }
 
     /**

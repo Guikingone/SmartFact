@@ -11,8 +11,7 @@
 
 namespace App\Action\Api\Accounting;
 
-use App\Managers\API\ApiUserManager;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Managers\API\ApiAccountingManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -24,7 +23,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 final class PostAccountingAction
 {
     /**
-     * @var ApiUserManager
+     * @var ApiAccountingManager
      */
     private $manager;
 
@@ -36,11 +35,11 @@ final class PostAccountingAction
     /**
      * PostAccountingAction constructor.
      *
-     * @param ApiUserManager        $manager
-     * @param RequestStack          $requestStack
+     * @param ApiAccountingManager        $manager
+     * @param RequestStack                $requestStack
      */
     public function __construct(
-        ApiUserManager $manager,
+        ApiAccountingManager $manager,
         RequestStack $requestStack
     ) {
         $this->manager = $manager;
@@ -59,7 +58,7 @@ final class PostAccountingAction
             true
         );
 
-        $entry = $this->manager->postUsers($data);
+        $entry = $this->manager->postAccounting($data);
 
         return new Response(
             $entry,

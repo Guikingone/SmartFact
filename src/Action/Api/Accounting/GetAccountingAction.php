@@ -53,7 +53,7 @@ final class GetAccountingAction
      */
     public function __invoke()
     {
-        $id = $this->requestStack->getCurrentRequest()->get('id');
+        $id = $this->requestStack->getCurrentRequest()->attributes->get('id');
 
         $data = $this->manager->getAccounting($id);
 

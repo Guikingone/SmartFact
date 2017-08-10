@@ -8,6 +8,8 @@ api_accountings_single:
     path:    '/accountings/{id}'
     methods: ['GET']
     defaults: { _controller: App\Action\Api\Accounting\GetAccountingAction }
+    requirements:
+        id: \d+
 
 api_accountings_single_post:
     path:    '/accountings/post'
@@ -18,13 +20,19 @@ api_accountings_single_put:
     path:    '/accountings/{id}/put'
     methods: ['PUT']
     defaults: { _controller: App\Action\Api\Accounting\PutAccountingAction }
+    requirements:
+        id: \d+
 
 api_accountings_single_patch:
     path:    '/accountings/{id}/patch'
     methods: ['PATCH']
     defaults: { _controller: App\Action\Api\Accounting\PatchAccountingAction }
+    requirements:
+        id: \d+
 
 api_accountings_single_delete:
     path:    '/accountings/{id}/delete'
     methods: ['DELETE']
     defaults: { _controller: App\Action\Api\Accounting\DeleteAccountingAction }
+    requirements:
+        id: \d+
