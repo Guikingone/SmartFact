@@ -13,6 +13,7 @@ namespace App\Model;
 
 use App\Interfaces\SmartFactBillsInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class Bills
@@ -23,46 +24,72 @@ class Bills implements SmartFactBillsInterface
 {
     /**
      * @var int
+     *
+     * @Groups({"users", "bills", "clients"})
      */
     private $id;
 
     /**
      * @var \DateTime
+     *
+     * @Groups({"users", "bills", "clients"})
      */
     private $date;
 
     /**
      * @var float
+     *
+     * @Groups({"users", "bills", "clients"})
      */
     private $total;
 
     /**
      * @var bool
+     *
+     * @Groups({"users", "bills", "clients"})
      */
     private $send;
 
     /**
      * @var \DateTime
+     *
+     * @Groups({"users", "bills", "clients"})
      */
     private $createdAt;
 
     /**
      * @var \DateTime
+     *
+     * @Groups({"users", "bills", "clients"})
      */
     private $sendAt;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "bills", "clients"})
      */
     private $file;
 
     /**
      * @var bool
+     *
+     * @Groups({"users", "bills", "clients"})
      */
     private $tva;
 
+    /**
+     * @var User
+     *
+     * @Groups({"bills", "clients"})
+     */
     private $user;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @Groups({"users", "bills"})
+     */
     private $clients;
 
     /**

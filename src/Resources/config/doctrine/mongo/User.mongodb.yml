@@ -1,6 +1,6 @@
 App\Model\User:
     type: document
-    collection: _smartfact_notifications
+    collection: _smartfact_user
     fields:
         id:
             type: id
@@ -34,7 +34,7 @@ App\Model\User:
             length: 150
             nullable: false
         createdAt:
-            type: datetime
+            type: date
             nullable: false
         validated:
             type: boolean
@@ -55,13 +55,13 @@ App\Model\User:
             length: 150
             nullable: false
         roles:
-            type: array
+            type: string
             nullable: false
 
     referenceOne:
         planning:
             targetDocument: App\Model\Planning
-            mappedBy: users
+            mappedBy: user
         accounting:
             targetDocument: App\Model\Accounting
             inversedBy: users

@@ -3,4 +3,8 @@ scenario
     endpoint "http://172.20.0.1:8000/"
 
     visit url('/api/token')
+        method POST
+        param username "HP"
+        param password "LB,L8ELTDL0"
+        json true
         expect status_code() == 200

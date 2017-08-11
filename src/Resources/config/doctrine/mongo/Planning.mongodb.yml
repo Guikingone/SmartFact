@@ -1,6 +1,6 @@
 App\Model\Planning:
     type: document
-    collection: _smartfact_notifications
+    collection: _smartfact_planning
     fields:
         id:
             type: id

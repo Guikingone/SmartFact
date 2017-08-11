@@ -97,5 +97,5 @@ interface SmartFactAccountingInterface
     /**
      * @return User
      */
-    public function getUser();
+    public function getUsers();
 }

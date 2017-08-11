@@ -13,6 +13,7 @@ namespace App\Model;
 
 use App\Interfaces\SmartFactAccountingInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class Accounting
@@ -23,36 +24,50 @@ class Accounting implements SmartFactAccountingInterface
 {
     /**
      * @var int
+     *
+     * @Groups({"users", "accounting"})
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "accounting"})
      */
     private $name;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "accounting"})
      */
     private $interlocutor;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "accounting"})
      */
     private $address;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "accounting"})
      */
     private $phoneNumber;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "accounting"})
      */
     private $email;
 
     /**
      * @var User
+     *
+     * @Groups({"accounting"})
      */
     private $users;
 
@@ -173,7 +188,7 @@ class Accounting implements SmartFactAccountingInterface
     /**
      * {@inheritdoc}
      */
-    public function getUser()
+    public function getUsers()
     {
         return $this->users;
     }

@@ -11,7 +11,6 @@
 
 namespace App\Action\Api\Accounting;
 
-use App\Model\Accounting;
 use App\Managers\API\ApiAccountingManager;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;

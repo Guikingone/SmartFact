@@ -121,6 +121,9 @@ composer dump-autoload --optimize --classmap-authoritative --no-dev
 # Configure BDD
 ./bin/console d:m:s:c # for MongoDB users
 ./bin/console d:s:c # for classic users
+
+# Fixtures
+./bin/console d:mf:l -n
 ```
 
 As this project use NodeJS for frontend assets, we need to build the assets : 
@@ -172,6 +175,9 @@ Then access the project via your browser:
 ```
 http://localhost:8000
 ```
+
+**The commands listed before stay available and needed for this approach**
+
 ## Tests coverage
 
 This project is completely tested and followed by PHPUnit and Behat, this way, our code is easily maintainable

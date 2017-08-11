@@ -134,7 +134,7 @@ interface SmartFactUserInterface extends AdvancedUserInterface, \Serializable
     /**
      * @param string $password
      */
-    public function setPassword($password);
+    public function setPassword(string $password);
 
     /**
      * @return string
@@ -144,7 +144,7 @@ interface SmartFactUserInterface extends AdvancedUserInterface, \Serializable
     /**
      * @param string $plainPassword
      */
-    public function setPlainPassword($plainPassword);
+    public function setPlainPassword(string $plainPassword);
 
     /**
      * @return string
@@ -154,20 +154,15 @@ interface SmartFactUserInterface extends AdvancedUserInterface, \Serializable
     /**
      * @param string $token
      */
-    public function setToken($token);
+    public function setToken(string $token);
 
     /**
-     * @return array
+     * @return string
      */
     public function getRoles();
 
     /**
-     * @param array $roles
-     */
-    public function setRoles($roles);
-
-    /**
      * @param string $roles
      */
-    public function addRoles($roles);
+    public function setRoles(string $roles);
 }

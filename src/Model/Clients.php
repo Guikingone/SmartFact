@@ -13,6 +13,7 @@ namespace App\Model;
 
 use App\Interfaces\SmartFactClientsInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class Clients
@@ -23,33 +24,58 @@ class Clients implements SmartFactClientsInterface
 {
     /**
      * @var int
+     *
+     * @Groups({"users", "clients", "bills", "meetups"})
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "clients", "bills", "meetups"})
      */
     private $name;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "clients", "bills", "meetups"})
      */
     private $address;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "clients", "bills", "meetups"})
      */
     private $phoneNumber;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "clients", "bills", "meetups"})
      */
     private $prestationType;
 
+    /**
+     * @var
+     *
+     * @Groups({ "clients", "bills", "meetups"})
+     */
     private $user;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @Groups({"users", "clients", "meetups"})
+     */
     private $bills;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @Groups({"users", "clients", "bills"})
+     */
     private $meetups;
 
     /**

@@ -12,6 +12,7 @@
 namespace App\Model;
 
 use App\Interfaces\SmartFactNotificationsInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class Notifications
@@ -22,46 +23,64 @@ class Notifications implements SmartFactNotificationsInterface
 {
     /**
      * @var int
+     *
+     * @Groups(["users", "notifications"])
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @Groups(["users", "notifications"])
      */
     private $name;
 
     /**
      * @var string
+     *
+     * @Groups(["users", "notifications"])
      */
     private $category;
 
     /**
      * @var \DateTime
+     *
+     * @Groups(["users", "notifications"])
      */
     private $createdAt;
 
     /**
      * @var string
+     *
+     * @Groups(["users", "notifications"])
      */
     private $link;
 
     /**
      * @var string
+     *
+     * @Groups(["users", "notifications"])
      */
     private $content;
 
     /**
      * @var bool
+     *
+     * @Groups(["users", "notifications"])
      */
     private $repetition;
 
     /**
      * @var bool
+     *
+     * @Groups(["users", "notifications"])
      */
     private $checked;
 
     /**
      * @var User
+     *
+     * @Groups(["notifications"])
      */
     private $user;
 

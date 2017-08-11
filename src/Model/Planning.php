@@ -13,6 +13,7 @@ namespace App\Model;
 
 use App\Interfaces\SmartFactPlanningInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class Planning
@@ -23,21 +24,29 @@ class Planning implements SmartFactPlanningInterface
 {
     /**
      * @var string
+     *
+     * @Groups({"users", "planning", "mmetup"})
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "planning", "mmetup"})
      */
     private $period;
 
     /**
      * @var ArrayCollection
+     *
+     * @Groups({"users", "planning"})
      */
     private $meetups;
 
     /**
      * @var User
+     *
+     * @Groups({ "planning", "mmetup"})
      */
     private $user;
 

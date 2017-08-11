@@ -14,6 +14,7 @@ namespace App\Model;
 use App\Interfaces\SmartFactUserInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class User
@@ -22,63 +23,73 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class User implements SmartFactUserInterface
 {
-    const CREATED = 'created';
-
-    const VALIDATED = 'validated';
-
-    const ACTIVATED = 'activated';
-
-    const UPDATED = 'updated';
-
-    const LOCKED = 'locked';
-
     /**
      * @var int
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $firstname;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $lastname;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $address;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $phoneNumber;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $email;
 
     /**
      * @var \DateTime
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $birthdate;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $status;
 
     /**
      * @var \DateTime
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $createdAt;
 
     /**
      * @var bool
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $validated;
 
@@ -89,6 +100,8 @@ class User implements SmartFactUserInterface
 
     /**
      * @var string
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $username;
 
@@ -108,21 +121,63 @@ class User implements SmartFactUserInterface
     private $token;
 
     /**
-     * @var array
+     * @var string
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $roles;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @Groups({"users", "planning", "accounting", "bills", "clients", "meetups"})
+     */
     private $notifications;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "meetups"})
+     */
     private $clients;
 
+    /**
+     * @var
+     *
+     * @Groups({"users", "planning", "bills", "clients", "meetups"})
+     */
     private $accounting;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "clients", "meetups"})
+     */
     private $bills;
 
+    /**
+     * @var
+     *
+     * @Groups({"users", "notifications", "accounting", "bills", "clients", "meetups"})
+     */
     private $planning;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients"})
+     */
     private $meetups;
+
+    const CREATED = 'created';
+
+    const VALIDATED = 'validated';
+
+    const ACTIVATED = 'activated';
+
+    const UPDATED = 'updated';
+
+    const LOCKED = 'locked';
 
     /**
      * User constructor.
@@ -319,7 +374,7 @@ class User implements SmartFactUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setPassword($password)
+    public function setPassword(string $password)
     {
         $this->password = $password;
     }
@@ -335,13 +390,13 @@ class User implements SmartFactUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setPlainPassword($plainPassword)
+    public function setPlainPassword(string $plainPassword)
     {
         $this->plainPassword = $plainPassword;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getToken()
     {
@@ -351,13 +406,13 @@ class User implements SmartFactUserInterface
     /**
      * @param string $token
      */
-    public function setToken($token)
+    public function setToken(string $token)
     {
         $this->token = $token;
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getRoles()
     {
@@ -365,19 +420,11 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @param array $roles
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-    }
-
-    /**
      * @param string $roles
      */
-    public function addRoles($roles)
+    public function setRoles(string $roles)
     {
-        $this->roles[] = $roles;
+        $this->roles = $roles;
     }
 
     /** @codeCoverageIgnore */
@@ -403,6 +450,9 @@ class User implements SmartFactUserInterface
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function isEnabled()
     {
         return $this->isActive;
@@ -529,7 +579,7 @@ class User implements SmartFactUserInterface
     /**
      * Get accounting
      *
-     * @return \AppBundle\Model\Accounting
+     * @return \App\Model\Accounting
      */
     public function getAccounting()
     {

@@ -81,7 +81,7 @@ class ApiAccountingManager
         return $this->serializer->serialize(
             $data,
             'json',
-            ['groups' => ['accouting']]
+            ['groups' => ['accounting']]
         );
     }
 

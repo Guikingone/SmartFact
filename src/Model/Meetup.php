@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 // Interface
 use App\Interfaces\SmartFactMeetupInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class Meetup
@@ -25,33 +26,58 @@ class Meetup implements SmartFactMeetupInterface
 {
     /**
      * @var int
+     *
+     * @Groups({"users", "planning", "clients"})
      */
     private $id;
 
     /**
      * @var \DateTime
+     *
+     * @Groups({"users", "planning", "clients"})
      */
     private $date;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "planning", "clients"})
      */
     private $places;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "planning", "clients"})
      */
     private $duration;
 
     /**
      * @var string
+     *
+     * @Groups({"users", "planning", "clients"})
      */
     private $type;
 
+    /**
+     * @var
+     *
+     * @Groups({"users", "clients"})
+     */
     private $planning;
 
+    /**
+     * @var
+     *
+     * @Groups({"planning", "clients"})
+     */
     private $user;
 
+    /**
+     * @var
+     *
+     * @Groups({"users", "planning"})
+     */
     private $clients;
 
     /**
