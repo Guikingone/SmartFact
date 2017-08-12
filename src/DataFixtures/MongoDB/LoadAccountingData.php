@@ -39,7 +39,29 @@ class LoadAccountingData extends AbstractFixture implements FixtureInterface, Or
 
         $this->addReference('accounting', $accounting);
 
+        $accountingI = new Accounting();
+        $accountingI->setName('Test Enterprise');
+        $accountingI->setInterlocutor('Mr Enter');
+        $accountingI->setEmail('mrEnter@test.com');
+        $accountingI->setPhoneNumber('0000000000');
+        $accountingI->setAddress('404 Not Found');
+        $accountingI->addUser($this->getReference('user'));
+
+        $this->addReference('accountingI', $accounting);
+
+        $accountingII = new Accounting();
+        $accountingII->setName('Test Enteprise');
+        $accountingII->setInterlocutor('Mr est');
+        $accountingII->setEmail('mrEst@test.com');
+        $accountingII->setPhoneNumber('0000000000');
+        $accountingII->setAddress('404 Not Found');
+        $accountingII->addUser($this->getReference('user'));
+
+        $this->addReference('accountingII', $accounting);
+
         $manager->persist($accounting);
+        $manager->persist($accountingI);
+        $manager->persist($accountingII);
         $manager->flush();
     }
 
