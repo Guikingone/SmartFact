@@ -59,6 +59,15 @@ class LoadAccountingData extends AbstractFixture implements FixtureInterface, Or
 
         $this->addReference('accountingII', $accounting);
 
+        $user = $this->getReference('user');
+        $user->setAccounting($accounting);
+
+        $userI = $this->getReference('userI');
+        $userI->setAccounting($accountingI);
+
+        $userII = $this->getReference('userII');
+        $userII->setAccounting($accountingII);
+
         $manager->persist($accounting);
         $manager->persist($accountingI);
         $manager->persist($accountingII);
@@ -70,6 +79,6 @@ class LoadAccountingData extends AbstractFixture implements FixtureInterface, Or
      */
     public function getOrder()
     {
-        return 2;
+        return 1;
     }
 }

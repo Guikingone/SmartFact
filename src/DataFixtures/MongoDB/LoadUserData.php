@@ -66,7 +66,54 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedF
 
         $this->addReference('user', $user);
 
+
+        $userI = new User();
+
+        $userI->setFirstname('Ben');
+        $userI->setLastname('Potter');
+        $userI->setAddress('23 Poudlard Avenue');
+        $userI->setPhoneNumber('0635459287');
+        $userI->setEmail('bp@gmail.com');
+        $userI->setBirthDate(new \DateTime('1995-03-21'));
+        $userI->setStatus('Freelance');
+        $userI->setCreatedAt(new \DateTime('2017-02-31'));
+        $userI->setValidated(true);
+        $userI->setUsername('BP');
+        $userI->setPlainPassword('LB,L8ELTDL0');
+        $userI->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
+        $userI->setRoles('ROLE_USER');
+
+        $password = $this->container->get('security.password_encoder')
+            ->encodePassword($userI, $userI->getPlainPassword());
+        $userI->setPassword($password);
+
+        $this->addReference('userI', $userI);
+
+        $userII = new User();
+
+        $userII->setFirstname('Tobias');
+        $userII->setLastname('Potter');
+        $userII->setAddress('23 Poudlard Avenue');
+        $userII->setPhoneNumber('0635459287');
+        $userII->setEmail('tp@gmail.com');
+        $userII->setBirthDate(new \DateTime('1995-03-21'));
+        $userII->setStatus('Freelance');
+        $userII->setCreatedAt(new \DateTime('2017-02-31'));
+        $userII->setValidated(true);
+        $userII->setUsername('TP');
+        $userII->setPlainPassword('LB,L8ELTDL0');
+        $userII->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
+        $userII->setRoles('ROLE_USER');
+
+        $password = $this->container->get('security.password_encoder')
+            ->encodePassword($userII, $userII->getPlainPassword());
+        $userII->setPassword($password);
+
+        $this->addReference('userII', $userII);
+
         $manager->persist($user);
+        $manager->persist($userI);
+        $manager->persist($userII);
         $manager->flush();
     }
 
@@ -75,6 +122,6 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedF
      */
     public function getOrder()
     {
-        return 1;
+        return 0;
     }
 }
