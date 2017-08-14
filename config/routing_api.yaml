@@ -1,8 +1,5 @@
-# Security
-api_token_entrypoint:
-    path:    '/token'
-    methods: ['POST']
-    defaults: { _controller: App\Action\Api\Security\ApiTokenAction }
+security:
+    resource: "routes/api/routing_security.yaml"
 
 accounting:
    resource: "routes/api/routing_accounting.yaml"

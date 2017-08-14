@@ -11,7 +11,7 @@
 
 namespace App\Action\Api\Security;
 
-use App\Managers\API\ApiUserManager;
+use App\Managers\API\ApiSecurityManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 final class ApiTokenAction
 {
     /**
-     * @var ApiUserManager
+     * @var ApiSecurityManager
      */
     private $apiManager;
 
@@ -35,11 +35,11 @@ final class ApiTokenAction
     /**
      * ApiTokenAction constructor.
      *
-     * @param ApiUserManager    $manager
-     * @param RequestStack      $request
+     * @param ApiSecurityManager    $manager
+     * @param RequestStack          $request
      */
     public function __construct(
-        ApiUserManager $manager,
+        ApiSecurityManager $manager,
         RequestStack $request
     ) {
         $this->apiManager = $manager;
@@ -56,7 +56,7 @@ final class ApiTokenAction
         /** @var array $data */
         $data = json_decode($this->request->getCurrentRequest()->getContent(), true);
 
-        $access = $this->apiManager->authenticateUser($data);
+        $access = $this->apiManager->authenticateUserViaCredentials($data);
 
         if (!$access) {
             return new JsonResponse(

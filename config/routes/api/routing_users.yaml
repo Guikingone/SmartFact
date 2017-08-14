@@ -4,10 +4,10 @@ api_users:
     methods: ['GET']
     defaults: { _controller: App\Action\Api\Users\GetUsersAction }
 
-api_users_single:
-    path:    '/users/{id}'
+api_user_personnal:
+    path:    '/users/me'
     methods: ['GET']
-    defaults: { _controller: App\Action\Api\Users\GetUserAction }
+    defaults: { _controller: App\Action\Api\Users\GetPersonalUserAction }
 
 api_users_single_post:
     path:    '/users/post'

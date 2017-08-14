@@ -93,7 +93,6 @@ class ApiUserManager
         $this->requestStack = $requestStack;
     }
 
-
     /**
      * Return all the Users.
      *
@@ -132,42 +131,22 @@ class ApiUserManager
         );
     }
 
-    /**
-     * @param array $data           The date used for authenticate the users.
-     *
-     * @throws ApiJsonException     If bad arguments are passed or empty.
-     * @throws ApiJsonException     If no users can be found.
-     *
-     * @return bool|string          The token if authenticated or false if not.
-     */
-    public function authenticateUser(array $data)
+    public function getPersonalUser(string $identifier)
     {
-        if ((!$data['username']) || (!$data['password'])) {
-            throw new ApiJsonException(
-                \sprintf(
-                    'The request must contains the right arguments, waiting for username and password !'
-                )
-            );
-        }
-
         $user = $this->documentManager->getRepository(User::class)
                                       ->findOneBy([
-                                          'username' => $data['username']
+                                          'id' => $identifier
                                       ]);
 
         if (!$user) {
-            throw new ApiJsonException(
-                \sprintf(
-                    'A users must be found using this identifiers !'
-                )
-            );
+
         }
 
-        if ($this->passwordEncoder->isPasswordValid($user, $data['password'])) {
-            return $this->tokenManager->create($user);
-        }
-
-        return false;
+        return $this->serializer->serialize(
+            $user,
+            'json',
+            ['groups' => ['personal']]
+        );
     }
 
     /**

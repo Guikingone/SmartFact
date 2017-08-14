@@ -1,0 +1,9 @@
+api_oauth_entrypoint:
+    path: '/access_token'
+    methods: ['POST']
+    defaults: { _controller: App\Action\Api\Security\ApiOauthAction }
+
+api_token_entrypoint:
+    path:    '/token'
+    methods: ['POST']
+    defaults: { _controller: App\Action\Api\Security\ApiTokenAction }
