@@ -57,6 +57,12 @@ App\Model\User:
         roles:
             type: string
             nullable: false
+        scope:
+            type: string
+            nullable: false
+        state:
+            type: string
+            nullable: true
 
     referenceOne:
         planning:

@@ -12,3 +12,4 @@ default:
             kernel:
                 bootstrap: features/bootstrap/bootstrap.php
                 class: App\Kernel
+        Behatch\Extension: ~

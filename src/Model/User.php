@@ -26,35 +26,35 @@ class User implements SmartFactUserInterface
     /**
      * @var int
      *
-     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
+     * @Groups({"personal", "users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $id;
 
     /**
      * @var string
      *
-     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
+     * @Groups({"personal", "users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $firstname;
 
     /**
      * @var string
      *
-     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
+     * @Groups({"personal", "users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $lastname;
 
     /**
      * @var string
      *
-     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
+     * @Groups({"personal", "users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $address;
 
     /**
      * @var string
      *
-     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
+     * @Groups({"personal", "users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $phoneNumber;
 
@@ -128,6 +128,20 @@ class User implements SmartFactUserInterface
     private $roles;
 
     /**
+     * @var string
+     *
+     * @Groups({"personal"})
+     */
+    private $scope;
+
+    /**
+     * @var string
+     *
+     * @Groups({"personal"})
+     */
+    private $state;
+
+    /**
      * @var ArrayCollection
      *
      * @Groups({"users", "planning", "accounting", "bills", "clients", "meetups"})
@@ -178,6 +192,12 @@ class User implements SmartFactUserInterface
     const UPDATED = 'updated';
 
     const LOCKED = 'locked';
+
+    const PROFESSIONAL_USER = 'professional_user';
+
+    const PARTICULAR_USER = 'particular_user';
+
+    const API_USER = 'api_user';
 
     /**
      * User constructor.
@@ -420,11 +440,43 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @param string $roles
+     * {@inheritdoc}
      */
     public function setRoles(string $roles)
     {
         $this->roles = $roles;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getScope()
+    {
+        return $this->scope;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setScope(string $scope)
+    {
+        $this->scope = $scope;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setState(string $state)
+    {
+        $this->state = $state;
     }
 
     /** @codeCoverageIgnore */

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Action\Web\Security;
+namespace App\Action\Security;
 
 use App\Managers\Web\WebUserManager;
 use Twig\Environment;

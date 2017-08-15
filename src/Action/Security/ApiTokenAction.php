@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Action\Api\Security;
+namespace App\Action\Security;
 
+use App\Exceptions\ApiJsonException;
 use App\Managers\API\ApiSecurityManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Class ApiTokenAction
@@ -28,43 +29,37 @@ final class ApiTokenAction
     private $apiManager;
 
     /**
-     * @var RequestStack
-     */
-    private $request;
-
-    /**
      * ApiTokenAction constructor.
      *
      * @param ApiSecurityManager    $manager
-     * @param RequestStack          $request
      */
-    public function __construct(
-        ApiSecurityManager $manager,
-        RequestStack $request
-    ) {
+    public function __construct(ApiSecurityManager $manager)
+    {
         $this->apiManager = $manager;
-        $this->request = $request;
     }
 
     /**
-     * @throws \InvalidArgumentException
+     * @param Request $request
      *
      * @return JsonResponse
+     *
+     * @throws \LogicException
+     * @throws ApiJsonException
      */
-    public function __invoke()
+    public function __invoke(Request $request) : JsonResponse
     {
         /** @var array $data */
-        $data = json_decode($this->request->getCurrentRequest()->getContent(), true);
+        $data = \json_decode($request->getContent(), true);
 
-        $access = $this->apiManager->authenticateUserViaCredentials($data);
-
-        if (!$access) {
-            return new JsonResponse(
-                [
-                    'message' => 'Authentication refused !'
-                ]
+        if (!$data) {
+            throw new ApiJsonException(
+                \sprintf(
+                    'No credentials passed, identification refused !'
+                )
             );
         }
+
+        $access = $this->apiManager->authenticateViaCredentials($data);
 
         return new JsonResponse(
             [

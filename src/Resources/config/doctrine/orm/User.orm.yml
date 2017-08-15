@@ -62,21 +62,21 @@ App\Model\User:
     oneToOne:
         planning:
             targetEntity: App\Model\Planning
-            mappedBy: users
+            mappedBy: user
 
     oneToMany:
         notifications:
             targetEntity: App\Model\Notifications
-            mappedBy: users
+            mappedBy: user
         clients:
             targetEntity: App\Model\Clients
-            mappedBy: users
+            mappedBy: user
         bills:
             targetEntity: App\Model\Bills
-            mappedBy: users
+            mappedBy: user
         meetups:
             targetEntity: App\Model\Meetup
-            mappedBy: users
+            mappedBy: user
 
     manyToOne:
         accounting:

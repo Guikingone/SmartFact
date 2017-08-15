@@ -47,8 +47,9 @@ class UserTest extends TestCase
         $user->setPlainPassword('LB,L8ELTDL0');
         $user->setPassword('LB,L8ELTDL0');
         $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
-        $user->addRoles('ROLE_USER');
-        $user->setRoles(['ROLE_USER']);
+        $user->setRoles('ROLE_USER');
+        $user->setScope($user::PROFESSIONAL_USER);
+        $user->setState('9848Y2GD9873N2');
 
         static::assertNull($user->getId());
         static::assertEquals('Harry', $user->getFirstname());
@@ -65,7 +66,9 @@ class UserTest extends TestCase
         static::assertEquals('LB,L8ELTDL0', $user->getPlainPassword());
         static::assertEquals('LB,L8ELTDL0', $user->getPassword());
         static::assertEquals('tok_0010901_001NNDOPPPANDHYEMMANDU', $user->getToken());
-        static::assertContains('ROLE_USER', $user->getRoles());
+        static::assertEquals('ROLE_USER', $user->getRoles());
+        static::assertEquals('professional_user', $user->getScope());
+        static::assertEquals('9848Y2GD9873N2', $user->getState());
     }
 
     /**
@@ -88,7 +91,7 @@ class UserTest extends TestCase
         $user->setUsername('HP');
         $user->setPassword('LB,L8ELTDL0');
         $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
-        $user->addRoles('ROLE_USER');
+        $user->setRoles('ROLE_USER');
 
         $notification->method('getName')
                      ->willReturn('A new bills has been generated !');
@@ -133,7 +136,7 @@ class UserTest extends TestCase
         $user->setUsername('HP');
         $user->setPassword('LB,L8ELTDL0');
         $user->setToken('tok_0010901_001NNDOPPPANDHYEMMANDU');
-        $user->addRoles('ROLE_USER');
+        $user->setRoles('ROLE_USER');
 
         $bills->method('getId')
               ->willReturn(0);

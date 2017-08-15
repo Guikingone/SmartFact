@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Action\Web\Security;
+namespace App\Action\Security;
 
 
 use Twig\Environment;

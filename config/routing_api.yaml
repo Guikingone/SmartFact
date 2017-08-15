@@ -1,6 +1,3 @@
-security:
-    resource: "routes/api/routing_security.yaml"
-
 accounting:
    resource: "routes/api/routing_accounting.yaml"
 
@@ -21,4 +18,3 @@ planning:
 
 users:
    resource: "routes/api/routing_users.yaml"
-

@@ -11,8 +11,9 @@
 
 namespace App\Action\Api\Users;
 
+use App\Managers\API\ApiUserManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Class GetPersonalUserAction
@@ -22,18 +23,17 @@ use Symfony\Component\HttpFoundation\RequestStack;
 final class GetPersonalUserAction
 {
     /**
-     * @var RequestStack
+     * @var ApiUserManager
      */
-    private $requestStack;
+    private $manager;
 
     /**
      * GetPersonalUserAction constructor.
-     *
-     * @param RequestStack $requestStack
+     * @param ApiUserManager $manager
      */
-    public function __construct(RequestStack $requestStack)
+    public function __construct(ApiUserManager $manager)
     {
-        $this->requestStack = $requestStack;
+        $this->manager = $manager;
     }
 
     /**
@@ -41,11 +41,12 @@ final class GetPersonalUserAction
      *
      * @return Response
      */
-    public function __invoke() : Response
+    public function __invoke(Request $request) : Response
     {
-        $headers = $this->requestStack->getCurrentRequest()->headers->all();
+        $headers = $request->headers->all();
 
-        var_dump($headers);
+
+        $this->manager->getPersonalUser($headers);
 
         return new Response(
             '',

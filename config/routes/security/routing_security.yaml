@@ -1,0 +1,19 @@
+api_oauth_entrypoint:
+    path: '/oauth2/token'
+    methods: ['POST']
+    defaults: { _controller: App\Action\Security\ApiOauthAction }
+
+api_jwt_entrypoint:
+    path:    '/jwt/token'
+    methods: ['POST']
+    defaults: { _controller: App\Action\Security\ApiTokenAction }
+
+register:
+    path:    '/register'
+    methods: ['GET', 'POST']
+    defaults: { _controller: App\Action\Security\RegisterAction }
+
+login:
+    path:    '/login'
+    methods: ['GET', 'POST']
+    defaults: { _controller: App\Action\Security\LoginAction }

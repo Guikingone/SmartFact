@@ -42,9 +42,9 @@ final class ApiSecurityManager
     /**
      * ApiSecurityManager constructor.
      *
-     * @param DocumentManager                 $documentManager
-     * @param UserPasswordEncoderInterface    $passwordEncoder
-     * @param JWTManager                      $tokenManager
+     * @param DocumentManager               $documentManager
+     * @param UserPasswordEncoderInterface  $passwordEncoder
+     * @param JWTManager                    $tokenManager
      */
     public function __construct(
         DocumentManager $documentManager,
@@ -56,10 +56,22 @@ final class ApiSecurityManager
         $this->tokenManager = $tokenManager;
     }
 
+    public function registerUserViaCredentials(array $credentials)
+    {
+        if (!$credentials) {
+            throw new ApiJsonException(
+                \sprintf(
+                    ''
+                )
+            );
+        }
+    }
+
     /**
      * @param array $headers
      *
      * @throws ApiJsonException
+     * @throws \InvalidArgumentException
      *
      * @return array
      */
@@ -89,13 +101,15 @@ final class ApiSecurityManager
         $token = $this->tokenManager->create($user);
 
         $user->setToken($token);
+        $user->setState(\uniqid('', false));
 
         $this->documentManager->flush();
 
         return [
+            'response_type' => 'code',
             'token' => $token,
             'refresh_token' => '',
-            'state' => $headers['state']
+            'state' => $user->getState()
         ];
     }
 
@@ -105,10 +119,10 @@ final class ApiSecurityManager
      * @throws ApiJsonException     If bad arguments are passed or empty.
      * @throws ApiJsonException     If no users can be found.
      *
-     * @return bool|string          The token if authenticated or false if not.
+     * @return string               The token if authenticated or false if not.
      */
 
-    public function authenticateUserViaCredentials(array $credentials)
+    public function authenticateViaCredentials(array $credentials)
     {
         if ((!$credentials['username']) || (!$credentials['password'])) {
             throw new ApiJsonException(
@@ -123,18 +137,14 @@ final class ApiSecurityManager
                                           'username' => $credentials['username']
                                       ]);
 
-        if (!$user) {
+        if ((!$user) || (!$this->passwordEncoder->isPasswordValid($user, $credentials['password']))) {
             throw new ApiJsonException(
                 \sprintf(
-                    'A users must be found using this identifiers !'
+                    'The identifiers does not allow to find a user !'
                 )
             );
         }
 
-        if ($this->passwordEncoder->isPasswordValid($user, $credentials['password'])) {
-            return $this->tokenManager->create($user);
-        }
-
-        return false;
+        return $this->tokenManager->create($user);
     }
 }

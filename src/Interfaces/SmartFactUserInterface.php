@@ -165,4 +165,24 @@ interface SmartFactUserInterface extends AdvancedUserInterface, \Serializable
      * @param string $roles
      */
     public function setRoles(string $roles);
+
+    /**
+     * @return string
+     */
+    public function getScope();
+
+    /**
+     * @param string $scope
+     */
+    public function setScope(string $scope);
+
+    /**
+     * @return string
+     */
+    public function getState();
+
+    /**
+     * @param string $state
+     */
+    public function setState(string $state);
 }

@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Action\Api\Security;
+namespace App\Action\Security;
 
+use App\Exceptions\ApiJsonException;
 use App\Managers\API\ApiSecurityManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Class ApiOauthAction
@@ -28,37 +29,31 @@ final class ApiOauthAction
     private $securityManager;
 
     /**
-     * @var RequestStack
-     */
-    private $requestStack;
-
-    /**
      * ApiOauthAction constructor.
      *
-     * @param ApiSecurityManager     $securityManager
-     * @param RequestStack           $requestStack
+     * @param ApiSecurityManager    $securityManager
      */
-    public function __construct(
-        ApiSecurityManager $securityManager,
-        RequestStack $requestStack
-    ) {
+    public function __construct(ApiSecurityManager $securityManager)
+    {
         $this->securityManager = $securityManager;
-        $this->requestStack = $requestStack;
     }
 
     /**
+     * @param $request  Request
+     *
      * @throws \InvalidArgumentException
+     * @throws ApiJsonException
      *
      * @return Response
      */
-    public function __invoke() : Response
+    public function __invoke(Request $request) : Response
     {
-        $headers = $this->requestStack->getCurrentRequest()->request->all();
+        $headers = $request->request->all();
 
         $credentials = $this->securityManager->authenticateUserViaHeaders($headers);
 
         return new Response(
-            json_encode($credentials),
+            \json_encode($credentials),
             Response::HTTP_OK,
             ['Content-Type' => 'application/json']
         );

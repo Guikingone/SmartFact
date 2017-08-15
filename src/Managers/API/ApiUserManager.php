@@ -67,7 +67,7 @@ class ApiUserManager
     /**
      * ApiUserManager constructor.
      *
-     * @param DocumentManager               $doctrine
+     * @param DocumentManager               $documentManager
      * @param SerializerInterface           $serializer
      * @param EventDispatcherInterface      $eventDispatcher
      * @param ValidatorInterface            $validator
@@ -110,6 +110,24 @@ class ApiUserManager
         );
     }
 
+    public function getPersonalUser(array $headers)
+    {
+        if (!$headers) {
+            throw new ApiJsonException(
+                \sprintf(
+                    ''
+                )
+            );
+        }
+
+        $user = $this->documentManager->getRepository(User::class)
+                                      ->findOneBy([
+                                          'token' => $headers['authorization']
+                                      ]);
+
+
+    }
+
     /**
      * Return a single User using his id.
      *
@@ -128,24 +146,6 @@ class ApiUserManager
             $data,
             'json',
             ['groups' => ['users']]
-        );
-    }
-
-    public function getPersonalUser(string $identifier)
-    {
-        $user = $this->documentManager->getRepository(User::class)
-                                      ->findOneBy([
-                                          'id' => $identifier
-                                      ]);
-
-        if (!$user) {
-
-        }
-
-        return $this->serializer->serialize(
-            $user,
-            'json',
-            ['groups' => ['personal']]
         );
     }
 
@@ -215,9 +215,11 @@ class ApiUserManager
     /**
      * @param int $id               The id of the resource.
      *
+     * @throws \InvalidArgumentException
+     *
      * @throws ApiJsonException     If no resource are found.
      */
-    public function deleteUser(int $id)
+    public function deleteUser(int $id) : void
     {
         $entity = $this->documentManager->getRepository(User::class)
                                         ->findOneBy([

@@ -12,9 +12,9 @@
 namespace App\Action\Api\Users;
 
 use App\Managers\API\ApiUserManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Class PostUserAction
@@ -29,30 +29,21 @@ final class PostUserAction
     private $manager;
 
     /**
-     * @var RequestStack
-     */
-    private $request;
-
-    /**
      * PostUserAction constructor.
      *
      * @param ApiUserManager    $manager
-     * @param RequestStack      $request
      */
-    public function __construct(
-        ApiUserManager $manager,
-        RequestStack $request
-    ) {
+    public function __construct(ApiUserManager $manager)
+    {
         $this->manager = $manager;
-        $this->request = $request;
     }
 
     /**
      * @return JsonResponse
      */
-    public function __invoke()
+    public function __invoke(Request $request) : JsonResponse
     {
-        $data = $this->request->getCurrentRequest()->getContent();
+        $data = $request->getContent();
 
         if (!$data) {
             return new JsonResponse(
