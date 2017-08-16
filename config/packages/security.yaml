@@ -15,4 +15,11 @@ security:
             security: false
         main:
             anonymous: null
+        # api:
+            # pattern: ^/api
+            # provider: my_mongo_provider
+            # stateless: true
+            # guard:
+                # authenticator:
+                    # - App\Security\TokenAuthenticator
 

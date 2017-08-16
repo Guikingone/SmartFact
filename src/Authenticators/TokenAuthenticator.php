@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Security;
+namespace App\Authenticators;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,18 +20,18 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
- * Class ApiTokenAuthenticator
+ * Class TokenAuthenticator
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class ApiTokenAuthenticator extends AbstractGuardAuthenticator
+final class TokenAuthenticator extends AbstractGuardAuthenticator
 {
     /**
      * {@inheritdoc}
      */
     public function getCredentials(Request $request) : array
     {
-        if (!$token = $request->headers->get('X-AUTH-TOKEN')) {
+        if (!$token = $request->headers->get('authorization')) {
             $token = null;
         }
 

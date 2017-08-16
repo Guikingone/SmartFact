@@ -11,6 +11,7 @@
 
 namespace App\Action\Api\Users;
 
+use App\Exceptions\ApiJsonException;
 use App\Managers\API\ApiUserManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,19 +38,21 @@ final class GetPersonalUserAction
     }
 
     /**
+     * @param $request  Request
+     *
      * @throws \InvalidArgumentException
+     * @throws ApiJsonException
      *
      * @return Response
      */
     public function __invoke(Request $request) : Response
     {
-        $headers = $request->headers->all();
+        $headers = $request->headers->get('authorization');
 
-
-        $this->manager->getPersonalUser($headers);
+        $object = $this->manager->getPersonalUser($headers);
 
         return new Response(
-            '',
+            $object,
             Response::HTTP_OK,
             ['Content-Type' => 'application/json']
         );

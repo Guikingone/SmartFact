@@ -4,9 +4,15 @@ services:
         autoconfigure: true
         public: false
 
+    # App\Authenticators\:
+        # resource: '../../src/Authenticators'
+
     App\Action\:
         resource: '../../src/Action'
         public: true
 
     App\Managers\:
         resource: '../../src/Managers'
+
+    App\Schemas\:
+        resource: '../../src/Schemas'

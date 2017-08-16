@@ -17,14 +17,20 @@ api_users_single_post:
 api_users_single_put:
     path:    '/users/{id}/put'
     methods: ['PUT']
-    defaults: { _controller: App\Action\Api\Users\GetUserAction }
+    defaults: { _controller: App\Action\Api\Users\PutUserAction }
+    requirements:
+        id: '\S+'
 
 api_users_single_patch:
     path:    '/users/{id}/patch'
     methods: ['PATCH']
-    defaults: { _controller: App\Action\Api\Users\GetUserAction }
+    defaults: { _controller: App\Action\Api\Users\PatchUserAction }
+    requirements:
+        id: '\S+'
 
 api_users_single_delete:
     path:    '/users/{id}/delete'
     methods: ['DELETE']
-    defaults: { _controller: App\Action\Api\Users\GetUserAction }
+    defaults: { _controller: App\Action\Api\Users\DeleteUserAction }
+    requirements:
+        id: '\S+'

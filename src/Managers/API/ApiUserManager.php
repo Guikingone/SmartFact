@@ -110,7 +110,14 @@ class ApiUserManager
         );
     }
 
-    public function getPersonalUser(array $headers)
+    /**
+     * @param string $headers
+     *
+     * @throws ApiJsonException
+     *
+     * @return string
+     */
+    public function getPersonalUser(string $headers) : string
     {
         if (!$headers) {
             throw new ApiJsonException(
@@ -122,10 +129,22 @@ class ApiUserManager
 
         $user = $this->documentManager->getRepository(User::class)
                                       ->findOneBy([
-                                          'token' => $headers['authorization']
+                                          'token' => $headers
                                       ]);
 
+        if (!$user) {
+            throw new ApiJsonException(
+                \sprintf(
+                    ''
+                )
+            );
+        }
 
+        return $this->serializer->serialize(
+            $user,
+            'json',
+            ['groups' => ['personal']]
+        );
     }
 
     /**
@@ -152,7 +171,8 @@ class ApiUserManager
     /**
      * @param string $data
      *
-     * @throws ApiJsonException        If no data are passed.
+     * @throws ApiJsonException            If no data are passed.
+     * @throws \InvalidArgumentException
      *
      * @return string
      */
@@ -203,23 +223,54 @@ class ApiUserManager
 
     }
 
+
     /**
      * @param int $id
      * @param string $data
+     *
+     * @throws ApiJsonException
+     * @throws \InvalidArgumentException
+     *
+     * @return string
      */
-    public function patchUsers(int $id, string $data)
+    public function patchUsers(int $id, string $data) : string
     {
+        $object = $this->documentManager->getRepository(User::class)
+                                        ->findOneBy([
+                                            'id' => $id
+                                        ]);
 
+        if (!$object) {
+            throw new ApiJsonException(
+                \sprintf(
+                    'No user can be found using credentials !'
+                )
+            );
+        }
+
+        $this->serializer->deserialize(
+            $data,
+            User::class,
+            'json',
+            ['object_to_populate' => $object]
+        );
+
+        $this->documentManager->flush();
+
+        return $this->serializer->serialize(
+            $object,
+            'json'
+        );
     }
 
     /**
-     * @param int $id               The id of the resource.
+     * @param string $id                    The id of the resource.
      *
-     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException    Thrown by the DocumentManager.
      *
-     * @throws ApiJsonException     If no resource are found.
+     * @throws ApiJsonException             If no resource are found.
      */
-    public function deleteUser(int $id) : void
+    public function deleteUser(string $id) : void
     {
         $entity = $this->documentManager->getRepository(User::class)
                                         ->findOneBy([
