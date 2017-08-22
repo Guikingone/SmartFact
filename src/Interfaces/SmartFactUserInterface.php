@@ -28,27 +28,27 @@ interface SmartFactUserInterface extends AdvancedUserInterface, \Serializable
     /**
      * @return string
      */
-    public function getFirstname() : string;
+    public function getFirstName();
 
     /**
-     * @param string $firstname
+     * @param string $firstName
      */
-    public function setFirstname(string $firstName);
-
-    /**
-     * @return string
-     */
-    public function getLastname() : string;
-
-    /**
-     * @param string $lastname
-     */
-    public function setLastname(string $lastName);
+    public function setFirstName(string $firstName);
 
     /**
      * @return string
      */
-    public function getAddress() : string;
+    public function getLastName();
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName(string $lastName);
+
+    /**
+     * @return string
+     */
+    public function getAddress();
 
     /**
      * @param string $address
@@ -58,7 +58,7 @@ interface SmartFactUserInterface extends AdvancedUserInterface, \Serializable
     /**
      * @return string
      */
-    public function getPhoneNumber() : string;
+    public function getPhoneNumber();
 
     /**
      * @param string $phoneNumber
@@ -68,7 +68,7 @@ interface SmartFactUserInterface extends AdvancedUserInterface, \Serializable
     /**
      * @return \DateTime
      */
-    public function getBirthDate() : \DateTime;
+    public function getBirthDate();
 
     /**
      * @param \DateTime $birthDate

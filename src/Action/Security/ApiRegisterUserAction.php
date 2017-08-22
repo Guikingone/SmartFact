@@ -9,43 +9,50 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Action\Api\Users;
+namespace App\Action\Security;
 
-use App\Managers\API\ApiUserManager;
+use App\Exceptions\ApiJsonException;
+use App\Managers\API\ApiSecurityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * Class PostUserAction
+ * Class ApiRegisterUserAction
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-final class PostUserAction
+final class ApiRegisterUserAction
 {
     /**
-     * @var ApiUserManager
+     * @var ApiSecurityManager
      */
     private $manager;
 
     /**
-     * PostUserAction constructor.
+     * ApiRegisterUserAction constructor.
      *
-     * @param ApiUserManager    $manager
+     * @param ApiSecurityManager     $manager
      */
-    public function __construct(ApiUserManager $manager)
+    public function __construct(ApiSecurityManager $manager)
     {
         $this->manager = $manager;
     }
 
     /**
+     * @param $request  Request
+     *
+     * @throws \LogicException
+     * @throws ApiJsonException
+     * @throws \InvalidArgumentException
+     *
      * @return JsonResponse
      */
     public function __invoke(Request $request) : JsonResponse
     {
-        $data = $request->getContent();
+        $credentials = $request->getContent();
 
-        if (!$data) {
+        if (!$credentials) {
             return new JsonResponse(
                 [
                     'error' => 'No data passed !',
@@ -56,14 +63,11 @@ final class PostUserAction
             );
         }
 
-        $this->manager->postUsers($data);
+        $this->manager->registerUserViaCredentials($credentials);
 
         return new JsonResponse(
             [
-                'message' => 'Resource created.',
-                'data' => [
-                    $data
-                ]
+                'message' => 'Resource created.'
             ],
             Response::HTTP_CREATED
         );

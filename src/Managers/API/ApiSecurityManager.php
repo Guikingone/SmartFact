@@ -11,11 +11,15 @@
 
 namespace App\Managers\API;
 
+use App\Events\Users\UserCreatedEvent;
 use App\Model\User;
 use App\Exceptions\ApiJsonException;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class ApiSecurityManager
@@ -30,6 +34,21 @@ final class ApiSecurityManager
     private $documentManager;
 
     /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
+     * @var SerializerInterface
+     */
+    private $serializer;
+
+    /**
      * @var UserPasswordEncoderInterface
      */
     private $passwordEncoder;
@@ -41,22 +60,38 @@ final class ApiSecurityManager
 
     /**
      * ApiSecurityManager constructor.
-     *
-     * @param DocumentManager               $documentManager
-     * @param UserPasswordEncoderInterface  $passwordEncoder
-     * @param JWTManager                    $tokenManager
+     * @param DocumentManager $documentManager
+     * @param ValidatorInterface $validator
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param SerializerInterface $serializer
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param JWTManager $tokenManager
      */
     public function __construct(
         DocumentManager $documentManager,
+        ValidatorInterface $validator,
+        EventDispatcherInterface $eventDispatcher,
+        SerializerInterface $serializer,
         UserPasswordEncoderInterface $passwordEncoder,
         JWTManager $tokenManager
     ) {
         $this->documentManager = $documentManager;
+        $this->validator = $validator;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->serializer = $serializer;
         $this->passwordEncoder = $passwordEncoder;
         $this->tokenManager = $tokenManager;
     }
 
-    public function registerUserViaCredentials(array $credentials)
+    /**
+     * @param string $credentials
+     *
+     * @throws ApiJsonException
+     * @throws \InvalidArgumentException
+     *
+     * @return array
+     */
+    public function registerUserViaCredentials(string $credentials)
     {
         if (!$credentials) {
             throw new ApiJsonException(
@@ -65,6 +100,37 @@ final class ApiSecurityManager
                 )
             );
         }
+
+        $entry = new User();
+
+        $this->serializer->deserialize(
+            $credentials,
+            User::class,
+            'json',
+            ['object_to_populate' => $entry]
+        );
+
+        $clone = $this->documentManager->getRepository(User::class)
+                                       ->findOneBy([
+                                           'firstname' => $entry->getFirstName()
+                                       ]);
+
+        if ($clone) {
+            return [
+                'message' => 'Resource already found !',
+                'data' => $this->serializer->serialize(
+                    $clone,
+                    'json'
+                )
+            ];
+        }
+
+        // $this->validator->validate($entry);
+        $event = new UserCreatedEvent($entry);
+        $this->eventDispatcher->dispatch($event::NAME, $event);
+
+        $this->documentManager->persist($entry);
+        $this->documentManager->flush();
     }
 
     /**

@@ -10,7 +10,7 @@ api_user_personnal:
     defaults: { _controller: App\Action\Api\Users\GetPersonalUserAction }
 
 api_users_single_post:
-    path:    '/users/post'
+    path:    '/users/register'
     methods: ['POST']
     defaults: { _controller: App\Action\Api\Users\PostUserAction }
 

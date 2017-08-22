@@ -13,7 +13,7 @@
         "doctrine/doctrine-fixtures-bundle": "^2.2@dev",
         "doctrine/mongodb-odm-bundle": "^3.3",
         "lexik/jwt-authentication-bundle": "^2.4",
-        "nelmio/cors-bundle": "^1.5@dev",
+        "nelmio/cors-bundle": "^1.5",
         "phpunit/phpunit": "^6.2",
         "predis/predis": "^1.1",
         "snc/redis-bundle": "^2.0@dev",

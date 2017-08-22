@@ -1,3 +1,8 @@
+api_register_entrypoint:
+    path:    '/api/register'
+    methods: ['POST']
+    defaults: { _controller: App\Action\Security\ApiRegisterUserAction }
+
 api_oauth_entrypoint:
     path: '/oauth2/token'
     methods: ['POST']
@@ -7,6 +12,11 @@ api_jwt_entrypoint:
     path:    '/jwt/token'
     methods: ['POST']
     defaults: { _controller: App\Action\Security\ApiTokenAction }
+
+api_forgot_password_entrypoint:
+    path:    '/api/forgot/password'
+    methods: ['POST']
+    defaults: { _controller: App\Action\Api\Users\PostUserAction }
 
 register:
     path:    '/register'

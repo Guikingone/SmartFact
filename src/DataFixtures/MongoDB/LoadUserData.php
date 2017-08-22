@@ -46,8 +46,8 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedF
     {
         $user = new User();
 
-        $user->setFirstname('Harry');
-        $user->setLastname('Potter');
+        $user->setFirstName('Harry');
+        $user->setLastName('Potter');
         $user->setAddress('23 Poudlard Avenue');
         $user->setPhoneNumber('0635459287');
         $user->setEmail('hp@gmail.com');

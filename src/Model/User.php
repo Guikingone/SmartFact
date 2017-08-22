@@ -226,7 +226,7 @@ class User implements SmartFactUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getFirstname() : string
+    public function getFirstName()
     {
         return $this->firstname;
     }
@@ -234,7 +234,7 @@ class User implements SmartFactUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setFirstname(string $firstName)
+    public function setFirstName(string $firstName)
     {
         $this->firstname = $firstName;
     }
@@ -242,7 +242,7 @@ class User implements SmartFactUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getLastname() : string
+    public function getLastname()
     {
         return $this->lastname;
     }
@@ -250,7 +250,7 @@ class User implements SmartFactUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setLastname(string $lastName)
+    public function setLastName(string $lastName)
     {
         $this->lastname = $lastName;
     }
@@ -258,7 +258,7 @@ class User implements SmartFactUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getAddress() : string
+    public function getAddress()
     {
         return $this->address;
     }
@@ -274,7 +274,7 @@ class User implements SmartFactUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getPhoneNumber() : string
+    public function getPhoneNumber()
     {
         return $this->phoneNumber;
     }
@@ -306,7 +306,7 @@ class User implements SmartFactUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getBirthDate() : \DateTime
+    public function getBirthDate()
     {
         return $this->birthdate;
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f6f03ce28c136cdfc6562a59a9ab544",
+    "content-hash": "e7e728d892d38803618d02a46302f029",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2415,7 +2415,7 @@
         },
         {
             "name": "nelmio/cors-bundle",
-            "version": "dev-master",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioCorsBundle.git",
@@ -7153,7 +7153,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "doctrine/doctrine-fixtures-bundle": 20,
-        "nelmio/cors-bundle": 20,
         "snc/redis-bundle": 20
     },
     "prefer-stable": false,

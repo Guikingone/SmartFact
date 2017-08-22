@@ -15,11 +15,14 @@ security:
             security: false
         main:
             anonymous: null
-        # api:
-            # pattern: ^/api
-            # provider: my_mongo_provider
-            # stateless: true
-            # guard:
-                # authenticator:
-                    # - App\Security\TokenAuthenticator
+        api:
+            pattern:   ^/api
+            stateless: true
+            provider: my_mongo_provider
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
 
+    # access_control:
+        # - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }

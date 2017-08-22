@@ -174,7 +174,7 @@ class ApiUserManager
      * @throws ApiJsonException            If no data are passed.
      * @throws \InvalidArgumentException
      *
-     * @return string
+     * @return array|string
      */
     public function postUsers(string $data)
     {
@@ -186,22 +186,28 @@ class ApiUserManager
             );
         }
 
+        $user = new User();
+
         $object = $this->serializer->deserialize(
             $data,
             User::class,
-            'json'
+            'json',
+            ['object_to_populate' => $user]
         );
 
         $clone = $this->documentManager->getRepository(User::class)
                                        ->findOneBy([
-                                           'firstname' => $object->getFirstname()
+                                           'firstname' => $user->getFirstName()
                                        ]);
 
         if ($clone) {
-            return \json_encode([
+            return [
                 'message' => 'Resource already exist !',
-                'data' => $clone
-            ]);
+                'data' => $this->serializer->serialize(
+                    $clone,
+                    'json'
+                )
+            ];
         }
 
         $this->validator->validate($object);
@@ -211,7 +217,10 @@ class ApiUserManager
         $this->documentManager->persist($object);
         $this->documentManager->flush();
 
-        return $object;
+        return $this->serializer->serialize(
+            $object,
+            'json'
+        );
     }
 
     /**
