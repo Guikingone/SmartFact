@@ -11,15 +11,15 @@
 
 namespace App\Managers\API;
 
-use App\Events\Users\UserCreatedEvent;
 use App\Model\User;
+use App\Events\Users\UserCreatedEvent;
 use App\Exceptions\ApiJsonException;
 use Doctrine\ODM\MongoDB\DocumentManager;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class ApiSecurityManager
@@ -96,7 +96,7 @@ final class ApiSecurityManager
         if (!$credentials) {
             throw new ApiJsonException(
                 \sprintf(
-                    ''
+                    'Credentials must be passed to create a resource !'
                 )
             );
         }
@@ -112,7 +112,7 @@ final class ApiSecurityManager
 
         $clone = $this->documentManager->getRepository(User::class)
                                        ->findOneBy([
-                                           'firstname' => $entry->getFirstName()
+                                           'username' => $entry->getUsername()
                                        ]);
 
         if ($clone) {
@@ -125,7 +125,14 @@ final class ApiSecurityManager
             ];
         }
 
-        // $this->validator->validate($entry);
+       // $errors = $this->validator->validate($entry);
+
+        // if ($errors) {
+            // return [
+                // 'errors' => $errors
+            // ];
+        // }
+
         $event = new UserCreatedEvent($entry);
         $this->eventDispatcher->dispatch($event::NAME, $event);
 
@@ -206,11 +213,89 @@ final class ApiSecurityManager
         if ((!$user) || (!$this->passwordEncoder->isPasswordValid($user, $credentials['password']))) {
             throw new ApiJsonException(
                 \sprintf(
-                    'The identifiers does not allow to find a user !'
+                    'The identifiers does not allow to authenticate a user !'
                 )
             );
         }
 
         return $this->tokenManager->create($user);
+    }
+
+    /**s
+     * @param string $credentials           The user credentials needed for authentication.
+     *
+     * @throws ApiJsonException             If no credentials are found.
+     * @throws ApiJsonException             If no user is found using credentials.
+     * @throws \InvalidArgumentException    @see DocumentManager.
+     *
+     * @return string                       The token for resetting the password.
+     */
+    public function resetPasswordTokenViaCredentials(string $credentials)
+    {
+        if (!$credentials) {
+            throw new ApiJsonException(
+                \sprintf(
+                    'No credentials passed !'
+                )
+            );
+        }
+
+        $entity = $this->serializer->deserialize(
+            $credentials,
+            User::class,
+            'json'
+        );
+
+        $object = $this->documentManager->getRepository(User::class)
+                                        ->findOneBy([
+                                            'username' => $entity->getUsername(),
+                                            'email' => $entity->getEmail()
+                                        ]);
+
+        if (!$object) {
+            throw new ApiJsonException(
+                \sprintf(
+                    'No user found using this identifiers ! Given %s',
+                    $credentials
+                )
+            );
+        }
+
+        $object->setResetPasswordToken($this->tokenManager->create($object));
+
+        $this->documentManager->flush();
+
+        return $object->getResetPasswordToken();
+    }
+
+    public function resetPasswordViaCredentials(string $credentials)
+    {
+        if (!$credentials) {
+            throw new ApiJsonException(
+                \sprintf(
+                    'No credentials passed !'
+                )
+            );
+        }
+
+        $results = $this->serializer->deserialize(
+            $credentials,
+            User::class,
+            'json'
+        );
+
+        $entity = $this->documentManager->getRepository(User::class)
+                                        ->findOneBy([
+                                            'resetPasswordToken' => $results->getResetPasswordToken()
+                                        ]);
+
+        if (!$entity) {
+            throw new ApiJsonException(
+                \sprintf(
+                    ''
+                )
+            );
+        }
+
     }
 }

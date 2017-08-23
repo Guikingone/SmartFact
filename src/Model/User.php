@@ -118,6 +118,11 @@ class User implements SmartFactUserInterface
     /**
      * @var string
      */
+    private $resetPasswordToken;
+
+    /**
+     * @var string
+     */
     private $token;
 
     /**
@@ -413,6 +418,22 @@ class User implements SmartFactUserInterface
     public function setPlainPassword(string $plainPassword)
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResetPasswordToken()
+    {
+        return $this->resetPasswordToken;
+    }
+
+    /**
+     * @param string $resetPasswordToken
+     */
+    public function setResetPasswordToken(string $resetPasswordToken)
+    {
+        $this->resetPasswordToken = $resetPasswordToken;
     }
 
     /**

@@ -13,10 +13,15 @@ api_jwt_entrypoint:
     methods: ['POST']
     defaults: { _controller: App\Action\Security\ApiTokenAction }
 
-api_forgot_password_entrypoint:
-    path:    '/api/forgot/password'
+api_forgot_password_authentication_entrypoint:
+    path:    '/api/password/reset/token'
     methods: ['POST']
-    defaults: { _controller: App\Action\Api\Users\PostUserAction }
+    defaults: { _controller: App\Action\Security\ApiResetPasswordTokenAction }
+
+api_forgot_password_validation_entrypoint:
+    path:    '/api/password/reset'
+    methods: ['PATCH']
+    defaults: { _controller: App\Action\Security\ApiResetPasswordAction }
 
 register:
     path:    '/register'

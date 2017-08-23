@@ -50,6 +50,9 @@ App\Model\User:
             type: string
             length: 150
             nullable: false
+        resetPasswordToken:
+            type: string
+            nullable: true
         token:
             type: string
             length: 150
