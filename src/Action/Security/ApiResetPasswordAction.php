@@ -11,6 +11,7 @@
 
 namespace App\Action\Security;
 
+use App\Exceptions\ApiJsonException;
 use App\Managers\API\ApiSecurityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -38,11 +39,14 @@ final class ApiResetPasswordAction
     }
 
     /**
-     * @param Request $request
+     * @param Request $request              The request who contains the credentials.
      *
-     * @throws \LogicException
+     * @throws \LogicException              @see Request::getContent()
+     * @throws ApiJsonException             @see ApiSecurityManager::resetPasswordViaCredentials()
+     * @throws \InvalidArgumentException    @see DocumentManager::flush()
      *
-     * @return JsonResponse
+     * @return JsonResponse                 If no credentials are passed.
+     * @return JsonResponse                 The response with the success message.
      */
     public function __invoke(Request $request) : JsonResponse
     {
@@ -57,6 +61,12 @@ final class ApiResetPasswordAction
             );
         }
 
-        return new JsonResponse();
+        $this->manager->resetPasswordViaCredentials($credentials);
+
+        return new JsonResponse(
+            [
+                'message' => 'Password updated !'
+            ]
+        );
     }
 }

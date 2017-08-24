@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Authenticators;
+namespace App\Guard;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,12 +24,12 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-final class TokenAuthenticator extends AbstractGuardAuthenticator
+class TokenAuthenticator extends AbstractGuardAuthenticator
 {
     /**
      * {@inheritdoc}
      */
-    public function getCredentials(Request $request) : array
+    public function getCredentials(Request $request)
     {
         if (!$token = $request->headers->get('authorization')) {
             $token = null;
@@ -65,12 +65,14 @@ final class TokenAuthenticator extends AbstractGuardAuthenticator
     /**
      * {@inheritdoc}
      */
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception) : JsonResponse
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
+        $errors = [
+            'message' => strtr($exception->getMessageKey(), $exception->getMessageData())
+        ];
+
         return new JsonResponse(
-            [
-                'message' => strtr($exception->getMessage(), $exception->getMessageData())
-            ],
+            $errors,
             JsonResponse::HTTP_FORBIDDEN
         );
     }
@@ -78,7 +80,7 @@ final class TokenAuthenticator extends AbstractGuardAuthenticator
     /**
      * {@inheritdoc}
      */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey) : null
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         return null;
     }
@@ -94,12 +96,14 @@ final class TokenAuthenticator extends AbstractGuardAuthenticator
     /**
      * {@inheritdoc}
      */
-    public function start(Request $request, AuthenticationException $authException = null) : JsonResponse
+    public function start(Request $request, AuthenticationException $authException = null)
     {
+        $informations = [
+            'message' => 'Authentication required'
+        ];
+
         return new JsonResponse(
-            [
-                'message' => 'Authentication required !'
-            ],
+            $informations,
             JsonResponse::HTTP_UNAUTHORIZED
         );
     }

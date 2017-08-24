@@ -53,6 +53,9 @@ App\Model\User:
         resetPasswordToken:
             type: string
             nullable: true
+        apiToken:
+            type: string
+            nullable: true
         token:
             type: string
             length: 150

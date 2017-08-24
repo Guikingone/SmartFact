@@ -30,7 +30,8 @@ final class GetPersonalUserAction
 
     /**
      * GetPersonalUserAction constructor.
-     * @param ApiUserManager $manager
+     *
+     * @param ApiUserManager    $manager
      */
     public function __construct(ApiUserManager $manager)
     {
@@ -38,21 +39,21 @@ final class GetPersonalUserAction
     }
 
     /**
-     * @param $request  Request
+     * @param $request  Request             The Request who contain the api token.
      *
-     * @throws \InvalidArgumentException
-     * @throws ApiJsonException
+     * @throws \InvalidArgumentException    @see Response
+     * @throws ApiJsonException             @see ApiUserManager::getPersonalUser()
      *
-     * @return Response
+     * @return Response                     The response with the user informations.
      */
     public function __invoke(Request $request) : Response
     {
         $headers = $request->headers->get('authorization');
 
-        $object = $this->manager->getPersonalUser($headers);
+        $informations = $this->manager->getPersonalUser($headers);
 
         return new Response(
-            $object,
+            $informations,
             Response::HTTP_OK,
             ['Content-Type' => 'application/json']
         );

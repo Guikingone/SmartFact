@@ -60,12 +60,13 @@ final class ApiSecurityManager
 
     /**
      * ApiSecurityManager constructor.
-     * @param DocumentManager $documentManager
-     * @param ValidatorInterface $validator
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param SerializerInterface $serializer
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param JWTManager $tokenManager
+     *
+     * @param DocumentManager               $documentManager
+     * @param ValidatorInterface            $validator
+     * @param EventDispatcherInterface      $eventDispatcher
+     * @param SerializerInterface           $serializer
+     * @param UserPasswordEncoderInterface  $passwordEncoder
+     * @param JWTManager                    $tokenManager
      */
     public function __construct(
         DocumentManager $documentManager,
@@ -84,9 +85,9 @@ final class ApiSecurityManager
     }
 
     /**
-     * @param string $credentials
+     * @param string $credentials           The credentials used for authenticate the user.
      *
-     * @throws ApiJsonException
+     * @throws ApiJsonException             If no credentials are passed.
      * @throws \InvalidArgumentException
      *
      * @return array
@@ -158,12 +159,12 @@ final class ApiSecurityManager
             );
         }
 
-        $user = $this->documentManager->getRepository(User::class)
+        $entity = $this->documentManager->getRepository(User::class)
                                       ->findOneBy([
                                           'id' => $headers['client_id']
                                       ]);
 
-        if (!$user) {
+        if (!$entity) {
             throw new ApiJsonException(
                 \sprintf(
                     'No user found using this headers/identifiers !'
@@ -171,10 +172,10 @@ final class ApiSecurityManager
             );
         }
 
-        $token = $this->tokenManager->create($user);
+        $token = $this->tokenManager->create($entity);
 
-        $user->setToken($token);
-        $user->setState(\uniqid('', false));
+        $entity->setToken($token);
+        $entity->setState(\uniqid('', false));
 
         $this->documentManager->flush();
 
@@ -182,19 +183,19 @@ final class ApiSecurityManager
             'response_type' => 'code',
             'token' => $token,
             'refresh_token' => '',
-            'state' => $user->getState()
+            'state' => $entity->getState()
         ];
     }
 
     /**
-     * @param array $credentials    The date used for authenticate the users.
+     * @param array $credentials                The credentials used to authenticate the users.
      *
-     * @throws ApiJsonException     If bad arguments are passed or empty.
-     * @throws ApiJsonException     If no users can be found.
+     * @throws ApiJsonException                 If bad arguments are passed or empty.
+     * @throws ApiJsonException                 If no users can be found.
+     * @throws \InvalidArgumentException        @see DocumentManager::flush()
      *
-     * @return string               The token if authenticated or false if not.
+     * @return string                           The authentication token.
      */
-
     public function authenticateViaCredentials(array $credentials)
     {
         if ((!$credentials['username']) || (!$credentials['password'])) {
@@ -205,12 +206,12 @@ final class ApiSecurityManager
             );
         }
 
-        $user = $this->documentManager->getRepository(User::class)
-                                      ->findOneBy([
-                                          'username' => $credentials['username']
-                                      ]);
+        $entity = $this->documentManager->getRepository(User::class)
+                                        ->findOneBy([
+                                            'username' => $credentials['username']
+                                        ]);
 
-        if ((!$user) || (!$this->passwordEncoder->isPasswordValid($user, $credentials['password']))) {
+        if ((!$entity) || (!$this->passwordEncoder->isPasswordValid($entity, $credentials['password']))) {
             throw new ApiJsonException(
                 \sprintf(
                     'The identifiers does not allow to authenticate a user !'
@@ -218,7 +219,11 @@ final class ApiSecurityManager
             );
         }
 
-        return $this->tokenManager->create($user);
+        $entity->setApiToken($this->tokenManager->create($entity));
+
+        $this->documentManager->flush();
+
+        return $entity->getApiToken();
     }
 
     /**s
@@ -226,7 +231,7 @@ final class ApiSecurityManager
      *
      * @throws ApiJsonException             If no credentials are found.
      * @throws ApiJsonException             If no user is found using credentials.
-     * @throws \InvalidArgumentException    @see DocumentManager.
+     * @throws \InvalidArgumentException    @see DocumentManager::flush()
      *
      * @return string                       The token for resetting the password.
      */
@@ -268,16 +273,14 @@ final class ApiSecurityManager
         return $object->getResetPasswordToken();
     }
 
+    /**
+     * @param string $credentials               The credentials (token + new password).
+     *
+     * @throws ApiJsonException                 If no user can be found using the token.
+     * @throws \InvalidArgumentException        @see DocumentManager::flush()
+     */
     public function resetPasswordViaCredentials(string $credentials)
     {
-        if (!$credentials) {
-            throw new ApiJsonException(
-                \sprintf(
-                    'No credentials passed !'
-                )
-            );
-        }
-
         $results = $this->serializer->deserialize(
             $credentials,
             User::class,
@@ -292,10 +295,15 @@ final class ApiSecurityManager
         if (!$entity) {
             throw new ApiJsonException(
                 \sprintf(
-                    ''
+                    'No user found using this token !'
                 )
             );
         }
 
+        $password = $this->passwordEncoder->encodePassword($entity, $entity->getPlainPassword());
+
+        $entity->setPassword($password);
+
+        $this->documentManager->flush();
     }
 }

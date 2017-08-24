@@ -4,8 +4,8 @@ services:
         autoconfigure: true
         public: false
 
-    # App\Authenticators\:
-        # resource: '../../src/Authenticators'
+    App\Guard\:
+        resource: '../../src/Guard'
 
     App\Action\:
         resource: '../../src/Action'

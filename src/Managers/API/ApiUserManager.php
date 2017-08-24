@@ -98,50 +98,51 @@ class ApiUserManager
      *
      * @return string       All the users saved.
      */
-    public function getUsers()
+    public function getUsers() : string
     {
-        $data = $this->documentManager->getRepository(User::class)
+        $users = $this->documentManager->getRepository(User::class)
                                       ->findAll();
 
         return $this->serializer->serialize(
-            $data,
+            $users,
             'json',
             ['groups' => ['users']]
         );
     }
 
     /**
-     * @param string $headers
+     * @param string $apiToken          The api key used to authenticate the client.
      *
-     * @throws ApiJsonException
+     * @throws ApiJsonException         Thrown if no api key is passed.
+     * @throws ApiJsonException         Thrown if no user is found using the api key.
      *
-     * @return string
+     * @return string                   The user informations
      */
-    public function getPersonalUser(string $headers) : string
+    public function getPersonalUser(string $apiToken) : string
     {
-        if (!$headers) {
+        if (!$apiToken) {
             throw new ApiJsonException(
                 \sprintf(
-                    ''
+                    'An API token must be passed, none given !'
                 )
             );
         }
 
-        $user = $this->documentManager->getRepository(User::class)
-                                      ->findOneBy([
-                                          'token' => $headers
-                                      ]);
+        $entity = $this->documentManager->getRepository(User::class)
+                                        ->findOneBy([
+                                            'apiToken' => $apiToken
+                                        ]);
 
-        if (!$user) {
+        if (!$entity) {
             throw new ApiJsonException(
                 \sprintf(
-                    ''
+                    'No user found using this identifier !'
                 )
             );
         }
 
         return $this->serializer->serialize(
-            $user,
+            $entity,
             'json',
             ['groups' => ['personal']]
         );
@@ -154,15 +155,15 @@ class ApiUserManager
      *
      * @return string       The User informations requested.
      */
-    public function getUserById($id)
+    public function getUserById(int $id) : string
     {
-        $data = $this->documentManager->getRepository(User::class)
-                                      ->findOneBy([
-                                          'id' => $id
-                                      ]);
+        $object = $this->documentManager->getRepository(User::class)
+                                        ->findOneBy([
+                                            'id' => $id
+                                        ]);
 
         return $this->serializer->serialize(
-            $data,
+            $object,
             'json',
             ['groups' => ['users']]
         );
@@ -171,7 +172,7 @@ class ApiUserManager
     /**
      * @param string $data
      *
-     * @throws ApiJsonException            If no data are passed.
+     * @throws ApiJsonException                If no data are passed.
      * @throws \InvalidArgumentException
      *
      * @return array|string
@@ -222,16 +223,6 @@ class ApiUserManager
             'json'
         );
     }
-
-    /**
-     * @param int $id
-     * @param string $data
-     */
-    public function putUsers(int $id, string $data)
-    {
-
-    }
-
 
     /**
      * @param int $id

@@ -61,21 +61,21 @@ class User implements SmartFactUserInterface
     /**
      * @var string
      *
-     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
+     * @Groups({"personal", "users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $email;
 
     /**
      * @var \DateTime
      *
-     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
+     * @Groups({"personal", "users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $birthdate;
 
     /**
      * @var string
      *
-     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
+     * @Groups({"personal", "users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $status;
 
@@ -101,7 +101,7 @@ class User implements SmartFactUserInterface
     /**
      * @var string
      *
-     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
+     * @Groups({"personal", "users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $username;
 
@@ -119,6 +119,11 @@ class User implements SmartFactUserInterface
      * @var string
      */
     private $resetPasswordToken;
+
+    /**
+     * @var string
+     */
+    private $apiToken;
 
     /**
      * @var string
@@ -434,6 +439,22 @@ class User implements SmartFactUserInterface
     public function setResetPasswordToken(string $resetPasswordToken)
     {
         $this->resetPasswordToken = $resetPasswordToken;
+    }
+
+    /**
+     * @return string
+     */
+    public function getApiToken()
+    {
+        return $this->apiToken;
+    }
+
+    /**
+     * @param string $apiToken
+     */
+    public function setApiToken(string $apiToken)
+    {
+        $this->apiToken = $apiToken;
     }
 
     /**

@@ -45,6 +45,7 @@ final class ApiTokenAction
      *
      * @throws \LogicException
      * @throws ApiJsonException
+     * @throws \InvalidArgumentException
      */
     public function __invoke(Request $request) : JsonResponse
     {
