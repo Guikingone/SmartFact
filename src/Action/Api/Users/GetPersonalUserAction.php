@@ -39,7 +39,7 @@ final class GetPersonalUserAction
     }
 
     /**
-     * @param $request  Request             The Request who contain the api token.x
+     * @param $request  Request             The Request who contain the api token.
      *
      * @throws ApiJsonException             If no headers are passed.
      * @throws \InvalidArgumentException    @see Response
