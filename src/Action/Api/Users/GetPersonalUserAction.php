@@ -39,8 +39,9 @@ final class GetPersonalUserAction
     }
 
     /**
-     * @param $request  Request             The Request who contain the api token.
+     * @param $request  Request             The Request who contain the api token.x
      *
+     * @throws ApiJsonException             If no headers are passed.
      * @throws \InvalidArgumentException    @see Response
      * @throws ApiJsonException             @see ApiUserManager::getPersonalUser()
      *
@@ -49,6 +50,14 @@ final class GetPersonalUserAction
     public function __invoke(Request $request) : Response
     {
         $headers = $request->headers->get('authorization');
+
+        if (!$headers) {
+            throw new ApiJsonException(
+                \sprintf(
+                    'An API token must be passed, none given !'
+                )
+            );
+        }
 
         $informations = $this->manager->getPersonalUser($headers);
 

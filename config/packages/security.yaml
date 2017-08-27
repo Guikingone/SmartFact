@@ -4,24 +4,22 @@ security:
             algorithm: bcrypt
 
     providers:
-        my_mongo_provider:
+        user_provider:
             mongodb:
                 class: App\Model\User
-                property: apiToken
+                property: username
+        api_token:
+            id: App\Providers\ApiTokenUserProvider
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            pattern: ^/api
             anonymous: null
-        # api:
-            # pattern:   ^/api
-            # stateless: true
-            # provider: my_mongo_provider
-            # guard:
-                # authenticators:
-                    # - App\Guard\TokenAuthenticator
+            provider: api_token
+            guard:
+                authenticators:
+                    - App\Guard\TokenAuthenticator
 
-    # access_control:
-        # - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }

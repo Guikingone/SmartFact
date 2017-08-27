@@ -7,6 +7,9 @@ services:
     App\Guard\:
         resource: '../../src/Guard'
 
+    App\Providers\:
+        resource: '../../src/Providers'
+
     App\Action\:
         resource: '../../src/Action'
         public: true

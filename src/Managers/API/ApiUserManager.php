@@ -120,14 +120,6 @@ class ApiUserManager
      */
     public function getPersonalUser(string $apiToken) : string
     {
-        if (!$apiToken) {
-            throw new ApiJsonException(
-                \sprintf(
-                    'An API token must be passed, none given !'
-                )
-            );
-        }
-
         $entity = $this->documentManager->getRepository(User::class)
                                         ->findOneBy([
                                             'apiToken' => $apiToken

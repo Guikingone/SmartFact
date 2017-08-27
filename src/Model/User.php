@@ -585,7 +585,7 @@ class User implements SmartFactUserInterface
             $this->username,
             $this->password,
             $this->isActive
-            ) = \unserialize($serialized, $this);
+            ) = \unserialize($serialized);
     }
 
     /**
