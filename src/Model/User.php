@@ -47,14 +47,14 @@ class User implements SmartFactUserInterface
     /**
      * @var string
      *
-     * @Groups({"personal", "users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $address;
 
     /**
      * @var string
      *
-     * @Groups({"personal", "users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $phoneNumber;
 
@@ -68,14 +68,14 @@ class User implements SmartFactUserInterface
     /**
      * @var \DateTime
      *
-     * @Groups({"personal", "users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $birthdate;
 
     /**
      * @var string
      *
-     * @Groups({"personal", "users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
+     * @Groups({"users", "notifications", "planning", "accounting", "bills", "clients", "meetups"})
      */
     private $status;
 
@@ -139,15 +139,11 @@ class User implements SmartFactUserInterface
 
     /**
      * @var string
-     *
-     * @Groups({"personal"})
      */
     private $scope;
 
     /**
      * @var string
-     *
-     * @Groups({"personal"})
      */
     private $state;
 
@@ -223,6 +219,7 @@ class User implements SmartFactUserInterface
         $this->status = static::CREATED;
         $this->validated = false;
         $this->isActive = true;
+        $this->roles = 'ROLE_USER';
     }
 
     /**
@@ -559,43 +556,13 @@ class User implements SmartFactUserInterface
     }
 
     /**
-     * @see \Serializable::serialize()
-     *
-     * @codeCoverageIgnore
-     */
-    public function serialize()
-    {
-        return \serialize([
-            $this->id,
-            $this->username,
-            $this->password,
-            $this->isActive
-        ]);
-    }
-
-    /**
-     * @see \Serializable::unserialize()
-     *
-     * @codeCoverageIgnore
-     */
-    public function unserialize($serialized)
-    {
-        list(
-            $this->id,
-            $this->username,
-            $this->password,
-            $this->isActive
-            ) = \unserialize($serialized);
-    }
-
-    /**
      * Add notification
      *
      * @param Notifications $notification
      *
      * @return User
      */
-    public function addNotification(Notifications $notification)
+    public function addNotification(Notifications $notification) : User
     {
         $this->notifications[] = $notification;
 
@@ -770,5 +737,41 @@ class User implements SmartFactUserInterface
     public function getMeetups()
     {
         return $this->meetups;
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     *
+     * @codeCoverageIgnore
+     *
+     * @return string
+     */
+    public function serialize() : string
+    {
+        return \serialize([
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->isActive
+        ]);
+    }
+
+    /**
+     * @param $serialized
+     *
+     * @see \Serializable::unserialize()
+     *
+     * @codeCoverageIgnore
+     *
+     * @return void
+     */
+    public function unserialize($serialized) : void
+    {
+        [
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->isActive
+        ] = \unserialize($serialized, ['allowed_classes' => false]);
     }
 }
