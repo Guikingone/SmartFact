@@ -38,6 +38,14 @@ services:
             - './:${WORKPATH}:rw'
         restart: always
 
+    composer:
+        container_name: ${CONTAINER_NAME}_composer
+        image: composer
+        links:
+          - debian
+        volumes:
+            - './:/${WORKPATH}:rw'
+
     redis:
         container_name: ${CONTAINER_NAME}_redis
         image: redis

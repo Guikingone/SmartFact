@@ -25,56 +25,56 @@ class Bills implements SmartFactBillsInterface
     /**
      * @var int
      *
-     * @Groups({"users", "bills", "clients"})
+     * @Groups({"personal", "users", "bills", "clients"})
      */
     private $id;
 
     /**
      * @var \DateTime
      *
-     * @Groups({"users", "bills", "clients"})
+     * @Groups({"personal", "users", "bills", "clients"})
      */
     private $date;
 
     /**
      * @var float
      *
-     * @Groups({"users", "bills", "clients"})
+     * @Groups({"personal", "users", "bills", "clients"})
      */
     private $total;
 
     /**
      * @var bool
      *
-     * @Groups({"users", "bills", "clients"})
+     * @Groups({"personal", "users", "bills", "clients"})
      */
     private $send;
 
     /**
      * @var \DateTime
      *
-     * @Groups({"users", "bills", "clients"})
+     * @Groups({"personal", "users", "bills", "clients"})
      */
     private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @Groups({"users", "bills", "clients"})
+     * @Groups({"personal", "users", "bills", "clients"})
      */
     private $sendAt;
 
     /**
      * @var string
      *
-     * @Groups({"users", "bills", "clients"})
+     * @Groups({"personal", "users", "bills", "clients"})
      */
     private $file;
 
     /**
      * @var bool
      *
-     * @Groups({"users", "bills", "clients"})
+     * @Groups({"personal", "users", "bills", "clients"})
      */
     private $tva;
 

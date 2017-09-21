@@ -57,9 +57,28 @@ final class ApiBillsManager
     }
 
     /**
+     * @param string $userId
+     *
+     * @return string
+     */
+    public function getPersonalBills(string $userId) : string
+    {
+        $entries = $this->documentManager->getRepository(Bills::class)
+                                         ->findBy([
+                                             'user' => $userId
+                                         ]);
+
+        return $this->serializer->serialize(
+            $entries,
+            'json',
+            ['groups' => ['personal']]
+        );
+    }
+
+    /**
      * @return string        The resources found.
      */
-    public function getBills()
+    public function getBills() : string
     {
         $data = $this->documentManager->getRepository(Bills::class)
                                       ->findAll();
@@ -78,7 +97,7 @@ final class ApiBillsManager
      *
      * @return string                  The resource found.
      */
-    public function getBillsById(int $id)
+    public function getBillsById(int $id) : string
     {
         $entity = $this->documentManager->getRepository(Bills::class)
                                         ->findOneBy([

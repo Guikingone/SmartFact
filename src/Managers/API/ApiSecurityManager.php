@@ -134,8 +134,8 @@ final class ApiSecurityManager
             // ];
         // }
 
-        $event = new UserCreatedEvent($entry);
-        $this->eventDispatcher->dispatch($event::NAME, $event);
+        //$event = new UserCreatedEvent($entry);
+        //$this->eventDispatcher->dispatch($event::NAME, $event);
 
         $this->documentManager->persist($entry);
         $this->documentManager->flush();
