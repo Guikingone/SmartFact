@@ -13,7 +13,8 @@ namespace App\Action\Api\Bills;
 
 use Twig\Environment;
 use App\Managers\API\ApiBillsManager;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Class GetPersonalBillsAction
@@ -28,6 +29,11 @@ class GetPersonalBillsAction
     private $manager;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * @var Environment
      */
     private $twig;
@@ -36,21 +42,33 @@ class GetPersonalBillsAction
      * GetPersonalBillsAction constructor.
      *
      * @param ApiBillsManager       $manager
+     * @param TokenStorageInterface $tokenStorage
      * @param Environment           $twig
      */
     public function __construct(
         ApiBillsManager $manager,
+        TokenStorageInterface $tokenStorage,
         Environment $twig
     ) {
         $this->manager = $manager;
+        $this->tokenStorage = $tokenStorage;
         $this->twig = $twig;
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function __invoke() : JsonResponse
-    {
 
+    /**
+     * @return Response
+     */
+    public function __invoke() : Response
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+
+        $bills = $this->manager->getPersonalBills($user);
+
+        return new Response(
+            $bills,
+            Response::HTTP_OK,
+            ['Content-Type' => 'application/json']
+        );
     }
 }

@@ -13,6 +13,7 @@ namespace App\Managers\API;
 
 use App\Model\Bills;
 use App\Exceptions\ApiJsonException;
+use App\Model\User;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -61,11 +62,11 @@ final class ApiBillsManager
      *
      * @return string
      */
-    public function getPersonalBills(string $userId) : string
+    public function getPersonalBills(User $user) : string
     {
         $entries = $this->documentManager->getRepository(Bills::class)
                                          ->findBy([
-                                             'user' => $userId
+                                             'user' => $user
                                          ]);
 
         return $this->serializer->serialize(

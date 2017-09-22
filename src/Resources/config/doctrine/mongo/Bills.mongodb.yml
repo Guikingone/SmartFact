@@ -7,7 +7,7 @@ App\Model\Bills:
             id: true
             strategy: AUTO
         date:
-            type: datetime
+            type: date
             nullable: false
         total:
             type: float
@@ -16,10 +16,10 @@ App\Model\Bills:
             type: boolean
             nullable: false
         createdAt:
-            type: datetime
+            type: date
             nullable: false
         sendAt:
-            type: datetime
+            type: date
             nullable: false
         file:
             type: string
@@ -30,9 +30,11 @@ App\Model\Bills:
             nullable: false
 
     referenceMany:
-        user:
-            targetDocument: App\Model\User
-            inversedBy: bills
         clients:
             targetDocument: App\Model\Clients
+            inversedBy: bills
+
+    referenceOne:
+        user:
+            targetDocument: App\Model\User
             inversedBy: bills

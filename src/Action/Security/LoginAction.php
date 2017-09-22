@@ -11,7 +11,6 @@
 
 namespace App\Action\Security;
 
-
 use Twig\Environment;
 use App\Form\Type\Security\LoginType;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +22,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class LoginAction
+final class LoginAction
 {
     /**
      * @var Environment

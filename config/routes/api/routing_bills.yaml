@@ -4,6 +4,12 @@ api_bills:
     methods: ['GET']
     defaults: { _controller: App\Action\Api\Bills\GetBillsAction }
 
+api_bills_personnal:
+    path:    '/bills/me'
+    methods: ['GET']
+    defaults: { _controller: App\Action\Api\Bills\GetPersonalBillsAction }
+
+
 api_bills_single:
     path:    '/bills/{id}'
     methods: ['GET']

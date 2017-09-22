@@ -42,9 +42,10 @@ services:
         container_name: ${CONTAINER_NAME}_composer
         image: composer
         links:
-          - debian
+          - php-fpm
         volumes:
             - './:/${WORKPATH}:rw'
+        working_dir: ${WORKPATH}
 
     redis:
         container_name: ${CONTAINER_NAME}_redis

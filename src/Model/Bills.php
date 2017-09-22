@@ -158,6 +158,14 @@ class Bills implements SmartFactBillsInterface
     }
 
     /**
+     * @return bool
+     */
+    public function getSend()
+    {
+        return $this->send;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getCreatedAt()
