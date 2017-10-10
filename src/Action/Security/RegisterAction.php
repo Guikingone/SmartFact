@@ -11,8 +11,8 @@
 
 namespace App\Action\Security;
 
-use App\Managers\Web\WebUserManager;
 use Twig\Environment;
+use App\Managers\Web\WebUserManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
 

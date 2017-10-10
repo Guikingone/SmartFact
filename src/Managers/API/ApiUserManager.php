@@ -101,7 +101,7 @@ class ApiUserManager
     public function getUsers() : string
     {
         $users = $this->documentManager->getRepository(User::class)
-                                      ->findAll();
+                                       ->findAll();
 
         return $this->serializer->serialize(
             $users,

@@ -51,7 +51,7 @@ final class TokenAuthenticator extends AbstractGuardAuthenticator
      *
      * @throws ApiJsonException                         @see ApiTokenUserProvider::findUserByApiToken()
      *
-     * @return \App\Model\User|null|UserInterface|void
+     * @return \App\Model\User|null|UserInterface
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {

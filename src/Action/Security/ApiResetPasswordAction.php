@@ -66,7 +66,8 @@ final class ApiResetPasswordAction
         return new JsonResponse(
             [
                 'message' => 'Password updated !'
-            ]
+            ],
+            JsonResponse::HTTP_OK
         );
     }
 }
