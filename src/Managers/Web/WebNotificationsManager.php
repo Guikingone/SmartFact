@@ -19,7 +19,7 @@ use App\Model\Notifications;
 use App\Events\Notifications\DeletedNotificationEvent;
 
 // Core
-use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -31,9 +31,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class WebNotificationsManager
 {
     /**
-     * @var DocumentManager
+     * @var EntityManager
      */
-    private $documentManager;
+    private $entityManager;
 
     /**
      * @var FormFactoryInterface
@@ -48,16 +48,16 @@ class WebNotificationsManager
     /**
      * WebNotificationsManager constructor.
      *
-     * @param DocumentManager               $documentManager
+     * @param EntityManager               $entityManager
      * @param FormFactoryInterface          $form
      * @param EventDispatcherInterface      $eventDispatcher
      */
     public function __construct(
-        DocumentManager $documentManager,
+        EntityManager $entityManager,
         FormFactoryInterface $form,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->documentManager = $documentManager;
+        $this->entityManager = $entityManager;
         $this->form = $form;
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -71,7 +71,7 @@ class WebNotificationsManager
      */
     public function getNotificationsByUser(int $userId)
     {
-        return $this->documentManager->getRepository(Notifications::class)
+        return $this->entityManager->getRepository(Notifications::class)
                                      ->findBy([
                                          'users' => $userId
                                      ]);
@@ -89,7 +89,7 @@ class WebNotificationsManager
      */
     public function getSingleNotificationsByUser(int $userId, int $id)
     {
-        $notification =  $this->documentManager->getRepository(Notifications::class)
+        $notification =  $this->entityManager->getRepository(Notifications::class)
                                                ->findOneBy([
                                                    'users' => $userId,
                                                    'id' => $id
@@ -119,7 +119,7 @@ class WebNotificationsManager
             );
         }
 
-        $user = $this->documentManager->getRepository(User::class)
+        $user = $this->entityManager->getRepository(User::class)
                                       ->findOneBy([
                                           'id' => $userId
                                       ]);
@@ -157,7 +157,7 @@ class WebNotificationsManager
             );
         }
 
-        $notification = $this->documentManager->getRepository(Notifications::class)
+        $notification = $this->entityManager->getRepository(Notifications::class)
                                               ->findOneBy([
                                                   'users' => $user,
                                                   'id' => $id
@@ -173,8 +173,8 @@ class WebNotificationsManager
             );
         }
 
-        $this->documentManager->remove($notification);
-        $this->documentManager->flush();
+        $this->entityManager->remove($notification);
+        $this->entityManager->flush();
     }
 
     /**
@@ -196,7 +196,7 @@ class WebNotificationsManager
             );
         }
 
-        $notifications = $this->documentManager->getRepository(Notifications::class)
+        $notifications = $this->entityManager->getRepository(Notifications::class)
                                                ->findBy([
                                                    'users' => $user
                                                ]);
@@ -217,9 +217,9 @@ class WebNotificationsManager
                 $event
             );
 
-            $this->documentManager->remove($notification);
+            $this->entityManager->remove($notification);
         }
 
-        $this->documentManager->flush();
+        $this->entityManager->flush();
     }
 }

@@ -14,7 +14,7 @@ namespace App\Managers\API;
 use App\Model\User;
 use App\Exceptions\ApiJsonException;
 use App\Events\Users\UserCreatedEvent;
-use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\SerializerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
@@ -30,9 +30,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 class ApiUserManager
 {
     /**
-     * @var DocumentManager
+     * @var EntityManager
      */
-    private $documentManager;
+    private $entityManager;
 
     /**
      * @var SerializerInterface
@@ -67,7 +67,7 @@ class ApiUserManager
     /**
      * ApiUserManager constructor.
      *
-     * @param DocumentManager               $documentManager
+     * @param EntityManager                 $entityManager
      * @param SerializerInterface           $serializer
      * @param EventDispatcherInterface      $eventDispatcher
      * @param ValidatorInterface            $validator
@@ -76,7 +76,7 @@ class ApiUserManager
      * @param RequestStack                  $requestStack
      */
     public function __construct(
-        DocumentManager $documentManager,
+        EntityManager $entityManager,
         SerializerInterface $serializer,
         EventDispatcherInterface $eventDispatcher,
         ValidatorInterface $validator,
@@ -84,7 +84,7 @@ class ApiUserManager
         JWTManager $tokenManager,
         RequestStack $requestStack
     ) {
-        $this->documentManager = $documentManager;
+        $this->entityManager = $entityManager;
         $this->serializer = $serializer;
         $this->eventDispatcher = $eventDispatcher;
         $this->validator = $validator;
@@ -100,7 +100,7 @@ class ApiUserManager
      */
     public function getUsers() : string
     {
-        $users = $this->documentManager->getRepository(User::class)
+        $users = $this->entityManager->getRepository(User::class)
                                        ->findAll();
 
         return $this->serializer->serialize(
@@ -120,7 +120,7 @@ class ApiUserManager
      */
     public function getPersonalUser(string $apiToken) : string
     {
-        $entity = $this->documentManager->getRepository(User::class)
+        $entity = $this->entityManager->getRepository(User::class)
                                         ->findOneBy([
                                             'apiToken' => $apiToken
                                         ]);
@@ -149,7 +149,7 @@ class ApiUserManager
      */
     public function getUserById(int $id) : string
     {
-        $object = $this->documentManager->getRepository(User::class)
+        $object = $this->entityManager->getRepository(User::class)
                                         ->findOneBy([
                                             'id' => $id
                                         ]);
@@ -188,7 +188,7 @@ class ApiUserManager
             ['object_to_populate' => $user]
         );
 
-        $clone = $this->documentManager->getRepository(User::class)
+        $clone = $this->entityManager->getRepository(User::class)
                                        ->findOneBy([
                                            'firstname' => $user->getFirstName()
                                        ]);
@@ -207,8 +207,8 @@ class ApiUserManager
         $event = new UserCreatedEvent($object);
         $this->eventDispatcher->dispatch($event::NAME, $event);
 
-        $this->documentManager->persist($object);
-        $this->documentManager->flush();
+        $this->entityManager->persist($object);
+        $this->entityManager->flush();
 
         return $this->serializer->serialize(
             $object,
@@ -227,7 +227,7 @@ class ApiUserManager
      */
     public function patchUsers(int $id, string $data) : string
     {
-        $object = $this->documentManager->getRepository(User::class)
+        $object = $this->entityManager->getRepository(User::class)
                                         ->findOneBy([
                                             'id' => $id
                                         ]);
@@ -247,7 +247,7 @@ class ApiUserManager
             ['object_to_populate' => $object]
         );
 
-        $this->documentManager->flush();
+        $this->entityManager->flush();
 
         return $this->serializer->serialize(
             $object,
@@ -258,13 +258,13 @@ class ApiUserManager
     /**
      * @param string $id                    The id of the resource.
      *
-     * @throws \InvalidArgumentException    Thrown by the DocumentManager.
+     * @throws \InvalidArgumentException    Thrown by the entityManager.
      *
      * @throws ApiJsonException             If no resource are found.
      */
     public function deleteUser(string $id) : void
     {
-        $entity = $this->documentManager->getRepository(User::class)
+        $entity = $this->entityManager->getRepository(User::class)
                                         ->findOneBy([
                                             'id' => $id
                                         ]);
@@ -277,7 +277,7 @@ class ApiUserManager
             );
         }
 
-        $this->documentManager->remove($entity);
-        $this->documentManager->flush();
+        $this->entityManager->remove($entity);
+        $this->entityManager->flush();
     }
 }

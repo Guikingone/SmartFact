@@ -1,15 +1,15 @@
 <?php
 
 return [
-    'Symfony\Bundle\FrameworkBundle\FrameworkBundle' => ['all' => true],
-    'Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle' => ['all' => true],
-    'Symfony\Bundle\TwigBundle\TwigBundle' => ['all' => true],
-    'Symfony\Bundle\SecurityBundle\SecurityBundle' => ['all' => true],
-    'Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle' => ['all' => true],
-    'Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle' => ['all' => true],
-    'Doctrine\Bundle\DoctrineBundle\DoctrineBundle' => ['all' => true],
-    'Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle' => ['all' => true],
-    'Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle' => ['dev' => true, 'test' => true],
-    'Nelmio\CorsBundle\NelmioCorsBundle' => ['all' => true],
-    'Snc\RedisBundle\SncRedisBundle' => ['all' => true],
+    Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
+    Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle::class => ['all' => true],
+    Symfony\Bundle\TwigBundle\TwigBundle::class => ['all' => true],
+    Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
+    Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle::class => ['all' => true],
+    Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class => ['all' => true],
+    Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
+    Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
+    Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
+    Snc\RedisBundle\SncRedisBundle::class => ['all' => true],
+    Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],
 ];

@@ -12,8 +12,8 @@
 namespace App\Managers\API;
 
 use App\Model\Accounting;
+use Doctrine\ORM\EntityManager;
 use App\Exceptions\ApiJsonException;
-use Doctrine\ODM\MongoDB\DocumentManager;
 use App\Events\Accounting\PostedAccountingEvent;
 use App\Events\Accounting\UpdatedAccountingEvent;
 use App\Events\Accounting\DeletedAccountingEvent;
@@ -29,9 +29,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class ApiAccountingManager
 {
     /**
-     * @var DocumentManager
+     * @var EntityManager
      */
-    private $documentManager;
+    private $entityManager;
 
     /**
      * @var ValidatorInterface
@@ -51,18 +51,18 @@ class ApiAccountingManager
     /**
      * ApiAccountingManager constructor.
      *
-     * @param DocumentManager           $documentManager
+     * @param EntityManager             $entityManager
      * @param ValidatorInterface        $validator
      * @param SerializerInterface       $serializer
      * @param EventDispatcherInterface  $dispatcher
      */
     public function __construct(
-        DocumentManager $documentManager,
+        EntityManager $entityManager,
         ValidatorInterface $validator,
         SerializerInterface $serializer,
         EventDispatcherInterface $dispatcher
     ) {
-        $this->documentManager = $documentManager;
+        $this->entityManager = $entityManager;
         $this->validator = $validator;
         $this->serializer = $serializer;
         $this->dispatcher = $dispatcher;
@@ -75,7 +75,7 @@ class ApiAccountingManager
      */
     public function getAccountings() : string
     {
-        $data = $this->documentManager->getRepository(Accounting::class)
+        $data = $this->entityManager->getRepository(Accounting::class)
                                       ->findAll();
 
         return $this->serializer->serialize(
@@ -94,7 +94,7 @@ class ApiAccountingManager
      */
     public function getAccounting(int $id) : string
     {
-        $data = $this->documentManager->getRepository(Accounting::class)
+        $data = $this->entityManager->getRepository(Accounting::class)
                                       ->findOneBy([
                                           'id' => $id
                                       ]);
@@ -137,7 +137,7 @@ class ApiAccountingManager
             'json'
         );
 
-        $clone = $this->documentManager->getRepository(Accounting::class)
+        $clone = $this->entityManager->getRepository(Accounting::class)
                                        ->findOneBy([
                                            'name' => $entity->getName()
                                        ]);
@@ -152,8 +152,8 @@ class ApiAccountingManager
         $event = new PostedAccountingEvent($entity);
         $this->dispatcher->dispatch($event::NAME, $event);
 
-        $this->documentManager->persist($entity);
-        $this->documentManager->flush();
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
 
         return $entity;
     }
@@ -168,7 +168,7 @@ class ApiAccountingManager
      */
     public function putAccounting(string $data, int $id)
     {
-        $entity = $this->documentManager->getRepository(Accounting::class)
+        $entity = $this->entityManager->getRepository(Accounting::class)
                                         ->findOneBy([
                                             'id' => $id
                                         ]);
@@ -180,7 +180,7 @@ class ApiAccountingManager
                 'json'
             );
 
-            $clone = $this->documentManager->getRepository(Accounting::class)
+            $clone = $this->entityManager->getRepository(Accounting::class)
                                            ->findOneBy([
                                                'name' => $accounting->getName()
                                            ]);
@@ -198,8 +198,8 @@ class ApiAccountingManager
             $event = new PostedAccountingEvent($accounting);
             $this->dispatcher->dispatch($event::NAME, $event);
 
-            $this->documentManager->persist($accounting);
-            $this->documentManager->flush();
+            $this->entityManager->persist($accounting);
+            $this->entityManager->flush();
 
             return $this->serializer->serialize(
                 $accounting,
@@ -216,7 +216,7 @@ class ApiAccountingManager
         $event = new UpdatedAccountingEvent($entity);
         $this->dispatcher->dispatch($event::NAME, $event);
 
-        $this->documentManager->flush();
+        $this->entityManager->flush();
 
         return $entity;
     }
@@ -227,7 +227,7 @@ class ApiAccountingManager
      */
     public function patchAccounting(array $data, int $id)
     {
-        $entity = $this->documentManager->getRepository(Accounting::class)
+        $entity = $this->entityManager->getRepository(Accounting::class)
                                         ->findOneBy([
                                             'id' => $id
                                         ]);
@@ -247,7 +247,7 @@ class ApiAccountingManager
      */
     public function deleteAccounting(int $id)
     {
-        $accounting = $this->documentManager->getRepository(Accounting::class)
+        $accounting = $this->entityManager->getRepository(Accounting::class)
                                             ->findOneBy([
                                                 'id' => $id
                                             ]);
@@ -260,12 +260,12 @@ class ApiAccountingManager
             );
         }
 
-        $this->documentManager->remove($accounting);
+        $this->entityManager->remove($accounting);
 
         $event = new DeletedAccountingEvent($accounting);
         $this->dispatcher->dispatch($event::NAME, $event);
 
-        $this->documentManager->flush();
+        $this->entityManager->flush();
 
         return [
             'message' => 'Resource deleted !'

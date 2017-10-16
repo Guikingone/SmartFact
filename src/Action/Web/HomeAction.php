@@ -22,28 +22,12 @@ use Symfony\Component\HttpFoundation\Response;
 final class HomeAction
 {
     /**
-     * @var Environment
-     */
-    private $twig;
-
-    /**
-     * HomeAction constructor.
-     *
-     * @param Environment $twig
-     */
-    public function __construct(
-        Environment $twig
-    ) {
-        $this->twig = $twig;
-    }
-
-    /**
      * @return Response
      */
-    public function __invoke()
+    public function __invoke(Environment $twig)
     {
         return new Response(
-            $this->twig->render('default/index.html.twig')
+            $twig->render('default/index.html.twig')
         );
     }
 }

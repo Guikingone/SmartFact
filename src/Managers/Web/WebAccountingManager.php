@@ -17,7 +17,7 @@ use App\Form\Type\Accounting\NewAccountingType;
 use App\Events\Accounting\PostedAccountingEvent;
 use App\Events\Accounting\UpdatedAccountingEvent;
 use App\Events\Accounting\DeletedAccountingEvent;
-use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -30,9 +30,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class WebAccountingManager
 {
     /**
-     * @var DocumentManager
+     * @var EntityManager
      */
-    private $documentManager;
+    private $entityManager;
 
     /**
      * @var FormFactoryInterface
@@ -47,16 +47,16 @@ class WebAccountingManager
     /**
      * WebAccountingManager constructor.
      *
-     * @param DocumentManager           $documentManager
+     * @param EntityManager             $entityManager
      * @param FormFactoryInterface      $form
      * @param EventDispatcherInterface  $eventDispatcher
      */
     public function __construct(
-        DocumentManager $documentManager,
+        EntityManager $entityManager,
         FormFactoryInterface $form,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->documentManager = $documentManager;
+        $this->entityManager = $entityManager;
         $this->form = $form;
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -68,7 +68,7 @@ class WebAccountingManager
      */
     public function getAccountings()
     {
-        return $this->documentManager->getRepository(Accounting::class)
+        return $this->entityManager->getRepository(Accounting::class)
                                      ->findAll();
     }
 
@@ -83,7 +83,7 @@ class WebAccountingManager
      */
     public function getAccountingDetails($id)
     {
-        $accounting =  $this->documentManager->getRepository(Accounting::class)
+        $accounting =  $this->entityManager->getRepository(Accounting::class)
                                              ->findBy([
                                                  'id' => $id
                                              ]);
@@ -122,8 +122,8 @@ class WebAccountingManager
                 $event
             );
 
-            $this->documentManager->persist($accounting);
-            $this->documentManager->flush();
+            $this->entityManager->persist($accounting);
+            $this->entityManager->flush();
         }
 
         return $form->createView();
@@ -141,7 +141,7 @@ class WebAccountingManager
      */
     public function updateAccounting($id, $request)
     {
-        $accounting = $this->documentManager->getRepository(Accounting::class)
+        $accounting = $this->entityManager->getRepository(Accounting::class)
                                             ->findOneBy([
                                                 'id' => $id
                                             ]);
@@ -166,7 +166,7 @@ class WebAccountingManager
                 $event
             );
 
-            $this->documentManager->flush();
+            $this->entityManager->flush();
         }
 
         return $form->createView();
@@ -194,7 +194,7 @@ class WebAccountingManager
             );
         }
 
-        $usr = $this->documentManager->getRepository(User::class)
+        $usr = $this->entityManager->getRepository(User::class)
                                      ->findOneBy([
                                          'id' => $user
                                      ]);
@@ -207,7 +207,7 @@ class WebAccountingManager
             );
         }
 
-        $accounting = $this->documentManager->getRepository(Accounting::class)
+        $accounting = $this->entityManager->getRepository(Accounting::class)
                                             ->findOneBy([
                                                 'users' => $usr,
                                                 'id' => $id
@@ -230,7 +230,7 @@ class WebAccountingManager
 
         $accounting->removeUser($usr);
 
-        $this->documentManager->flush();
+        $this->entityManager->flush();
     }
 
     /**
@@ -253,7 +253,7 @@ class WebAccountingManager
             );
         }
 
-        $accounting = $this->documentManager->getRepository(Accounting::class)
+        $accounting = $this->entityManager->getRepository(Accounting::class)
                                             ->findOneBy([
                                                 'id' => $id
                                             ]);
@@ -267,7 +267,7 @@ class WebAccountingManager
             );
         }
 
-        $this->documentManager->remove($accounting);
-        $this->documentManager->flush();
+        $this->entityManager->remove($accounting);
+        $this->entityManager->flush();
     }
 }

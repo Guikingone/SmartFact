@@ -11,10 +11,10 @@
 
 namespace App\Managers\API;
 
-use App\Model\Bills;
-use App\Exceptions\ApiJsonException;
 use App\Model\User;
-use Doctrine\ODM\MongoDB\DocumentManager;
+use App\Model\Bills;
+use Doctrine\ORM\EntityManager;
+use App\Exceptions\ApiJsonException;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -26,9 +26,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 final class ApiBillsManager
 {
     /**
-     * @var DocumentManager
+     * @var EntityManager
      */
-    private $documentManager;
+    private $entityManager;
 
     /**
      * @var SerializerInterface
@@ -43,16 +43,16 @@ final class ApiBillsManager
     /**
      * ApiBillsManager constructor.
      *
-     * @param DocumentManager           $documentManager
+     * @param EntityManager             $entityManager
      * @param SerializerInterface       $serializer
      * @param EventDispatcherInterface  $dispatcher
      */
     public function __construct(
-        DocumentManager $documentManager,
+        EntityManager $entityManager,
         SerializerInterface $serializer,
         EventDispatcherInterface $dispatcher
     ) {
-        $this->documentManager = $documentManager;
+        $this->entityManager = $entityManager;
         $this->serializer = $serializer;
         $this->dispatcher = $dispatcher;
     }
@@ -64,7 +64,7 @@ final class ApiBillsManager
      */
     public function getPersonalBills(User $user) : string
     {
-        $entries = $this->documentManager->getRepository(Bills::class)
+        $entries = $this->entityManager->getRepository(Bills::class)
                                          ->findBy([
                                              'user' => $user
                                          ]);
@@ -81,7 +81,7 @@ final class ApiBillsManager
      */
     public function getBills() : string
     {
-        $data = $this->documentManager->getRepository(Bills::class)
+        $data = $this->entityManager->getRepository(Bills::class)
                                       ->findAll();
 
         return $this->serializer->serialize(
@@ -100,7 +100,7 @@ final class ApiBillsManager
      */
     public function getBillsById(int $id) : string
     {
-        $entity = $this->documentManager->getRepository(Bills::class)
+        $entity = $this->entityManager->getRepository(Bills::class)
                                         ->findOneBy([
                                             'id' => $id
                                         ]);
@@ -134,7 +134,7 @@ final class ApiBillsManager
      */
     public function deleteBills(int $id)
     {
-        $entity = $this->documentManager->getRepository(Bills::class)
+        $entity = $this->entityManager->getRepository(Bills::class)
                                         ->findOneBy([
                                             'id' => $id
                                         ]);
@@ -147,7 +147,7 @@ final class ApiBillsManager
             );
         }
 
-        $this->documentManager->remove($entity);
-        $this->documentManager->flush();
+        $this->entityManager->remove($entity);
+        $this->entityManager->flush();
     }
 }

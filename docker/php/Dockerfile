@@ -27,6 +27,14 @@ RUN pecl install apcu \
     && docker-php-ext-install pdo_mysql opcache json sockets \
     && docker-php-ext-enable apcu xdebug mongodb.so
 
+# Composer
+COPY ./install-composer.sh /usr/local/bin/docker-app-install-composer
+RUN chmod +x /usr/local/bin/docker-app-install-composer \
+    && docker-app-install-composer \
+    && mv composer.phar /usr/local/bin/composer
+
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
 # Blackfire (Docker approach)
 RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
     && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$version \
@@ -38,10 +46,6 @@ RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
 RUN curl -OLsS http://get.blackfire.io/blackfire-player.phar \
     && chmod +x blackfire-player.phar \
     && mv blackfire-player.phar /usr/local/bin/blackfire-player
-
-# Sami (API)
-RUN curl -O http://get.sensiolabs.org/sami.phar \
-    && mv sami.phar /usr/local/bin/sami
 
 RUN mkdir -p ${WORKDIR}
 

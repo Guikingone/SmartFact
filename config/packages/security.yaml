@@ -4,12 +4,8 @@ security:
             algorithm: bcrypt
 
     providers:
-        user_provider:
-            mongodb:
-                class: App\Model\User
-                property: username
-        api_token:
-            id: App\Providers\ApiTokenUserProvider
+        in_memory:
+            memory: ~
 
     firewalls:
         dev:
@@ -19,7 +15,7 @@ security:
         main:
             pattern: ^/api
             anonymous: null
-            provider: api_token
+            #provider: api_token
             guard:
                 authenticators:
                     - App\Guard\TokenAuthenticator

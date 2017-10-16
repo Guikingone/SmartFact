@@ -38,15 +38,6 @@ services:
             - './:${WORKPATH}:rw'
         restart: always
 
-    composer:
-        container_name: ${CONTAINER_NAME}_composer
-        image: composer
-        links:
-          - php-fpm
-        volumes:
-            - './:/${WORKPATH}:rw'
-        working_dir: ${WORKPATH}
-
     redis:
         container_name: ${CONTAINER_NAME}_redis
         image: redis
@@ -69,18 +60,7 @@ services:
         ports:
             - '${MYSQL_PORT}:3306'
         volumes:
-            - 'mysql_louvre_smartfact:/var/lib/mysql'
-        restart: always
-
-    mongodb:
-        container_name: ${CONTAINER_NAME}_mongodb
-        image: mongo
-        ports:
-          - '${MONGO_PORT}:27017'
-        links:
-          - debian
-        volumes:
-          - 'mongodb_smartfact:/data/db'
+            - 'mysql_smartfact:/var/lib/mysql'
         restart: always
 
     # Frontend
@@ -107,5 +87,5 @@ services:
         restart: always
 
 volumes:
-    mysql_louvre_smartfact:
+    mysql_smartfact:
     mongodb_smartfact:

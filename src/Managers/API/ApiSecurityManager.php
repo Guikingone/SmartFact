@@ -12,9 +12,9 @@
 namespace App\Managers\API;
 
 use App\Model\User;
-use App\Events\Users\UserCreatedEvent;
+use Doctrine\ORM\EntityManager;
 use App\Exceptions\ApiJsonException;
-use Doctrine\ODM\MongoDB\DocumentManager;
+use App\Events\Users\UserCreatedEvent;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
@@ -29,9 +29,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 final class ApiSecurityManager
 {
     /**
-     * @var DocumentManager
+     * @var EntityManager
      */
-    private $documentManager;
+    private $entityManager;
 
     /**
      * @var ValidatorInterface
@@ -61,7 +61,7 @@ final class ApiSecurityManager
     /**
      * ApiSecurityManager constructor.
      *
-     * @param DocumentManager               $documentManager
+     * @param EntityManager                 $entityManager
      * @param ValidatorInterface            $validator
      * @param EventDispatcherInterface      $eventDispatcher
      * @param SerializerInterface           $serializer
@@ -69,14 +69,14 @@ final class ApiSecurityManager
      * @param JWTManager                    $tokenManager
      */
     public function __construct(
-        DocumentManager $documentManager,
+        EntityManager $entityManager,
         ValidatorInterface $validator,
         EventDispatcherInterface $eventDispatcher,
         SerializerInterface $serializer,
         UserPasswordEncoderInterface $passwordEncoder,
         JWTManager $tokenManager
     ) {
-        $this->documentManager = $documentManager;
+        $this->entityManager = $entityManager;
         $this->validator = $validator;
         $this->eventDispatcher = $eventDispatcher;
         $this->serializer = $serializer;
@@ -111,7 +111,7 @@ final class ApiSecurityManager
             ['object_to_populate' => $entry]
         );
 
-        $clone = $this->documentManager->getRepository(User::class)
+        $clone = $this->entityManager->getRepository(User::class)
                                        ->findOneBy([
                                            'username' => $entry->getUsername()
                                        ]);
@@ -137,8 +137,8 @@ final class ApiSecurityManager
         //$event = new UserCreatedEvent($entry);
         //$this->eventDispatcher->dispatch($event::NAME, $event);
 
-        $this->documentManager->persist($entry);
-        $this->documentManager->flush();
+        $this->entityManager->persist($entry);
+        $this->entityManager->flush();
     }
 
     /**
@@ -159,7 +159,7 @@ final class ApiSecurityManager
             );
         }
 
-        $entity = $this->documentManager->getRepository(User::class)
+        $entity = $this->entityManager->getRepository(User::class)
                                       ->findOneBy([
                                           'id' => $headers['client_id']
                                       ]);
@@ -177,7 +177,7 @@ final class ApiSecurityManager
         $entity->setToken($token);
         $entity->setState(\uniqid('', false));
 
-        $this->documentManager->flush();
+        $this->entityManager->flush();
 
         return [
             'response_type' => 'code',
@@ -192,7 +192,7 @@ final class ApiSecurityManager
      *
      * @throws ApiJsonException                 If bad arguments are passed or empty.
      * @throws ApiJsonException                 If no users can be found.
-     * @throws \InvalidArgumentException        @see DocumentManager::flush()
+     * @throws \InvalidArgumentException        @see entityManager::flush()
      *
      * @return string                           The authentication token.
      */
@@ -206,7 +206,7 @@ final class ApiSecurityManager
             );
         }
 
-        $entity = $this->documentManager->getRepository(User::class)
+        $entity = $this->entityManager->getRepository(User::class)
                                         ->findOneBy([
                                             'username' => $credentials['username']
                                         ]);
@@ -221,7 +221,7 @@ final class ApiSecurityManager
 
         $entity->setApiToken($this->tokenManager->create($entity));
 
-        $this->documentManager->flush();
+        $this->entityManager->flush();
 
         return $entity->getApiToken();
     }
@@ -231,7 +231,7 @@ final class ApiSecurityManager
      *
      * @throws ApiJsonException             If no credentials are found.
      * @throws ApiJsonException             If no user is found using credentials.
-     * @throws \InvalidArgumentException    @see DocumentManager::flush()
+     * @throws \InvalidArgumentException    @see entityManager::flush()
      *
      * @return string                       The token for resetting the password.
      */
@@ -251,7 +251,7 @@ final class ApiSecurityManager
             'json'
         );
 
-        $object = $this->documentManager->getRepository(User::class)
+        $object = $this->entityManager->getRepository(User::class)
                                         ->findOneBy([
                                             'username' => $entity->getUsername(),
                                             'email' => $entity->getEmail()
@@ -268,7 +268,7 @@ final class ApiSecurityManager
 
         $object->setResetPasswordToken($this->tokenManager->create($object));
 
-        $this->documentManager->flush();
+        $this->entityManager->flush();
 
         return $object->getResetPasswordToken();
     }
@@ -277,7 +277,7 @@ final class ApiSecurityManager
      * @param string $credentials               The credentials (token + new password).
      *
      * @throws ApiJsonException                 If no user can be found using the token.
-     * @throws \InvalidArgumentException        @see DocumentManager::flush()
+     * @throws \InvalidArgumentException        @see entityManager::flush()
      */
     public function resetPasswordViaCredentials(string $credentials)
     {
@@ -287,7 +287,7 @@ final class ApiSecurityManager
             'json'
         );
 
-        $entity = $this->documentManager->getRepository(User::class)
+        $entity = $this->entityManager->getRepository(User::class)
                                         ->findOneBy([
                                             'resetPasswordToken' => $results->getResetPasswordToken()
                                         ]);
@@ -304,6 +304,6 @@ final class ApiSecurityManager
 
         $entity->setPassword($password);
 
-        $this->documentManager->flush();
+        $this->entityManager->flush();
     }
 }
