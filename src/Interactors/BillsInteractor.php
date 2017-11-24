@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the SmartFact project.
  *
@@ -9,16 +11,15 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\App\Actions\Api\Users;
+namespace App\Interactors;
 
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use App\Models\Bills;
 
 /**
- * Class GetUsersActionTest
+ * Class BillsInteractor
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class GetUsersActionTest extends KernelTestCase
+class BillsInteractor extends Bills
 {
-
 }

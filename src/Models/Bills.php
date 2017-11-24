@@ -22,7 +22,7 @@ use App\Models\Interfaces\ClientInterface;
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class Bills implements BillsInterface
+abstract class Bills implements BillsInterface
 {
     /**
      * @var int

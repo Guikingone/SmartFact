@@ -29,7 +29,7 @@ services:
         build: './docker/php'
         environment:
             BLACKFIRE_SERVER_ID: '${BLACKFIRE_SERVER_ID}'
-            BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
+            BLACKFIRE_SERVER_TOKEN: '${BLACKFIRE_SERVER_TOKEN}'
         ports:
             - '${PHP_PORT}:9000'
         links:
@@ -48,29 +48,38 @@ services:
         restart: always
 
     # DB configuration
-    mysql:
-        container_name: ${CONTAINER_NAME}_mysql
-        image: mysql:latest
+    postgresql:
+        container_name: ${CONTAINER_NAME}_postgresql
+        image: postgres:9.6 # Update to 10.0 once Doctrine is updated.
         environment:
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-            MYSQL_ROOT_HOST: ${MYSQL_ROOT_HOST}
-            MYSQL_DATABASE: ${CONTAINER_NAME}
-            MYSQL_USER: ${CONTAINER_NAME}
-            MYSQL_PASSWORD: '${CONTAINER_NAME}'
+            POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
         ports:
-            - '${MYSQL_PORT}:3306'
+            - '${POSTGRES_PORT}:5432'
         volumes:
-            - 'mysql_smartfact:/var/lib/mysql'
+            - 'postgres_smartfact:/var/lib/postgresql/data:rw'
         restart: always
 
-    # Frontend
+    mongodb:
+        container_name: ${CONTAINER_NAME}_mongodb
+        image: mongo
+        ports:
+            - '${MONGODB_PORT}:27017'
+        volumes:
+            - 'mongo_smartfact:/data/db'
+        restart: always
+
+    # Frontend configuration
     node:
-        container_name: ${CONTAINER_NAME}_node
-        image: node
+        container_name: ${CONTAINER_NAME}_nodejs
+        build: './docker/node'
         links:
-          - debian
+            - debian
         volumes:
             - './:${WORKPATH}:rw'
+        working_dir: ${WORKPATH}
+        command: bash -c "yarn && yarn dev"
         restart: always
 
     # Testing configuration
@@ -87,5 +96,5 @@ services:
         restart: always
 
 volumes:
-    mysql_smartfact:
-    mongodb_smartfact:
+    postgres_smartfact:
+    mongo_smartfact:

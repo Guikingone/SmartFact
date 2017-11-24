@@ -29,8 +29,12 @@ class ProductBuilderTest extends TestCase
         $builder
             ->create()
             ->withType('Gestion de Projet')
+            ->withPrice(35.24)
+            ->withQuantity(200)
         ;
 
         static::assertNull($builder->build()->getId());
+        static::assertEquals(35.24, $builder->build()->getPrice());
+        static::assertEquals(200, $builder->build()->getQuantity());
     }
 }

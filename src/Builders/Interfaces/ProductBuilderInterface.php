@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Builders\Interfaces;
 
+use App\Models\Interfaces\BillsInterface;
 use App\Models\Interfaces\ProductInterface;
 
 /**
@@ -28,11 +29,32 @@ interface ProductBuilderInterface
     public function create(): ProductBuilderInterface;
 
     /**
-     * @param string $type               The product type.
+     * @param string $type                The product type.
      *
      * @return ProductBuilderInterface
      */
     public function withType(string $type): ProductBuilderInterface;
+
+    /**
+     * @param float $price                The product price.
+     *
+     * @return ProductBuilderInterface
+     */
+    public function withPrice(float $price): ProductBuilderInterface;
+
+    /**
+     * @param int $quantity               The product quantity.
+     *
+     * @return ProductBuilderInterface
+     */
+    public function withQuantity(int $quantity): ProductBuilderInterface;
+
+    /**
+     * @param BillsInterface $bills       The bill which contain the product.
+     *
+     * @return ProductBuilderInterface
+     */
+    public function withBill(BillsInterface $bills): ProductBuilderInterface;
 
     /**
      * @return ProductInterface

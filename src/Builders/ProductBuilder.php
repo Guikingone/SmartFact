@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Builders;
 
 use App\Interactors\ProductInteractor;
+use App\Models\Interfaces\BillsInterface;
 use App\Models\Interfaces\ProductInterface;
 use App\Builders\Interfaces\ProductBuilderInterface;
 
@@ -45,6 +46,36 @@ class ProductBuilder implements ProductBuilderInterface
     public function withType(string $type): ProductBuilderInterface
     {
         $this->product->setType($type);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withPrice(float $price): ProductBuilderInterface
+    {
+        $this->product->setPrice($price);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withQuantity(int $quantity): ProductBuilderInterface
+    {
+        $this->product->setQuantity($quantity);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withBill(BillsInterface $bills): ProductBuilderInterface
+    {
+        $this->product->setBill($bills);
 
         return $this;
     }

@@ -1,97 +1,26 @@
 # SmartFact
 
-This repository contains the source code of the "open" project as asked in the EII path at OpenClassrooms.
-
-**_Please note that the code present here is only part of the backend->frontend logic, the mobile
-applications are available on other repositories._**
-
-### iOS application
-
-[Smartfact-iOS](https://github.com/Guikingone/SmartFact-IOS)
-
-### Android application
-
-### Ionic application
-
-[SmartFact-Ionic](https://github.com/Guikingone/SmartFact-Ionic)
-
-## About
-
-_Contexte_
-
-Vous devez développer une application mobile ayant un objectif social. Il peut s'agir d'un nouveau projet que vous rêviez de faire depuis longtemps ou d'une idée que vous allez chercher spécifiquement pour réaliser ce projet, du temps que celle-ci propose un impact social positif.
-
-_Mission_
-
-Vous allez créer une application mobile pour la plateforme iOS ou Android. Il peut s'agir de n'importe quel type d'application (jeu ludo-éducatif, santé, utilitaire...).
-
-L'application devra fonctionner de pair avec un serveur : il y aura donc une communication via une API sur ce serveur. Celui-ci stockera des informations dans une base de données qu'il pourra transmettre aux applications mobiles.
-
-L'application fonctionnera donc sur le modèle suivant :
-
-- Communication entre applications mobiles et serveur
-
-![Communication entre applications mobiles et serveur](https://user.oc-static.com/upload/2016/12/29/14830188284661_smartphones_serveur.png)
-
-Ce schéma est très courant pour de nombreuses applications. A vous de veiller à concevoir une application qui respecte ce modèle.
-
-Vous porterez une attention particulière au modèle de données choisi, qui doit être efficace et cohérent. Vous devrez en particulier prouver qu'il tient la charge si votre application rencontre un succès rapide (souvenez-vous des débuts difficiles de Pokémon Go !). Sélectionnez donc avec soin votre méthode d'hébergement pour qu'elle puisse facilement passer à l'échelle.
-
-**_Si votre application comporte plus de 3 écrans différents, elle risque de vous demander beaucoup de travail, faites attention.
-Il est facile de se laisser déborder par le périmètre d'une application. Nous vous recommandons de vous efforcer à concevoir quelque chose de suffisamment simple._**
-
-Quelques exemples d'applications
-
-Les applications suivantes répondent aux critères du projet. Vous pouvez vous en inspirer, mais n'hésitez pas à partir sur une autre idée qui vous tient à coeur :
-
-- Une liste de missions bénévoles proposées par des associations à proximité
-- Un jeu éducatif pour apprendre à trier ses déchets dont les scores et la position des joueurs sont synchronisés avec un serveur
-- Une application de suivi de santé pour un médecin et ses patients, qui servirait en-dehors des rendez-vous médicaux.
-
-Si vous avez une idée et que vous n'êtes pas certain·e qu'elle ait un minimum d'impact social, posez la question à votre mentor qui pourra vous aider à trancher.
-
-Bonus : c'est encore mieux si votre application est basée sur de vraies données (de vrais besoins d'une association par exemple), mais vous pouvez tout à fait inventer un scénario si besoin.
-Prenez le temps de déterminer l'objectif de votre application avec soin. Elle pourra servir à valoriser votre savoir-faire sur votre CV et votre portfolio !
-
-**_Livrables à fournir_**
-
-- Modèle de données
-- Résultats du test de charge du serveur de base de données
-- Code source de l'application mobile
-
+The source code of the web application/API used for SmartFact mobile application.
 
 ## Build
 
-This project is followed and tested inside a CI process, with this approach, the project is completely
-tested and easily maintainable, here's the tools who help the development process : 
-
-### Insight
-
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/7d68b2b6-6303-4e81-aebb-bc6a7aab1baf/big.png)](https://insight.sensiolabs.com/projects/7d68b2b6-6303-4e81-aebb-bc6a7aab1baf)
-
-### Gitlab
-
-### Blackfire
+- Insight :
 
 ## Usage
 
-This project is build using Docker along with PHP, Nginx, Postgres, MySQL, MongoDB, Redis and Blackfire.
-
-This way, the project can be used in differents ways : 
-
-## Docker 
+Once you've installed Docker, time to build the project.
 
 This project use Docker environment files in order to allow the configuration according to your needs,
 this way, you NEED to define a .env file in order to launch the build.
 
-**_In order to perform better, Docker can block your dependencies installation and return an error 
-or never change your php configuration, we recommand to delete all your images/containers 
+**_In order to perform better, Docker can block your dependencies installation and return an error
+or never change your php configuration, we recommend to delete all your images/containers
 before building the project_**
 
 ```bash
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
-docker rmi $(docker images -a -q) -f
+docker rmi $(docker images -a -q) -f # Only if you need to clean your images and containers stored locally.
 ```
 
 **Note that this command can take several minutes before ending**
@@ -119,17 +48,10 @@ composer clear-cache
 composer dump-autoload --optimize --classmap-authoritative --no-dev
 
 # Configure BDD
-./bin/console d:m:s:c # for MongoDB users
-./bin/console d:s:c # for classic users
+./bin/console d:s:c 
 
 # Fixtures
-./bin/console d:mf:l -n
-```
-
-As this project use NodeJS for frontend assets, we need to build the assets : 
-
-```bash
-// TODO
+./bin/console d:f:l -n
 ```
 
 Once this is done, access the project via your browser : 
@@ -183,7 +105,6 @@ http://localhost:8000
 This project is completely tested and followed by PHPUnit and Behat, this way, our code is easily maintainable
 and upgradable, here's is the details of the coverage : 
 
-
 In order to launch the tests, here's the process : 
 
 **Be sure to have build the containers/services**
@@ -205,6 +126,20 @@ vendor/bin/behat
 ```
 
 Once this is done, you should see the different results of tests.
+
+## Quality
+
+As define in the internal guidelines, this project follow the more strict rules for
+quality and best practices, this way, we include PHP-CS-FIXER for the code quality and PSR 
+respect, here's the process to use it : 
+
+```bash
+docker exec -it container_php-fpm sh
+
+# Once the container is launched
+php-cs-fixer fix src/ # Every time you work on a new feature.
+php-cs-fixer fix tests/ # Once you've added new tests
+```
 
 ## Performances
 
@@ -263,10 +198,24 @@ In order to be effective and help to improve the application, you MUST write tes
 version (production and development) and both "part" (API and Web) if your features is 
 concerned by both parts.
 
-## Frontend assets
+## Frontend
 
-To define
+This project use React in order to manage the frontend part, this way, 
+we use [Symfony/Encore]('https://symfony.com/doc/current/frontend.html').
 
-## Production
+### Development 
 
-To define
+In order to achieve the development environment, we use Docker and NodeJS, once the project is build, let's compile the assets : 
+
+```bash
+./node_modules/.bin/encore dev --watch # Development approach using the watcher.
+```
+
+### Production
+
+In production environment, the assets preparation is even easier, once the project is build and ready, just use
+Encore shortcuts to build the production assets : 
+
+```bash
+./node_modules/.bin/encore production # Compiled once and optimized.
+```
