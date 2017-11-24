@@ -11,17 +11,27 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Models\Interfaces;
+namespace App\Models;
+
+use App\Models\Interfaces\ClientInterface;
 
 /**
- * Interface ClientInterface
+ * Class Client
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-interface ClientInterface
+abstract class Client implements ClientInterface
 {
     /**
-     * @return int|null
+     * @var int
      */
-    public function getId():? int;
+    private $id;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId():? int
+    {
+        return $this->id;
+    }
 }
