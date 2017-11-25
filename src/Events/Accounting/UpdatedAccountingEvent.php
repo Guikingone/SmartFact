@@ -44,5 +44,4 @@ class UpdatedAccountingEvent extends Event
     {
         return $this->accounting;
     }
-    
 }

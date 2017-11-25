@@ -126,12 +126,12 @@ final class ApiSecurityManager
             ];
         }
 
-       // $errors = $this->validator->validate($entry);
+        // $errors = $this->validator->validate($entry);
 
         // if ($errors) {
-            // return [
-                // 'errors' => $errors
-            // ];
+        // return [
+        // 'errors' => $errors
+        // ];
         // }
 
         //$event = new UserCreatedEvent($entry);

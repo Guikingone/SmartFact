@@ -13,10 +13,9 @@ namespace App\Action\Api\Clients;
 
 /**
  * Class DeleteClientsAction
- * 
+ *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
 final class DeleteClientsAction
 {
-
 }

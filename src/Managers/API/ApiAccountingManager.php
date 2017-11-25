@@ -233,9 +233,7 @@ class ApiAccountingManager
                                         ]);
 
         if (!$entity) {
-
         }
-
     }
 
     /**
@@ -255,7 +253,8 @@ class ApiAccountingManager
         if (!$accounting) {
             throw new ApiJsonException(
                 \sprintf(
-                    'The identifier doesn\'t return any entry ! Given %d', $id
+                    'The identifier doesn\'t return any entry ! Given %d',
+                    $id
                 )
             );
         }

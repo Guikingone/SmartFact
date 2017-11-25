@@ -40,8 +40,8 @@ final class GetNotificationsAction
         ApiNotificationsManager $manager,
         RequestStack $requestStack
     ) {
-       $this->manager = $manager;
-       $this->requestStack = $requestStack;
+        $this->manager = $manager;
+        $this->requestStack = $requestStack;
     }
 
     /**

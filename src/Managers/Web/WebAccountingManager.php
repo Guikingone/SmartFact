@@ -92,7 +92,8 @@ class WebAccountingManager
             throw new \InvalidArgumentException(
                 \sprintf(
                     'This identifier doesn\'t exist !
-                            Given %s', $id
+                            Given %s',
+                    $id
                 )
             );
         }
@@ -115,7 +116,6 @@ class WebAccountingManager
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $event = new PostedAccountingEvent($accounting);
             $this->eventDispatcher->dispatch(
                 PostedAccountingEvent::NAME,
@@ -150,7 +150,8 @@ class WebAccountingManager
             throw new \LogicException(
                 sprintf(
                     'This identifier doesn\'t exist !
-                            Given %s', $id
+                            Given %s',
+                    $id
                 )
             );
         }
@@ -159,7 +160,6 @@ class WebAccountingManager
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $event = new UpdatedAccountingEvent($accounting);
             $this->eventDispatcher->dispatch(
                 UpdatedAccountingEvent::NAME,
@@ -217,7 +217,8 @@ class WebAccountingManager
             throw new \LogicException(
                 sprintf(
                     'This identifier doesn\'t exist !
-                            Given %s', $id
+                            Given %s',
+                    $id
                 )
             );
         }

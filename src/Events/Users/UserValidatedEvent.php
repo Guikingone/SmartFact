@@ -16,7 +16,7 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class UserValidatedEvent
- * 
+ *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
 final class UserValidatedEvent extends Event

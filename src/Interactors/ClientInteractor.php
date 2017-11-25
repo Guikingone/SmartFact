@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the SmartFact project.
  *
@@ -9,28 +11,23 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Schemas;
+namespace App\Interactors;
 
-use GraphQL\Type\Definition\InterfaceType;
+use App\Models\Client;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Class AccountingSchema
+ * Class ClientInteractor
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-final class AccountingSchema extends InterfaceType
+class ClientInteractor extends Client
 {
     /**
-     * @return array
+     * ClientInteractor constructor.
      */
-    public function build() : array
+    public function __construct()
     {
-        return [
-            'name' => 'Accounting',
-            'description' => '',
-            'fields' => [
-
-            ]
-        ];
+        $this->bills = new ArrayCollection();
     }
 }

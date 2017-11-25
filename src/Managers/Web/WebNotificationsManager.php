@@ -99,7 +99,8 @@ class WebNotificationsManager
             throw new \InvalidArgumentException(
                 sprintf(
                     'This identifier doesn\'t exist !
-                            Given %s', $id
+                            Given %s',
+                    $id
                 )
             );
         }
@@ -128,12 +129,11 @@ class WebNotificationsManager
             throw new \LogicException(
                 sprintf(
                     'A User should be found using the identifier passed !
-                            Given %s', $user
+                            Given %s',
+                    $user
                 )
             );
         }
-
-
     }
 
     /**
@@ -191,7 +191,8 @@ class WebNotificationsManager
             throw new \InvalidArgumentException(
                 sprintf(
                     'This identifier doesn\'t exist !
-                            Given %s', $user
+                            Given %s',
+                    $user
                 )
             );
         }
@@ -205,7 +206,8 @@ class WebNotificationsManager
             throw new \InvalidArgumentException(
                 sprintf(
                     'No data has been found, please check the identifier, 
-                            given %s', $user
+                            given %s',
+                    $user
                 )
             );
         }

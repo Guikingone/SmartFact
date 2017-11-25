@@ -8,8 +8,6 @@
 
 namespace App\Action\Api\Users;
 
-
 final class PutUserAction
 {
-
 }

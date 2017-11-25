@@ -57,7 +57,8 @@ final class ApiTokenUserProvider implements UserProviderInterface
         if (!$entity) {
             throw new ApiJsonException(
                 \sprintf(
-                    'No user can be found using this api token ! Given %s', $apiToken
+                    'No user can be found using this api token ! Given %s',
+                    $apiToken
                 )
             );
         }

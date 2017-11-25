@@ -13,10 +13,9 @@ namespace App\Action\Api\Meetups;
 
 /**
  * Class DeleteMeetupsAction
- * 
+ *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
 final class DeleteMeetupsAction
 {
-
 }

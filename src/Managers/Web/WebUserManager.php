@@ -137,8 +137,6 @@ class WebUserManager
                 )
             );
         }
-
-
     }
 
     /**
@@ -160,7 +158,8 @@ class WebUserManager
             throw new \InvalidArgumentException(
                 \sprintf(
                     'An users must be found using the id passed !
-                            Given %s', $id
+                            Given %s',
+                    $id
                 )
             );
         }

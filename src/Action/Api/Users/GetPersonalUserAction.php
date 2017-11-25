@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class GetPersonalUserAction
- * 
+ *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
 final class GetPersonalUserAction

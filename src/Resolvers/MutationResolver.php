@@ -18,5 +18,4 @@ namespace App\Resolvers;
  */
 final class MutationResolver
 {
-
 }

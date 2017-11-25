@@ -51,6 +51,5 @@ class NotificationsListeners
         if (!$notification) {
             return;
         }
-
     }
 }

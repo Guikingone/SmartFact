@@ -13,10 +13,9 @@ namespace App\Action\Api\Meetups;
 
 /**
  * Class GetMeetupsAction
- * 
+ *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
 final class GetMeetupsAction
 {
-
 }

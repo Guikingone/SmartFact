@@ -18,5 +18,4 @@ namespace App\Action\Api\Planning;
  */
 final class PatchPlanningAction
 {
-
 }

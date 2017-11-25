@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class ApiOauthAction
- * 
+ *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
 final class ApiOauthAction

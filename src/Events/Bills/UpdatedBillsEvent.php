@@ -34,7 +34,7 @@ class UpdatedBillsEvent extends Event
     public function __construct(
         Bills $bills
     ) {
-      $this->bills = $bills;
+        $this->bills = $bills;
     }
 
     /**

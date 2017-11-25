@@ -108,7 +108,8 @@ final class ApiBillsManager
         if (!$entity) {
             throw new ApiJsonException(
                 \sprintf(
-                    'No resource found using the identifier %d', $id
+                    'No resource found using the identifier %d',
+                    $id
                 )
             );
         }
@@ -124,7 +125,6 @@ final class ApiBillsManager
      */
     public function postBills(array $data)
     {
-
     }
 
     /**
@@ -142,7 +142,8 @@ final class ApiBillsManager
         if (!$entity) {
             throw new ApiJsonException(
                 \sprintf(
-                    'No resource found using the identifier %d', $id
+                    'No resource found using the identifier %d',
+                    $id
                 )
             );
         }

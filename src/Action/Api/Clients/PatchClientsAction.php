@@ -13,10 +13,9 @@ namespace App\Action\Api\Clients;
 
 /**
  * Class PatchClientsAction
- * 
+ *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
 final class PatchClientsAction
 {
-
 }

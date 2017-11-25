@@ -272,7 +272,8 @@ class ApiUserManager
         if (!$entity) {
             throw new ApiJsonException(
                 \sprintf(
-                    'No resource can be found using this identifier, given %d', $id
+                    'No resource can be found using this identifier, given %d',
+                    $id
                 )
             );
         }

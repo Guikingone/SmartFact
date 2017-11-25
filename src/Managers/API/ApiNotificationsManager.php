@@ -127,7 +127,6 @@ class ApiNotificationsManager
 
     public function patchUserNotification($data)
     {
-
     }
 
 

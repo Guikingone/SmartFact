@@ -11,8 +11,6 @@
 
 namespace App\Action\Api\Clients;
 
-
 final class GetClientsAction
 {
-
 }

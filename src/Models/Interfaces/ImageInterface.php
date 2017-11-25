@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the SmartFact project.
  *
@@ -9,13 +11,14 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Action\Api\Planning;
+namespace App\Models\Interfaces;
 
 /**
- * Class GetPlanningsAction
+ * Interface ImageInterface
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-final class GetPlanningsAction
+interface ImageInterface
 {
+
 }

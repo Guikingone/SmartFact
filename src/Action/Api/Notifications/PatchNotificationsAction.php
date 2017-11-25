@@ -18,5 +18,4 @@ namespace App\Action\Api\Notifications;
  */
 final class PatchNotificationsAction
 {
-
 }

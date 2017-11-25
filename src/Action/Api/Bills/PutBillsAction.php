@@ -8,8 +8,6 @@
 
 namespace App\Action\Api\Bills;
 
-
 final class PutBillsAction
 {
-
 }

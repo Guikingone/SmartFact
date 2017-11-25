@@ -27,7 +27,6 @@ final class UpdateUserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
     }
 
     /**
@@ -35,6 +34,5 @@ final class UpdateUserType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-
     }
 }

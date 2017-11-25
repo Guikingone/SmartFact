@@ -18,5 +18,4 @@ namespace App\Action\Api\Meetups;
  */
 final class GetMeetupAction
 {
-
 }
