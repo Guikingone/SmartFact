@@ -40,4 +40,24 @@ class ClientBuilderTest extends TestCase
         static::assertEquals("Client", $builder->build()->getLastName());
         static::assertEquals(43712404562145, $builder->build()->getLegalIdentifier());
     }
+
+    public function testRelationWithImage()
+    {
+        $builder = new ClientBuilder();
+
+        $image = $this->createMock(Image::class);
+        $image->method('getId')
+              ->willReturn(0);
+
+        $builder
+            ->create()
+            ->withName('NewClient')
+            ->withFirstName("New")
+            ->withLastName("Client")
+            ->withLegalIdentifier(43712404562145)
+            ->withImage($image);
+        ;
+
+        static::assertEquals(0, $builder->build()->getImage()->getId());
+    }
 }
