@@ -11,17 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Models\Interfaces;
+namespace App\Interactors;
+
+use App\Models\User;
 
 /**
- * Interface UserInterface
+ * Class UserInteractor
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-interface UserInterface
+class UserInteractor extends User
 {
-    /**
-     * @return int|null
-     */
-    public function getId():? int;
 }

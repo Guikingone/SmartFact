@@ -53,6 +53,8 @@
             <directory>./src/*</directory>
             <exclude>
                 <directory>src/App/DataFixtures</directory>
+                <directory>src/Builders/Interfaces</directory>
+                <directory>src/Models/Interfaces</directory>
             </exclude>
         </whitelist>
     </filter>

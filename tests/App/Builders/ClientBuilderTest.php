@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Builders;
 
 use PHPUnit\Framework\TestCase;
+use App\Interactors\ImageInteractor;
 
 /**
  * Class ClientBuilderTest
@@ -45,7 +46,7 @@ class ClientBuilderTest extends TestCase
     {
         $builder = new ClientBuilder();
 
-        $image = $this->createMock(Image::class);
+        $image = $this->createMock(ImageInteractor::class);
         $image->method('getId')
               ->willReturn(0);
 

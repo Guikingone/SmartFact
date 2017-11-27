@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace App\Builders;
 
+use App\Interactors\ImageInteractor;
+use App\Models\Interfaces\UserInterface;
+use App\Models\Interfaces\ImageInterface;
+use App\Models\Interfaces\ClientInterface;
 use App\Builders\Interfaces\ImageBuilderInterface;
 
 /**
@@ -22,5 +26,126 @@ use App\Builders\Interfaces\ImageBuilderInterface;
  */
 class ImageBuilder implements ImageBuilderInterface
 {
+    /**
+     * @var ImageInterface
+     */
+    private $image;
 
+    /**
+     * {@inheritdoc}
+     */
+    public function create(): ImageBuilderInterface
+    {
+        $this->image = new ImageInteractor();
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setImage(ImageInterface $image): ImageBuilderInterface
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withName(string $name): ImageBuilderInterface
+    {
+        $this->image->setName($name);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withExtension(string $extension): ImageBuilderInterface
+    {
+        $this->image->setExtension($extension);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withSize(string $size): ImageBuilderInterface
+    {
+        $this->image->setSize($size);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withLocalPath(string $localPath): ImageBuilderInterface
+    {
+        $this->image->setLocalPath($localPath);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withPublicPath(string $publicPath): ImageBuilderInterface
+    {
+        $this->image->setPublicPath($publicPath);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withUploadDate(\DateTime $uploadDate): ImageBuilderInterface
+    {
+        $this->image->setUploadDate($uploadDate);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withModificationDate(\DateTime $modificationDate): ImageBuilderInterface
+    {
+        $this->image->setModificationDate($modificationDate);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withUser(UserInterface $user): ImageBuilderInterface
+    {
+        $this->image->setUser($user);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withClient(ClientInterface $client): ImageBuilderInterface
+    {
+        $this->image->setClient($client);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(): ImageInterface
+    {
+        return $this->image;
+    }
 }

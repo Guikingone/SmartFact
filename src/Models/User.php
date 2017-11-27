@@ -11,17 +11,27 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Models\Interfaces;
+namespace App\Models;
+
+use App\Models\Interfaces\UserInterface;
 
 /**
- * Interface UserInterface
+ * Class User
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-interface UserInterface
+abstract class User implements UserInterface
 {
     /**
-     * @return int|null
+     * @var int
      */
-    public function getId():? int;
+    protected $id;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId():? int
+    {
+        return $this->id;
+    }
 }
