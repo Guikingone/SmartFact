@@ -15,6 +15,8 @@ namespace App\Builders;
 
 use PHPUnit\Framework\TestCase;
 use App\Interactors\ImageInteractor;
+use App\Interactors\BillsInteractor;
+use App\Interactors\ClientInteractor;
 
 /**
  * Class ClientBuilderTest
@@ -33,6 +35,11 @@ class ClientBuilderTest extends TestCase
             ->withFirstName("New")
             ->withLastName("Client")
             ->withLegalIdentifier(43712404562145)
+            ->withTaxesIdentifier('FR012345678987')
+            ->withArtisanIdentifier('')
+            ->withFormat('SAS')
+            ->withAddress('404 Route de l\'inconnu')
+            ->withSocialAddress('404 Route de l\'inconnu')
         ;
 
         static::assertNull($builder->build()->getId());
@@ -40,6 +47,26 @@ class ClientBuilderTest extends TestCase
         static::assertEquals("New", $builder->build()->getFirstName());
         static::assertEquals("Client", $builder->build()->getLastName());
         static::assertEquals(43712404562145, $builder->build()->getLegalIdentifier());
+        static::assertEquals('FR012345678987', $builder->build()->getTaxesIdentifier());
+        static::assertEquals('', $builder->build()->getArtisanIdentifier());
+        static::assertEquals('SAS', $builder->build()->getFormat());
+        static::assertEquals('404 Route de l\'inconnu', $builder->build()->getAddress());
+        static::assertEquals('404 Route de l\'inconnu', $builder->build()->getSocialAddress());
+    }
+
+    public function testSetter()
+    {
+        $builder = new ClientBuilder();
+
+        $clientStub = $this->createMock(ClientInteractor::class);
+        $clientStub->method('getId')
+                    ->willReturn(0);
+
+        $builder
+            ->setClient($clientStub)
+        ;
+
+        static::assertEquals(0, $builder->build()->getId());
     }
 
     public function testRelationWithImage()
@@ -60,5 +87,34 @@ class ClientBuilderTest extends TestCase
         ;
 
         static::assertEquals(0, $builder->build()->getImage()->getId());
+    }
+
+    public function testRelationWithBill()
+    {
+        $builder = new ClientBuilder();
+
+        $billStub = $this->createMock(BillsInteractor::class);
+        $billStub->method('getId')
+                 ->willReturn(0);
+
+        $builder
+            ->create()
+            ->withName('NewClient')
+            ->withFirstName("New")
+            ->withLastName("Client")
+            ->withLegalIdentifier(43712404562145)
+            ->withTaxesIdentifier('FR012345678987')
+            ->withArtisanIdentifier('')
+            ->withFormat('SAS')
+            ->withAddress('404 Route de l\'inconnu')
+            ->withSocialAddress('404 Route de l\'inconnu')
+            ->withBill($billStub)
+        ;
+
+        static::assertEquals(0, $builder->build()->getBills()->offsetGet(0)->getId());
+
+        $builder->build()->removeBill($billStub);
+
+        static::assertEmpty($builder->build()->getBills());
     }
 }

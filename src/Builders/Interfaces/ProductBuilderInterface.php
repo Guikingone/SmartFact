@@ -29,6 +29,13 @@ interface ProductBuilderInterface
     public function create(): ProductBuilderInterface;
 
     /**
+     * @param ProductInterface $product    The Product to define as class instance.
+     *
+     * @return ProductBuilderInterface
+     */
+    public function setProduct(ProductInterface $product): ProductBuilderInterface;
+
+    /**
      * @param string $type                The product type.
      *
      * @return ProductBuilderInterface

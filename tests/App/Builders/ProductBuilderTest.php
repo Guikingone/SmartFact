@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace App\Builders;
 
 use PHPUnit\Framework\TestCase;
+use App\Interactors\BillsInteractor;
+use App\Interactors\ProductInteractor;
 
 /**
  * Class ProductBuilderTest
@@ -34,7 +36,42 @@ class ProductBuilderTest extends TestCase
         ;
 
         static::assertNull($builder->build()->getId());
+        static::assertEquals('Gestion de Projet', $builder->build()->getType());
         static::assertEquals(35.24, $builder->build()->getPrice());
         static::assertEquals(200, $builder->build()->getQuantity());
+    }
+
+    public function testSetter()
+    {
+        $builder = new ProductBuilder();
+
+        $productStub = $this->createMock(ProductInteractor::class);
+        $productStub->method('getId')
+                    ->willReturn(0);
+
+        $builder
+            ->setProduct($productStub)
+        ;
+
+        static::assertEquals(0, $builder->build()->getId());
+    }
+
+    public function testRelationWithBill()
+    {
+        $builder = new ProductBuilder();
+
+        $billStub = $this->createMock(BillsInteractor::class);
+        $billStub->method('getId')
+                 ->willReturn(0);
+
+        $builder
+            ->create()
+            ->withType('Gestion de Projet')
+            ->withPrice(35.24)
+            ->withQuantity(200)
+            ->withBill($billStub)
+        ;
+
+        static::assertEquals(0, $builder->build()->getBill()->getId());
     }
 }

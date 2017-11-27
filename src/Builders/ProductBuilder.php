@@ -43,6 +43,16 @@ class ProductBuilder implements ProductBuilderInterface
     /**
      * {@inheritdoc}
      */
+    public function setProduct(ProductInterface $product): ProductBuilderInterface
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function withType(string $type): ProductBuilderInterface
     {
         $this->product->setType($type);
