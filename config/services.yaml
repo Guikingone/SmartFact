@@ -7,6 +7,21 @@ services:
         autoconfigure: true
         public: false
 
+    App\Guard\:
+        resource: '../src/Guard'
+
+    App\Providers\:
+        resource: '../src/Providers'
+
+    App\Action\:
+        resource: '../src/Action'
+        public: true
+        tags:
+            - 'controller.service_arguments'
+
+    App\Managers\:
+        resource: '../src/Managers'
+
     App\Exceptions\Listeners\:
         resource: '../src/Exceptions/Listeners'
         tags:
