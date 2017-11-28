@@ -11,5 +11,5 @@ unit_tests:
         - php composer-setup.php
         - php -r "unlink('composer-setup.php');"
     script:
-        - composer install
+        - php composer.phar install
         - vendor/bin/phpunit -v
