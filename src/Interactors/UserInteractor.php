@@ -14,12 +14,82 @@ declare(strict_types=1);
 namespace App\Interactors;
 
 use App\Models\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * Class UserInteractor
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class UserInteractor extends User
+class UserInteractor extends User implements AdvancedUserInterface
 {
+    /**
+     * UserInteractor constructor.
+     */
+    public function __construct()
+    {
+        $this->clients = new ArrayCollection();
+        $this->bills = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
+     */
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
+     */
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
+     */
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
+     */
+    public function isEnabled()
+    {
+        return $this->active;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
+     */
+    public function eraseCredentials()
+    {
+    }
 }

@@ -18,10 +18,235 @@ namespace App\Models\Interfaces;
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-interface UserInterface
+interface UserInterface extends \Serializable
 {
     /**
      * @return int|null
      */
     public function getId():? int;
+
+    /**
+     * @return null|string
+     */
+    public function getFirstName():? string;
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName(string $firstName);
+
+    /**
+     * @return null|string
+     */
+    public function getLastName():? string;
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName(string $lastName);
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string;
+
+    /**
+     * @param string $username
+     */
+    public function setUsername(string $username);
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string;
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email);
+
+    /**
+     * @return null|string
+     */
+    public function getPlainPassword():? string;
+
+    /**
+     * @param string $plainPassword
+     */
+    public function setPlainPassword(string $plainPassword);
+
+    /**
+     * @return string
+     */
+    public function getPassword(): string;
+
+    /**
+     * @param string $password
+     */
+    public function setPassword(string $password);
+
+    /**
+     * @return array
+     */
+    public function getRoles(): array;
+
+    /**
+     * @param string $role
+     */
+    public function addRole(string $role);
+
+    /**
+     * @return string
+     */
+    public function getCreationDate(): string;
+
+    /**
+     * @param \DateTime $creationDate
+     */
+    public function setCreationDate(\DateTime $creationDate);
+
+    /**
+     * @return null|string
+     */
+    public function getValidationDate():? string;
+
+    /**
+     * @param \DateTime $validationDate
+     */
+    public function setValidationDate(\DateTime $validationDate);
+
+    /**
+     * @return null|string
+     */
+    public function getValidationToken():? string;
+
+    /**
+     * @param string $validationToken
+     */
+    public function setValidationToken(string $validationToken);
+
+    /**
+     * @return bool
+     */
+    public function hasBeenValidated(): bool;
+
+    /**
+     * @param bool $validated
+     */
+    public function setValidated(bool $validated);
+
+    /**
+     * @return bool
+     */
+    public function hasAnActiveAccount(): bool;
+
+    /**
+     * @param bool $activeAccount
+     */
+    public function setActiveAccount(bool $activeAccount);
+
+    /**
+     * @return null|string
+     */
+    public function getResetToken():? string;
+
+    /**
+     * @param string $resetToken
+     */
+    public function setResetToken(string $resetToken);
+
+    /**
+     * @return null|string
+     */
+    public function getApiToken():? string;
+
+    /**
+     * @param string $apiToken
+     */
+    public function setApiToken(string $apiToken);
+
+    /**
+     * @return string
+     */
+    public function getTaxesIdentifier(): string;
+
+    /**
+     * @param string $taxesIdentifier
+     */
+    public function setTaxesIdentifier(string $taxesIdentifier);
+
+    /**
+     * @return string
+     */
+    public function getFormat(): string;
+
+    /**
+     * @param string $format
+     */
+    public function setFormat(string $format);
+
+    /**
+     * @return ImageInterface|null
+     */
+    public function getImage():? ImageInterface;
+
+    /**
+     * @param ImageInterface $image
+     */
+    public function setImage(ImageInterface $image);
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getClients(): \ArrayAccess;
+
+    /**
+     * @param ClientInterface $client
+     */
+    public function addClient(ClientInterface $client);
+
+    /**
+     * @param ClientInterface $client
+     */
+    public function removeClient(ClientInterface $client);
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getBills(): \ArrayAccess;
+
+    /**
+     * @param BillsInterface $bill
+     */
+    public function addBill(BillsInterface $bill);
+
+    /**
+     * @param BillsInterface $bill
+     */
+    public function removeBill(BillsInterface $bill);
+
+    /**
+     * @return AccountingInterface
+     */
+    public function getAccounting(): AccountingInterface;
+
+    /**
+     * @param AccountingInterface $accounting
+     */
+    public function setAccounting(AccountingInterface $accounting);
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getNotifications(): \ArrayAccess;
+
+    /**
+     * @param NotificationInterface $notification
+     */
+    public function addNotification(NotificationInterface $notification);
+
+    /**
+     * @param NotificationInterface $notification
+     */
+    public function removeNotification(NotificationInterface $notification);
 }
