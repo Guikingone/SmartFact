@@ -1,0 +1,9 @@
+App\Interactors\ProductInteractor:
+    type: entity
+    table: smartfact_product
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+

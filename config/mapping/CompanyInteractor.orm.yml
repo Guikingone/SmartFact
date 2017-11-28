@@ -1,0 +1,9 @@
+App\Interactors\CompanyInteractor:
+    type: entity
+    table: smartfact_company
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+

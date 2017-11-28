@@ -27,97 +27,97 @@ abstract class Bills implements BillsInterface
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var int
      */
-    private $uuid;
+    protected $uuid;
 
     /**
      * @var \DateTime
      */
-    private $creationDate;
+    protected $creationDate;
 
     /**
      * @var \DateTime
      */
-    private $productionDate;
+    protected $productionDate;
 
     /**
      * @var \DateTime
      */
-    private $modificationDate;
+    protected $modificationDate;
 
     /**
      * @var float
      */
-    private $taxesFreeTotal;
+    protected $taxesFreeTotal;
 
     /**
      * @var float
      */
-    private $taxesTotal;
+    protected $taxesTotal;
 
     /**
      * @var bool
      */
-    private $taxes;
+    protected $taxes;
 
     /**
      * @var float
      */
-    private $taxesPercentage;
+    protected $taxesPercentage;
 
     /**
      * @var bool
      */
-    private $reduction;
+    protected $reduction;
 
     /**
      * @var float
      */
-    private $reductionTotal;
+    protected $reductionTotal;
 
     /**
      * @var bool
      */
-    private $send;
+    protected $send;
 
     /**
      * @var \DateTime
      */
-    private $sendingDate;
+    protected $sendingDate;
 
     /**
      * @var \DateTime
      */
-    private $limitPaymentDate;
+    protected $limitPaymentDate;
 
     /**
      * @var float
      */
-    private $penaltyRate;
+    protected $penaltyRate;
 
     /**
      * @var float
      */
-    private $recoveryPrice;
+    protected $recoveryPrice;
 
     /**
      * @var string
      */
-    private $file;
+    protected $file;
 
     /**
      * @var UserInterface
      */
-    private $author;
+    protected $author;
 
     /**
      * @var ClientInterface
      */
-    private $client;
+    protected $client;
 
     /**
      * {@inheritdoc}

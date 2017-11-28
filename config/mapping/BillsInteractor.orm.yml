@@ -1,0 +1,9 @@
+App\Interactors\BillsInteractor:
+    type: entity
+    table: smartfact_bills
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+

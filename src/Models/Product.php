@@ -26,27 +26,27 @@ abstract class Product implements ProductInterface
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $type;
+    protected $type;
 
     /**
      * @var float
      */
-    private $price;
+    protected $price;
 
     /**
      * @var int
      */
-    private $quantity;
+    protected $quantity;
 
     /**
      * @var BillsInterface
      */
-    private $bill;
+    protected $bill;
 
     /**
      * {@inheritdoc}

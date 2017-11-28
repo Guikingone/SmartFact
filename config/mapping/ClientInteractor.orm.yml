@@ -1,0 +1,9 @@
+App\Interactors\ClientInteractor:
+    type: entity
+    table: smartfact_client
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+

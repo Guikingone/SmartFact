@@ -27,7 +27,7 @@ abstract class Client implements ClientInterface
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
