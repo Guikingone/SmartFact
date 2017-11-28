@@ -1,1 +1,15 @@
-# To define
+stages:
+    - unit_tests
+
+unit_tests:
+    stage: unit_tests
+    image: php:fpm
+    before_script:
+        - apt-get update
+        - apt-get install zip unzip
+        - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+        - php composer-setup.php
+        - php -r "unlink('composer-setup.php');"
+    script:
+        - composer install
+        - vendor/bin/phpunit -v
