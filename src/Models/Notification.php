@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Interfaces\UserInterface;
 use App\Models\Interfaces\NotificationInterface;
 
 /**
@@ -25,7 +26,27 @@ abstract class Notification implements NotificationInterface
     /**
      * @var int
      */
-    private $id;
+    protected $id;
+
+    /**
+     * @var string
+     */
+    protected $label;
+
+    /**
+     * @var string
+     */
+    protected $content;
+
+    /**
+     * @var array
+     */
+    protected $tags;
+
+    /**
+     * @var UserInterface
+     */
+    protected $user;
 
     /**
      * {@inheritdoc}
@@ -33,5 +54,69 @@ abstract class Notification implements NotificationInterface
     public function getId():? int
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLabel(string $label)
+    {
+        $this->label = $label;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setContent(string $content)
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addTags(array $tags)
+    {
+        $this->tags[] = $tags;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUser(): UserInterface
+    {
+        return $this->user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUser(UserInterface $user)
+    {
+        $this->user = $user;
     }
 }

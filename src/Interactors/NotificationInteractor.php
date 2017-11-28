@@ -22,5 +22,4 @@ use App\Models\Notification;
  */
 class NotificationInteractor extends Notification
 {
-
 }

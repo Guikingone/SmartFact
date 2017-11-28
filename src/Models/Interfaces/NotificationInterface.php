@@ -24,4 +24,44 @@ interface NotificationInterface
      * @return int|null
      */
     public function getId():? int;
+
+    /**
+     * @return string
+     */
+    public function getLabel(): string;
+
+    /**
+     * @param string $label
+     */
+    public function setLabel(string $label);
+
+    /**
+     * @return string
+     */
+    public function getContent(): string;
+
+    /**
+     * @param string $content
+     */
+    public function setContent(string $content);
+
+    /**
+     * @return array
+     */
+    public function getTags(): array;
+
+    /**
+     * @param array $tags
+     */
+    public function addTags(array $tags);
+
+    /**
+     * @return UserInterface
+     */
+    public function getUser(): UserInterface;
+
+    /**
+     * @param UserInterface $user
+     */
+    public function setUser(UserInterface $user);
 }
