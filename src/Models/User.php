@@ -15,9 +15,7 @@ namespace App\Models;
 
 use App\Models\Interfaces\UserInterface;
 use App\Models\Interfaces\ImageInterface;
-use App\Models\Interfaces\BillsInterface;
-use App\Models\Interfaces\ClientInterface;
-use App\Models\Interfaces\AccountingInterface;
+use App\Models\Interfaces\CompanyInterface;
 use App\Models\Interfaces\NotificationInterface;
 
 /**
@@ -118,19 +116,9 @@ abstract class User implements UserInterface
     protected $image;
 
     /**
-     * @var \ArrayAccess
+     * @var CompanyInterface
      */
-    protected $clients;
-
-    /**
-     * @var \ArrayAccess
-     */
-    protected $bills;
-
-    /**
-     * @var AccountingInterface
-     */
-    protected $accounting;
+    protected $company;
 
     /**
      * @var \ArrayAccess
@@ -420,65 +408,17 @@ abstract class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getClients(): \ArrayAccess
+    public function getCompany(): CompanyInterface
     {
-        return $this->clients;
+        return $this->company;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addClient(ClientInterface $client)
+    public function setCompany(CompanyInterface $company)
     {
-        $this->clients[] = $client;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeClient(ClientInterface $client)
-    {
-        unset($this->clients[array_search($client, (array) $this->clients, true)]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBills(): \ArrayAccess
-    {
-        return $this->bills;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addBill(BillsInterface $bill)
-    {
-        $this->bills[] = $bill;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeBill(BillsInterface $bill)
-    {
-        unset($this->bills[array_search($bill, (array) $this->bills, true)]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAccounting(): AccountingInterface
-    {
-        return $this->accounting;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAccounting(AccountingInterface $accounting)
-    {
-        $this->accounting = $accounting;
+        $this->company = $company;
     }
 
     /**

@@ -196,44 +196,14 @@ interface UserInterface extends \Serializable
     public function setImage(ImageInterface $image);
 
     /**
-     * @return \ArrayAccess
+     * @return CompanyInterface
      */
-    public function getClients(): \ArrayAccess;
+    public function getCompany(): CompanyInterface;
 
     /**
-     * @param ClientInterface $client
+     * @param CompanyInterface $company
      */
-    public function addClient(ClientInterface $client);
-
-    /**
-     * @param ClientInterface $client
-     */
-    public function removeClient(ClientInterface $client);
-
-    /**
-     * @return \ArrayAccess
-     */
-    public function getBills(): \ArrayAccess;
-
-    /**
-     * @param BillsInterface $bill
-     */
-    public function addBill(BillsInterface $bill);
-
-    /**
-     * @param BillsInterface $bill
-     */
-    public function removeBill(BillsInterface $bill);
-
-    /**
-     * @return AccountingInterface
-     */
-    public function getAccounting(): AccountingInterface;
-
-    /**
-     * @param AccountingInterface $accounting
-     */
-    public function setAccounting(AccountingInterface $accounting);
+    public function setCompany(CompanyInterface $company);
 
     /**
      * @return \ArrayAccess

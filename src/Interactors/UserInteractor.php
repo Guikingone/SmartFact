@@ -29,8 +29,6 @@ class UserInteractor extends User implements AdvancedUserInterface
      */
     public function __construct()
     {
-        $this->clients = new ArrayCollection();
-        $this->bills = new ArrayCollection();
         $this->notifications = new ArrayCollection();
     }
 

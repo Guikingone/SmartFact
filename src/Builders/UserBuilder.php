@@ -14,11 +14,9 @@ declare(strict_types=1);
 namespace App\Builders;
 
 use App\Interactors\UserInteractor;
-use App\Models\Interfaces\ClientInterface;
 use App\Models\Interfaces\UserInterface;
-use App\Models\Interfaces\BillsInterface;
 use App\Models\Interfaces\ImageInterface;
-use App\Models\Interfaces\AccountingInterface;
+use App\Models\Interfaces\CompanyInterface;
 use App\Models\Interfaces\NotificationInterface;
 use App\Builders\Interfaces\UserBuilderInterface;
 
@@ -227,29 +225,9 @@ class UserBuilder implements UserBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function withClient(ClientInterface $client): UserBuilderInterface
+    public function withCompany(CompanyInterface $company): UserBuilderInterface
     {
-        $this->user->addClient($client);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function withBill(BillsInterface $bill): UserBuilderInterface
-    {
-        $this->user->addBill($bill);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function withAccounting(AccountingInterface $accounting): UserBuilderInterface
-    {
-        $this->user->setAccounting($accounting);
+        $this->user->setCompany($company);
 
         return $this;
     }

@@ -14,10 +14,8 @@ declare(strict_types=1);
 namespace App\Builders\Interfaces;
 
 use App\Models\Interfaces\UserInterface;
-use App\Models\Interfaces\BillsInterface;
 use App\Models\Interfaces\ImageInterface;
-use App\Models\Interfaces\ClientInterface;
-use App\Models\Interfaces\AccountingInterface;
+use App\Models\Interfaces\CompanyInterface;
 use App\Models\Interfaces\NotificationInterface;
 
 /**
@@ -159,25 +157,11 @@ interface UserBuilderInterface
     public function withImage(ImageInterface $image): UserBuilderInterface;
 
     /**
-     * @param ClientInterface $client
+     * @param CompanyInterface $company
      *
      * @return UserBuilderInterface
      */
-    public function withClient(ClientInterface $client): UserBuilderInterface;
-
-    /**
-     * @param BillsInterface $bill
-     *
-     * @return UserBuilderInterface
-     */
-    public function withBill(BillsInterface $bill): UserBuilderInterface;
-
-    /**
-     * @param AccountingInterface $accounting
-     *
-     * @return UserBuilderInterface
-     */
-    public function withAccounting(AccountingInterface $accounting): UserBuilderInterface;
+    public function withCompany(CompanyInterface $company): UserBuilderInterface;
 
     /**
      * @param NotificationInterface $notification
