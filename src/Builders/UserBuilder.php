@@ -195,26 +195,6 @@ class UserBuilder implements UserBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function withTaxesIdentifier(string $taxesIdentifier): UserBuilderInterface
-    {
-        $this->user->setTaxesIdentifier($taxesIdentifier);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function withFormat(string $format): UserBuilderInterface
-    {
-        $this->user->setFormat($format);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function withImage(ImageInterface $image): UserBuilderInterface
     {
         $this->user->setImage($image);

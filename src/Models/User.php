@@ -101,16 +101,6 @@ abstract class User implements UserInterface
     protected $apiToken;
 
     /**
-     * @var string
-     */
-    protected $taxesIdentifier;
-
-    /**
-     * @var string
-     */
-    protected $format;
-
-    /**
      * @var ImageInterface
      */
     protected $image;
@@ -360,38 +350,6 @@ abstract class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getTaxesIdentifier(): string
-    {
-        return $this->taxesIdentifier;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTaxesIdentifier(string $taxesIdentifier)
-    {
-        $this->taxesIdentifier = $taxesIdentifier;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFormat(): string
-    {
-        return $this->format;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFormat(string $format)
-    {
-        $this->format = $format;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getImage():? ImageInterface
     {
         return $this->image;
@@ -447,6 +405,8 @@ abstract class User implements UserInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
      */
     public function serialize()
     {
@@ -459,6 +419,8 @@ abstract class User implements UserInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
      */
     public function unserialize($serialized)
     {

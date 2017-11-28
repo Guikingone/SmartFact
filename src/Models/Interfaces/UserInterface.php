@@ -166,26 +166,6 @@ interface UserInterface extends \Serializable
     public function setApiToken(string $apiToken);
 
     /**
-     * @return string
-     */
-    public function getTaxesIdentifier(): string;
-
-    /**
-     * @param string $taxesIdentifier
-     */
-    public function setTaxesIdentifier(string $taxesIdentifier);
-
-    /**
-     * @return string
-     */
-    public function getFormat(): string;
-
-    /**
-     * @param string $format
-     */
-    public function setFormat(string $format);
-
-    /**
      * @return ImageInterface|null
      */
     public function getImage():? ImageInterface;

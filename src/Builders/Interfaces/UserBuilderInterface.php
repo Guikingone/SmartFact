@@ -136,20 +136,6 @@ interface UserBuilderInterface
     public function withApiToken(string $apiToken): UserBuilderInterface;
 
     /**
-     * @param string $taxesIdentifier
-     *
-     * @return UserBuilderInterface
-     */
-    public function withTaxesIdentifier(string $taxesIdentifier): UserBuilderInterface;
-
-    /**
-     * @param string $format
-     *
-     * @return UserBuilderInterface
-     */
-    public function withFormat(string $format): UserBuilderInterface;
-
-    /**
      * @param ImageInterface $image
      *
      * @return UserBuilderInterface

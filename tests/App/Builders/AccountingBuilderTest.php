@@ -11,15 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Interactors;
+namespace App\Builders;
 
-use App\Models\Accounting;
+use PHPUnit\Framework\TestCase;
 
 /**
- * Class AccountingInteractor
+ * Class AccountingBuilderTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class AccountingInteractor extends Accounting
+class AccountingBuilderTest extends TestCase
 {
+    public function testInstantiation()
+    {
+    }
 }
