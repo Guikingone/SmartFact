@@ -11,27 +11,24 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Models;
+namespace App\Builders\Interfaces;
 
 use App\Models\Interfaces\CompanyInterface;
 
 /**
- * Class Company
+ * Interface CompanyBuilderInterface
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-abstract class Company implements CompanyInterface
+interface CompanyBuilderInterface
 {
     /**
-     * @var int
+     * @return CompanyBuilderInterface
      */
-    protected $id;
+    public function create(): CompanyBuilderInterface;
 
     /**
-     * {@inheritdoc}
+     * @return CompanyInterface
      */
-    public function getId():? int
-    {
-        return $this->id;
-    }
+    public function build(): CompanyInterface;
 }

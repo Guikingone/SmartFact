@@ -11,27 +11,25 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Models;
+namespace App\Builders;
 
-use App\Models\Interfaces\CompanyInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
- * Class Company
+ * Class CompanyBuilderTest
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-abstract class Company implements CompanyInterface
+class CompanyBuilderTest extends TestCase
 {
-    /**
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId():? int
+    public function testInstantiation()
     {
-        return $this->id;
+        $builder = new CompanyBuilder();
+
+        $builder
+            ->create()
+        ;
+
+        static::assertNull($builder->build()->getId());
     }
 }

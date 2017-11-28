@@ -20,7 +20,7 @@ use App\Models\Interfaces\NotificationInterface;
 
 /**
  * Interface UserBuilderInterface
- * 
+ *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
 interface UserBuilderInterface

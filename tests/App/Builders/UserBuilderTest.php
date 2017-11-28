@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Builders;
 
 use PHPUnit\Framework\TestCase;
+use App\Models\Interfaces\CompanyInterface;
 
 /**
  * Class UserBuilderTest
@@ -31,5 +32,21 @@ class UserBuilderTest extends TestCase
         ;
 
         static::assertNull($builder->build()->getId());
+    }
+
+    public function testRelationWithCompany()
+    {
+        $builder = new UserBuilder();
+
+        $companyStub = $this->createMock(CompanyInterface::class);
+        $companyStub->method('getId')
+                    ->willReturn(0);
+
+        $builder
+            ->create()
+            ->withCompany($companyStub)
+        ;
+
+        static::assertEquals(0, $builder->build()->getCompany()->getId());
     }
 }

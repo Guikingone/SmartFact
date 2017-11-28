@@ -20,5 +20,8 @@ namespace App\Models\Interfaces;
  */
 interface CompanyInterface
 {
-
+    /**
+     * @return int|null
+     */
+    public function getId():? int;
 }

@@ -11,27 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Models;
+namespace App\Interactors;
 
-use App\Models\Interfaces\CompanyInterface;
+use App\Models\Company;
 
 /**
- * Class Company
+ * Class CompanyInteractor
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-abstract class Company implements CompanyInterface
+class CompanyInteractor extends Company
 {
-    /**
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId():? int
-    {
-        return $this->id;
-    }
 }
