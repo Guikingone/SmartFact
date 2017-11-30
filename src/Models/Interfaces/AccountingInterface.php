@@ -24,4 +24,64 @@ interface AccountingInterface
      * @return int|null
      */
     public function getId():? int;
+
+    /**
+     * @return string
+     */
+    public function getName(): string;
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name);
+
+    /**
+     * @return null|string
+     */
+    public function getInterlocutor():? string;
+
+    /**
+     * @param string $interlocutor
+     */
+    public function setInterlocutor(string $interlocutor);
+
+    /**
+     * @return int|null
+     */
+    public function getPhoneNumber():? int;
+
+    /**
+     * @param int $phoneNumber
+     */
+    public function setPhoneNumber(int $phoneNumber);
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string;
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email);
+
+    /**
+     * @return string
+     */
+    public function getAddress(): string;
+
+    /**
+     * @param string $address
+     */
+    public function setAddress(string $address);
+
+    /**
+     * @return CompanyInterface
+     */
+    public function getCompany(): CompanyInterface;
+
+    /**
+     * @param CompanyInterface $company
+     */
+    public function setCompany(CompanyInterface $company);
 }

@@ -24,5 +24,12 @@ class AccountingBuilderTest extends TestCase
 {
     public function testInstantiation()
     {
+        $builder = new AccountingBuilder();
+
+        $builder
+            ->create()
+        ;
+
+        static::assertNull($builder->build()->getId());
     }
 }
