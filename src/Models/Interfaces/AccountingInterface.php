@@ -46,14 +46,14 @@ interface AccountingInterface
     public function setInterlocutor(string $interlocutor);
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getPhoneNumber():? int;
+    public function getPhoneNumber():? string;
 
     /**
-     * @param int $phoneNumber
+     * @param string $phoneNumber
      */
-    public function setPhoneNumber(int $phoneNumber);
+    public function setPhoneNumber(string $phoneNumber);
 
     /**
      * @return string

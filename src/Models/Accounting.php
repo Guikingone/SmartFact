@@ -39,7 +39,7 @@ abstract class Accounting implements AccountingInterface
     protected $interlocutor;
 
     /**
-     * @var int
+     * @var string
      */
     protected $phoneNumber;
 
@@ -101,7 +101,7 @@ abstract class Accounting implements AccountingInterface
     /**
      * {@inheritdoc}
      */
-    public function getPhoneNumber():? int
+    public function getPhoneNumber():? string
     {
         return $this->phoneNumber;
     }
@@ -109,7 +109,7 @@ abstract class Accounting implements AccountingInterface
     /**
      * {@inheritdoc}
      */
-    public function setPhoneNumber(int $phoneNumber)
+    public function setPhoneNumber(string $phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
     }

@@ -55,7 +55,9 @@ class AccountingBuilder implements AccountingBuilderInterface
      */
     public function withName(string $name): AccountingBuilderInterface
     {
-        // TODO: Implement withName() method.
+        $this->accounting->setName($name);
+
+        return $this;
     }
 
     /**
@@ -63,7 +65,9 @@ class AccountingBuilder implements AccountingBuilderInterface
      */
     public function withInterlocutor(string $interlocutor): AccountingBuilderInterface
     {
-        // TODO: Implement withInterlocutor() method.
+        $this->accounting->setInterlocutor($interlocutor);
+
+        return $this;
     }
 
     /**
@@ -71,7 +75,9 @@ class AccountingBuilder implements AccountingBuilderInterface
      */
     public function withPhoneNumber(string $phoneNumber): AccountingBuilderInterface
     {
-        // TODO: Implement withPhoneNumber() method.
+        $this->accounting->setPhoneNumber($phoneNumber);
+
+        return $this;
     }
 
     /**
@@ -79,7 +85,9 @@ class AccountingBuilder implements AccountingBuilderInterface
      */
     public function withEmail(string $email): AccountingBuilderInterface
     {
-        // TODO: Implement withEmail() method.
+        $this->accounting->setEmail($email);
+
+        return $this;
     }
 
     /**
@@ -87,7 +95,9 @@ class AccountingBuilder implements AccountingBuilderInterface
      */
     public function withAddress(string $address): AccountingBuilderInterface
     {
-        // TODO: Implement withAddress() method.
+        $this->accounting->setAddress($address);
+
+        return $this;
     }
 
     /**
@@ -95,7 +105,9 @@ class AccountingBuilder implements AccountingBuilderInterface
      */
     public function withCompany(CompanyInterface $company): AccountingBuilderInterface
     {
-        // TODO: Implement withCompany() method.
+        $this->accounting->setCompany($company);
+
+        return $this;
     }
 
     /**
