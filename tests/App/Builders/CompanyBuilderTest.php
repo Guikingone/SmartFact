@@ -14,7 +14,11 @@ declare(strict_types=1);
 namespace App\Builders;
 
 use PHPUnit\Framework\TestCase;
+use App\Models\Interfaces\BillsInterface;
+use App\Models\Interfaces\ImageInterface;
+use App\Models\Interfaces\ClientInterface;
 use App\Models\Interfaces\CompanyInterface;
+use App\Models\Interfaces\AccountingInterface;
 
 /**
  * Class CompanyBuilderTest
@@ -65,6 +69,101 @@ class CompanyBuilderTest extends TestCase
 
     public function testRelationWithImage()
     {
+        $builder = new CompanyBuilder();
 
+        $imageStub = $this->createMock(ImageInterface::class);
+        $imageStub->method('getId')
+                  ->willReturn(0);
+
+        $builder
+            ->create()
+            ->withName('NewCompany')
+            ->withLegalIdentifier('12345678900075')
+            ->withAddress('404 Road Not Found')
+            ->withSocialAddress('404 Road Not Found')
+            ->withTaxesIdentifier('FR123456789')
+            ->withArtisanIdentifier('')
+            ->withFormat('SAS')
+            ->withImage($imageStub)
+        ;
+
+        static::assertEquals(0, $builder->build()->getImage()->getId());
+    }
+
+    public function testRelationWithAccounting()
+    {
+        $builder = new CompanyBuilder();
+
+        $accountingStub = $this->createMock(AccountingInterface::class);
+        $accountingStub->method('getId')
+                       ->willReturn(0);
+
+        $builder
+            ->create()
+            ->withName('NewCompany')
+            ->withLegalIdentifier('12345678900075')
+            ->withAddress('404 Road Not Found')
+            ->withSocialAddress('404 Road Not Found')
+            ->withTaxesIdentifier('FR123456789')
+            ->withArtisanIdentifier('')
+            ->withFormat('SAS')
+            ->withAccounting($accountingStub)
+        ;
+
+        static::assertEquals(0, $builder->build()->getAccounting()->getId());
+    }
+
+    public function testRelationWithBill()
+    {
+        $builder = new CompanyBuilder();
+
+        $billStub = $this->createMock(BillsInterface::class);
+        $billStub->method('getId')
+                 ->willReturn(0);
+
+        $builder
+            ->create()
+            ->withName('NewCompany')
+            ->withLegalIdentifier('12345678900075')
+            ->withAddress('404 Road Not Found')
+            ->withSocialAddress('404 Road Not Found')
+            ->withTaxesIdentifier('FR123456789')
+            ->withArtisanIdentifier('')
+            ->withFormat('SAS')
+            ->withBill($billStub)
+        ;
+
+        static::assertEquals(0, $builder->build()->getBills()->offsetGet(0)->getId());
+
+        $builder->build()->removeBill($billStub);
+
+        static::assertEmpty($builder->build()->getBills());
+    }
+
+    public function testRelationWithClient()
+    {
+        $builder = new CompanyBuilder();
+
+        $clientStub = $this->createMock(ClientInterface::class);
+        $clientStub->method('getId')
+                   ->willReturn(0);
+
+        $builder
+            ->create()
+            ->withName('NewCompany')
+            ->withLegalIdentifier('12345678900075')
+            ->withAddress('404 Road Not Found')
+            ->withSocialAddress('404 Road Not Found')
+            ->withTaxesIdentifier('FR123456789')
+            ->withArtisanIdentifier('')
+            ->withFormat('SAS')
+            ->withClient($clientStub)
+        ;
+
+        static::assertEquals(0, $builder->build()->getClients()->offsetGet(0)->getId());
+
+        $builder->build()->removeClient($clientStub);
+
+        static::assertEmpty($builder->build()->getClients());
     }
 }
