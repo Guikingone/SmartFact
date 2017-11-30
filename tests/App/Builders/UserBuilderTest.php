@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Builders;
 
 use PHPUnit\Framework\TestCase;
+use App\Models\Interfaces\UserInterface;
 use App\Models\Interfaces\ImageInterface;
 use App\Models\Interfaces\CompanyInterface;
 use App\Models\Interfaces\NotificationInterface;
@@ -62,6 +63,21 @@ class UserBuilderTest extends TestCase
         static::assertTrue($builder->build()->hasAnActiveAccount());
         static::assertEquals('24ad4a8zd4d1a464a2dz', $builder->build()->getResetToken());
         static::assertEquals('24ad4a8zd4d1a464a2dz+92d4a26d35d4ad6', $builder->build()->getApiToken());
+    }
+
+    public function testSetter()
+    {
+        $builder = new UserBuilder();
+
+        $userStub = $this->createMock(UserInterface::class);
+        $userStub->method('getId')
+                 ->willReturn(0);
+
+        $builder
+            ->setUser($userStub)
+        ;
+
+        static::assertEquals(0, $builder->build()->getId());
     }
 
     public function testRelationWithImage()

@@ -14,7 +14,11 @@ declare(strict_types=1);
 namespace App\Builders;
 
 use App\Interactors\CompanyInteractor;
+use App\Models\Interfaces\ImageInterface;
+use App\Models\Interfaces\BillsInterface;
+use App\Models\Interfaces\ClientInterface;
 use App\Models\Interfaces\CompanyInterface;
+use App\Models\Interfaces\AccountingInterface;
 use App\Builders\Interfaces\CompanyBuilderInterface;
 
 /**
@@ -35,6 +39,126 @@ class CompanyBuilder implements CompanyBuilderInterface
     public function create(): CompanyBuilderInterface
     {
         $this->company = new CompanyInteractor();
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCompany(CompanyInterface $company): CompanyBuilderInterface
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withName(string $name): CompanyBuilderInterface
+    {
+        $this->company->setName($name);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withLegalIdentifier(string $legalIdentifier): CompanyBuilderInterface
+    {
+        $this->company->setLegalIdentifier($legalIdentifier);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withAddress(string $address): CompanyBuilderInterface
+    {
+        $this->company->setAddress($address);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withSocialAddress(string $socialAddress): CompanyBuilderInterface
+    {
+        $this->company->setSocialAddress($socialAddress);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withTaxesIdentifier(string $taxesIdentifier): CompanyBuilderInterface
+    {
+        $this->company->setTaxesIdentifier($taxesIdentifier);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withArtisanIdentifier(string $artisanIdentifier): CompanyBuilderInterface
+    {
+        $this->company->setArtisanIdentifier($artisanIdentifier);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withFormat(string $format): CompanyBuilderInterface
+    {
+        $this->company->setFormat($format);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withImage(ImageInterface $image): CompanyBuilderInterface
+    {
+        $this->company->setImage($image);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withAccounting(AccountingInterface $accounting): CompanyBuilderInterface
+    {
+        $this->company->setAccounting($accounting);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withBill(BillsInterface $bills): CompanyBuilderInterface
+    {
+        $this->company->addBill($bills);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withClient(ClientInterface $client): CompanyBuilderInterface
+    {
+        $this->company->addClient($client);
 
         return $this;
     }

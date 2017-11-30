@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Interactors;
 
 use App\Models\Company;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class CompanyInteractor
@@ -22,4 +23,12 @@ use App\Models\Company;
  */
 class CompanyInteractor extends Company
 {
+    /**
+     * CompanyInteractor constructor.
+     */
+    public function __construct()
+    {
+        $this->bills = new ArrayCollection();
+        $this->clients = new ArrayCollection();
+    }
 }
