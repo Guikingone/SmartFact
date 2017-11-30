@@ -26,14 +26,14 @@ interface BillsInterface
     public function getId():? int;
 
     /**
-     * @return int
+     * @return string
      */
-    public function getUuid(): int;
+    public function getUuid(): string;
 
     /**
-     * @param int $uuid
+     * @param string $uuid
      */
-    public function setUuid(int $uuid);
+    public function setUuid(string $uuid);
 
     /**
      * @return string
@@ -121,9 +121,9 @@ interface BillsInterface
     public function getReductionTotal():? float;
 
     /**
-     * @param int $reductionTotal
+     * @param float $reductionTotal
      */
-    public function setReductionTotal(int $reductionTotal);
+    public function setReductionTotal(float $reductionTotal);
 
     /**
      * @return bool
@@ -186,14 +186,24 @@ interface BillsInterface
     public function setFile(string $file);
 
     /**
-     * @return UserInterface
+     * @return \SplFileInfo
      */
-    public function getAuthor(): UserInterface;
+    public function getFinalFile(): \SplFileInfo;
 
     /**
-     * @param UserInterface $author
+     * @param \SplFileInfo $finalFile
      */
-    public function setAuthor(UserInterface $author);
+    public function setFinalFile(\SplFileInfo $finalFile);
+
+    /**
+     * @return CompanyInterface
+     */
+    public function getOwner(): CompanyInterface;
+
+    /**
+     * @param CompanyInterface $owner
+     */
+    public function setOwner(CompanyInterface $owner);
 
     /**
      * @return ClientInterface
@@ -204,4 +214,19 @@ interface BillsInterface
      * @param ClientInterface $client
      */
     public function setClient(ClientInterface $client);
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getProducts(): \ArrayAccess;
+
+    /**
+     * @param ProductInterface $product
+     */
+    public function addProduct(ProductInterface $product);
+
+    /**
+     * @param ProductInterface $product
+     */
+    public function removeProduct(ProductInterface $product);
 }

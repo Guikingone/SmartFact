@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Models\Interfaces\UserInterface;
 use App\Models\Interfaces\BillsInterface;
 use App\Models\Interfaces\ClientInterface;
+use App\Models\Interfaces\CompanyInterface;
+use App\Models\Interfaces\ProductInterface;
 
 /**
  * Class Bills
@@ -30,7 +31,7 @@ abstract class Bills implements BillsInterface
     protected $id;
 
     /**
-     * @var int
+     * @var string
      */
     protected $uuid;
 
@@ -110,14 +111,24 @@ abstract class Bills implements BillsInterface
     protected $file;
 
     /**
-     * @var UserInterface
+     * @var \SplFileInfo
      */
-    protected $author;
+    protected $finalFile;
+
+    /**
+     * @var CompanyInterface
+     */
+    protected $owner;
 
     /**
      * @var ClientInterface
      */
     protected $client;
+
+    /**
+     * @var \ArrayAccess
+     */
+    protected $products;
 
     /**
      * {@inheritdoc}
@@ -130,7 +141,7 @@ abstract class Bills implements BillsInterface
     /**
      * {@inheritdoc}
      */
-    public function getUuid(): int
+    public function getUuid(): string
     {
         return $this->uuid;
     }
@@ -138,7 +149,7 @@ abstract class Bills implements BillsInterface
     /**
      * {@inheritdoc}
      */
-    public function setUuid(int $uuid)
+    public function setUuid(string $uuid)
     {
         $this->uuid = $uuid;
     }
@@ -279,7 +290,7 @@ abstract class Bills implements BillsInterface
     /**
      * {@inheritdoc}
      */
-    public function setReductionTotal(int $reductionTotal)
+    public function setReductionTotal(float $reductionTotal)
     {
         $this->reductionTotal = $reductionTotal;
     }
@@ -383,17 +394,33 @@ abstract class Bills implements BillsInterface
     /**
      * {@inheritdoc}
      */
-    public function getAuthor(): UserInterface
+    public function getFinalFile(): \SplFileInfo
     {
-        return $this->author;
+        return $this->finalFile;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setAuthor(UserInterface $author)
+    public function setFinalFile(\SplFileInfo $finalFile)
     {
-        $this->author = $author;
+        $this->finalFile = $finalFile;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOwner(): CompanyInterface
+    {
+        return $this->owner;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOwner(CompanyInterface $owner)
+    {
+        $this->owner = $owner;
     }
 
     /**
@@ -410,5 +437,29 @@ abstract class Bills implements BillsInterface
     public function setClient(ClientInterface $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProducts(): \ArrayAccess
+    {
+        return $this->products;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addProduct(ProductInterface $product)
+    {
+        $this->products[] = $product;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeProduct(ProductInterface $product)
+    {
+        unset($this->products[array_search($product, (array) $this->products, true)]);
     }
 }

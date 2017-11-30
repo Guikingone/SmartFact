@@ -23,6 +23,7 @@ use App\Form\Type\Security\RegisterType;
 
 // Core
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -35,7 +36,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class WebUserManager
 {
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     private $entityManager;
 
@@ -52,12 +53,12 @@ class WebUserManager
     /**
      * WebUserManager constructor.
      *
-     * @param EntityManager             $entityManager
+     * @param EntityManagerInterface             $entityManager
      * @param FormFactoryInterface      $form
      * @param EventDispatcherInterface  $eventDispatcher
      */
     public function __construct(
-        EntityManager $entityManager,
+        EntityManagerInterface $entityManager,
         FormFactoryInterface $form,
         EventDispatcherInterface $eventDispatcher
     ) {

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Interactors;
 
 use App\Models\Bills;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class BillsInteractor
@@ -22,4 +23,11 @@ use App\Models\Bills;
  */
 class BillsInteractor extends Bills
 {
+    /**
+     * BillsInteractor constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 }
