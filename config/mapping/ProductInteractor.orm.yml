@@ -7,3 +7,10 @@ App\Interactors\ProductInteractor:
             generator: { strategy: AUTO }
     fields:
 
+    manyToOne:
+        bill:
+            targetEntity: App\Interactors\BillsInteractor
+            inversedBy: products
+            joinColumn:
+                name: bill_id
+                referencedColumnName: id

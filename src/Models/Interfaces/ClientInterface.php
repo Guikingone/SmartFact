@@ -126,6 +126,16 @@ interface ClientInterface
     public function setImage(ImageInterface $image);
 
     /**
+     * @return CompanyInterface|null
+     */
+    public function getRecipient():? CompanyInterface;
+
+    /**
+     * @param CompanyInterface $recipient
+     */
+    public function setRecipient(CompanyInterface $recipient);
+
+    /**
      * @return \ArrayAccess
      */
     public function getBills(): \ArrayAccess;

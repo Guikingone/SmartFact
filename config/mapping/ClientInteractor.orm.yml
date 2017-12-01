@@ -6,4 +6,57 @@ App\Interactors\ClientInteractor:
             type: integer
             generator: { strategy: AUTO }
     fields:
+        name:
+           type: string
+           length: 200
+           unique: true
+        name:
+           type: string
+           length: 200
+           unique: true
+        name:
+           type: string
+           length: 200
+           unique: true
+        name:
+           type: string
+           length: 200
+           unique: true
+        name:
+           type: string
+           length: 200
+           unique: true
+        name:
+           type: string
+           length: 200
+           unique: true
+        name:
+           type: string
+           length: 200
+           unique: true
+        name:
+           type: string
+           length: 200
+           unique: true
+        name:
+           type: string
+           length: 200
+           unique: true
 
+    oneToOne:
+        image:
+            targetEntity: App\Interactors\ImageInteractor
+            inversedBy: client
+            joinColumn:
+                name: image_id
+                referencedColumnName: id
+
+    oneToMany:
+        bills:
+            targetEntity: App\Interactors\BillsInteractor
+            mappedBy: client
+
+    manyToOne:
+        recipient:
+            targetEntity: App\Interactors\CompanyInteractor
+            inversedBy: client

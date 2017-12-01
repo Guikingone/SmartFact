@@ -16,6 +16,7 @@ namespace App\Models;
 use App\Models\Interfaces\ImageInterface;
 use App\Models\Interfaces\BillsInterface;
 use App\Models\Interfaces\ClientInterface;
+use App\Models\Interfaces\CompanyInterface;
 
 /**
  * Class Client
@@ -78,6 +79,11 @@ abstract class Client implements ClientInterface
      * @var ImageInterface
      */
     protected $image;
+
+    /**
+     * @var CompanyInterface
+     */
+    protected $recipient;
 
     /**
      * @var \ArrayAccess
@@ -250,6 +256,22 @@ abstract class Client implements ClientInterface
     public function setImage(ImageInterface $image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRecipient():? CompanyInterface
+    {
+        return $this->recipient;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRecipient(CompanyInterface $recipient): void
+    {
+        $this->recipient = $recipient;
     }
 
     /**

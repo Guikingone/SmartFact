@@ -39,11 +39,22 @@ App\Interactors\CompanyInteractor:
         accounting:
             targetEntity: App\Interactors\AccountingInteractor
             inversedBy: company
-                joinColumn:
-                    name: company_id
-                    referencedColumnName: id
+            joinColumn:
+                name: company_id
+                referencedColumnName: id
+        image:
+            targetEntity: App\Interactors\ImageInteractor
+            inversedBy: company
+            joinColumn:
+                name: company_id
+                referencedColumnName: id
 
     oneToMany:
         bills:
             targetEntity: App\Interactors\BillsInteractor
             mappedBy: owner
+            cascade: ['remove', 'persist']
+        clients:
+            targetEntity: App\Interactors\ClientInteractor
+            mappedBy: recipient
+            cascade: ['persist']

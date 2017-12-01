@@ -7,3 +7,12 @@ App\Interactors\ImageInteractor:
             generator: { strategy: AUTO }
     fields:
 
+    oneToOne:
+        client:
+            targetEntity: App\Interactors\ClientInteractor
+            mappedBy: image
+            cascade: ['persist']
+        company:
+            targetEntity: App\Interactors\CompanyInteractor
+            mappedBy: image
+            cascade: ['persist']
