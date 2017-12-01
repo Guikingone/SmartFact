@@ -31,6 +31,4 @@ App\Interactors\AccountingInteractor:
     oneToOne:
         company:
             targetEntity: App\Interactors\CompanyInteractor
-            joinColumn:
-                name: accounting
-                referencedColumnName: id
+            mappedBy: accounting

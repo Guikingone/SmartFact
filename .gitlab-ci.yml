@@ -3,7 +3,7 @@ stages:
 
 unit_tests:
     stage: unit_tests
-    image: php:fpm
+    image: php7.1:fpm
     before_script:
         - apt-get update -y
         - apt-get install -y libssl-dev

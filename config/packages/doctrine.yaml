@@ -12,12 +12,3 @@ doctrine:
                 dir: '%kernel.project_dir%/config/mapping'
                 prefix: 'App\Interactors'
                 alias: App
-        resolve_target_entities:
-            App\Interactors\AccountingInteractor: App\Models\Accounting
-            App\Interactors\BillsInteractor: App\Models\Bills
-            App\Interactors\ClientInteractor: App\Models\Client
-            App\Interactors\CompanyInteractor: App\Models\Company
-            App\Interactors\ImageInteractor: App\Models\Image
-            App\Interactors\NotificationInteractor: App\Models\Notification
-            App\Interactors\ProductInteractor: App\Models\Product
-            App\Interactors\UserInteractor: App\Models\User

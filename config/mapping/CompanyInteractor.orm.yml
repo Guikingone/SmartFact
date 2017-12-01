@@ -6,4 +6,44 @@ App\Interactors\CompanyInteractor:
             type: integer
             generator: { strategy: AUTO }
     fields:
+        name:
+            type: string
+            length: 150
+            unique: true
+        legalIdentifier:
+            type: string
+            length: 20
+            unique: true
+        address:
+            type: string
+            length: 255
+            unique: true
+        socialAddress:
+            type: string
+            length: 255
+            unique: true
+        taxesIdentifier:
+            type: string
+            length: 30
+            unique: true
+        artisanIdentifier:
+            type: string
+            length: 100
+            nullable: true
+            unique: true
+        format:
+            type: string
+            length: 15
 
+    oneToOne:
+        accounting:
+            targetEntity: App\Interactors\AccountingInteractor
+            inversedBy: company
+                joinColumn:
+                    name: company_id
+                    referencedColumnName: id
+
+    oneToMany:
+        bills:
+            targetEntity: App\Interactors\BillsInteractor
+            mappedBy: owner

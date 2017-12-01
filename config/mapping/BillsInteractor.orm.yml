@@ -60,6 +60,13 @@ App\Interactors\BillsInteractor:
         owner:
             targetEntity: App\Interactors\CompanyInteractor
             inversedBy: bills
+            joinColumn:
+                name: owner_id
+                referencedColumnName: id
+
         client:
             targetEntity: App\Interactors\ClientInteractor
             inversedBy: bills
+            joinColumn:
+                name: client_id
+                referencedColumnName: id
