@@ -6,4 +6,60 @@ App\Interactors\BillsInteractor:
             type: integer
             generator: { strategy: AUTO }
     fields:
+        uuid:
+            type: string
+            length: 200
+            unique: true
+        creationDate:
+            type: datetime
+        productionDate:
+            type: datetime
+            nullable: true
+        modificationDate:
+            type: datetime
+            nullable: true
+        taxesFreeTotal:
+            type: float
+        taxesTotal:
+            type: float
+            nullable: true
+        taxes:
+            type: boolean
+        taxesPercentage:
+            type: float
+            nullable: true
+        reduction:
+            type: boolean
+        reductionTotal:
+            type: float
+            nullable: true
+        send:
+            type: boolean
+        sendingDate:
+            type: datetime
+            nullable: true
+        limitPaymentDate:
+            type: datetime
+        penaltyRate:
+            type: float
+            nullable: true
+        recoveryPrice:
+            type: float
+        file:
+            type: string
+            length: 255
+            unique: true
 
+    oneToMany:
+        products:
+            targetEntity: App\Interactors\ProductInteractor
+            mappedBy: bill
+            cascade: ['persist']
+
+    manyToOne:
+        owner:
+            targetEntity: App\Interactors\CompanyInteractor
+            inversedBy: bills
+        client:
+            targetEntity: App\Interactors\ClientInteractor
+            inversedBy: bills
