@@ -8,9 +8,9 @@ The source code of the web application/API used for SmartFact mobile application
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/d996390800b4a91d6247/maintainability)](https://codeclimate.com/github/Guikingone/SmartFact/maintainability)
 
-- CodeClimate : 
+- Travis : 
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/d996390800b4a91d6247/maintainability)](https://codeclimate.com/github/Guikingone/SmartFact/maintainability)
+[![Build Status](https://travis-ci.org/Guikingone/SmartFact.svg?branch=master)](https://travis-ci.org/Guikingone/SmartFact)
 
 ## Usage
 
