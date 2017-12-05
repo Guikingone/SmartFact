@@ -1,15 +1,5 @@
 stages:
-    - quality
     - unit_tests
-
-codequality:
-    stage: quality
-    image: codeclimate/codeclimate
-    script:
-        - codeclimate/codeclimate init
-        - codeclimate/codeclimate analyze -f html > codeclimate.html
-    artifacts:
-        paths: [codeclimate.html]
 
 unit_tests:
     stage: unit_tests
