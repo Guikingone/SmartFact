@@ -6,6 +6,16 @@ App\Interactors\ProductInteractor:
             type: integer
             generator: { strategy: AUTO }
     fields:
+        type:
+            type: string
+            length: 200
+            nullable: false
+        price:
+            type: float
+            nullable: false
+        quantity:
+            type: float
+            nullable: false
 
     manyToOne:
         bill:

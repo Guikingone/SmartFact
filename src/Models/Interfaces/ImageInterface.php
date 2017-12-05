@@ -114,4 +114,14 @@ interface ImageInterface
      * @param ClientInterface $client
      */
     public function setClient(ClientInterface $client);
+
+    /**
+     * @return CompanyInterface|null
+     */
+    public function getCompany():? CompanyInterface;
+
+    /**
+     * @param CompanyInterface $company
+     */
+    public function setCompany(CompanyInterface $company): void;
 }

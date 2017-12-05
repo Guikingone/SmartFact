@@ -16,6 +16,7 @@ namespace App\Models;
 use App\Models\Interfaces\UserInterface;
 use App\Models\Interfaces\ImageInterface;
 use App\Models\Interfaces\ClientInterface;
+use App\Models\Interfaces\CompanyInterface;
 
 /**
  * Class Image
@@ -73,6 +74,11 @@ abstract class Image implements ImageInterface
      * @var ClientInterface
      */
     protected $client;
+
+    /**
+     * @var CompanyInterface
+     */
+    protected $company;
 
     /**
      * {@inheritdoc}
@@ -224,5 +230,21 @@ abstract class Image implements ImageInterface
     public function setClient(ClientInterface $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCompany():? CompanyInterface
+    {
+        return $this->company;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCompany(CompanyInterface $company): void
+    {
+        $this->company = $company;
     }
 }

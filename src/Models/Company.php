@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Interfaces\UserInterface;
 use App\Models\Interfaces\ImageInterface;
 use App\Models\Interfaces\BillsInterface;
 use App\Models\Interfaces\ClientInterface;
@@ -85,6 +86,11 @@ abstract class Company implements CompanyInterface
      * @var \ArrayAccess
      */
     protected $clients;
+
+    /**
+     * @var UserInterface
+     */
+    protected $owner;
 
     /**
      * {@inheritdoc}
@@ -284,5 +290,21 @@ abstract class Company implements CompanyInterface
     public function removeClient(ClientInterface $client)
     {
         unset($this->clients[array_search($client, (array) $this->clients, true)]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOwner(): UserInterface
+    {
+        return $this->owner;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOwner(UserInterface $owner): void
+    {
+        $this->owner = $owner;
     }
 }

@@ -56,7 +56,20 @@ App\Interactors\UserInteractor:
             nullable: true
             unique: true
 
+    oneToOne:
+        image:
+            targetEntity: App\Interactors\ImageInteractor
+            inversedBy: user
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+
     oneToMany:
+        company:
+            targetEntity: App\Interactors\CompanyInteractor
+            mappedBy: owner
+            cascade: ['persist', 'remove']
+
         notifications:
             targetEntity: App\Interactors\NotificationInteractor
             mappedBy: user

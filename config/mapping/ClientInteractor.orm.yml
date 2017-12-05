@@ -7,41 +7,48 @@ App\Interactors\ClientInteractor:
             generator: { strategy: AUTO }
     fields:
         name:
-           type: string
-           length: 200
-           unique: true
-        name:
-           type: string
-           length: 200
-           unique: true
-        name:
-           type: string
-           length: 200
-           unique: true
-        name:
-           type: string
-           length: 200
-           unique: true
-        name:
-           type: string
-           length: 200
-           unique: true
-        name:
-           type: string
-           length: 200
-           unique: true
-        name:
-           type: string
-           length: 200
-           unique: true
-        name:
-           type: string
-           length: 200
-           unique: true
-        name:
-           type: string
-           length: 200
-           unique: true
+            type: string
+            length: 200
+            nullable: false
+            unique: true
+        legalIdentifier:
+            type: string
+            length: 20
+            nullable: false
+            unique: true
+        format:
+            type: string
+            length: 15
+            nullable: false
+            unique: true
+        firstName:
+            type: string
+            length: 100
+            nullable: true
+        lastName:
+            type: string
+            length: 100
+            nullable: true
+        taxesIdentifier:
+            type: string
+            length: 30
+            nullable: false
+            unique: true
+        address:
+            type: string
+            length: 255
+            nullable: false
+            unique: true
+        socialAddress:
+            type: string
+            length: 255
+            nullable: false
+            unique: true
+        artisanIdentifier:
+            type: string
+            length: 200
+            nullable: true
+            unique: true
 
     oneToOne:
         image:
@@ -59,4 +66,4 @@ App\Interactors\ClientInteractor:
     manyToOne:
         recipient:
             targetEntity: App\Interactors\CompanyInteractor
-            inversedBy: client
+            inversedBy: clients

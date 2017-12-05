@@ -144,4 +144,14 @@ interface CompanyInterface
      * @param ClientInterface $client
      */
     public function removeClient(ClientInterface $client);
+
+    /**
+     * @return UserInterface
+     */
+    public function getOwner(): UserInterface;
+
+    /**
+     * @param UserInterface $owner
+     */
+    public function setOwner(UserInterface $owner): void;
 }

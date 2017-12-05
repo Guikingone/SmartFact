@@ -58,3 +58,11 @@ App\Interactors\CompanyInteractor:
             targetEntity: App\Interactors\ClientInteractor
             mappedBy: recipient
             cascade: ['persist']
+
+    manyToOne:
+        owner:
+            targetEntity: App\Interactors\UserInteractor
+            inversedBy: company
+            joinColumn:
+                name: company_id
+                referencedColumnName: id

@@ -6,8 +6,42 @@ App\Interactors\ImageInteractor:
             type: integer
             generator: { strategy: AUTO }
     fields:
+        name:
+            type: string
+            length: 50
+            nullable: false
+            unique: true
+        extension:
+            type: string
+            nullable: true
+            length: 5
+        size:
+            type: string
+            length: 75
+            nullable: false
+        localPath:
+            type: string
+            length: 255
+            nullable: false
+            unique: true
+        publicPath:
+            type: string
+            length: 255
+            nullable: false
+            unique: true
+        uploadDate:
+            type: datetime
+            length: 50
+            nullable: false
+        modificationDate:
+            type: datetime
+            nullable: true
 
     oneToOne:
+        user:
+            targetEntity: App\Interactors\UserInteractor
+            mappedBy: image
+            cascade: ['persist', 'remove']
         client:
             targetEntity: App\Interactors\ClientInteractor
             mappedBy: image
