@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Builders;
 
 use PHPUnit\Framework\TestCase;
+use App\Models\Interfaces\UserInterface;
 use App\Models\Interfaces\BillsInterface;
 use App\Models\Interfaces\ImageInterface;
 use App\Models\Interfaces\ClientInterface;
@@ -165,5 +166,28 @@ class CompanyBuilderTest extends TestCase
         $builder->build()->removeClient($clientStub);
 
         static::assertEmpty($builder->build()->getClients());
+    }
+
+    public function testRelationWithOwner()
+    {
+        $builder = new CompanyBuilder();
+
+        $ownerStub = $this->createMock(UserInterface::class);
+        $ownerStub->method('getId')
+                  ->willReturn(0);
+
+        $builder
+            ->create()
+            ->withName('NewCompany')
+            ->withLegalIdentifier('12345678900075')
+            ->withAddress('404 Road Not Found')
+            ->withSocialAddress('404 Road Not Found')
+            ->withTaxesIdentifier('FR123456789')
+            ->withArtisanIdentifier('')
+            ->withFormat('SAS')
+            ->withOwner($ownerStub)
+        ;
+
+        static::assertEquals(0, $builder->build()->getOwner()->getId());
     }
 }

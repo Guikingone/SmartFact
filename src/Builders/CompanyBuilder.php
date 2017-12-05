@@ -20,6 +20,7 @@ use App\Models\Interfaces\ClientInterface;
 use App\Models\Interfaces\CompanyInterface;
 use App\Models\Interfaces\AccountingInterface;
 use App\Builders\Interfaces\CompanyBuilderInterface;
+use App\Models\Interfaces\UserInterface;
 
 /**
  * Class CompanyBuilder
@@ -159,6 +160,16 @@ class CompanyBuilder implements CompanyBuilderInterface
     public function withClient(ClientInterface $client): CompanyBuilderInterface
     {
         $this->company->addClient($client);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withOwner(UserInterface $owner): CompanyBuilderInterface
+    {
+        $this->company->setOwner($owner);
 
         return $this;
     }

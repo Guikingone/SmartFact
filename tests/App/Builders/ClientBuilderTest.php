@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace App\Builders;
 
 use PHPUnit\Framework\TestCase;
-use App\Interactors\ImageInteractor;
-use App\Interactors\BillsInteractor;
-use App\Interactors\ClientInteractor;
+use App\Models\Interfaces\ImageInterface;
+use App\Models\Interfaces\BillsInterface;
+use App\Models\Interfaces\ClientInterface;
+use App\Models\Interfaces\CompanyInterface;
 
 /**
  * Class ClientBuilderTest
@@ -58,7 +59,7 @@ class ClientBuilderTest extends TestCase
     {
         $builder = new ClientBuilder();
 
-        $clientStub = $this->createMock(ClientInteractor::class);
+        $clientStub = $this->createMock(ClientInterface::class);
         $clientStub->method('getId')
                     ->willReturn(0);
 
@@ -73,7 +74,7 @@ class ClientBuilderTest extends TestCase
     {
         $builder = new ClientBuilder();
 
-        $image = $this->createMock(ImageInteractor::class);
+        $image = $this->createMock(ImageInterface::class);
         $image->method('getId')
               ->willReturn(0);
 
@@ -93,7 +94,7 @@ class ClientBuilderTest extends TestCase
     {
         $builder = new ClientBuilder();
 
-        $billStub = $this->createMock(BillsInteractor::class);
+        $billStub = $this->createMock(BillsInterface::class);
         $billStub->method('getId')
                  ->willReturn(0);
 
@@ -116,5 +117,31 @@ class ClientBuilderTest extends TestCase
         $builder->build()->removeBill($billStub);
 
         static::assertEmpty($builder->build()->getBills());
+    }
+
+    public function testRelationWithRecipient()
+    {
+
+        $builder = new ClientBuilder();
+
+        $recipientStub = $this->createMock(CompanyInterface::class);
+        $recipientStub->method('getId')
+                      ->willReturn(0);
+
+        $builder
+            ->create()
+            ->withName('NewClient')
+            ->withFirstName("New")
+            ->withLastName("Client")
+            ->withLegalIdentifier(43712404562145)
+            ->withTaxesIdentifier('FR012345678987')
+            ->withArtisanIdentifier('')
+            ->withFormat('SAS')
+            ->withAddress('404 Route de l\'inconnu')
+            ->withSocialAddress('404 Route de l\'inconnu')
+            ->withRecipient($recipientStub)
+        ;
+
+        static::assertEquals(0, $builder->build()->getRecipient()->getId());
     }
 }

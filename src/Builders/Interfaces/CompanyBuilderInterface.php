@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Builders\Interfaces;
 
+use App\Models\Interfaces\UserInterface;
 use App\Models\Interfaces\BillsInterface;
 use App\Models\Interfaces\ImageInterface;
 use App\Models\Interfaces\ClientInterface;
@@ -114,6 +115,13 @@ interface CompanyBuilderInterface
      * @return CompanyBuilderInterface
      */
     public function withClient(ClientInterface $client): CompanyBuilderInterface;
+
+    /**
+     * @param UserInterface $owner
+     *
+     * @return CompanyBuilderInterface
+     */
+    public function withOwner(UserInterface $owner): CompanyBuilderInterface;
 
     /**
      * @return CompanyInterface

@@ -16,6 +16,7 @@ namespace App\Builders\Interfaces;
 use App\Models\Interfaces\ImageInterface;
 use App\Models\Interfaces\BillsInterface;
 use App\Models\Interfaces\ClientInterface;
+use App\Models\Interfaces\CompanyInterface;
 
 /**
  * Interface ClientBuilderInterface
@@ -112,6 +113,13 @@ interface ClientBuilderInterface
      * @return ClientBuilderInterface
      */
     public function withBill(BillsInterface $bill): ClientBuilderInterface;
+
+    /**
+     * @param CompanyInterface $recipient
+     *
+     * @return ClientBuilderInterface
+     */
+    public function withRecipient(CompanyInterface $recipient): ClientBuilderInterface;
 
     /**
      * @return ClientInterface

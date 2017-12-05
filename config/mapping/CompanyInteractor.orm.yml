@@ -40,13 +40,13 @@ App\Interactors\CompanyInteractor:
             targetEntity: App\Interactors\AccountingInteractor
             inversedBy: company
             joinColumn:
-                name: company_id
+                name: accounting_id
                 referencedColumnName: id
         image:
             targetEntity: App\Interactors\ImageInteractor
             inversedBy: company
             joinColumn:
-                name: company_id
+                name: image_id
                 referencedColumnName: id
 
     oneToMany:
@@ -64,5 +64,5 @@ App\Interactors\CompanyInteractor:
             targetEntity: App\Interactors\UserInteractor
             inversedBy: company
             joinColumn:
-                name: company_id
+                name: owner_id
                 referencedColumnName: id

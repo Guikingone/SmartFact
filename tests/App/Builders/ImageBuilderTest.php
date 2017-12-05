@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace App\Builders;
 
 use PHPUnit\Framework\TestCase;
-use App\Interactors\UserInteractor;
-use App\Interactors\ClientInteractor;
+use App\Models\Interfaces\UserInterface;
 use App\Models\Interfaces\ImageInterface;
+use App\Models\Interfaces\ClientInterface;
+use App\Models\Interfaces\CompanyInterface;
 
 /**
  * Class ImageBuilderTest
@@ -69,7 +70,7 @@ class ImageBuilderTest extends TestCase
     {
         $builder = new ImageBuilder();
 
-        $userMock = $this->createMock(UserInteractor::class);
+        $userMock = $this->createMock(UserInterface::class);
         $userMock->method('getId')
                  ->willReturn(0);
 
@@ -91,7 +92,7 @@ class ImageBuilderTest extends TestCase
     {
         $builder = new ImageBuilder();
 
-        $clientMock = $this->createMock(ClientInteractor::class);
+        $clientMock = $this->createMock(ClientInterface::class);
         $clientMock->method('getId')
                    ->willReturn(0);
 
@@ -107,5 +108,21 @@ class ImageBuilderTest extends TestCase
         ;
 
         static::assertEquals(0, $builder->build()->getClient()->getId());
+    }
+
+    public function testRelationWithCompany()
+    {
+        $builder = new ImageBuilder();
+
+        $companyStub = $this->createMock(CompanyInterface::class);
+        $companyStub->method('getId')
+                    ->willReturn(0);
+
+        $builder
+            ->create()
+            ->withCompany($companyStub)
+        ;
+
+        static::assertEquals(0, $builder->build()->getCompany()->getId());
     }
 }

@@ -61,7 +61,7 @@ App\Interactors\UserInteractor:
             targetEntity: App\Interactors\ImageInteractor
             inversedBy: user
             joinColumn:
-                name: user_id
+                name: image_id
                 referencedColumnName: id
 
     oneToMany:

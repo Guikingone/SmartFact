@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Builders;
 
 use App\Interactors\ClientInteractor;
+use App\Models\Interfaces\CompanyInterface;
 use App\Models\Interfaces\ImageInterface;
 use App\Models\Interfaces\BillsInterface;
 use App\Models\Interfaces\ClientInterface;
@@ -157,6 +158,16 @@ class ClientBuilder implements ClientBuilderInterface
     public function withBill(BillsInterface $bill): ClientBuilderInterface
     {
         $this->client->addBill($bill);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withRecipient(CompanyInterface $recipient): ClientBuilderInterface
+    {
+        $this->client->setRecipient($recipient);
 
         return $this;
     }

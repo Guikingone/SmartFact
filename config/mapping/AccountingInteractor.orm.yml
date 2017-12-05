@@ -32,3 +32,4 @@ App\Interactors\AccountingInteractor:
         company:
             targetEntity: App\Interactors\CompanyInteractor
             mappedBy: accounting
+            cascade: ['persist']

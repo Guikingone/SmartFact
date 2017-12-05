@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Builders\Interfaces;
 
+use App\Models\Interfaces\CompanyInterface;
 use App\Models\Interfaces\UserInterface;
 use App\Models\Interfaces\ImageInterface;
 use App\Models\Interfaces\ClientInterface;
@@ -98,6 +99,13 @@ interface ImageBuilderInterface
      * @return ImageBuilderInterface
      */
     public function withClient(ClientInterface $client): ImageBuilderInterface;
+
+    /**
+     * @param CompanyInterface $company
+     *
+     * @return ImageBuilderInterface
+     */
+    public function withCompany(CompanyInterface $company): ImageBuilderInterface;
 
     /**
      * @return ImageInterface

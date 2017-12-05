@@ -62,8 +62,12 @@ App\Interactors\ClientInteractor:
         bills:
             targetEntity: App\Interactors\BillsInteractor
             mappedBy: client
+            cascade: ['persist']
 
     manyToOne:
         recipient:
             targetEntity: App\Interactors\CompanyInteractor
             inversedBy: clients
+            joinColumn:
+                name: recipient_id
+                referencedColumnName: id

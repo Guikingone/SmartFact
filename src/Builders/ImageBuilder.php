@@ -17,6 +17,7 @@ use App\Interactors\ImageInteractor;
 use App\Models\Interfaces\UserInterface;
 use App\Models\Interfaces\ImageInterface;
 use App\Models\Interfaces\ClientInterface;
+use App\Models\Interfaces\CompanyInterface;
 use App\Builders\Interfaces\ImageBuilderInterface;
 
 /**
@@ -137,6 +138,16 @@ class ImageBuilder implements ImageBuilderInterface
     public function withClient(ClientInterface $client): ImageBuilderInterface
     {
         $this->image->setClient($client);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withCompany(CompanyInterface $company): ImageBuilderInterface
+    {
+        $this->image->setCompany($company);
 
         return $this;
     }

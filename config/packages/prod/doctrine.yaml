@@ -1,6 +1,15 @@
 doctrine:
     dbal:
-        url: '%env(DATABASE_URL)%'
+        connections:
+            default:
+                driver: '%env(DB_DRIVER)%'
+                host: '%env(DB_HOST)%'
+                server_version: '%env(DB_VERSION)%'
+                dbname: '%env(POSTGRES_DB)%'
+                port: '%env(POSTGRES_PORT)%'
+                user: '%env(POSTGRES_USER)%'
+                password: '%env(POSTGRES_PASSWORD)%'
+                charset: '%env(POSTGRES_CHARSET)%'
     orm:
         #metadata_cache_driver: apcu
         #result_cache_driver: apcu
