@@ -6,6 +6,12 @@ The source code of the web application/API used for SmartFact mobile application
 
 - Insight :
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/d996390800b4a91d6247/maintainability)](https://codeclimate.com/github/Guikingone/SmartFact/maintainability)
+
+- CodeClimate : 
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/d996390800b4a91d6247/maintainability)](https://codeclimate.com/github/Guikingone/SmartFact/maintainability)
+
 ## Usage
 
 Once you've installed Docker, time to build the project.

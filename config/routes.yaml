@@ -1,9 +1,5 @@
-app:
-    resource: "routing_web.yaml"
-
-security:
-    resource: "routes/security/routing_security.yaml"
-
-api:
-   prefix: /api
-   resource: "routing_api.yaml"
+home:
+    path:    '/'
+    methods: ['GET']
+    defaults:
+        _controller: App\Action\HomeAction

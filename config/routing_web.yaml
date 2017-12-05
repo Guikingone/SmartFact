@@ -1,6 +1,0 @@
-# Core
-home:
-    path:    '/'
-    methods: ['GET']
-    defaults: { _controller: App\Action\Web\HomeAction }
-

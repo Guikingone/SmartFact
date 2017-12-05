@@ -1,8 +1,26 @@
 {
+    "overblog/graphql-bundle": {
+        "version": "0.9",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.9",
+            "ref": "31775bd62133c1ed66fac537694909c25fbfb879"
+        }
+    },
+    "overblog/graphql-php-generator": {
+        "version": "v0.6.0"
+    },
+    "symfony/expression-language": {
+        "version": "v4.0.1"
+    },
     "symfony/polyfill-php72": {
         "version": "v1.6.0"
     },
     "symfony/security-guard": {
         "version": "v3.4.0"
+    },
+    "webonyx/graphql-php": {
+        "version": "v0.11.4"
     }
 }

@@ -12,6 +12,7 @@
         "doctrine/doctrine-fixtures-bundle": "^2.2@dev",
         "lexik/jwt-authentication-bundle": "^2.4",
         "nelmio/cors-bundle": "^1.5",
+        "overblog/graphql-bundle": "^0.10.0",
         "phpunit/phpunit": "^6.2",
         "predis/predis": "^1.1",
         "snc/redis-bundle": "^2.0@dev",
@@ -33,8 +34,7 @@
         "symfony/twig-bundle": "^3.3",
         "symfony/validator": "^3.3",
         "symfony/workflow": "^3.3",
-        "symfony/yaml": "^3.3",
-        "webonyx/graphql-php": "^0.9.13"
+        "symfony/yaml": "^3.3"
     },
     "require-dev": {
         "symfony/dotenv": "^3.3"

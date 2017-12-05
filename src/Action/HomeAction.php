@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the SmartFact project.
  *
@@ -9,9 +11,9 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Action\Web;
+namespace App\Action;
 
-use Twig\Environment;
+use App\Responder\HomeResponder;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -22,12 +24,16 @@ use Symfony\Component\HttpFoundation\Response;
 final class HomeAction
 {
     /**
+     * @param HomeResponder $responder
+     *
      * @return Response
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
-    public function __invoke(Environment $twig)
+    public function __invoke(HomeResponder $responder)
     {
-        return new Response(
-            $twig->render('default/index.html.twig')
-        );
+        return $responder();
     }
 }
