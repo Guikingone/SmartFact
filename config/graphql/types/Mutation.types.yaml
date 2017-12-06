@@ -3,18 +3,26 @@ Mutation:
     config:
         description: ""
         fields:
-            registerUser:
-                type: "UserInteractor"
-                description: "Allow to register a new user."
+            createNotification:
+                type: "NotificationInteractor"
+                description: "Allow to create a new Notification"
                 args:
-                    email:
+                    label:
                         type: "String!"
-                        description: "The email of the user."
-                    username:
+                        description: "The label of the Notification."
+                    content:
                         type: "String!"
-                        description: "The username of the user."
-                    password:
-                        type: "String!"
-                        description: "The password of the user."
-                resolve: ""
+                        description: "The content of the Notification."
+                    tags:
+                        type: "[String!]"
+                        description: "The tags of the Notification."
+                resolve: "@=service('app.notification_mutator').createNotification(args)"
+            deleteNotification:
+                type: "NotificationInteractor"
+                description: "Allow to delete a Notification"
+                args:
+                    id:
+                        type: "Int!"
+                        description: "The identifier of the Notification."
+                resolve: "@=service('app.notification_mutator').deleteNotification(args)"
 

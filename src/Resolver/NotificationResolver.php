@@ -44,28 +44,33 @@ class NotificationResolver implements NotificationResolverInterface
      */
     public function getNotifications(\ArrayAccess $arguments): array
     {
-        if ($id = $arguments->offsetGet('id')) {
-            return [
-                $this->entityManagerInterface
-                     ->getRepository(NotificationInteractor::class)
-                     ->findOneBy([
-                         'id' => $id
-                     ])
-            ];
-        } elseif ($userId = $arguments->offsetGet('user_id')) {
-            return [
-                $this->entityManagerInterface
-                    ->getRepository(NotificationInteractor::class)
-                    ->findOneBy([
-                        'user' => $userId
-                    ])
-            ];
+        switch ($arguments) {
+            case $arguments->offsetExists('id') && $arguments->offsetExists('userId'):
+                return [
+                    $this->entityManagerInterface
+                         ->getRepository(NotificationInteractor::class)
+                         ->findOneBy([
+                             'id' => (int) $arguments->offsetGet('id'),
+                             'user' => (int) $arguments->offsetGet('userId')
+                         ])
+                ];
+                break;
+            case $arguments->offsetExists('id'):
+                return [
+                    $this->entityManagerInterface
+                         ->getRepository(NotificationInteractor::class)
+                         ->findOneBy([
+                             'id' => (int) $arguments->offsetGet('id')
+                         ])
+                ];
+                break;
+            default:
+                return [
+                    $this->entityManagerInterface
+                         ->getRepository(NotificationInteractor::class)
+                         ->findAll()
+                ];
+                break;
         }
-
-        return [
-            $this->entityManagerInterface
-                 ->getRepository(NotificationInteractor::class)
-                 ->findAll()
-        ];
     }
 }
