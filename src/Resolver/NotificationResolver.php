@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Resolver;
 
+use Doctrine\ORM\EntityManagerInterface;
+use App\Interactors\NotificationInteractor;
 use App\Resolver\Interfaces\NotificationResolverInterface;
 
 /**
@@ -23,10 +25,47 @@ use App\Resolver\Interfaces\NotificationResolverInterface;
 class NotificationResolver implements NotificationResolverInterface
 {
     /**
+     * @var EntityManagerInterface
+     */
+    private $entityManagerInterface;
+
+    /**
+     * NotificationResolver constructor.
+     *
+     * @param EntityManagerInterface $entityManagerInterface
+     */
+    public function __construct(EntityManagerInterface $entityManagerInterface)
+    {
+        $this->entityManagerInterface = $entityManagerInterface;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getNotifications(\ArrayAccess $arguments): array
     {
-        // TODO: Implement getNotifications() method.
+        if ($id = $arguments->offsetGet('id')) {
+            return [
+                $this->entityManagerInterface
+                     ->getRepository(NotificationInteractor::class)
+                     ->findOneBy([
+                         'id' => $id
+                     ])
+            ];
+        } elseif ($userId = $arguments->offsetGet('user_id')) {
+            return [
+                $this->entityManagerInterface
+                    ->getRepository(NotificationInteractor::class)
+                    ->findOneBy([
+                        'user' => $userId
+                    ])
+            ];
+        }
+
+        return [
+            $this->entityManagerInterface
+                 ->getRepository(NotificationInteractor::class)
+                 ->findAll()
+        ];
     }
 }
