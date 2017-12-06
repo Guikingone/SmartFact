@@ -3,8 +3,18 @@ Mutation:
     config:
         description: ""
         fields:
-            create_bill:
+            registerUser:
+                type: "UserInteractor"
+                description: "Allow to register a new user."
                 args:
-                    id:
-                        type: "Int"
-                        description: ""
+                    email:
+                        type: "String!"
+                        description: "The email of the user."
+                    username:
+                        type: "String!"
+                        description: "The username of the user."
+                    password:
+                        type: "String!"
+                        description: "The password of the user."
+                resolve: ""
+

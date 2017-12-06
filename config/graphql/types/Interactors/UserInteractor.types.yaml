@@ -1,0 +1,8 @@
+UserInteractor:
+    type: object
+    config:
+        description: ""
+        fields:
+            id:
+                type: "Int"
+                description: ""

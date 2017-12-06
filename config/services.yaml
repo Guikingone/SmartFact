@@ -21,6 +21,13 @@ services:
     App\Resolver\:
         resource: '../src/Resolver'
 
+    app.notifications_resolver:
+        class: App\Resolver\NotificationResolver
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: overblog_graphql.resolver }
+
     App\Managers\:
         resource: '../src/Managers'
 
