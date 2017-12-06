@@ -18,6 +18,9 @@ services:
     App\Responder\:
         resource: '../src/Responder'
 
+    App\Resolver\:
+        resource: '../src/Resolver'
+
     App\Managers\:
         resource: '../src/Managers'
 

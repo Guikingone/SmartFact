@@ -1,0 +1,15 @@
+Query:
+    type: object
+    config:
+        description: "Allow to query all the entities."
+        fields:
+            notifications:
+                type: "[NotificationInteractor]"
+                args:
+                    id:
+                        type: "Int"
+                        description: "The identifier of the notification."
+                    user_id:
+                        type: "Int"
+                        description: "The id of the user who own the notification."
+                resolve: ""

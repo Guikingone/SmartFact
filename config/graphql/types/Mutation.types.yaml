@@ -1,0 +1,10 @@
+Mutation:
+    type: object
+    config:
+        description: ""
+        fields:
+            create_bill:
+                args:
+                    id:
+                        type: "Int"
+                        description: ""
