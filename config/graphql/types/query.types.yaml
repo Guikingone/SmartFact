@@ -8,8 +8,11 @@ Query:
                 args:
                     id:
                         type: "Int"
-                        description: "The identifier of the notifications."
-                    user_id:
+                        description: "The identifier of a single notification."
+                    tags:
+                        type: "String"
+                        description: "The tag of the notifications."
+                    userId:
                         type: "Int"
-                        description: "The id of the user who own the notification."
+                        description: "The id of the user who own the notifications (if a notification id is passed, a single notification is returned)."
                 resolve: "@=service('app.notifications_resolver').getNotifications(args)"
