@@ -1,0 +1,11 @@
+NotificationInteractor:
+    type: object
+    config:
+        description: ""
+        fields:
+            id:
+                type: "Int"
+                description: "The identifier of the Notification"
+            label:
+                type: "String"
+                description: ""
