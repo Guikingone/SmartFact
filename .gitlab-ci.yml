@@ -18,7 +18,7 @@ frontend_dependencies:
     image: node
     before_script:
         - yarn install
-    scrip:
+    script:
         - ./node_modules/.bin/encore dev
 
 unit_tests:
