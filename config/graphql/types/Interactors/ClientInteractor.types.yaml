@@ -1,0 +1,44 @@
+ClientInteractor:
+    type: object
+    config:
+        description: "A client which is managed by a Company"
+        fields:
+            name:
+                type: "String"
+                description: ""
+            firstName:
+                type: "String"
+                description: ""
+            lastName:
+                type: "String"
+                description: ""
+            id:
+                type: "Int"
+                description: ""
+            id:
+                type: "Int"
+                description: ""
+            id:
+                type: "Int"
+                description: ""
+            id:
+                type: "Int"
+                description: ""
+            id:
+                type: "Int"
+                description: ""
+            id:
+                type: "Int"
+                description: ""
+            id:
+                type: "Int"
+                description: ""
+            image:
+                type: "ImageInteractor"
+                description: "The image (aka logo) of a Client"
+            bills:
+                type: "[BillsInteractor]"
+                description: "The bills linked to a Client"
+            recipient:
+                type: "CompanyInteractor"
+                description: "The company which manage a Client"

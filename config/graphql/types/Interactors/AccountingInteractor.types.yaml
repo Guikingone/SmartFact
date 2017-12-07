@@ -1,0 +1,26 @@
+AccountingInteractor:
+    type: object
+    config:
+        description: "An Accounting which can be linked to a Company."
+        fields:
+            id:
+                type: "Int"
+                description: "The unique identifier of an Accounting"
+            name:
+                type: "String"
+                description: "The name of an Accounting"
+            interlocutor:
+                type: "String"
+                description: "The main interlocutor of an Accounting"
+            phoneNumber:
+                type: "String"
+                description: "The phone number of an Accounting"
+            email:
+                type: "String"
+                description: "The email of an Accounting"
+            address:
+                type: "String"
+                description: "The physical address of an Accounting"
+            company:
+                type: "CompanyInteractor"
+                description: "The Company linked to an Accounting"

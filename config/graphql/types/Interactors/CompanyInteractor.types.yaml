@@ -1,0 +1,44 @@
+CompanyInteractor:
+    type: object
+    config:
+        description: "A company which is capable of creating bills."
+        fields:
+            id:
+                type: "Int"
+                description: "The unique identifier of a Company"
+            name:
+                type: "String"
+                description: "The name of a Company"
+            legalIdentifier:
+                type: "String"
+                description: "The legal identifier of a Company"
+            taxesIdentifier:
+                type: "String"
+                description: "The taxes identifier of a Company"
+            artisanIdentifier:
+                type: "Int"
+                description: "The artisan identifier of a Company (if the Company is an artisan)"
+            address:
+                type: "String"
+                description: "The physical address of a Company"
+            socialAddress:
+                type: "String"
+                description: "The social address of a Company"
+            format:
+                type: "String"
+                description: "The format of a Company"
+            accounting:
+                type: "AccountingInteractor"
+                description: "The accounting linked to a Company"
+            image:
+                type: "ImageInteractor"
+                description: "The image of a Company (aka the logo)"
+            bills:
+                type: "[BillsInteractor]"
+                description: "The bills created by a Company"
+            clients:
+                type: "[ClientInteractor]"
+                description: "The clients managed by a Company"
+            owner:
+                type: "UserInteractor"
+                description: "The owner of a Company"

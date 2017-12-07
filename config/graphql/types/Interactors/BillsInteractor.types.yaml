@@ -1,0 +1,8 @@
+BillsInteractor:
+    type: object
+    config:
+        description: ""
+        fields:
+            id:
+                type: "Int"
+                description: ""

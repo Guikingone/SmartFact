@@ -26,3 +26,33 @@ Query:
                         type: "String"
                         description: ""
                 resolve: "@=service('app.image_resolver').getImages(args)"
+            clients:
+                type: "[ClientInteractor]"
+                args:
+                    id:
+                        type: "Int"
+                        description: ""
+                    name:
+                        type: "String"
+                        description: ""
+                resolve: "@=service('app.image_resolver').getImages(args)"
+            accountings:
+                type: "[AccountingInteractor]"
+                args:
+                    id:
+                        type: "Int"
+                        description: ""
+                    name:
+                        type: "String"
+                        description: ""
+                resolve: "@=service('app.image_resolver').getImages(args)"
+            companies:
+                type: "[CompanyInteractor]"
+                args:
+                    id:
+                        type: "Int"
+                        description: ""
+                    name:
+                        type: "String"
+                        description: ""
+                resolve: "@=service('app.image_resolver').getImages(args)"
