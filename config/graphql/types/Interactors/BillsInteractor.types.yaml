@@ -1,8 +1,65 @@
 BillsInteractor:
     type: object
     config:
-        description: ""
+        description: "A bill which is send to a Client by a Company and which contain a list of Products"
         fields:
             id:
                 type: "Int"
+                description: "The identifier of a Bill"
+            uuid:
+                type: "Int"
+                description: "The unique identifier of a Bill"
+            creationDate:
+                type: "String"
+                description: "The creation date of a Bill"
+            productionDate:
+                type: "String"
+                description: "The production date of a Bill (aka realisation date)"
+            taxesFreeTotal:
+                type: "Float"
+                description: "The taxes free total"
+            taxesTotal:
+                type: "Float"
+                description: "The total price with taxes of a Bill"
+            taxes:
+                type: "Boolean"
+                description: "If the Bill is taxed"
+            taxesPercentage:
+                type: "Float"
+                description: "The percentage of taxes applied to a Bill"
+            reduction:
+                type: "Boolean"
+                description: "If a reduction can be applied to a Bill"
+            reductionTotal:
+                type: "Float"
+                description: "The total price with reduction (if can be applied)"
+            id:
+                type: "Int"
                 description: ""
+            id:
+                type: "Int"
+                description: ""
+            id:
+                type: "Int"
+                description: ""
+            id:
+                type: "Int"
+                description: ""
+            id:
+                type: "Int"
+                description: ""
+            id:
+                type: "Int"
+                description: ""
+            file:
+                type: "String"
+                description: "The actual .pdf file which represent the Bill"
+            products:
+                type: "[ProductInteractor]"
+                description: "A list of Product contained by a Bill"
+            owner:
+                type: "CompanyInteractor"
+                description: "The recipient of a Bill"
+            client:
+                type: "ClientInteractor"
+                description: "The client of a Bill"

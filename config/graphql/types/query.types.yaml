@@ -3,7 +3,7 @@ Query:
     config:
         description: "Allow to query all the entities."
         fields:
-            notifications:
+            notification:
                 type: "[NotificationInteractor]"
                 args:
                     id:
@@ -16,7 +16,7 @@ Query:
                         type: "Int"
                         description: "The id of the user who own the notifications (if a notification id is passed, a single notification is returned)."
                 resolve: "@=service('app.notifications_resolver').getNotifications(args)"
-            images:
+            image:
                 type: "[ImageInteractor]"
                 args:
                     id:
@@ -26,7 +26,7 @@ Query:
                         type: "String"
                         description: ""
                 resolve: "@=service('app.image_resolver').getImages(args)"
-            clients:
+            client:
                 type: "[ClientInteractor]"
                 args:
                     id:
@@ -36,7 +36,7 @@ Query:
                         type: "String"
                         description: ""
                 resolve: "@=service('app.image_resolver').getImages(args)"
-            accountings:
+            accounting:
                 type: "[AccountingInteractor]"
                 args:
                     id:
@@ -46,7 +46,7 @@ Query:
                         type: "String"
                         description: ""
                 resolve: "@=service('app.image_resolver').getImages(args)"
-            companies:
+            company:
                 type: "[CompanyInteractor]"
                 args:
                     id:

@@ -5,34 +5,31 @@ ClientInteractor:
         fields:
             name:
                 type: "String"
-                description: ""
+                description: "The unique identifier of a Client"
             firstName:
                 type: "String"
-                description: ""
+                description: "The firstname of a Client (if a physical person)"
             lastName:
                 type: "String"
-                description: ""
-            id:
-                type: "Int"
-                description: ""
-            id:
-                type: "Int"
-                description: ""
-            id:
-                type: "Int"
-                description: ""
-            id:
-                type: "Int"
-                description: ""
-            id:
-                type: "Int"
-                description: ""
-            id:
-                type: "Int"
-                description: ""
-            id:
-                type: "Int"
-                description: ""
+                description: "The lastname of a Client (if a physical person)"
+            legalIdentifier:
+                type: "String"
+                description: "The legal identifier of a Client"
+            taxesIdentifier:
+                type: "String"
+                description: "The taxes identifier of a Client"
+            artisanIdentifier:
+                type: "String"
+                description: "The artisan identifier of a Client (if he's an artisan)"
+            format:
+                type: "String"
+                description: "The format of a Client"
+            address:
+                type: "String"
+                description: "The physical address of a Client"
+            socialAddress:
+                type: "String"
+                description: "The social address of a Client"
             image:
                 type: "ImageInteractor"
                 description: "The image (aka logo) of a Client"

@@ -1,0 +1,20 @@
+ProductInteractor:
+    type: object
+    config:
+        description: "A Product which is linked to a Bill"
+        fields:
+            id:
+                type: "Int"
+                description: "The unique identifier of a Product"
+            type:
+                type: "String"
+                description: "The type of a Product"
+            price:
+                type: "Float"
+                description: "The price of a Product"
+            quantity:
+                type: "Float"
+                description: "The quantity of a Product"
+            bill:
+                type: "Bill"
+                description: "The bill which contain the Product"
