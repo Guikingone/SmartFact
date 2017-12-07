@@ -4,7 +4,7 @@ The source code of the web application/API used for SmartFact mobile application
 
 ## Build
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0faa11b9-4b07-4797-824a-731be7f735a3/small.png)](https://insight.sensiolabs.com/projects/0faa11b9-4b07-4797-824a-731be7f735a3)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/e255fc48-1265-4a49-a950-4c71fee7d0ef/mini.png)](https://insight.sensiolabs.com/projects/e255fc48-1265-4a49-a950-4c71fee7d0ef)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d996390800b4a91d6247/maintainability)](https://codeclimate.com/github/Guikingone/SmartFact/maintainability)
 [![Build Status](https://travis-ci.org/Guikingone/SmartFact.svg?branch=master)](https://travis-ci.org/Guikingone/SmartFact)
 
