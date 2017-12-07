@@ -2,4 +2,9 @@
 
 {% block body %}
     <p>Hello World !</p>
+    <p id="app"></p>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/vue.js') }}"></script>
 {% endblock %}
