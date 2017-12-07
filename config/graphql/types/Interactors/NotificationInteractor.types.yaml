@@ -1,11 +1,20 @@
 NotificationInteractor:
     type: object
     config:
-        description: ""
+        description: "A Notification which can been linked to an User."
         fields:
             id:
                 type: "Int"
                 description: "The identifier of the Notification"
             label:
                 type: "String"
-                description: ""
+                description: "The label of the Notification"
+            content:
+                type: "String"
+                description: "The content of the Notification"
+            tags:
+                type: "[String]"
+                description: "The tags of the Notification"
+            user:
+                type: "UserInteractor"
+                description: "The user who own the Notification"

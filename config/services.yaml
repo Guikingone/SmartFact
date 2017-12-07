@@ -28,6 +28,13 @@ services:
         tags:
             - { name: overblog_graphql.resolver }
 
+    app.images_resolver:
+        class: App\Resolver\ImageResolver
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: overblog_graphql.resolver }
+
     app.notifications_mutator:
         class: App\Mutator\NotificationMutator
         arguments:

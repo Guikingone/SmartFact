@@ -16,3 +16,13 @@ Query:
                         type: "Int"
                         description: "The id of the user who own the notifications (if a notification id is passed, a single notification is returned)."
                 resolve: "@=service('app.notifications_resolver').getNotifications(args)"
+            images:
+                type: "[ImageInteractor]"
+                args:
+                    id:
+                        type: "Int"
+                        description: ""
+                    name:
+                        type: "String"
+                        description: ""
+                resolve: "@=service('app.image_resolver').getImages(args)"

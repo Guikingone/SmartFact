@@ -5,4 +5,4 @@ UserInteractor:
         fields:
             id:
                 type: "Int"
-                description: ""
+                description: "The identifier of the User."

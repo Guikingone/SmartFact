@@ -1,0 +1,38 @@
+ImageInteractor:
+    type: object
+    config:
+        description: "A Image which can been linked to an User, a Client or a Company."
+        fields:
+            id:
+                type: "Int"
+                description: "The identifier of the Image"
+            name:
+                type: "String"
+                description: "The name of the Image"
+            extension:
+                type: "String"
+                description: "The extension of the Image"
+            size:
+                type: "String"
+                description: "The size of the Image"
+            localPath:
+                type: "String"
+                description: "The local path (aka server path) of the Image"
+            publicPath:
+                type: "String"
+                description: "The public path (aka project path) of the Image"
+            uploadDate:
+                type: "String"
+                description: "The upload date of the Image"
+            modificationDate:
+                type: "String"
+                description: "The modification date of the Image"
+            user:
+                type: "UserInteractor"
+                description: "If an User own this image, the User."
+            client:
+                type: "Int"
+                description: "If a Client own this image, the Client."
+            company:
+                type: "Int"
+                description: "If a Company own this image, the Company"
