@@ -13,7 +13,7 @@ insight:
     only:
         - master
 
-frontend_dependencies:
+encore:
     stage: frontend
     image: node
     before_script:

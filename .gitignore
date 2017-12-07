@@ -26,11 +26,8 @@ src/Entity/*.php~
 # PHPUnit
 /coverage/
 
-# JWT
-config/jwt/*
-
-# Node
-/node_modules/
+# Encore
+/public/build/*
 
 ###> symfony/webpack-encore-pack ###
 /node_modules/
