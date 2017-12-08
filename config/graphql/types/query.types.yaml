@@ -3,6 +3,13 @@ Query:
     config:
         description: "Allow to query all the entities."
         fields:
+            user:
+                type: "[UserInteractor]"
+                args:
+                    id:
+                        type: "Int"
+                        description: "The identifier of a User"
+                resolve: "@=service('app.image_resolver').getImages(args)"
             notification:
                 type: "[NotificationInteractor]"
                 args:
@@ -21,38 +28,55 @@ Query:
                 args:
                     id:
                         type: "Int"
-                        description: ""
+                        description: "The identifier of an Image"
                     name:
                         type: "String"
-                        description: ""
+                        description: "The name of an Image"
                 resolve: "@=service('app.image_resolver').getImages(args)"
             client:
                 type: "[ClientInteractor]"
                 args:
                     id:
                         type: "Int"
-                        description: ""
-                    name:
+                        description: "The identifier of a Client"
+                    firstName:
                         type: "String"
-                        description: ""
+                        description: "The firstname of a Client"
                 resolve: "@=service('app.image_resolver').getImages(args)"
             accounting:
                 type: "[AccountingInteractor]"
                 args:
                     id:
                         type: "Int"
-                        description: ""
+                        description: "The identifier of an Accounting"
                     name:
                         type: "String"
-                        description: ""
+                        description: "The name of an Accounting"
                 resolve: "@=service('app.image_resolver').getImages(args)"
             company:
                 type: "[CompanyInteractor]"
                 args:
                     id:
                         type: "Int"
-                        description: ""
+                        description: "The identifier of a Company"
                     name:
                         type: "String"
-                        description: ""
+                        description: "The name of a Company"
+                resolve: "@=service('app.image_resolver').getImages(args)"
+            bill:
+                type: "[BillsInteractor]"
+                args:
+                    id:
+                        type: "Int"
+                        description: "The identifier of a Bill"
+                resolve: "@=service('app.image_resolver').getImages(args)"
+            products:
+                type: "[ProductInteractor]"
+                args:
+                    id:
+                        type: "Int"
+                        description: "The identifier of a Product"
+                    type:
+                        type: "String"
+                        description: "The type of a Product"
                 resolve: "@=service('app.image_resolver').getImages(args)"

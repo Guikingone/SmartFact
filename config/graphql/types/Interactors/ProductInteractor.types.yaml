@@ -16,5 +16,5 @@ ProductInteractor:
                 type: "Float"
                 description: "The quantity of a Product"
             bill:
-                type: "Bill"
+                type: "BillsInteractor"
                 description: "The bill which contain the Product"

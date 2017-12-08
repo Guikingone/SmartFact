@@ -1,8 +1,44 @@
 UserInteractor:
     type: object
     config:
-        description: ""
+        description: "An User which can be linked to a Company, Image and have many Notifications"
         fields:
             id:
                 type: "Int"
-                description: "The identifier of the User."
+                description: "The identifier of a User."
+            firstName:
+                type: "String"
+                description: "The firstname of a User."
+            lastName:
+                type: "String"
+                description: "The lastname of a User."
+            username:
+                type: "String"
+                description: "The username of a User."
+            email:
+                type: "String"
+                description: "The email of an User."
+            roles:
+                type: "[String]"
+                description: "The roles of an User."
+            creationDate:
+                type: "String"
+                description: "The creation date of an User."
+            validated:
+                type: "Boolean"
+                description: "If an User is validated"
+            active:
+                type: "Boolean"
+                description: "If an User is active"
+            apiToken:
+                type: "String"
+                description: "The api token of an User."
+            image:
+                type: "ImageInteractor"
+                description: "The image of an User."
+            company:
+                type: "[CompanyInteractor]"
+                description: "The companies owned by an User."
+            notifications:
+                type: "[NotificationInteractor]"
+                description: "The notifications owned by an User."

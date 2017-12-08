@@ -33,24 +33,21 @@ BillsInteractor:
             reductionTotal:
                 type: "Float"
                 description: "The total price with reduction (if can be applied)"
-            id:
-                type: "Int"
-                description: ""
-            id:
-                type: "Int"
-                description: ""
-            id:
-                type: "Int"
-                description: ""
-            id:
-                type: "Int"
-                description: ""
-            id:
-                type: "Int"
-                description: ""
-            id:
-                type: "Int"
-                description: ""
+            send:
+                type: "Boolean"
+                description: "If a Bill has been send."
+            sendingDate:
+                type: "String"
+                description: "The sending date of a Bill"
+            limitPaymentDate:
+                type: "String"
+                description: "The limit payment date of a Bill"
+            penaltyRate:
+                type: "Float"
+                description: "The penalty rate applied to a Bill"
+            recoveryPrice:
+                type: "Float"
+                description: "The recovery price applied to a Bill"
             file:
                 type: "String"
                 description: "The actual .pdf file which represent the Bill"
