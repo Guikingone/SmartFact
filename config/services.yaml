@@ -18,8 +18,10 @@ services:
     App\Responder\:
         resource: '../src/Responder'
 
-    App\Resolver\:
-        resource: '../src/Resolver'
+    App\DataFixtures\:
+        resource: '../src/DataFixtures'
+        tags:
+            - 'doctrine.fixtures.orm'
 
     # Resolver
     app.accountings_resolver:
