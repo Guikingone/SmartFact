@@ -121,7 +121,6 @@ class ClientBuilderTest extends TestCase
 
     public function testRelationWithRecipient()
     {
-
         $builder = new ClientBuilder();
 
         $recipientStub = $this->createMock(CompanyInterface::class);

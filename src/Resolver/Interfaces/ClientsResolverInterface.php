@@ -14,16 +14,16 @@ declare(strict_types=1);
 namespace App\Resolver\Interfaces;
 
 /**
- * Interface UserResolverInterface
+ * Interface ClientsResolverInterface
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-interface UserResolverInterface
+interface ClientsResolverInterface
 {
     /**
      * @param \ArrayAccess $arguments    The arguments defined in the schema.
      *
-     * @return mixed                     The array which contain the entries.
+     * @return array                     The array which contain all the entries.
      */
-    public function getUsers(\ArrayAccess $arguments): array;
+    public function getClients(\ArrayAccess $arguments): array;
 }

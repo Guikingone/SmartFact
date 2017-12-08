@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace App\Resolver;
 
+use App\Interactors\BillsInteractor;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Interactors\AccountingInteractor;
-use App\Resolver\Interfaces\AccountingResolverInterface;
+use App\Resolver\Interfaces\BillsResolverInterface;
 
 /**
- * Class AccountingResolver
+ * Class BillsResolver
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-final class AccountingResolver implements AccountingResolverInterface
+final class BillsResolver implements BillsResolverInterface
 {
     /**
      * @var EntityManagerInterface
@@ -30,7 +30,7 @@ final class AccountingResolver implements AccountingResolverInterface
     private $entityManagerInterface;
 
     /**
-     * AccountingResolver constructor.
+     * BillsResolver constructor.
      *
      * @param EntityManagerInterface $entityManagerInterface
      */
@@ -42,13 +42,13 @@ final class AccountingResolver implements AccountingResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function getAccountings(\ArrayAccess $arguments): array
+    public function getBills(\ArrayAccess $arguments): array
     {
         switch ($arguments) {
             case $arguments->offsetExists('id'):
                 return [
                     $this->entityManagerInterface
-                         ->getRepository(AccountingInteractor::class)
+                         ->getRepository(BillsInteractor::class)
                          ->findOneBy([
                              'id' => (int) $arguments->offsetGet('id')
                          ])
@@ -57,7 +57,7 @@ final class AccountingResolver implements AccountingResolverInterface
             default:
                 return [
                     $this->entityManagerInterface
-                         ->getRepository(AccountingInteractor::class)
+                         ->getRepository(BillsInteractor::class)
                          ->findAll()
                 ];
                 break;

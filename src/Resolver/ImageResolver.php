@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Resolver;
 
+use App\Interactors\ImageInteractor;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Resolver\Interfaces\ImageResolverInterface;
 
@@ -43,6 +44,42 @@ final class ImageResolver implements ImageResolverInterface
      */
     public function getImages(\ArrayAccess $arguments): array
     {
-        // TODO: Implement getImages() method.
+        switch ($arguments) {
+            case $arguments->offsetExists('id') && $arguments->offsetExists('name'):
+                return [
+                    $this->entityManagerInterface
+                         ->getRepository(ImageInteractor::class)
+                         ->findOneBy([
+                             'id' => (int) $arguments->offsetGet('id'),
+                             'name' => (string) $arguments->offsetGet('name')
+                         ])
+                ];
+                break;
+            case $arguments->offsetExists('id'):
+                return [
+                    $this->entityManagerInterface
+                         ->getRepository(ImageInteractor::class)
+                         ->findOneBy([
+                             'id' => (int) $arguments->offsetGet('id')
+                         ])
+                ];
+                break;
+            case $arguments->offsetExists('name'):
+                return [
+                    $this->entityManagerInterface
+                         ->getRepository(ImageInteractor::class)
+                         ->findOneBy([
+                             'name' => (string) $arguments->offsetGet('name')
+                         ])
+                ];
+                break;
+            default:
+                return [
+                    $this->entityManagerInterface
+                         ->getRepository(ImageInteractor::class)
+                         ->findAll()
+                ];
+                break;
+        }
     }
 }

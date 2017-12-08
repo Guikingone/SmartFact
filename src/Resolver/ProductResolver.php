@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace App\Resolver;
 
+use App\Interactors\ProductInteractor;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Interactors\NotificationInteractor;
-use App\Resolver\Interfaces\NotificationResolverInterface;
+use App\Resolver\Interfaces\ProductResolverInterface;
 
 /**
- * Class NotificationResolver
+ * Class ProductResolver
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class NotificationResolver implements NotificationResolverInterface
+class ProductResolver implements ProductResolverInterface
 {
     /**
      * @var EntityManagerInterface
@@ -30,7 +30,7 @@ class NotificationResolver implements NotificationResolverInterface
     private $entityManagerInterface;
 
     /**
-     * NotificationResolver constructor.
+     * ProductResolver constructor.
      *
      * @param EntityManagerInterface $entityManagerInterface
      */
@@ -42,41 +42,41 @@ class NotificationResolver implements NotificationResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function getNotifications(\ArrayAccess $arguments): array
+    public function getProducts(\ArrayAccess $arguments): array
     {
         switch ($arguments) {
-            case $arguments->offsetExists('id') && $arguments->offsetExists('userId'):
+            case $arguments->offsetExists('id') && $arguments->offsetExists('type'):
                 return [
                     $this->entityManagerInterface
-                         ->getRepository(NotificationInteractor::class)
+                         ->getRepository(ProductInteractor::class)
                          ->findOneBy([
-                             'id' => (int) $arguments->offsetGet('id'),
-                             'user' => (int) $arguments->offsetGet('userId')
+                             'id' => (int)  $arguments->offsetGet('id'),
+                             'type' => (string) $arguments->offsetGet('type')
                          ])
                 ];
                 break;
             case $arguments->offsetExists('id'):
                 return [
                     $this->entityManagerInterface
-                         ->getRepository(NotificationInteractor::class)
+                         ->getRepository(ProductInteractor::class)
                          ->findOneBy([
-                             'id' => (int) $arguments->offsetGet('id')
+                             'id' => (int)  $arguments->offsetGet('id')
                          ])
                 ];
                 break;
-            case $arguments->offsetExists('userId'):
+            case $arguments->offsetExists('type'):
                 return [
                     $this->entityManagerInterface
-                         ->getRepository(NotificationInteractor::class)
-                         ->findBy([
-                             'user' => (int) $arguments->offsetGet('userId')
+                         ->getRepository(ProductInteractor::class)
+                         ->findOneBy([
+                             'type' => (string) $arguments->offsetGet('type')
                          ])
                 ];
                 break;
             default:
                 return [
                     $this->entityManagerInterface
-                         ->getRepository(NotificationInteractor::class)
+                         ->getRepository(ProductInteractor::class)
                          ->findAll()
                 ];
                 break;

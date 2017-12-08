@@ -22,8 +22,36 @@ services:
         resource: '../src/Resolver'
 
     # Resolver
-    app.users_resolver:
-        class: App\Resolver\UserResolver
+    app.accountings_resolver:
+        class: App\Resolver\AccountingResolver
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: overblog_graphql.resolver }
+
+    app.bills_resolver:
+        class: App\Resolver\BillsResolver
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: overblog_graphql.resolver }
+
+    app.clients_resolver:
+        class: App\Resolver\ClientsResolver
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: overblog_graphql.resolver }
+
+    app.companies_resolver:
+        class: App\Resolver\CompanyResolver
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: overblog_graphql.resolver }
+
+    app.images_resolver:
+        class: App\Resolver\ImageResolver
         arguments:
             - '@doctrine.orm.entity_manager'
         tags:
@@ -35,9 +63,16 @@ services:
             - '@doctrine.orm.entity_manager'
         tags:
             - { name: overblog_graphql.resolver }
-            
-    app.images_resolver:
-        class: App\Resolver\ImageResolver
+
+    app.products_resolver:
+        class: App\Resolver\ProductResolver
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: overblog_graphql.resolver }
+
+    app.users_resolver:
+        class: App\Resolver\UserResolver
         arguments:
             - '@doctrine.orm.entity_manager'
         tags:

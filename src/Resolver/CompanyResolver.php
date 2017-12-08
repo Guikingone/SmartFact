@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace App\Resolver;
 
+use App\Interactors\CompanyInteractor;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Interactors\NotificationInteractor;
-use App\Resolver\Interfaces\NotificationResolverInterface;
+use App\Resolver\Interfaces\CompanyResolverInterface;
 
 /**
- * Class NotificationResolver
+ * Class CompanyResolver
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class NotificationResolver implements NotificationResolverInterface
+class CompanyResolver implements CompanyResolverInterface
 {
     /**
      * @var EntityManagerInterface
@@ -30,7 +30,7 @@ class NotificationResolver implements NotificationResolverInterface
     private $entityManagerInterface;
 
     /**
-     * NotificationResolver constructor.
+     * CompanyResolver constructor.
      *
      * @param EntityManagerInterface $entityManagerInterface
      */
@@ -42,41 +42,41 @@ class NotificationResolver implements NotificationResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function getNotifications(\ArrayAccess $arguments): array
+    public function getCompanies(\ArrayAccess $arguments): array
     {
         switch ($arguments) {
-            case $arguments->offsetExists('id') && $arguments->offsetExists('userId'):
+            case $arguments->offsetExists('id') && $arguments->offsetExists('name'):
                 return [
                     $this->entityManagerInterface
-                         ->getRepository(NotificationInteractor::class)
+                         ->getRepository(CompanyInteractor::class)
                          ->findOneBy([
                              'id' => (int) $arguments->offsetGet('id'),
-                             'user' => (int) $arguments->offsetGet('userId')
+                             'name' => (string) $arguments->offsetGet('name')
                          ])
                 ];
                 break;
             case $arguments->offsetExists('id'):
                 return [
                     $this->entityManagerInterface
-                         ->getRepository(NotificationInteractor::class)
+                         ->getRepository(CompanyInteractor::class)
                          ->findOneBy([
                              'id' => (int) $arguments->offsetGet('id')
                          ])
                 ];
                 break;
-            case $arguments->offsetExists('userId'):
+            case $arguments->offsetExists('name'):
                 return [
                     $this->entityManagerInterface
-                         ->getRepository(NotificationInteractor::class)
-                         ->findBy([
-                             'user' => (int) $arguments->offsetGet('userId')
+                         ->getRepository(CompanyInteractor::class)
+                         ->findOneBy([
+                             'name' => (int) $arguments->offsetGet('name')
                          ])
                 ];
                 break;
             default:
                 return [
                     $this->entityManagerInterface
-                         ->getRepository(NotificationInteractor::class)
+                         ->getRepository(CompanyInteractor::class)
                          ->findAll()
                 ];
                 break;
