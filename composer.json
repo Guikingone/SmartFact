@@ -9,7 +9,7 @@
         "behat/mink-goutte-driver": "^1.2",
         "behat/symfony2-extension": "^2.1",
         "behatch/contexts": "^2.7",
-        "doctrine/doctrine-fixtures-bundle": "^2.2@dev",
+        "doctrine/doctrine-fixtures-bundle": "^3.0",
         "lexik/jwt-authentication-bundle": "^2.4",
         "nelmio/cors-bundle": "^1.5",
         "overblog/graphql-bundle": "^0.10.0",

@@ -21,6 +21,14 @@ services:
     App\Resolver\:
         resource: '../src/Resolver'
 
+    # Resolver
+    app.users_resolver:
+        class: App\Resolver\UserResolver
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: overblog_graphql.resolver }
+
     app.notifications_resolver:
         class: App\Resolver\NotificationResolver
         arguments:
@@ -35,6 +43,7 @@ services:
         tags:
             - { name: overblog_graphql.resolver }
 
+    # Mutators
     app.notifications_mutator:
         class: App\Mutator\NotificationMutator
         arguments:

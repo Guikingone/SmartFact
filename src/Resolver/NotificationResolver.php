@@ -45,7 +45,7 @@ class NotificationResolver implements NotificationResolverInterface
     public function getNotifications(\ArrayAccess $arguments): array
     {
         switch ($arguments) {
-            case $arguments->offsetExists('id') && $arguments->offsetExists('userId'):
+            case $arguments->offsetExists('id') && $arguments->offsetExists('userId') && $arguments->offsetExists('tags'):
                 return [
                     $this->entityManagerInterface
                          ->getRepository(NotificationInteractor::class)
@@ -64,6 +64,14 @@ class NotificationResolver implements NotificationResolverInterface
                          ])
                 ];
                 break;
+            case $arguments->offsetExists('userId'):
+                return [
+                    $this->entityManagerInterface
+                         ->getRepository(NotificationInteractor::class)
+                         ->findBy([
+                             'user' => (int) $arguments->offsetGet('userId')
+                         ])
+                ];
             default:
                 return [
                     $this->entityManagerInterface
