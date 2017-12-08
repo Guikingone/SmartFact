@@ -11,19 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\DataFixtures\ORM;
+namespace App\DataFixtures;
 
 use App\Builders\ImageBuilder;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
  * Class ImageFixtures
  *
  * @author Guillaume Loulier <contact@guillaumeloulier.fr>
  */
-class ImageFixtures extends Fixture implements DependentFixtureInterface
+class ImageFixtures extends Fixture
 {
     /**
      * {@inheritdoc}
@@ -44,13 +43,6 @@ class ImageFixtures extends Fixture implements DependentFixtureInterface
         ;
 
         $manager->persist($builder->build());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    function getDependencies()
-    {
-        // TODO: Implement getDependencies() method.
+        $manager->flush();
     }
 }
