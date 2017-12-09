@@ -46,7 +46,7 @@ deployment:
     image: google/cloud-sdk
     before_script:
         - apt-get update -y
-        - echo $GOOGLE_CLOUD_PROJECT > /tmp/google_cloud_project_key.json
+        - echo $GOOGLE_CLOUD_KEY > /tmp/google_cloud_project_key.json
         - gcloud config set project $GOOGLE_CLOUD_PROJECT
         - gcloud auth activate-service-account --key-file /tmp/google_cloud_project_key.json
     script:
