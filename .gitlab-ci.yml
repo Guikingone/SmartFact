@@ -49,6 +49,7 @@ deployment:
         - echo $GOOGLE_CLOUD_KEY > /tmp/google_cloud_project_key.json
         - gcloud config set project $GOOGLE_CLOUD_PROJECT
         - gcloud auth activate-service-account --key-file /tmp/google_cloud_project_key.json
+        - rm -rf Dockerfile docker-compose.yml docker/*
     script:
         - gcloud app deploy
     after_script:
