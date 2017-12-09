@@ -4,7 +4,7 @@ services:
     # Core configuration
     debian:
         container_name: ${CONTAINER_NAME}_debian
-        build: './docker/debian'
+        build: .
         volumes:
             - './:${WORKPATH}:rw'
         restart: always
@@ -61,15 +61,6 @@ services:
             - 'postgres_smartfact:/var/lib/postgresql/data:rw'
         restart: always
 
-    mongodb:
-        container_name: ${CONTAINER_NAME}_mongodb
-        image: mongo
-        ports:
-            - '${MONGODB_PORT}:27017'
-        volumes:
-            - 'mongo_smartfact:/data/db'
-        restart: always
-
     # Frontend configuration
     node:
         container_name: ${CONTAINER_NAME}_nodejs
@@ -97,4 +88,3 @@ services:
 
 volumes:
     postgres_smartfact:
-    mongo_smartfact:
