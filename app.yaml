@@ -4,3 +4,22 @@ env: flex
 runtime_config:
     document_root: public
     front_controller_file: index.php
+
+env_variables:
+    # App configuration
+    APP_ENV=prod
+    APP_DEBUG=0
+    APP_SECRET=c5cbbfb8d98e19cd57dc4b47b09c0d7d
+    APP_STATE=c5cb091NNDOAM8e191767230GDNAPMMDNZ7cd57dc4b470NNDPAM
+
+    # POSTGRESQL configuration
+    POSTGRES_CHARSET=utf8
+    POSTGRES_DB=project
+    POSTGRES_USER=project
+    POSTGRES_PASSWORD=project
+    POSTGRES_PORT=5432
+
+    # Database configuration
+    DB_HOST=172.20.0.1
+    DB_DRIVER=pdo_pgsql
+    DB_VERSION=9.6
