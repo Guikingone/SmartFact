@@ -2,7 +2,7 @@ FROM debian
 
 ENV WORKDIR "/var/www/smartfact"
 
-ADD . ${WORKDIR}
+ADD ../../ ${WORKDIR}
 
 RUN rm -rf ${WORKDIR}/vendor \
     && ls -l ${WORKDIR}

@@ -4,7 +4,7 @@ services:
     # Core configuration
     debian:
         container_name: ${CONTAINER_NAME}_debian
-        build: .
+        build: './docker/debian'
         volumes:
             - './:${WORKPATH}:rw'
         restart: always
