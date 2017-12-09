@@ -42,7 +42,35 @@ class ImageFixtures extends Fixture
             ->withPublicPath('http://domain.extension/public/images/NewImage.png')
         ;
 
+        $builderII = new ImageBuilder();
+
+        $builderII
+            ->create()
+            ->withName('NewImageII')
+            ->withExtension('.png')
+            ->withSize('25Ko')
+            ->withUploadDate(new \DateTime('2017-03-15'))
+            ->withModificationDate(new \DateTime('2017-03-16'))
+            ->withLocalPath('/public/images/NewImageII.png')
+            ->withPublicPath('http://domain.extension/public/images/NewImageII.png')
+        ;
+
+        $builderIII = new ImageBuilder();
+
+        $builderIII
+            ->create()
+            ->withName('NewImageIII')
+            ->withExtension('.png')
+            ->withSize('25Ko')
+            ->withUploadDate(new \DateTime('2017-03-15'))
+            ->withModificationDate(new \DateTime('2017-03-16'))
+            ->withLocalPath('/public/images/NewImageIII.png')
+            ->withPublicPath('http://domain.extension/public/images/NewImageIII.png')
+        ;
+
         $manager->persist($builder->build());
+        $manager->persist($builderII->build());
+        $manager->persist($builderIII->build());
         $manager->flush();
     }
 }

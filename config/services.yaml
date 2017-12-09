@@ -23,6 +23,9 @@ services:
         tags:
             - 'doctrine.fixtures.orm'
 
+    App\Builders\:
+        resource: '../src/Builders'
+
     # Resolver
     app.accountings_resolver:
         class: App\Resolver\AccountingResolver

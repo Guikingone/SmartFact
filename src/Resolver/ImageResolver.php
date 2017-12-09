@@ -74,11 +74,10 @@ final class ImageResolver implements ImageResolverInterface
                 ];
                 break;
             default:
-                return [
+                return
                     $this->entityManagerInterface
                          ->getRepository(ImageInteractor::class)
-                         ->findAll()
-                ];
+                         ->findAll();
                 break;
         }
     }
