@@ -50,6 +50,6 @@ deployment:
         - gcloud config set project $GOOGLE_CLOUD_PROJECT
         - gcloud auth activate-service-account --key-file /tmp/google_cloud_project_key.json
     script:
-        - echo 'Hello World from Google Cloud !'
+        - google app deploy
     after_script:
             - rm /tmp/google_cloud_project_key.json
