@@ -7,6 +7,7 @@ The source code of the web application/API used for SmartFact mobile application
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/e255fc48-1265-4a49-a950-4c71fee7d0ef/mini.png)](https://insight.sensiolabs.com/projects/e255fc48-1265-4a49-a950-4c71fee7d0ef)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d996390800b4a91d6247/maintainability)](https://codeclimate.com/github/Guikingone/SmartFact/maintainability)
 [![Build Status](https://travis-ci.org/Guikingone/SmartFact.svg?branch=master)](https://travis-ci.org/Guikingone/SmartFact)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/61a5f23ecfe641b7a0c43f24e7b25691)](https://www.codacy.com/app/Guikingone/SmartFact?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Guikingone/SmartFact&amp;utm_campaign=Badge_Grade)
 
 ## Usage
 
