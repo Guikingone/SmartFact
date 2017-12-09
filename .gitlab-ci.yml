@@ -50,7 +50,7 @@ docker:
         - gcloud config set project $GOOGLE_CLOUD_PROJECT
         - gcloud auth activate-service-account --key-file /tmp/google_cloud_project_key.json
     script:
-        - gcloud compute instances create smartfact --image-family debian-8 --image-project debian-cloud
+        - gcloud compute instances create smartfact --image-family debian-8 --image-project debian-cloud --zone europe-west3-b
 
 deployment:
     stage: cloud
