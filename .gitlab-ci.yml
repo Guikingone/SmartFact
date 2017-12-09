@@ -2,6 +2,7 @@ stages:
     - quality
     - frontend
     - unit_tests
+    - cloud
 
 insight:
     stage: quality
@@ -39,3 +40,12 @@ unit_tests:
     script:
         - php composer.phar install
         - vendor/bin/phpunit -v
+
+deployment:
+    stage: cloud
+    image: google/cloud-sdk
+    before_script:
+        - apt-get update -y
+    script:
+        - echo 'Hello World from Google Cloud !'
+        
